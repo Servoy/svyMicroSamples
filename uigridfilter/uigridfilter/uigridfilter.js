@@ -163,6 +163,15 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 					}
 					return null;
 				}
+				
+				/** return the row of the given foundsetObj at given index */
+				function getClientViewPortRow(foundsetObj, index) {
+					var row;
+					if (foundsetObj.viewPort.rows) {
+						row = foundsetObj.viewPort.rows[index];
+					}
+					return row;
+				}
 
 				/**
 				 * Merge the rows in the given foundset into the grid data.
@@ -231,7 +240,7 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 						console.log(rowUpdates);
 					}
 					for (var i = 0; i < rowUpdates.length; i++) {
-						for (var j = rowUpdates[i].startIndex; j < rowUpdates[i].endIndex; j++) {
+						for (var j = rowUpdates[i].startIndex; j <= rowUpdates[i].endIndex; j++) {
 							updateRow(j);
 						}
 						//updateRow(rowUpdates[i].startIndex);
@@ -240,9 +249,16 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 				/**
 				 * Update the uiGrid row with given viewPort index
 				 * @param {Number} index
+				 * @param {Object} [foundsetObj]
+				 * 
 				 *  */
-				function updateRow(index) {
-					var row = getViewPortRow(index);
+				function updateRow(index, foundsetObj) {
+					var row;
+					if (!foundsetObj) {
+						row = getViewPortRow(index);
+					} else {
+						row  = getClientViewPortRow(foundsetObj, index); // TODO get it from viewportObj
+					}
 					var uiRow = getUiGridRow(row._svyRowId);
 
 					// update the row
@@ -502,13 +518,21 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 								dataproviders, sort, foundsetNRelation).then(function(rfoundset) {
 								console.log(rfoundset);
 								if (foundsetChangeWatches[rfoundsetinfo.foundsethash] != undefined) {
-									foundsetChangeWatches[rfoundsetinfo.foundsethash]();
+									foundsetChangeWatches[rfoundsetinfo.foundsethash] = rfoundsetinfo.addChangeListener(clientFoundsetListener);
 								}
-								foundsetChangeWatches[rfoundsetinfo.foundsethash] = foundset_manager.addFoundSetChangeCallback(rfoundsetinfo.foundsethash, function(row) {
-										console.log(row)
-									});
+								
 								mergeData($scope.gridOptions.data, rfoundset, dataproviderName);
 								updateNumRows();
+								
+								// client listener
+								function clientFoundsetListener(rowUpdates) {
+									for (var i = 0; i < rowUpdates.length; i++) {
+										for (var j = rowUpdates[i].startIndex; j <= rowUpdates[i].endIndex; j++) {
+											updateRow(j, rfoundsetinfo);
+										}
+									}
+								}
+								
 							});
 						} else {
 							$scope.pendingChildrenRequests = $scope.pendingChildrenRequests - 1;
@@ -521,6 +545,7 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 
 					return function(rfoundsetinfo) {
 						if (rfoundsetinfo) {
+							// TODO delete foundset listener
 							delete foundsetChangeWatches[rfoundsetinfo.foundsethash];
 							// foundset_manager.removeFoundSetFromCache(rfoundsetinfo.foundsethash);
 							// TODO remove it from the table ?

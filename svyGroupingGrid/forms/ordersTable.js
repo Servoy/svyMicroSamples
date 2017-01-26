@@ -30,7 +30,17 @@ function onAction(event) {
  * @properties={typeid:24,uuid:"7B2EAF05-FC71-4DDC-89F8-29D5C7DB440E"}
  * @AllowToRunInFind
  */
-function onAction1(event) {
-	// TODO Auto-generated method stub
+function onSearch(event) {
 	foundset.search()
+}
+
+/**
+ * @param {JSEvent} event
+ *
+ * @protected
+ *
+ * @properties={typeid:24,uuid:"1129661A-2620-494E-B976-241B0293CF60"}
+ */
+function onSave(event) {
+	databaseManager.saveData();
 }
