@@ -1,0 +1,14 @@
+customProperties:"formComponent:false",
+encapsulation:60,
+items:[
+{
+height:480,
+partType:5,
+typeid:19,
+uuid:"CCD8084B-3484-41E7-8FBA-CBF44DD9BF67"
+}
+],
+name:"AbstractMicroSample",
+showInMenu:true,
+typeid:3,
+uuid:"1046CC5D-E653-4F9C-B8B9-E3FCDA83A211"
