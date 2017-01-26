@@ -7,3 +7,14 @@
     margin-right: auto;
 	background-color: #fff;
 }
+
+.banner
+{
+	text-align: center;
+	font-size: 32px;
+	border: 0px solid #ff8000;
+	border-bottom-width: 2px;
+}
+.svy-main-window-container{
+	background-color: #444;
+}
