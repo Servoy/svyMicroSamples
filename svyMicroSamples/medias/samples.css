@@ -1,0 +1,9 @@
+@IMPORT url("sideNav.css");
+
+.body_main
+{
+	width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+	background-color: #fff;
+}
