@@ -28,3 +28,13 @@ function getDescription(){
 function getParent(){
 	return null;
 }
+
+/**
+ * Gets an optional icon style class for menu navigation
+ * @public 
+ * @return {String}
+ * @properties={typeid:24,uuid:"03913234-F650-4704-B138-4C8EA9BE27C2"}
+ */
+function getIconStyleClass(){
+	return null;
+}
