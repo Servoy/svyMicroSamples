@@ -2,11 +2,18 @@ customProperties:"formComponent:false",
 extendsID:"1046CC5D-E653-4F9C-B8B9-E3FCDA83A211",
 items:[
 {
-location:"193,228",
-text:"Test !",
-transparent:true,
-typeid:7,
-uuid:"F3017A88-56D7-4D95-800F-74F587103E73"
+extendsID:"D2CC2424-957C-4C3A-9D6E-228F36A1D201",
+items:[
+{
+containsFormID:"3A694C75-45B1-4ED0-B0A8-AD91545C95CE",
+location:"20,50",
+text:"testDemo",
+typeid:15,
+uuid:"09F03DD9-619C-4984-9711-F7CD0ECAC117"
+}
+],
+typeid:16,
+uuid:"1EE87C0E-0DA8-4923-B39A-C1BAE3E24F1A"
 }
 ],
 name:"testSample",

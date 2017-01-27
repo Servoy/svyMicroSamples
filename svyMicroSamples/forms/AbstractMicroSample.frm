@@ -19,6 +19,7 @@ uuid:"D2CC2424-957C-4C3A-9D6E-228F36A1D201"
 }
 ],
 name:"AbstractMicroSample",
+onShowMethodID:"BB075C8A-D9A6-4F4E-BB4C-DFC99F1B2814",
 showInMenu:true,
 typeid:3,
 uuid:"1046CC5D-E653-4F9C-B8B9-E3FCDA83A211"
