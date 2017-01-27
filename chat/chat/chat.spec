@@ -63,6 +63,10 @@
 			"parameters": [
 			]
 		},
+		"hideTyping": {
+			"parameters": [
+			]
+		},
 		"showReceivedMessage": {
 			"parameters": [
 				{
@@ -70,6 +74,9 @@
 					"type": "string"
 				}
 			]
+		},
+		"getContent": {
+			"returns": "object[]"
 		}
 	}
 }
