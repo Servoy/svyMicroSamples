@@ -9,7 +9,7 @@ function showFieldValuesForm() {
 	//remove tabs from tabpanel
 	elements.tabsFieldValues.removeAllTabs();
 	
-	//if the form currently exists, revert it
+	//if the form currently exists, remove it, remove relationships and revert form
 	var success = history.removeForm('svy_fieldvalues_main');
 	if (success) {
 	    solutionModel.revertForm('svy_fieldvalues_main');
@@ -20,8 +20,6 @@ function showFieldValuesForm() {
 	
 	//Gather fieldnames and create fields on form with labels
 	if (scopes.svyFlexFields.gv_svy_fieldset_id) {
-		//fvForm.newLabel(companyname,0,0,80,20)
-		
 		//gather fieldnames for selected fieldset and sort on sequence
 		/** @type {JSFoundSet<db:/example_data/svy_fieldnames>} */
 		var fieldNameFS = svy_fieldnames$gv_svy_fieldset_id;
@@ -48,10 +46,16 @@ function showFieldValuesForm() {
 			
 			//create the relationship to connect to dataprovider
 			var fvRelName = 'customers_' + record.svy_fieldname_id + '_fieldname';
-			var fvRel = solutionModel.newRelation(fvRelName, 'db:/example_data/customers', 'db:/example_data/svy_fieldvalues', JSRelation.INNER_JOIN);
-			fvRel.newRelationItem('customerid','=','customerid');
-			var fvRelItemLiteral1 = fvRel.newRelationItem('1','=','svy_fieldname_id');
-			fvRelItemLiteral1.primaryLiteral = record.svy_fieldname_id;
+			//only create if the relation does not already exist
+			if (!solutionModel.getRelation(fvRelName)) {
+				var fvRel = solutionModel.newRelation(fvRelName, 'db:/example_data/customers', 'db:/example_data/svy_fieldvalues', JSRelation.INNER_JOIN);
+				fvRel.newRelationItem('customerid','=','customerid');
+				var fvRelItemLiteral1 = fvRel.newRelationItem('customerid','=','svy_fieldname_id');
+				fvRelItemLiteral1.primaryLiteral = record.svy_fieldname_id;
+				fvRel.allowCreationRelatedRecords = true;
+				fvRel.allowParentDeleteWhenHavingRelatedRecords = true;
+				fvRel.deleteRelatedRecords = true;
+			}
 			
 			//set the field's dataprovider
 			fvField.dataProviderID = fvRelName + '.' + fieldSizeProperties.colName;
@@ -61,7 +65,10 @@ function showFieldValuesForm() {
 			yPos += (yMargin + fieldSizeProperties.height)
 		}
 	}
-	forms.svy_fieldvalues_main.controller.recreateUI();
+	
+	if (forms.svy_fieldvalues_main) {
+		forms.svy_fieldvalues_main.controller.recreateUI();
+	}
 	
 	//add the tab back to the tabpanel
 	elements.tabsFieldValues.addTab(forms.svy_fieldvalues_main);
