@@ -1,4 +1,12 @@
 /**
+ * @private 
+ * @type {String}
+ *
+ * @properties={typeid:35,uuid:"0DACD5EC-2CE6-4DB9-B55A-BFDE15B6177E"}
+ */
+var bodyContent = '';
+
+/**
  * Show the display name of the sample for navigation 
  * @public 
  * @return {String}
@@ -45,7 +53,8 @@ function getIconStyleClass(){
  * @properties={typeid:24,uuid:"C60F058E-C986-4BC6-82A4-42531234E698"}
  */
 function showBodyContent(content){
-	
+	bodyContent = content;
+	elements.content.visible = true;
 }
 
 /**
