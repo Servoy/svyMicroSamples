@@ -1,0 +1,12 @@
+dataSource:"db:/example_data/svy_fieldnames",
+items:[
+{
+dataProviderIDToAggregate:"sequence",
+name:"max_sequence",
+type:1,
+typeid:40,
+uuid:"3FDA0C9F-BCC4-4821-8B65-4FF5CFA9CE32"
+}
+],
+typeid:39,
+uuid:"646EC400-1EA4-49C1-99EB-9C365CD0FDB3"
