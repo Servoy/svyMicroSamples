@@ -142,6 +142,7 @@ specname:\"column\"\
 items:[
 {
 json:{
+onActionMethodID:"57108D50-7C88-466C-BD6B-9759DD394FBD",
 text:"Customer"
 },
 name:"bean_1",
@@ -195,6 +196,7 @@ uuid:"A72E889B-C6AF-4573-9187-3F94F811235E"
 }
 ],
 location:"1,1",
+name:"container",
 typeid:46,
 uuid:"EF79C9EB-A223-432B-B5B4-3BE4D33B5F61"
 }

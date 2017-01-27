@@ -7,7 +7,7 @@ length:5,
 name:"customerid"
 },
 {
-allowNull:false,
+allowNull:false, 
 autoEnterSubType:0,
 autoEnterType:2,
 creationOrderIndex:0,
