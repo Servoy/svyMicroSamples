@@ -1,5 +1,12 @@
 /**
  * @private 
+ * @type {String}
+ * @properties={typeid:35,uuid:"67CA9FA8-9340-44BA-854D-965503647BD8"}
+ */
+var title = 'Welcome to MicroSamples!'
+
+/**
+ * @private 
  * @properties={typeid:24,uuid:"64939378-3178-4066-8729-07A7425DC6A9"}
  */
 function loadMenu(){
@@ -46,11 +53,13 @@ function onMenuItemSelected(menuItemId, event) {
 	// get selected item
 	/** @type {RuntimeForm<AbstractMicroSample>} */
 	var form = forms[menuItemId];
-	if(!form) throw 'AHHHHHHH';
-	
+
 	// add tab
 	elements.tabs.addTab(form,form.getName(),form.getName(),form.getDescription());
 
+	// set title
+	title = form.getDescription();
+	
 	return true;
 }
 

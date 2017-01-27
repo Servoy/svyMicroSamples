@@ -1,0 +1,13 @@
+addEmptyValue:1,
+dataProviderID1:"customerid",
+dataProviderID2:"city",
+dataProviderID3:"companyname",
+name:"customer_country",
+relationName:"customers_by_country",
+returnDataProviders:1,
+separator:" - ",
+showDataProviders:6,
+sortOptions:"city asc",
+typeid:34,
+uuid:"44290AD2-386C-4FE3-BB35-01911985BC42",
+valueListType:1

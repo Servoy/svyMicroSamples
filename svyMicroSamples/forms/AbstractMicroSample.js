@@ -1,12 +1,4 @@
 /**
- * @private 
- * @type {String}
- *
- * @properties={typeid:35,uuid:"0DACD5EC-2CE6-4DB9-B55A-BFDE15B6177E"}
- */
-var bodyContent = '';
-
-/**
  * Show the display name of the sample for navigation 
  * @public 
  * @return {String}
@@ -53,8 +45,7 @@ function getIconStyleClass(){
  * @properties={typeid:24,uuid:"C60F058E-C986-4BC6-82A4-42531234E698"}
  */
 function showBodyContent(content){
-	bodyContent = content;
-	elements.content.visible = true;
+	forms.content.showBodyContent(content);
 }
 
 /**
@@ -74,4 +65,55 @@ function showMedia(media){
  */
 function showCode(code){
 	
+}
+
+/**
+ * TODO generated, please specify type and doc for the params
+ * @param functionToPrint
+ * @return {Array<String>}
+ * @properties={typeid:24,uuid:"EF846935-DDF2-4A8A-8635-FEF190847BDD"}
+ */
+function printMethodCode(functionToPrint) {
+	var fd = new Packages.com.servoy.j2db.scripting.FunctionDefinition(functionToPrint);
+	if (fd.getFormName()) {
+		var jsForm = solutionModel.getForm(fd.getFormName());
+		var jsMethod = jsForm.getMethod(fd.getMethodName());
+		
+		var lines = jsMethod.code.split('\n');
+		var relevantLines = [];
+		var functionStartFound = false;
+		for (var i = 0; i < lines.length; i++) {
+			if (!functionStartFound && utils.stringTrim(lines[i]).indexOf('function ') == 0) {
+				functionStartFound = true;
+			}
+			if (functionStartFound && lines[i].indexOf('printMethodCode') == -1) {
+				relevantLines.push(lines[i]);
+			}
+		}
+		
+		relevantLines.pop();
+		return relevantLines;
+		
+//		var relevantCode = relevantLines.join('\n');
+//		application.output(relevantCode);
+		
+//		forms.method_code.setMethodCode(relevantLines);
+		
+//		return relevantCode;
+	} else {
+		return [];
+	}
+} 
+/**
+ * Callback method for when form is shown.
+ *
+ * @param {Boolean} firstShow form is shown first time after load
+ * @param {JSEvent} event the event that triggered the action
+ *
+ * @protected
+ *
+ * @properties={typeid:24,uuid:"BB075C8A-D9A6-4F4E-BB4C-DFC99F1B2814"}
+ */
+function onShow(firstShow, event) {
+	// TODO clear infos
 }

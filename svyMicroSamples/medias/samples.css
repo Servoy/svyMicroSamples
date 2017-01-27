@@ -18,3 +18,82 @@
 .svy-main-window-container{
 	background-color: #444;
 }
+
+.label_header_3
+{
+	font-weight: bold;
+	padding-left: 12px;
+	color: #008040;
+	background-color: #c2e7c4;
+	font-size: 12pt;
+	border-radius: 4px;
+}
+.label_header_2
+{
+	font-weight: bold;
+	padding-left: 12px;
+	color: #005177;
+	background-color: #eee;
+	font-size: 12pt;
+	border-radius: 4px;
+}
+.label_header_1
+{
+	font-weight: bold;
+	padding-left: 12px;
+	color: #fff;
+	background-color: #5a96e1;
+	font-size: 16pt;
+	border-radius: 4px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.center
+{
+	text-align: center;
+}
+.font-icon
+{
+	font-size: 18px;
+	text-align: center;
+	color: #aaa;
+	transition: .25s;
+}
+.font-icon.large
+{
+	font-size: 24px;
+}
+.font-icon:HOVER
+{
+	color: #e77509;
+}
+.label-info
+{
+	background-color: #5bc0de;
+	color: #fff;
+	border-radius: 4px;
+	text-align: center;
+	box-shadow: 4px 4px 5px #888888;
+	font-weight: bold;
+}
+.label-warn
+{
+	background-color: #ff8000;
+	color: #fff;
+	border-radius: 4px;
+	text-align: center;
+	box-shadow: 4px 4px 5px #888888;
+	font-weight: bold;
+}
+.label-error
+{
+	background-color: #800000;
+	color: #fff;
+	border-radius: 4px;
+	text-align: center;
+	box-shadow: 4px 4px 5px #888888;
+	font-weight: bold;
+}
+.label-info:HOVER {
+	background-color: #5a96e1;
+}

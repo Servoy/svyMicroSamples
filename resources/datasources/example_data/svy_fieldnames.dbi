@@ -17,6 +17,13 @@ name:"fieldtype"
 },
 {
 allowNull:true,
+creationOrderIndex:5,
+dataType:12,
+length:50,
+name:"label"
+},
+{
+allowNull:true,
 creationOrderIndex:1,
 dataType:12,
 length:50,

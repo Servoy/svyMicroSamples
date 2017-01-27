@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: chat
+Bundle-Name: chat
+Bundle-Version: 1.0.0
+Package-Type: Web-Component
+
+Name: chat/chat.spec
+Web-Component: True
+
