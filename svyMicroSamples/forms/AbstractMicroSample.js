@@ -1,4 +1,12 @@
 /**
+ * @private 
+ * @type {String}
+ *
+ * @properties={typeid:35,uuid:"0DACD5EC-2CE6-4DB9-B55A-BFDE15B6177E"}
+ */
+var bodyContent = '';
+
+/**
  * Show the display name of the sample for navigation 
  * @public 
  * @return {String}
@@ -37,4 +45,33 @@ function getParent(){
  */
 function getIconStyleClass(){
 	return null;
+}
+
+/**
+ * @protected 
+ * @param {String} content 
+ * @properties={typeid:24,uuid:"C60F058E-C986-4BC6-82A4-42531234E698"}
+ */
+function showBodyContent(content){
+	bodyContent = content;
+	elements.content.visible = true;
+}
+
+/**
+ * @protected 
+ * @param {Array<Array<byte>>} media
+ * @properties={typeid:24,uuid:"52AC4BAE-F629-487C-9EE3-22F416E157ED"}
+ */
+function showMedia(media){
+	
+}
+
+/**
+ * Return the lines of code
+ * @protected 
+ * @param {Array<String>} code
+ * @properties={typeid:24,uuid:"8E9F08C7-15E5-420C-98B9-D276F9EE8F29"}
+ */
+function showCode(code){
+	
 }
