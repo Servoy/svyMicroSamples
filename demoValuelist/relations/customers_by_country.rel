@@ -1,0 +1,10 @@
+allowCreationRelatedRecords:true,
+foreignDataSource:"db:/example_data/customers",
+items:[
+{foreignColumnName:"country",primaryDataProviderID:"scopes.demoValuelist.xcountry",typeid:23,uuid:"BB4345B7-3458-4504-87A3-1D1405781259"}
+],
+joinType:1,
+name:"customers_by_country",
+primaryDataSource:"db:/example_data/customers",
+typeid:22,
+uuid:"CA3D0B04-0067-42F7-924F-2B19EE85CFB2"
