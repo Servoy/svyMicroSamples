@@ -34,8 +34,9 @@ function showFieldValuesForm() {
 		for (var i = 1; i <= fieldNameFS.getSize(); i++) {
 			var record = fieldNameFS.getRecord(i);
 			//create label for field and update xPos
-			fvForm.newLabel(record.name,xPos,yPos,80,20);
-			xPos += (80 + xMargin);
+			var fvLabel = fvForm.newLabel(record.name,xPos,yPos,130,20);
+			fvLabel.transparent = true;
+			xPos += (130 + xMargin);
 			
 			//create field
 			/** @type {{fieldtype: Number, colName: String, height:Number, width:Number}} */

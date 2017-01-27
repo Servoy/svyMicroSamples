@@ -33,6 +33,7 @@ typeid:4,
 uuid:"83D258CD-FE33-40E5-8103-C03CC78C0DFC"
 },
 {
+background:"#ffffff",
 height:480,
 partType:5,
 typeid:19,
