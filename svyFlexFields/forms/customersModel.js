@@ -18,7 +18,7 @@ function getDescription() {
 * @properties={typeid:24,uuid:"31736A5F-0EC9-4570-A383-E91D112EDD21"}
 */
 function getIconStyleClass() {
-	return 'fa-server';
+	return 'fa-arrows-h';
 	/** When the number of arguments that ought to be send into the _super call are known,
 	 the _super call can also be made like this: _super.getIconStyleClass(arg1,arg2)*/
 }
@@ -30,7 +30,7 @@ function getIconStyleClass() {
 * @properties={typeid:24,uuid:"565C9E65-0A7D-465C-906A-B82A6BE60771"}
 */
 function getName() {
-	return 'Custom fields responsive';
+	return 'Responsive';
 	/** When the number of arguments that ought to be send into the _super call are known,
 	 the _super call can also be made like this: _super.getName(arg1,arg2)*/
 }
@@ -64,5 +64,5 @@ function prevRecord(event) {
 * @properties={typeid:24,uuid:"357F7F61-780C-4486-AE48-9A3B11EF6F06"}
 */
 function getParent() {
-	return forms.svy_flexfields_main
+	return forms.svy_flexFields_main
 }
