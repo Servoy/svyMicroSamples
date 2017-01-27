@@ -44,11 +44,13 @@ typeid:47,
 uuid:"F6E2B9B8-B843-45E6-BFF0-5CCCF54419BC"
 },
 {
-location:"446,54",
+location:"400,54",
+name:"email_btn",
 onActionMethodID:"220DC872-5493-49D1-ACFD-618EA5395460",
 onDoubleClickMethodID:"-1",
 onRightClickMethodID:"-1",
 size:"133,27",
+styleClass:"message-submit",
 text:"e-mail this chat",
 typeid:7,
 uuid:"FACFD980-269C-44B6-829A-47DB49F35E04"
