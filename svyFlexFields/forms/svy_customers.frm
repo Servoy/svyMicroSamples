@@ -92,6 +92,7 @@ displayType:2,
 editable:false,
 location:"100,130",
 name:"svy_fieldset_id",
+onDataChangeMethodID:"EDFD5CB0-5E80-43EA-8967-CF92093601DC",
 size:"230,20",
 text:"Svy Fieldset Id",
 typeid:4,
@@ -148,6 +149,7 @@ uuid:"F4CD63CB-5BCC-402F-BEDA-45E97B93429C"
 }
 ],
 name:"svy_customers",
+onRecordSelectionMethodID:"7C19DEBD-04F6-47F3-BE90-7249528D6666",
 showInMenu:true,
 typeid:3,
 uuid:"762343B9-0311-44EF-9B24-82BC582157F1"

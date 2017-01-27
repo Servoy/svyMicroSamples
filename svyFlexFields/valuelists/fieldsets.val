@@ -1,4 +1,3 @@
-addEmptyValue:1,
 dataProviderID1:"svy_fieldset_id",
 dataProviderID2:"name",
 dataSource:"db:/example_data/svy_fieldsets",
