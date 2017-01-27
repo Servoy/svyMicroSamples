@@ -14,7 +14,6 @@ function showFieldValuesForm() {
 	if (success) {
 	    solutionModel.revertForm('svy_fieldvalues_main');
 	}
-	forms.svy_fieldvalues_main.controller.recreateUI();
 	
 	//change the form
 	var fvForm = solutionModel.getForm('svy_fieldvalues_main')
@@ -40,12 +39,24 @@ function showFieldValuesForm() {
 			fvForm.newLabel(record.name,xPos,yPos,80,20);
 			xPos += (80 + xMargin);
 			
-			//create field and update yPos and reset xPos
-			/** @type {{fieldtype: Number, height:Number, width:Number}} */
+			//create field
+			/** @type {{fieldtype: Number, colName: String, height:Number, width:Number}} */
 			var fieldSizeProperties = scopes.svyFlexFields.en_fieldtypes[record.fieldtype];
-			var variable = fvForm.newVariable('myVar' + i, JSVariable.TEXT);
-			variable.defaultValue = "This is a default value";
-			var field = fvForm.newField(variable, fieldSizeProperties.fieldtype, xPos, yPos, fieldSizeProperties.width, fieldSizeProperties.height);
+//			var variable = fvForm.newVariable('myVar' + i, JSVariable.TEXT);
+//			variable.defaultValue = "This is a default value";
+			var fvField = fvForm.newField(null, fieldSizeProperties.fieldtype, xPos, yPos, fieldSizeProperties.width, fieldSizeProperties.height);
+			
+			//create the relationship to connect to dataprovider
+			var fvRelName = 'customers_' + record.svy_fieldname_id + '_fieldname';
+			var fvRel = solutionModel.newRelation(fvRelName, 'db:/example_data/customers', 'db:/example_data/svy_fieldvalues', JSRelation.INNER_JOIN);
+			fvRel.newRelationItem('customerid','=','customerid');
+			var fvRelItemLiteral1 = fvRel.newRelationItem('1','=','svy_fieldname_id');
+			fvRelItemLiteral1.primaryLiteral = record.svy_fieldname_id;
+			
+			//set the field's dataprovider
+			fvField.dataProviderID = fvRelName + '.' + fieldSizeProperties.colName;
+			
+			//update yPos and reset xPos
 			xPos = 0;
 			yPos += (yMargin + fieldSizeProperties.height)
 		}

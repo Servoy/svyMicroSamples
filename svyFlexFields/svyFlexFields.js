@@ -3,10 +3,10 @@
  * @properties={typeid:35,uuid:"92CC5082-F245-4A0D-8453-7D7A734BE973",variableType:-4}
  */
 var en_fieldtypes = {
-	TEXT: {fieldtype: JSField.TEXT_FIELD, height:20, width:230},
-	DATE: {fieldtype: JSField.CALENDAR, height:20, width:230},
-	NUMBER: {fieldtype: JSField.TEXT_FIELD, height:20, width:230},
-	IMAGE: {fieldtype: JSField.IMAGE_MEDIA, height:120, width:230}
+	TEXT: {fieldtype: JSField.TEXT_FIELD, colName: 'fld_text', height:20, width:230},
+	DATE: {fieldtype: JSField.CALENDAR, colName: 'fld_date', height:20, width:230},
+	NUMBER: {fieldtype: JSField.TEXT_FIELD, colName: 'fld_number', height:20, width:230},
+	IMAGE: {fieldtype: JSField.IMAGE_MEDIA, colName: 'fld_image', height:120, width:230}
 };
 
 /**
