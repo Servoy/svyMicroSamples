@@ -3,23 +3,30 @@
  *
  * @return {String}
  *
- * @properties={typeid:24,uuid:"29579BC1-6ED3-4FA6-A036-48D5125748A3"}
+ * @properties={typeid:24,uuid:"D03840EC-86E3-4711-AD01-C4DA32BCAA11"}
  */
 function getName() {
-	return "Flex Fields - Non-Responsive";
-	/** When the number of arguments that ought to be send into the _super call are known,
-	 the _super call can also be made like this: _super.getName(arg1,arg2)*/
+	return "Non-Responsive";
 }
-
 
 /**
 *
 * @return {String}
 *
-* @properties={typeid:24,uuid:"B425FA81-2087-48CA-B45E-3F87ACF5D275"}
+* @properties={typeid:24,uuid:"40BD96E8-2361-4DAE-8C97-68336ED22FD4"}
 */
 function getDescription() {
-	return "This is the description. It's Great!";
+	return "Admin can create sets of fields.  Each Customer record has data for all sets.";
 	/** When the number of arguments that ought to be send into the _super call are known,
 	 the _super call can also be made like this: _super.getDescription(arg1,arg2)*/
+}
+
+/**
+*
+* @return {RuntimeForm<AbstractMicroSample>}
+*
+* @properties={typeid:24,uuid:"07245EC9-0A32-4138-832E-A0654A9272EA"}
+*/
+function getParent() {
+	return forms.svy_flexFields_main;
 }
