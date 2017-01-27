@@ -1,0 +1,10 @@
+.add_btn {
+    border: 1px solid #555;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    border: none;
+    background-color:lightgreen;
+    text-decoration: none;    
+    cursor: pointer;
+    display: inline-block;
+}}

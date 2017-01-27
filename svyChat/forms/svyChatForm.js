@@ -111,6 +111,9 @@ function onTypingMessage() {
  */
 function onSendingMessage(message) {
 	broadcasterMessage.broadcastMessage(message);
+	
+	var lines = forms.AbstractMicroSample.printMethodCode(onSendingMessage);
+	forms.content.showCode(lines);
 }
 
 /**
