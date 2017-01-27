@@ -1,0 +1,11 @@
+allowCreationRelatedRecords:true,
+deleteRelatedRecords:true,
+foreignDataSource:"db:/example_data/svy_fieldnames",
+items:[
+{foreignColumnName:"svy_fieldset_id",primaryDataProviderID:"svy_fieldset_id",typeid:23,uuid:"5AF80588-98BB-46A6-A502-08635F826D7F"}
+],
+joinType:1,
+name:"svy_fieldsets_to_svy_fieldnames$svy_fieldset_id",
+primaryDataSource:"db:/example_data/svy_fieldsets",
+typeid:22,
+uuid:"1F6EBAE3-5F7C-4811-928B-75FE8F83FEBE"
