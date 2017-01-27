@@ -66,7 +66,7 @@ function onEmailChatAction(event) {
  *
  * @return {String}
  *
- * @properties={typeid:24,uuid:"67892011-89C6-46AF-BDF8-819EEC2D83AD"}
+ * @properties={typeid:24,uuid:"C22F0827-B129-47E2-8733-F5E77A1B41A2"}
  */
 function getName() {
 	return 'Chat';
@@ -76,7 +76,7 @@ function getName() {
 *
 * @return {String}
 *
-* @properties={typeid:24,uuid:"D6CF8752-F74E-4D6B-9FAB-60C4DF6164FB"}
+* @properties={typeid:24,uuid:"096EC1CA-7CB5-418C-8579-96CBCAEA4D3B"}
 */
 function getDescription() {
 	return 'Chat here!';
@@ -86,10 +86,10 @@ function getDescription() {
 *
 * @return {String}
 *
-* @properties={typeid:24,uuid:"3F8BA430-1E34-4E15-B6FD-80865D1B0672"}
+* @properties={typeid:24,uuid:"1BE5CCCF-9C37-4087-B28C-C28058D8E3F7"}
 */
 function getIconStyleClass() {
-	return 'fa-home'
+	return 'fa-weixin';
 }
 
 /**
