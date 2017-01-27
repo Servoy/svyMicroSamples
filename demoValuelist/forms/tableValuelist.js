@@ -23,7 +23,7 @@ function getName() {
  * @properties={typeid:24,uuid:"27EE384F-CB39-4FA4-888C-C649B00DFAE1"}
  */
 function getDescription() {
-	return "Valuelist";
+	return "Valuelist generated on table columns without writing code";
 }
 
 /**
