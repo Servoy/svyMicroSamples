@@ -1,0 +1,6 @@
+foreignDataSource:"db:/example_data/customers",
+joinType:1,
+name:"customers$container",
+primaryDataSource:"db:/example_data/customers",
+typeid:22,
+uuid:"CEB5B90F-FC24-45CE-8D4A-BB6DBDDEB4F0"

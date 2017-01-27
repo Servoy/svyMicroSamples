@@ -18,7 +18,7 @@ items:[
 {
 containsFormID:"821DB811-1224-49B2-AC5E-2F2CDEA9BAA6",
 location:"52,214",
-relationName:"customers_to_svy_fieldvalues",
+relationName:"customers$container",
 text:"svy_fieldvalues_main",
 typeid:15,
 uuid:"A91339E2-4738-4DA6-BC2B-7DA134D26CEC"
