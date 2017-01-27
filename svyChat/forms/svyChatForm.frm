@@ -1,0 +1,26 @@
+customProperties:"formComponent:false",
+encapsulation:60,
+extendsID:"1046CC5D-E653-4F9C-B8B9-E3FCDA83A211",
+items:[
+{
+extendsID:"CCD8084B-3484-41E7-8FBA-CBF44DD9BF67",
+height:480,
+typeid:19,
+uuid:"E5C4FE3A-59B0-426C-96BF-65858AA2EBAD"
+},
+{
+location:"446,54",
+onActionMethodID:"220DC872-5493-49D1-ACFD-618EA5395460",
+onDoubleClickMethodID:"-1",
+onRightClickMethodID:"-1",
+size:"133,27",
+text:"e-mail this chat",
+typeid:7,
+uuid:"FACFD980-269C-44B6-829A-47DB49F35E04"
+}
+],
+name:"svyChatForm",
+navigatorID:"-1",
+showInMenu:true,
+typeid:3,
+uuid:"FC784862-3095-47CD-A9C9-572A3B15D578"

@@ -1,0 +1,11 @@
+addEmptyValue:1,
+dataProviderID1:"svy_fieldset_id",
+dataProviderID2:"name",
+dataSource:"db:/example_data/svy_fieldsets",
+name:"fieldsets",
+returnDataProviders:1,
+showDataProviders:2,
+sortOptions:"name asc",
+typeid:34,
+uuid:"026B1D42-2B5E-481A-B722-C168BC604F87",
+valueListType:1
