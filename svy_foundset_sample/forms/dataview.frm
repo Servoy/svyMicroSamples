@@ -22,11 +22,12 @@ uuid:"15BBD867-807E-49C0-985C-38B5B2E4C1E6"
 },
 {
 location:"140,9",
+name:"add_record_button",
 onActionMethodID:"524B62A9-B230-4318-89D0-897DA980B355",
 onDoubleClickMethodID:"-1",
 onRightClickMethodID:"-1",
 size:"148,24",
-styleClass:"add_btn",
+styleClass:"add_btn svy-help",
 text:"Add New Customer",
 typeid:7,
 uuid:"5D488AF8-4EC1-4677-99B4-AED04D0FEA4B"
@@ -53,7 +54,7 @@ uuid:"6E080171-2465-4D52-B024-1B0678A1B49A"
 items:[
 {
 containsFormID:"745901CE-8020-409A-B21C-8F10592A555B",
-location:"303,40",
+location:"355,85",
 text:"detail_view",
 typeid:15,
 uuid:"424D7F5B-8510-47F4-9ACE-145F79E3DA2A"

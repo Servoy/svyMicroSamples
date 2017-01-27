@@ -107,7 +107,7 @@ function onSolutionOpen(arg, queryParams) {
 	initInMemDatabase();
 	plugins.svyhelp.callback = onHelpCalled;
 	plugins.svyhelp.helpEvent = 'mouseover';
-	plugins.svyhelp.helpMode = true;
+	plugins.svyhelp.helpMode = false;
 }
 
 /**

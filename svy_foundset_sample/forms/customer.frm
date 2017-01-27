@@ -13,7 +13,9 @@ uuid:"23231298-3ABC-48D8-ADA2-69167D2D6EC2"
 {
 labelFor:"contact",
 location:"13,20",
+name:"contact_label",
 size:"152,20",
+styleClass:"svy-help",
 text:"Contact Name",
 transparent:true,
 typeid:7,
@@ -22,7 +24,10 @@ uuid:"28332772-79E5-4AF7-B69C-1BA984CB9D2F"
 {
 labelFor:"delete_record",
 location:"51,85",
+mnemonic:"",
+name:"delete_label",
 size:"41,20",
+styleClass:"svy-help",
 text:"Delete",
 transparent:true,
 typeid:7,
