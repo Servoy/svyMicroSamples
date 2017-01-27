@@ -3,7 +3,7 @@
  *
  * @properties={typeid:35,uuid:"0ACE684D-8B09-422E-9096-75FA85116E36",variableType:8}
  */
-var xValue = null;
+var xValue = 40;
 
 /**
  * @properties={typeid:24,uuid:"FAC710FD-1DCB-4465-AFBE-756F270F2953"}
@@ -16,7 +16,7 @@ function getName() {
  * @properties={typeid:24,uuid:"4C728EDB-420B-4BEB-9003-7CB612F11C06"}
  */
 function getDescription() {
-	return "Simple Hardcoded Valuelist";
+	return "Simple Hardcoded Valuelist, no code required";
 }
 
 /**

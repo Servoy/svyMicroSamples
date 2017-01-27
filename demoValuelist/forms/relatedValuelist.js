@@ -16,7 +16,7 @@ function getName() {
  * @properties={typeid:24,uuid:"1C53FE92-2990-4A7E-B045-0E2A35DC23EA"}
  */
 function getDescription() {
-	return "Valuelist";
+	return "Valuelist generated on related data without writing a line of code";
 }
 
 /**
@@ -31,4 +31,17 @@ function getParent() {
  */
 function getIconStyleClass() {
 	return 'fa-gear';
+}
+/**
+ * Callback method for when form is shown.
+ *
+ * @param {Boolean} firstShow form is shown first time after load
+ * @param {JSEvent} event the event that triggered the action
+ *
+ * @private
+ *
+ * @properties={typeid:24,uuid:"8126C5F9-C651-4BA4-9795-51DB44C11218"}
+ */
+function onShow(firstShow, event) {
+	scopes.demoValuelist.xcountry = country
 }

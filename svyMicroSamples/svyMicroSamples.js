@@ -73,7 +73,8 @@ function sortSamples(form1,form2){
  */
 function initInMemDatabase() {
 	var serverName = "example_data";
-	var example_data_tables = databaseManager.getTableNames(serverName);
+	//var example_data_tables = databaseManager.getTableNames(serverName);
+	var example_data_tables = ['categories', 'customers', 'orders'];
 	for(var i = 0; i < example_data_tables.length; i++) {
 		var tableName = example_data_tables[i];
 		var ds = databaseManager.createEmptyDataSet();
