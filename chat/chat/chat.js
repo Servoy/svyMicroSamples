@@ -8,6 +8,8 @@ angular.module('chatChat', ['servoy']).directive('chatChat', function() {
 				servoyApi: "=svyServoyapi"
 			},
 			link: function($scope, $element, $attrs) {
+				var content = [];
+				
 				var $messages = $('.messages-content'),
 					d, h, m,
 					i = 0;
@@ -40,6 +42,8 @@ angular.module('chatChat', ['servoy']).directive('chatChat', function() {
 					updateScrollbar();
 
 					$scope.handlers.onSendingMessage(msg);
+					
+					content.push({timestamp: new Date(), direction: 'out', message: msg});
 				}
 
 				$('.message-submit').click(function() {
@@ -50,7 +54,7 @@ angular.module('chatChat', ['servoy']).directive('chatChat', function() {
 						if (e.which != 13) {
 							$scope.handlers.onTypingMessage();
 
-							return
+							return;
 						}
 
 						insertMessage();
@@ -60,15 +64,22 @@ angular.module('chatChat', ['servoy']).directive('chatChat', function() {
 				$scope.api.showTyping = function() {
 					$('<div class="message loading new"><figure class="avatar"><img src="trump.png" /></figure><span></span></div>').appendTo($('.mCSB_container'));
 					updateScrollbar();
-					setTimeout(function() {
-							$('.message.loading').remove();
-						}, 2000)
+				}
+				
+				$scope.api.hideTyping = function() {
+					$('.message.loading').remove();
 				}
 
 				$scope.api.showReceivedMessage = function(message) {
 					$('<div class="message new"><figure class="avatar"><img src="trump.png" /></figure>' + message + '</div>').appendTo($('.mCSB_container')).addClass('new');
 					setDate();
 					updateScrollbar();
+					
+					content.push({timestamp: new Date(), direction: 'in', message: message});
+				}
+				
+				$scope.api.getContent = function() {
+					return content;
 				}
 			},			
 			controller: function($scope, $element, $attrs) { },
