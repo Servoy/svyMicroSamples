@@ -1,9 +1,10 @@
 borderType:"EmptyBorder,0,0,0,0",
 customProperties:"formComponent:false",
-dataSource:"db:/example_data/svy_fieldvalues",
+dataSource:"db:/example_data/customers",
 encapsulation:44,
 items:[
 {
+background:"#ffffff",
 height:480,
 partType:5,
 typeid:19,

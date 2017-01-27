@@ -79,6 +79,7 @@ typeid:7,
 uuid:"C65383E7-5466-4C56-8335-1D6583334A86"
 },
 {
+background:"#ffffff",
 height:480,
 partType:5,
 typeid:19,
