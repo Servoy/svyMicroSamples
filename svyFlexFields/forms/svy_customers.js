@@ -107,3 +107,29 @@ function onDataChange$gv_svy_fieldset_id(oldValue, newValue, event) {
 	showFieldValuesForm();
 	return true
 }
+
+/**
+ * Perform the element default action.
+ *
+ * @param {JSEvent} event the event that triggered the action
+ *
+ * @private
+ *
+ * @properties={typeid:24,uuid:"EEC15439-58F1-44BF-870F-214E7401485C"}
+ */
+function onAction$previous(event) {
+	foundset.setSelectedIndex(foundset.getSelectedIndex() == 1 ? 1 : foundset.getSelectedIndex() - 1);
+}
+
+/**
+ * Perform the element default action.
+ *
+ * @param {JSEvent} event the event that triggered the action
+ *
+ * @private
+ *
+ * @properties={typeid:24,uuid:"CB0E1FEB-0BC5-46F3-8E0B-4DB665DB4406"}
+ */
+function onAction$next(event) {
+	foundset.setSelectedIndex(foundset.getSelectedIndex() == foundset.getSize() ? foundset.getSize() : foundset.getSelectedIndex() + 1)
+}

@@ -67,3 +67,27 @@ function onAction$deleteFieldSetFieldName(event) {
 	}
 
 }
+
+/**
+ * Perform the element default action.
+ *
+ * @param {JSEvent} event the event that triggered the action
+ *
+ * @properties={typeid:24,uuid:"38051168-DCB1-4A30-9972-7FBCA3B1011A"}
+ */
+function onAction$previous(event) {
+	foundset.setSelectedIndex(foundset.getSelectedIndex() == 1 ? 1 : foundset.getSelectedIndex() - 1);
+}
+
+/**
+ * Perform the element default action.
+ *
+ * @param {JSEvent} event the event that triggered the action
+ *
+ * @private
+ *
+ * @properties={typeid:24,uuid:"0762DB01-208B-4C97-979B-D9734C24FE94"}
+ */
+function onAction$next(event) {
+	foundset.setSelectedIndex(foundset.getSelectedIndex() == foundset.getSize() ? foundset.getSize() : foundset.getSelectedIndex() + 1)
+}

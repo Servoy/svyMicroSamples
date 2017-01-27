@@ -50,6 +50,16 @@ typeid:4,
 uuid:"399C78D8-E671-4FEA-8635-90D69BFBE594"
 },
 {
+location:"314,5",
+onActionMethodID:"0762DB01-208B-4C97-979B-D9734C24FE94",
+onDoubleClickMethodID:"-1",
+onRightClickMethodID:"-1",
+size:"100,20",
+text:"Next >",
+typeid:7,
+uuid:"65F8A4A5-0DDF-4B79-A41A-39D55782F10E"
+},
+{
 labelFor:"description",
 location:"240,30",
 name:"description_label",
@@ -58,6 +68,16 @@ text:"Description",
 transparent:true,
 typeid:7,
 uuid:"698AF45D-16C4-4038-B718-F2F2AE31001A"
+},
+{
+location:"209,5",
+onActionMethodID:"38051168-DCB1-4A30-9972-7FBCA3B1011A",
+onDoubleClickMethodID:"-1",
+onRightClickMethodID:"-1",
+size:"100,20",
+text:"< Previous",
+typeid:7,
+uuid:"A0F8D9B6-24C8-4A8F-80AF-3A9A0E00E04A"
 },
 {
 labelFor:"name",
@@ -100,7 +120,7 @@ uuid:"018A700A-9C5F-4525-B0DD-1043C927E422"
 location:"5,91",
 name:"tabs",
 printable:false,
-size:"620,384",
+size:"620,234",
 tabOrientation:-1,
 transparent:true,
 typeid:16,

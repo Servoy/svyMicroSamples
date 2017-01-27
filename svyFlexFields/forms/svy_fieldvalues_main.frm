@@ -13,7 +13,7 @@ uuid:"D35CAC19-0BDD-4B14-B3CB-05D821DB8247"
 ],
 name:"svy_fieldvalues_main",
 navigatorID:"-1",
-scrollbars:36,
+scrollbars:33,
 showInMenu:true,
 typeid:3,
 uuid:"821DB811-1224-49B2-AC5E-2F2CDEA9BAA6"

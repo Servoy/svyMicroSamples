@@ -30,3 +30,15 @@ function getDescription() {
 function getParent() {
 	return forms.svy_flexFields_main;
 }
+
+/**
+*
+* @return {String}
+*
+* @properties={typeid:24,uuid:"BE721D40-087D-46AF-9D41-5B614C4C9644"}
+*/
+function getIconStyleClass() {
+	return "fa-square-o";
+	/** When the number of arguments that ought to be send into the _super call are known,
+	 the _super call can also be made like this: _super.getIconStyleClass(arg1,arg2)*/
+}
