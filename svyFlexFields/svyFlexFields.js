@@ -28,6 +28,11 @@ function addFieldsToForm(event, fieldSetId) {
 	solutionModel.revertForm('customfields')
 	 var jsForm = solutionModel.getForm('customfields');
 	
+	if(!fieldSetId){
+		forms['customfields']['controller'].recreateUI()
+		
+		return  forms['customfields']
+	}
 
 	var table = databaseManager.getTable(jsFormOrg.dataSource)
 	var pkColumn = table.getRowIdentifierColumnNames()[0] //for this sample we expect one PK on a table
@@ -61,6 +66,7 @@ application.output('relation '+relationName)
 			globalsFieldNameId.defaultValue = recordFieldNames.svy_fieldname_id
 			relation.newRelationItem('scopes.svyFlexFields.'+globalParentRecordId.name, '=', 'parent_record_id')
 			relation.newRelationItem('scopes.svyFlexFields.'+globalsFieldNameId.name, '=', 'svy_fieldname_id')
+			relation.allowCreationRelatedRecords = true
 		}
 
 	
@@ -83,7 +89,7 @@ application.output('relation '+relationName)
 			break;
 		}
 
-		application.output('dataprovider '+dataprovider + ' seq '+ recordFieldNames.sequence)
+		application.output('dataprovider '+dataprovider + ' seq '+ recordFieldNames.sequence + ' label '+  recordFieldNames.label)
 		createField(dataprovider, recordFieldNames.fieldtype, recordFieldNames.sequence, recordFieldNames.label)
 	}
 
@@ -104,16 +110,23 @@ application.output('relation '+relationName)
 	    
 	    column = row.newLayoutContainer(1);
 	    column.tagType = 'column';
-	    column.cssClasses = 'col-md-6';
+	    column.cssClasses = 'col-md-4 customLabel';
 	    column.name = 'column1';
 	    column.packageName = '12grid';
-	    label = column.newWebComponent('lbl_text','bootstrapcomponents-label',1);
-	    textfield = column.newWebComponent('textfield1','bootstrapcomponents-textbox',1);
+	    label = column.newWebComponent('lbl_text'+pos,'bootstrapcomponents-label',1);
 
+	    var column2 = row.newLayoutContainer(2);
+	    column2.tagType = 'column';
+	    column2.cssClasses = 'col-md-8 customLabel';
+	    column2.name = 'column2';
+	    column2.packageName = '12grid';
+	    textfield = column2.newWebComponent('textfield'+pos,'bootstrapcomponents-textbox',1);
+
+	    
 	    label.setJSONProperty('text',labelText)
 	    label.setJSONProperty('border', 'LineBorder,1,#ccffcc');
 	    textfield.setJSONProperty('border', 'LineBorder,1,#ccffcc');
-	    textfield.setJSONProperty('dataProvider', dataprovider);	
+	    textfield.setJSONProperty('dataProvider', dataProvider);	
 		break;
 
 		case '3':
@@ -123,21 +136,23 @@ application.output('relation '+relationName)
 	    row = jsForm.getLayoutContainer('container').newLayoutContainer(pos); 
 	    row.tagType = 'row';
 	    row.cssClasses = 'row';
-	    row.name = 'row2';
 	    row.packageName = '12grid';
 	    
 	    column = row.newLayoutContainer(1);
 	    column.tagType = 'column';
-	    column.cssClasses = 'col-md-6';
-	    column.name = 'column1';
+	    column.cssClasses = 'col-md-4 customLabel';
 	    column.packageName = '12grid';
-	    label = column.newWebComponent('lbl_number','bootstrapcomponents-label',1);
-	    textfield = column.newWebComponent('number','bootstrapcomponents-textbox',1);
+	    label = column.newWebComponent('lbl_number'+pos,'bootstrapcomponents-label',1);
+	    column2 = row.newLayoutContainer(2);
+	    column2.tagType = 'column';
+	    column2.cssClasses = 'col-md-8 customLabel';
+	    column2.packageName = '12grid';
+	    textfield = column2.newWebComponent('number'+pos,'bootstrapcomponents-textbox',1);
 
 	    label.setJSONProperty('text',labelText)
 	    label.setJSONProperty('border', 'LineBorder,1,#ccffcc');
 	    textfield.setJSONProperty('border', 'LineBorder,1,#ccffcc');
-	    textfield.setJSONProperty('dataProvider', dataprovider);	
+	    textfield.setJSONProperty('dataProvider', dataProvider);	
 		break;
 
 		case '1':
@@ -148,22 +163,24 @@ application.output('relation '+relationName)
 	    row = jsForm.getLayoutContainer('container').newLayoutContainer(pos); 
 	    row.tagType = 'row';
 	    row.cssClasses = 'row';
-	    row.name = 'row2';
 	    row.packageName = '12grid';
 	    
 	    column = row.newLayoutContainer(1);
 	    column.tagType = 'column';
-	    column.cssClasses = 'col-md-6';
-	    column.name = 'column1';
+	    column.cssClasses = 'col-md-4 customLabel';
 	    column.packageName = '12grid';
-	    label = column.newWebComponent('lbl_number','bootstrapcomponents-label',1);
-	    date = column.newWebComponent('textfield99','bootstrapcomponents-calendar',1);
+	    label = column.newWebComponent('lbl_number'+pos,'bootstrapcomponents-label',1);
+	    column2 = row.newLayoutContainer(2);
+	    column2.tagType = 'column';
+	    column2.cssClasses = 'col-md-8 customLabel';
+	    column2.packageName = '12grid';
+	    date = column2.newWebComponent('textfield'+pos,'bootstrapcomponents-calendar',2);
 
 	    label.setJSONProperty('text',labelText)
 	    label.setJSONProperty('border', 'LineBorder,1,#ccffcc');
 	    
 	    date.setJSONProperty('border', 'LineBorder,1,#ccffcc');
-	    date.setJSONProperty('dataProvider', dataprovider);	
+	    date.setJSONProperty('dataProvider', dataProvider);	
 		break;
 
 		case '4':
@@ -173,21 +190,23 @@ application.output('relation '+relationName)
 	    row = jsForm.getLayoutContainer('container').newLayoutContainer(pos); 
 	    row.tagType = 'row';
 	    row.cssClasses = 'row';
-	    row.name = 'row2';
 	    row.packageName = '12grid';
 	    
 	    column = row.newLayoutContainer(1);
 	    column.tagType = 'column';
-	    column.cssClasses = 'col-md-6';
-	    column.name = 'column1';
+	    column.cssClasses = 'col-md-4 customLabel';
 	    column.packageName = '12grid';
-	    label = column.newWebComponent('lbl_number','bootstrapcomponents-label',1);
-	    media = column.newWebComponent('textfield99','bootstrapcomponents-imagemedia',1);
+	    label = column.newWebComponent('lbl_number'+pos,'bootstrapcomponents-label',1);
+	    column2 = row.newLayoutContainer(2);
+	    column2.tagType = 'column';
+	    column2.cssClasses = 'col-md-8 customLabel';
+	    column2.packageName = '12grid';
+	    media = column.newWebComponent('textfield'+pos,'bootstrapcomponents-imagemedia',1);
 
 	    label.setJSONProperty('text',labelText)
 	    label.setJSONProperty('border', 'LineBorder,1,#ccffcc');
 	    media.setJSONProperty('border', 'LineBorder,1,#ccffcc');
-	    media.setJSONProperty('dataProvider', dataprovider);	
+	    media.setJSONProperty('dataProvider', dataProvider);	
 
 		break; 
 		
@@ -196,7 +215,7 @@ application.output('relation '+relationName)
 	
 	
 	
-	forms['customfields'].controller.recreateUI()
+	forms['customfields']['controller'].recreateUI()
 	
 	return  forms['customfields']
 	

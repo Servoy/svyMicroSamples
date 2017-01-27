@@ -64,7 +64,7 @@ name:"flagged_for_mobile"
 },
 {
 allowNull:true,
-creationOrderIndex:11,
+creationOrderIndex:13,
 dataType:12,
 length:50,
 name:"organization_id"
@@ -92,7 +92,7 @@ name:"region"
 },
 {
 allowNull:true,
-creationOrderIndex:13,
+creationOrderIndex:11,
 dataType:4,
 name:"svy_fieldset_id"
 }

@@ -4,7 +4,7 @@
 	<buildpathentry exported="true" kind="prj" path="/svyCharts"/>
 	<buildpathentry exported="true" kind="prj" path="/svyChat"/>
 	<buildpathentry exported="true" kind="prj" path="/svyFlexFields"/>
+	<buildpathentry exported="true" kind="prj" path="/svyGroupingGrid"/>
 	<buildpathentry exported="true" kind="prj" path="/svyMicroSamples"/>
 	<buildpathentry exported="true" kind="prj" path="/svyUtils"/>
-	<buildpathentry exported="true" kind="prj" path="/svy_foundset_sample"/>
 </buildpath>

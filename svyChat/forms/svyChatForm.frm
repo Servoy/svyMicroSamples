@@ -24,7 +24,7 @@ uuid:"E5C4FE3A-59B0-426C-96BF-65858AA2EBAD"
 json:{
 chatImage:"779D2174-405B-433E-A427-DD08BEFF87C0",
 chatName:"Servoy",
-chatTitle:"For complex business applations",
+chatTitle:"For complex business applications",
 location:{
 x:20,
 y:20
