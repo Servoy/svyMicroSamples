@@ -62,7 +62,7 @@ angular.module('chatChat', ['servoy']).directive('chatChat', function() {
 					})
 
 				$scope.api.showTyping = function() {
-					$('<div class="message loading new"><figure class="avatar"><img src="trump.png" /></figure><span></span></div>').appendTo($('.mCSB_container'));
+					$('<div class="message loading new"><figure class="avatar"><img src="' + $scope.model.chatImage + '" /></figure><span></span></div>').appendTo($('.mCSB_container'));
 					updateScrollbar();
 				}
 				
@@ -71,7 +71,7 @@ angular.module('chatChat', ['servoy']).directive('chatChat', function() {
 				}
 
 				$scope.api.showReceivedMessage = function(message) {
-					$('<div class="message new"><figure class="avatar"><img src="trump.png" /></figure>' + message + '</div>').appendTo($('.mCSB_container')).addClass('new');
+					$('<div class="message new"><figure class="avatar"><img src="' + $scope.model.chatImage + '" /></figure>' + message + '</div>').appendTo($('.mCSB_container')).addClass('new');
 					setDate();
 					updateScrollbar();
 					
