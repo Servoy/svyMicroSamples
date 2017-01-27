@@ -43,13 +43,14 @@ typeid:16,
 uuid:"8757B02A-7FB7-421B-BBAA-9D0832AEA91B"
 },
 {
-height:480,
+height:100,
 partType:5,
 typeid:19,
-uuid:"E87419C1-FFE5-4095-AE7E-2B6798FA7229"
+uuid:"A10AAB89-B4F3-428D-BDCD-175DAE8FE5D3"
 }
 ],
 name:"main",
+navigatorID:"-1",
 showInMenu:true,
 size:"1315,480",
 typeid:3,

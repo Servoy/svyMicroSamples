@@ -24,20 +24,20 @@ function onShow(firstShow, event) {
 //	elements.dbtreeview_3.addRoots(foundset);
 
 	
-	elements.dbtreeview.bindings = [{
-		datasource: databaseManager.getDataSource('example_data', 'customers'),
-		nrelationname : 'customers_to_orders',
-		textdataprovider: "customerid"
-	},{
-		datasource: databaseManager.getDataSource('example_data', 'orders'),
-		textdataprovider: "orderid"
-		
-	}];
+//	elements.dbtreeview.bindings = [{
+//		datasource: databaseManager.getDataSource('example_data', 'customers'),
+//		nrelationname : 'customers_to_orders',
+//		textdataprovider: "customerid"
+//	},{
+//		datasource: databaseManager.getDataSource('example_data', 'orders'),
+//		textdataprovider: "orderid"
+//		
+//	}];
 	
-	var fs = databaseManager.getFoundSet("db:/example_data/customers");
-	fs.loadAllRecords()
-	elements.dbtreeview.addRoots(fs);
-	//elements.dbtreeview.refresh();
+//	var fs = databaseManager.getFoundSet("db:/example_data/customers");
+//	fs.loadAllRecords()
+//	elements.dbtreeview.addRoots(fs);
+//	//elements.dbtreeview.refresh();
 	
 	elements.uigridfilter_1.root = foundset;
 	elements.uigridfilter_1.groupings= [{
