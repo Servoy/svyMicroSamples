@@ -49,7 +49,7 @@ typeid:46,
 uuid:"9EBE556E-F861-4986-9C95-3D4348B862B2"
 }
 ],
-location:"3,3",
+location:"4,4",
 typeid:46,
 uuid:"3A46CE72-724D-411B-9DB1-EAB8EB407901"
 },
@@ -155,7 +155,7 @@ specname:\"row\"\
 items:[
 {
 customProperties:"attributes:{\
-class:\"col-md-12\"\
+class:\"col-md-12 margin\"\
 },\
 properties:{\
 packagename:\"12grid\",\
@@ -182,8 +182,6 @@ specname:\"column\"\
 items:[
 {
 json:{
-labelFor:"Type",
-styleClass:"customLabel",
 text:"Type"
 },
 name:"bean_3",
@@ -209,6 +207,7 @@ items:[
 json:{
 dataProviderID:"svy_fieldset_id",
 onDataChangeMethodID:"365880BE-BDD0-4FAF-A4BB-9E4B262ADA96",
+styleClass:"input-sm form-control customcombo",
 valuelistID:"026B1D42-2B5E-481A-B722-C168BC604F87"
 },
 location:"1,1",
@@ -234,7 +233,7 @@ typeid:46,
 uuid:"3A8D4B1D-D32D-4730-A6FB-939DC40B53BC"
 }
 ],
-location:"2,2",
+location:"3,3",
 typeid:46,
 uuid:"DBA99DC9-A95C-4621-AD1D-3A8A8218E927"
 }

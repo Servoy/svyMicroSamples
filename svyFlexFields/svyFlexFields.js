@@ -205,7 +205,7 @@ application.output('relation '+relationName)
 
 	    label.setJSONProperty('text',labelText)
 	    label.setJSONProperty('border', 'LineBorder,1,#ccffcc');
-	    media.setJSONProperty('border', 'LineBorder,1,#ccffcc');
+	    //media.setJSONProperty('border', 'LineBorder,1,#ccffcc');
 	    media.setJSONProperty('dataProvider', dataProvider);	
 
 		break; 
