@@ -34,5 +34,15 @@ function onSearch(event) {
  * @properties={typeid:24,uuid:"4C0D90EF-3E95-488B-980A-323A0C5BD086"}
  */
 function onLoad(event) {
+	plugins.svyhelp.callback = getHelp;
+	plugins.svyhelp.helpEvent = 'click';
+	plugins.svyhelp.helpMode = true;	
 	databaseManager.setAutoSave(false);
+}
+
+/**
+ * @properties={typeid:24,uuid:"80CC0A17-C451-408C-942D-9FCAE20DB830"}
+ */
+function getHelp(){
+	application.output('hello');
 }

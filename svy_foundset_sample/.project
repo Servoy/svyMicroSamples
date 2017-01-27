@@ -5,6 +5,7 @@
 	<projects>
 		<project>resources</project>
 		<project>svyfoundsetsample</project>
+		<project>svyhelp</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
