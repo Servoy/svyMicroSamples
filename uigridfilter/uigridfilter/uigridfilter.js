@@ -1,4 +1,4 @@
-angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.grid', 'ui.grid.moveColumns', 'ui.grid.pinning', 'ui.grid.resizeColumns', 'ui.grid.grouping', 'ui.grid.selection', 'ui.grid.exporter', 'ngAnimate', 'ngTouch']).directive('uigridfilterUigridfilter', ['foundset_manager', function(foundset_manager) {
+angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.grid', 'ui.grid.moveColumns', 'ui.grid.pinning', 'ui.grid.resizeColumns', 'ui.grid.grouping', 'ui.grid.selection', 'ngAnimate', 'ngTouch']).directive('uigridfilterUigridfilter', ['foundset_manager', function(foundset_manager) {
 		return {
 			restrict: 'E',
 			scope: {
@@ -474,6 +474,12 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 					showGridFooter: true,
 					showColumnFooter: true,
 					enableSelectAll: false,
+					multiSelect : false,
+					modifierKeysToMultiSelect: false,
+					noUnselect: true,
+					enableRowSelection: true, 
+					enableRowHeaderSelection: false,
+
 //					exporterMenuPdf: $scope.pdfEnabled,
 //					exporterPdfDefaultStyle: { fontSize: 9 },
 //					exporterPdfTableStyle: { margin: [30, 30, 30, 30] },
@@ -496,37 +502,7 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 					onRegisterApi: function(gridApi) {
 						$scope.grid1Api = gridApi;
 						$scope.grid1Api.treeBase.expandAll = true;
-						$scope.grid1Api.selection.on.rowSelectionChanged($scope, function(row) {
-								var key = '';
-								if (row.entity.ghost) {
-									// TODO load next items
-
-									var foundsetObj = ghosts[row.entity._svyRowId];
-									foundsetObj.loadExtraRecordsAsync(10).then(function(result) {
-										console.log("Something happened");
-										console.log(result);
-									}).catch(function(e) {
-										console.log(e);
-									});
-								} else {
-
-									for (var j = 0; j < $scope.PKs.length; j++) {
-										key += row.entity[$scope.PKs[j]];
-									}
-									if ($scope.selectedRows.hasOwnProperty(key)) {
-										delete $scope.selectedRows[key];
-										$scope.handlers.onActionMethodID($scope.selectedRows);
-									} else {
-										var rowData = { };
-										for (var k = 0; k < $scope.PKs.length; k++) {
-											rowData[$scope.PKs[k]] = row.entity[$scope.PKs[k]];
-										}
-										$scope.selectedRows[key] = rowData;
-										$scope.handlers.onActionMethodID($scope.selectedRows);
-									}
-								}
-
-							});
+						$scope.grid1Api.selection.on.rowSelectionChanged($scope, $scope.rowSelectionChanged);
 
 						// listener for grouping
 						$scope.grid1Api.grouping.on.groupingChanged($scope, onGroupChanged);
@@ -537,10 +513,41 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 				};
 				
 				function rowTemplate() {
-					return '<div ng-class="{ \'my-css-class\': grid.appScope.rowFormatter( row ) }">'
-						+ '  <div ng-if="row.entity.ghost" class="ghost">Load more...</div>'
+					return '<div>'
+						+ '  <div ng-if="row.entity.ghost" class="ghost" ng-click="grid.appScope.rowSelectionChanged(row)">Load more...</div>'
 						+ '  <div ng-if="!row.entity.ghost" ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }"  ui-grid-cell></div>' 
 						+ '</div>';
+				}
+				
+				$scope.rowSelectionChanged = function(row) {
+					var key = '';
+					if (row.entity.ghost) {
+						// TODO load next items
+
+						var foundsetObj = ghosts[row.entity._svyRowId];
+						foundsetObj.loadExtraRecordsAsync(10).then(function(result) {
+							console.log("Something happened");
+							console.log(result);
+						}).catch(function(e) {
+							console.log(e);
+						});
+					} else {
+
+						for (var j = 0; j < $scope.PKs.length; j++) {
+							key += row.entity[$scope.PKs[j]];
+						}
+						if ($scope.selectedRows.hasOwnProperty(key)) {
+							delete $scope.selectedRows[key];
+							$scope.handlers.onActionMethodID($scope.selectedRows);
+						} else {
+							var rowData = { };
+							for (var k = 0; k < $scope.PKs.length; k++) {
+								rowData[$scope.PKs[k]] = row.entity[$scope.PKs[k]];
+							}
+							$scope.selectedRows[key] = rowData;
+							$scope.handlers.onActionMethodID($scope.selectedRows);
+						}
+					}
 				}
 
 
@@ -818,13 +825,13 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 								aggregationType: aggregationType,
 								headerCellClass: $scope.highlightFilteredHeader,
 								width: 150,
-								visible: header["visible"],
-								cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
-									if (grid.getCellValue(row, col) == true) {
-										return 'ghost';
-									}
-									return '';
-								}
+								visible: header["visible"]//,
+//								cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
+//									if (grid.getCellValue(row, col) == true) {
+//										return 'ghost';
+//									}
+//									return '';
+//								}
 							};
 							colDefs.push(colDef);
 							console.log(header["visible"]);
@@ -833,13 +840,13 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 							name: "ghost",
 							field: "ghost",
 							width: 50,
-							visible: true,
-							cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
-								if (grid.getCellValue(row, col) == true) {
-									return 'ghost';
-								}
-								return '';
-							}
+							visible: true
+//							cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
+//								if (grid.getCellValue(row, col) == true) {
+//									return 'ghost';
+//								}
+//								return '';
+//							}
 						})
 
 						console.log($scope.PKs);
