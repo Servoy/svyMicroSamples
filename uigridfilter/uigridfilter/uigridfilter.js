@@ -468,6 +468,9 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 					enableFiltering: true,
 					enableColumnResizing: true,
 					enableGridMenu: true,
+					groupingShowCounts: false,
+					enableGroupHeaderSelection: true,
+					groupingNullLabel: "Null",
 					flatEntityAccess: true,
 					fastWatch: true,
 					treeRowHeaderAlwaysVisible: false,
@@ -514,7 +517,7 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 				
 				function rowTemplate() {
 					return '<div>'
-						+ '  <div ng-if="row.entity.ghost" class="ghost" ng-click="grid.appScope.rowSelectionChanged(row)">Load more...</div>'
+						+ '  <div ng-if="row.entity.ghost" class="ghost" ng-click="grid.appScope.rowSelectionChanged(row)"><span class="glyphicon glyphicon-repeat"></span> Load more...</div>'
 						+ '  <div ng-if="!row.entity.ghost" ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }"  ui-grid-cell></div>' 
 						+ '</div>';
 				}
@@ -633,8 +636,8 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 							foundset_manager.getFoundSet(rfoundsetinfo.foundsethash,
 								dataproviders, sort, foundsetNRelation).then(function(rfoundset) {
 								console.log(rfoundset);
-								if (foundsetChangeWatches[rfoundsetinfo.foundsethash] != undefined) {
-									foundsetChangeWatches[rfoundsetinfo.foundsethash] = rfoundsetinfo.addChangeListener(clientFoundsetListener);
+								if (foundsetChangeWatches[rfoundsetinfo.foundsethash] === undefined) {
+									foundsetChangeWatches[rfoundsetinfo.foundsethash] = rfoundset.addChangeListener(clientFoundsetListener);
 								}
 
 								mergeData($scope.gridOptions.data, rfoundset, dataproviderName);
@@ -644,7 +647,7 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 								function clientFoundsetListener(rowUpdates) {
 									for (var i = 0; i < rowUpdates.length; i++) {
 										for (var j = rowUpdates[i].startIndex; j <= rowUpdates[i].endIndex; j++) {
-											updateRow(j, rfoundsetinfo);
+											updateRow(j, rfoundset);
 										}
 									}
 								}
@@ -840,7 +843,7 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 							name: "ghost",
 							field: "ghost",
 							width: 50,
-							visible: true
+							visible: false
 //							cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
 //								if (grid.getCellValue(row, col) == true) {
 //									return 'ghost';

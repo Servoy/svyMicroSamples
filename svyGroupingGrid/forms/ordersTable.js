@@ -16,7 +16,6 @@ var count = null;
  * @properties={typeid:24,uuid:"E08CD2EC-6B7A-4274-A0FA-130D907A3E9B"}
  */
 function onAction(event) {
-	// TODO Auto-generated method stub
 	foundset.find()
 }
 
