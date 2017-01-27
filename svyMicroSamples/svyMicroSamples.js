@@ -105,4 +105,17 @@ function initInMemDatabase() {
  */
 function onSolutionOpen(arg, queryParams) {
 	initInMemDatabase();
+	plugins.svyhelp.callback = onHelpCalled;
+	plugins.svyhelp.helpEvent = 'mouseover';
+	plugins.svyhelp.helpMode = true;
+}
+
+/**
+ * TODO generated, please specify type and doc for the params
+ * @param event
+ *
+ * @properties={typeid:24,uuid:"89737115-7C0E-4D9F-B288-7E7C5FDE058E"}
+ */
+function onHelpCalled(event) {
+	application.output(event);
 }

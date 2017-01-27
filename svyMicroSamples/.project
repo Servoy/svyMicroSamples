@@ -4,6 +4,9 @@
 	<comment></comment>
 	<projects>
 		<project>resources</project>
+		<project>svyfoundsetsample</project>
+		<project>bootstrapextracomponents</project>
+		<project>showdown</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -1,0 +1,12 @@
+addEmptyValue:1,
+customValues:"IDLE|10\
+BOARDING|20\
+TAXXING|30\
+TAKING OFF|40\
+IN ROUTE|50\
+APPROACHING|60\
+LANDING|70\
+CANCELLED|90",
+name:"hardcodedValuelist",
+typeid:34,
+uuid:"2FF101CB-DF9F-4CC3-ABB0-A7A98DAEC3FF"
