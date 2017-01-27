@@ -68,7 +68,6 @@ var rootFs;
 function onGroupChanged(dataproviderName, grouping) {
 	
 //	foundset.sort(dataproviderName);
-	return;
 	if (grouping) {
 		// var fs = foundset.duplicateFoundSet();
 		//fs.sort(dataproviderName + ' asc');
@@ -104,6 +103,8 @@ function onGroupChanged(dataproviderName, grouping) {
 		
 		foundset.loadRecords(query)
 		return;
+		
+		
 		var fs = databaseManager.getFoundSet(query);
 		fs.loadAllRecords()
 		rootFs = fs;

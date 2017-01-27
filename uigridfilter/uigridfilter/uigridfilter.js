@@ -382,7 +382,7 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 						if (false && hasGrouping()) {
 							$scope.numRowsFoundset = -1;
 						} else {
-							$scope.numRowsFoundset = Math.min($scope.model.myFoundset.serverSize, 10);
+							$scope.numRowsFoundset = Math.min($scope.model.myFoundset.serverSize, 70);
 						}
 						$scope.viewPortSize = $scope.model.myFoundset.viewPort.size;
 
@@ -414,17 +414,27 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 				//						//}
 				//					});
 
-				$scope.$watch('model.foundset.viewPort.rows', function(newValue, oldValue) {
+				$scope.$watch('model.myFoundset.viewPort.rows', function(newValue, oldValue) {
 						// full viewport update (it changed by reference); start over with renderedSize
-						var data = rootLevel.getViewPortData();
-
 						console.log("row data changed");
-						console.log($scope.model.myFoundset);
-						$scope.gridOptions.data = data;//$scope.model.myFoundset.viewPort.rows;
+
+						refreshGridData();
 						$scope.model.myFoundset.addChangeListener(rootLevel.foundsetListener);
+						
 						// generateTemplate();
-						updateNumRows();
 					});
+				
+				$scope.$watch('model.myFoundset.viewPort', function(newValue, oldValue) { 
+					console.log("viewport changed")
+				});
+				
+				function refreshGridData() {
+					var data = rootLevel.getViewPortData();
+
+					console.log($scope.model.myFoundset);
+					$scope.gridOptions.data = data;//$scope.model.myFoundset.viewPort.rows;
+					updateNumRows();
+				}
 
 				function hasGrouping() {
 					return false;
@@ -527,8 +537,11 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 					if (row.entity.ghost) {
 						// TODO load next items
 
+						
 						var foundsetObj = ghosts[row.entity._svyRowId];
-						foundsetObj.loadExtraRecordsAsync(10).then(function(result) {
+						if (row.entity._svyRowId !== "ghost-root") deleteUiGridRow(row.entity._svyRowId);
+						
+						foundsetObj.loadExtraRecordsAsync(70).then(function(result) {
 							console.log("Something happened");
 							console.log(result);
 						}).catch(function(e) {
@@ -541,7 +554,9 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 						}
 						if ($scope.selectedRows.hasOwnProperty(key)) {
 							delete $scope.selectedRows[key];
-							$scope.handlers.onActionMethodID($scope.selectedRows);
+							if ($scope.handlers.onActionMethodID) {
+								$scope.handlers.onActionMethodID($scope.selectedRows);
+							}	
 						} else {
 							var rowData = { };
 							for (var k = 0; k < $scope.PKs.length; k++) {
@@ -648,7 +663,13 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 									for (var i = 0; i < rowUpdates.length; i++) {
 										for (var j = rowUpdates[i].startIndex; j <= rowUpdates[i].endIndex; j++) {
 											updateRow(j, rfoundset);
+											// check for ghost row
 										}
+									}
+									
+									if (rfoundset.hasMoreRows || rfoundset.viewPort.size < rfoundset.serverSize) {
+										var ghostRow = createGhostRow(rfoundset, dataproviderName);
+										addUiGridRow(ghostRow);
 									}
 								}
 

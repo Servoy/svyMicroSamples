@@ -4,3 +4,10 @@
 	cursor: pointer;
 	padding: 5px;
 }
+
+.ui-grid-render-container-left .ghost {
+	color: transparent !important;
+	opacity: 1;
+	background-color: inherit;
+	padding: 0;
+}
