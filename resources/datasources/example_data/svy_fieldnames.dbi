@@ -31,8 +31,7 @@ name:"sequence"
 {
 allowNull:true,
 creationOrderIndex:4,
-dataType:12,
-length:50,
+dataType:4,
 name:"svy_fieldset_id"
 }
 ],

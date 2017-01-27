@@ -87,7 +87,7 @@ typeid:4,
 uuid:"A1EA39D0-57F8-4F1A-8099-164687FCBEFD"
 },
 {
-dataProviderID:"scopes.globals.gv_svy_fieldset_id",
+dataProviderID:"scopes.svyFlexFields.gv_svy_fieldset_id",
 displayType:2,
 editable:false,
 location:"100,130",
@@ -148,7 +148,6 @@ uuid:"F4CD63CB-5BCC-402F-BEDA-45E97B93429C"
 }
 ],
 name:"svy_customers",
-onRecordSelectionMethodID:"7C19DEBD-04F6-47F3-BE90-7249528D6666",
 showInMenu:true,
 typeid:3,
 uuid:"762343B9-0311-44EF-9B24-82BC582157F1"
