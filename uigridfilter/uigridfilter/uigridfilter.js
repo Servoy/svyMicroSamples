@@ -56,7 +56,9 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 				 *
 				 * */
 
-				console.log(foundset_manager)
+				console.log(foundset_manager);
+
+				var rootLevel;
 
 				var currentColumnLength;
 				Object.defineProperty($scope.model, $sabloConstants.modelChangeNotifier, {
@@ -87,61 +89,151 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 					});
 
 				var destroyListenerUnreg = $scope.$on("$destroy", function() {
-						$scope.model.foundset.removeChangeListener(foundsetListener);
+						$scope.model.foundset.removeChangeListener(rootLevel.foundsetListener);
 						destroyListenerUnreg();
 						delete $scope.model[$sabloConstants.modelChangeNotifier];
 					});
 				// data can already be here, if so call the modelChange function so
 				// that it is initialized correctly.
 				var modelChangFunction = $scope.model[$sabloConstants.modelChangeNotifier];
-				for (key in $scope.model) {
+				for (var key in $scope.model) {
 					modelChangFunction(key, $scope.model[key]);
 				}
 
-				function foundsetListener(rowUpdates, oldStartIndex, oldSize) {
-					// update all rows
-					// TODO fixme, is adding rows
-					updateRows(rowUpdates, oldStartIndex, oldSize);
+				function GroupLevel(groupName, level) {
+
+					this.groupName = groupName;
+					this.level = level;
 				}
 
-				/** return the viewPort data in a new object */
-				function getViewPortData() {
-					//if($scope.model.myFoundset.viewPort.size == $scope.model.numRows){
-					var data = [];
-					for (var j = 0; j < $scope.model.myFoundset.viewPort.rows.length; j++) {
-						data.push(getViewPortRow(j));
-					}
+				function RootLevel() {
+					var thisInstance = this;
 
-					if ($scope.model.myFoundset.hasMoreRows || $scope.model.myFoundset.viewPort.size < $scope.model.myFoundset.serverSize) {
-						var ghostRow = new Object();
-						ghostRow._svyRowId = "ghost-root";
+					this.foundset = $scope.model.myFoundset;
+					this.ghostRow = null;
 
-						for (var i = 0; i < $scope.model.columns.length; i++) {
-							var column = $scope.model.columns[i];
-							ghostRow[column.dp] = ""; //column.dataprovider[column.dataprovider.length - 1];
+					/** return the viewPort data in a new object */
+					this.getViewPortData = function() {
+						//if($scope.model.myFoundset.viewPort.size == $scope.model.numRows){
+						var data = [];
+						for (var j = 0; j < thisInstance.foundset.viewPort.rows.length; j++) {
+							data.push(thisInstance.getViewPortRow(j));
 						}
-
-						ghostRow.ghost = "Load more...";
-						ghosts[ghostRow._svyRowId] = $scope.model.myFoundset;
+						
+						// update the ghost row
+						var ghostRow = thisInstance.getGhostRow();
 						data.push(ghostRow);
+						return data;
 					}
 
-					return data;
-				}
+					/** return the row in viewport at the given index */
+					this.getViewPortRow = function(index) {
+						var r;
+						try {
+							r = new Object();
+							// push the id so the rows can be merged
+							r._svyRowId = thisInstance.foundset.viewPort.rows[index]._svyRowId;
 
-				/** return the row in viewport at the given index */
-				function getViewPortRow(index) {
-					var r = new Object();
-					// push the id so the rows can be merged
-					r._svyRowId = $scope.model.myFoundset.viewPort.rows[index]._svyRowId;
+							// push each dataprovider
+							for (var i = 0; i < $scope.model.columns.length; i++) {
+								var header = $scope.model.columns[i];
+								r[header.dp] = header.dataprovider[index];
+							}
+							return r;
 
-					// push each dataprovider
-					for (var i = 0; i < $scope.model.columns.length; i++) {
-						var header = $scope.model.columns[i];
-						r[header.dp] = header.dataprovider[index];
+						} catch (e) {
+							$log.error(e);
+							r = null;
+						}
+						return r;
 					}
-					return r;
+					
+					this.getGhostRow = function() {
+						if (thisInstance.hasMoreRecordsToLoad()) {
+							var ghostRow;
+							if (thisInstance.ghostRow) {	// update ghostRow fields
+								ghostRow = thisInstance.ghostRow;
+							} else {
+								ghostRow = new Object();
+								
+								// create the ghost row
+								ghostRow._svyRowId = "ghost-root";
+								for (var i = 0; i < $scope.model.columns.length; i++) {
+									var column = $scope.model.columns[i];
+									ghostRow[column.dp] = ""; //column.dataprovider[column.dataprovider.length - 1];
+								}
+								ghostRow.ghost = true;
+								
+								// update object
+								ghosts[ghostRow._svyRowId] = thisInstance.foundset;
+								thisInstance.ghostRow = ghostRow;
+							}
+							return ghostRow;
+						} else {
+							
+							// update object
+							delete ghosts[ghostRow._svyRowId];
+							return null;
+						}
+					}
+					
+					this.hasMoreRecordsToLoad = function () {
+						return thisInstance.foundset.hasMoreRows || thisInstance.foundset.viewPort.size < thisInstance.foundset.serverSize;
+					}
+					
+					this.updateGhostRow = function () {
+						if (thisInstance.hasMoreRecordsToLoad()) {
+							if (!thisInstance.ghostRow) {
+								// add the ghost row
+								var row = thisInstance.getGhostRow();
+								addUiGridRow(row);
+							} else {
+								// update the ghost row position
+								var row = deleteUiGridRow(thisInstance.ghostRow._svyRowId);
+								addUiGridRow(row);
+							}
+						} else {
+							if (thisInstance.ghostRow) {
+								// delete the ghostRow
+								deleteUiGridRow(thisInstance.ghostRow._svyRowId);
+								delete ghosts[thisInstance.ghostRow._svyRowId];
+								thisInstance.ghostRow = null;
+							} else {
+								// do nothing
+							}
+						}
+						// find the ghostRow and move it at the end
+					}
+
+					this.foundsetListener = function(rowUpdates, oldStartIndex, oldSize) {
+						// update all rows
+						// TODO fixme, is adding rows
+						updateRows(rowUpdates, oldStartIndex, oldSize);
+						thisInstance.updateGhostRow();
+					}
+
 				}
+				
+				rootLevel = new RootLevel();
+				
+				function deleteUiGridRow(svyRowId) {
+					var data = $scope.gridOptions.data;
+					for (var i = 0; i < data.length; i++) {
+						if (data[i]._svyRowId === svyRowId) {
+							return data.splice(i, 1)[0];
+						}
+					}
+				}
+				
+				function addUiGridRow(row) {
+					var data = $scope.gridOptions.data;
+					data.push(row);
+				}
+				
+				function updateUiGridRow(svyRowId, row) {
+					// TODO 
+				}
+
 
 				/** return the row in grid with the given id */
 				function getUiGridRow(svyRowId) {
@@ -163,7 +255,7 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 					}
 					return null;
 				}
-				
+
 				/** return the row of the given foundsetObj at given index */
 				function getClientViewPortRow(foundsetObj, index) {
 					var row;
@@ -232,44 +324,52 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 					return ghostRow;
 				}
 
+				
+				/**
+				 * Update the uiGrid row with given viewPort index
+				 * @param {Array} rowUpdates
+				 * @param {Number} [oldStartIndex]
+				 * @param {Number} oldSize
+				 *
+				 *  */
 				function updateRows(rowUpdates, oldStartIndex, oldSize) {
-					if (rowUpdates.length === 1) {
-						var index = rowUpdates
-					} else {
-						$log.warning("There are more row being updated")
-						console.log(rowUpdates);
-					}
 					for (var i = 0; i < rowUpdates.length; i++) {
 						for (var j = rowUpdates[i].startIndex; j <= rowUpdates[i].endIndex; j++) {
 							updateRow(j);
 						}
-						//updateRow(rowUpdates[i].startIndex);
 					}
+					// TODO update ghostRow
 				}
+				
 				/**
 				 * Update the uiGrid row with given viewPort index
 				 * @param {Number} index
 				 * @param {Object} [foundsetObj]
-				 * 
+				 *
 				 *  */
 				function updateRow(index, foundsetObj) {
 					var row;
 					if (!foundsetObj) {
-						row = getViewPortRow(index);
+						row = rootLevel.getViewPortRow(index);
 					} else {
-						row  = getClientViewPortRow(foundsetObj, index); // TODO get it from viewportObj
+						row = getClientViewPortRow(foundsetObj, index); // TODO get it from viewportObj
 					}
-					var uiRow = getUiGridRow(row._svyRowId);
 
-					// update the row
-					if (uiRow) {
-						for (var prop in row) {
-							if (uiRow[prop] != row[prop]) {
-								uiRow[prop] = row[prop];
+					if (row) {
+						var uiRow = getUiGridRow(row._svyRowId);
+
+						// update the row
+						if (uiRow) {
+							for (var prop in row) {
+								if (uiRow[prop] != row[prop]) {
+									uiRow[prop] = row[prop];
+								}
 							}
+						} else {
+							$scope.gridOptions.data.push(row);
 						}
-					} else if (row) {
-						$scope.gridOptions.data.push(row);
+					} else {
+						$log.warn("could not update row at index " + index);
 					}
 				}
 
@@ -316,12 +416,12 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 
 				$scope.$watch('model.foundset.viewPort.rows', function(newValue, oldValue) {
 						// full viewport update (it changed by reference); start over with renderedSize
-						var data = getViewPortData();
+						var data = rootLevel.getViewPortData();
 
 						console.log("row data changed");
 						console.log($scope.model.myFoundset);
 						$scope.gridOptions.data = data;//$scope.model.myFoundset.viewPort.rows;
-						$scope.model.myFoundset.addChangeListener(foundsetListener);
+						$scope.model.myFoundset.addChangeListener(rootLevel.foundsetListener);
 						// generateTemplate();
 						updateNumRows();
 					});
@@ -363,6 +463,7 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 
 				//grid options initial setup
 				$scope.gridOptions = {
+				    rowTemplate: rowTemplate(),
 					enableSorting: true,
 					enableFiltering: true,
 					enableColumnResizing: true,
@@ -372,26 +473,26 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 					treeRowHeaderAlwaysVisible: false,
 					showGridFooter: true,
 					showColumnFooter: true,
-					enableSelectAll: true,
-					exporterMenuPdf: $scope.pdfEnabled,
-					exporterPdfDefaultStyle: { fontSize: 9 },
-					exporterPdfTableStyle: { margin: [30, 30, 30, 30] },
-					exporterPdfTableHeaderStyle: { fontSize: 10, bold: true, italics: true, color: 'red' },
-					exporterPdfHeader: { text: "My Header", style: 'headerStyle' },
-					exporterPdfFooter: function(currentPage, pageCount) {
-						return { text: currentPage.toString() + ' of ' + pageCount.toString(), style: 'footerStyle' };
-					},
-					exporterPdfCustomFormatter: function(docDefinition) {
-						docDefinition.styles.headerStyle = { fontSize: 22, bold: true };
-						docDefinition.styles.footerStyle = { fontSize: 10, bold: true };
-						return docDefinition;
-					},
-					exporterPdfOrientation: 'landscape',
-					exporterPdfPageSize: 'LETTER',
-					exporterPdfMaxGridWidth: 700,
-					exporterMenuCsv: $scope.csvEnabled,
-					exporterCsvFilename: 'myFile.csv',
-					exporterCsvLinkElement: angular.element(document.querySelectorAll(".custom-csv-link-location")),
+					enableSelectAll: false,
+//					exporterMenuPdf: $scope.pdfEnabled,
+//					exporterPdfDefaultStyle: { fontSize: 9 },
+//					exporterPdfTableStyle: { margin: [30, 30, 30, 30] },
+//					exporterPdfTableHeaderStyle: { fontSize: 10, bold: true, italics: true, color: 'red' },
+//					exporterPdfHeader: { text: "My Header", style: 'headerStyle' },
+//					exporterPdfFooter: function(currentPage, pageCount) {
+//						return { text: currentPage.toString() + ' of ' + pageCount.toString(), style: 'footerStyle' };
+//					},
+//					exporterPdfCustomFormatter: function(docDefinition) {
+//						docDefinition.styles.headerStyle = { fontSize: 22, bold: true };
+//						docDefinition.styles.footerStyle = { fontSize: 10, bold: true };
+//						return docDefinition;
+//					},
+//					exporterPdfOrientation: 'landscape',
+//					exporterPdfPageSize: 'LETTER',
+//					exporterPdfMaxGridWidth: 700,
+//					exporterMenuCsv: $scope.csvEnabled,
+//					exporterCsvFilename: 'myFile.csv',
+//					exporterCsvLinkElement: angular.element(document.querySelectorAll(".custom-csv-link-location")),
 					onRegisterApi: function(gridApi) {
 						$scope.grid1Api = gridApi;
 						$scope.grid1Api.treeBase.expandAll = true;
@@ -399,12 +500,12 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 								var key = '';
 								if (row.entity.ghost) {
 									// TODO load next items
-									
+
 									var foundsetObj = ghosts[row.entity._svyRowId];
-									foundsetObj.loadExtraRecordsAsync(10).then(function (result) {
+									foundsetObj.loadExtraRecordsAsync(10).then(function(result) {
 										console.log("Something happened");
 										console.log(result);
-									}).catch(function (e) {
+									}).catch(function(e) {
 										console.log(e);
 									});
 								} else {
@@ -434,6 +535,14 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 
 					}
 				};
+				
+				function rowTemplate() {
+					return '<div ng-class="{ \'my-css-class\': grid.appScope.rowFormatter( row ) }">'
+						+ '  <div ng-if="row.entity.ghost" class="ghost">Load more...</div>'
+						+ '  <div ng-if="!row.entity.ghost" ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }"  ui-grid-cell></div>' 
+						+ '</div>';
+				}
+
 
 				function onGroupChanged(col) {
 					console.log(col);
@@ -520,10 +629,10 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 								if (foundsetChangeWatches[rfoundsetinfo.foundsethash] != undefined) {
 									foundsetChangeWatches[rfoundsetinfo.foundsethash] = rfoundsetinfo.addChangeListener(clientFoundsetListener);
 								}
-								
+
 								mergeData($scope.gridOptions.data, rfoundset, dataproviderName);
 								updateNumRows();
-								
+
 								// client listener
 								function clientFoundsetListener(rowUpdates) {
 									for (var i = 0; i < rowUpdates.length; i++) {
@@ -532,7 +641,7 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 										}
 									}
 								}
-								
+
 							});
 						} else {
 							$scope.pendingChildrenRequests = $scope.pendingChildrenRequests - 1;
@@ -726,7 +835,7 @@ angular.module('uigridfilterUigridfilter', ['servoy', 'foundset_manager', 'ui.gr
 							width: 50,
 							visible: true,
 							cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
-								if (grid.getCellValue(row, col) == "Load more...") {
+								if (grid.getCellValue(row, col) == true) {
 									return 'ghost';
 								}
 								return '';
