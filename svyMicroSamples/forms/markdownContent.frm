@@ -15,6 +15,7 @@ location:{
 x:10,
 y:10
 },
+markdown:"###foobar This is **showdown** for _Servoy_",
 size:{
 height:180,
 width:460

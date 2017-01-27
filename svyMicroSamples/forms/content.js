@@ -4,8 +4,8 @@
  *
  * @properties={typeid:24,uuid:"8B749AF7-6B4D-4F4B-9F0A-A581624D8EDA"}
  */
-function showBodyContent(content){
-	forms.bodyContent.setContent(content);
+function showInfo(content){
+	forms.markdownContent.setContent(content);
 	elements.tabs.tabIndex = 1;
 }
 

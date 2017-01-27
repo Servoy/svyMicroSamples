@@ -19,8 +19,15 @@ function showInfo() {
  * @properties={typeid:24,uuid:"FA88F057-2922-4C29-8784-F85FD2AAAD4E"}
  */
 function showContent(event) {
-	forms.content.showBodyContent('This shows a <b>dialog</b>');
-	
+	var content = [
+		'# Dialogs Plugin',
+		'-----',
+		'We have the **BEST** dialogs',
+		'* We can do **info**',
+		'* We can do **warnings**',
+		'* We can do **error**'
+	];
+	scopes.svyMicroSamples.showInfo(content.join('\n\n'));
 }
 
 /**
@@ -28,21 +35,21 @@ function showContent(event) {
  */
 function showCodeInfo(){
 	var lines = forms.AbstractMicroSample.printMethodCode(showInfo);
-	forms.content.showCode(lines);
+	scopes.svyMicroSamples.showCode(lines);
 }
 /**
  * @properties={typeid:24,uuid:"AA4BA9A8-5AA3-4FE3-908A-45404BB123F2"}
  */
 function showCodeError(){
 	var lines = forms.AbstractMicroSample.printMethodCode(showError);
-	forms.content.showCode(lines);
+	scopes.svyMicroSamples.showCode(lines);
 }
 /**
  * @properties={typeid:24,uuid:"D8A12790-6EDD-4D19-AD3E-07330DCFD24E"}
  */
 function showCodeWarning(){
 	var lines = forms.AbstractMicroSample.printMethodCode(showWarning);
-	forms.content.showCode(lines);
+	scopes.svyMicroSamples.showCode(lines);
 }
 
 /**

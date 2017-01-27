@@ -40,34 +40,6 @@ function getIconStyleClass(){
 }
 
 /**
- * @protected 
- * @param {String} content 
- * @properties={typeid:24,uuid:"C60F058E-C986-4BC6-82A4-42531234E698"}
- */
-function showBodyContent(content){
-	forms.content.showBodyContent(content);
-}
-
-/**
- * @protected 
- * @param {Array<Array<byte>>} media
- * @properties={typeid:24,uuid:"52AC4BAE-F629-487C-9EE3-22F416E157ED"}
- */
-function showMedia(media){
-	
-}
-
-/**
- * Return the lines of code
- * @protected 
- * @param {Array<String>} code
- * @properties={typeid:24,uuid:"8E9F08C7-15E5-420C-98B9-D276F9EE8F29"}
- */
-function showCode(code){
-	
-}
-
-/**
  * TODO generated, please specify type and doc for the params
  * @param functionToPrint
  * @return {Array<String>}
@@ -115,5 +87,5 @@ function printMethodCode(functionToPrint) {
  * @properties={typeid:24,uuid:"BB075C8A-D9A6-4F4E-BB4C-DFC99F1B2814"}
  */
 function onShow(firstShow, event) {
-	// TODO clear infos
+	scopes.svyMicroSamples.showInfo('');
 }

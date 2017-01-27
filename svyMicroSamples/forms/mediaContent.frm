@@ -12,7 +12,7 @@ x:5,
 y:5
 },
 noPause:true,
-noTransition:true,
+noTransition:false,
 size:{
 height:190,
 width:465
