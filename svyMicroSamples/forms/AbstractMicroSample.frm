@@ -6,6 +6,16 @@ height:480,
 partType:5,
 typeid:19,
 uuid:"CCD8084B-3484-41E7-8FBA-CBF44DD9BF67"
+},
+{
+anchors:15,
+location:"20,20",
+name:"tabs",
+printable:false,
+size:"600,440",
+transparent:true,
+typeid:16,
+uuid:"D2CC2424-957C-4C3A-9D6E-228F36A1D201"
 }
 ],
 name:"AbstractMicroSample",
