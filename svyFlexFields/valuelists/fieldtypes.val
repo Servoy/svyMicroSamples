@@ -1,0 +1,8 @@
+addEmptyValue:1,
+customValues:"DATE |1\r\
+TEXT |2\r\
+NUMBER |3\r\
+MEDIA |4",
+name:"fieldtypes",
+typeid:34,
+uuid:"C4B43C69-2107-42E9-B362-70A4C3F9B976"

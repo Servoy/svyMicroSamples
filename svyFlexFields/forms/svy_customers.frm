@@ -18,7 +18,7 @@ items:[
 {
 containsFormID:"821DB811-1224-49B2-AC5E-2F2CDEA9BAA6",
 location:"52,214",
-relationName:"customers_to_svy_fieldvalues",
+relationName:"customers$container",
 text:"svy_fieldvalues_main",
 typeid:15,
 uuid:"A91339E2-4738-4DA6-BC2B-7DA134D26CEC"
@@ -92,6 +92,7 @@ displayType:2,
 editable:false,
 location:"100,130",
 name:"svy_fieldset_id",
+onDataChangeMethodID:"EDFD5CB0-5E80-43EA-8967-CF92093601DC",
 size:"230,20",
 text:"Svy Fieldset Id",
 typeid:4,
@@ -148,6 +149,7 @@ uuid:"F4CD63CB-5BCC-402F-BEDA-45E97B93429C"
 }
 ],
 name:"svy_customers",
+onRecordSelectionMethodID:"7C19DEBD-04F6-47F3-BE90-7249528D6666",
 showInMenu:true,
 typeid:3,
 uuid:"762343B9-0311-44EF-9B24-82BC582157F1"

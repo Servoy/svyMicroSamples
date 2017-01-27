@@ -1,0 +1,9 @@
+foreignDataSource:"db:/example_data/svy_fieldnames",
+items:[
+{foreignColumnName:"svy_fieldset_id",primaryDataProviderID:"scopes.svyFlexFields.gv_svy_fieldset_id",typeid:23,uuid:"7FF58D25-4346-4BA9-AF50-17A83B6D6644"}
+],
+joinType:1,
+name:"svy_fieldnames$gv_svy_fieldset_id",
+primaryDataSource:"db:/example_data/svy_fieldnames",
+typeid:22,
+uuid:"413D857C-8E7E-4B9B-9C71-F5676B0EE20C"
