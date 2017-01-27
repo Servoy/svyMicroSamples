@@ -27,5 +27,5 @@ function getDescription() {
 * @properties={typeid:24,uuid:"4390F8F0-7C37-4AB7-8304-55B1019C5532"}
 */
 function getIconStyleClass() {
-	return "glyphicon-th-list";
+	return "fa-server";
 }
