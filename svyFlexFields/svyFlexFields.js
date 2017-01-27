@@ -1,4 +1,15 @@
 /**
+ * @enum 
+ * @properties={typeid:35,uuid:"92CC5082-F245-4A0D-8453-7D7A734BE973",variableType:-4}
+ */
+var en_fieldtypes = {
+	TEXT: {fieldtype: JSField.TEXT_FIELD, height:20, width:230},
+	DATE: {fieldtype: JSField.CALENDAR, height:20, width:230},
+	NUMBER: {fieldtype: JSField.TEXT_FIELD, height:20, width:230},
+	IMAGE: {fieldtype: JSField.IMAGE_MEDIA, height:120, width:230}
+};
+
+/**
  * @type {Number}
  *
  * @properties={typeid:35,uuid:"BC3B6115-180F-400C-94AB-941041500986",variableType:4}

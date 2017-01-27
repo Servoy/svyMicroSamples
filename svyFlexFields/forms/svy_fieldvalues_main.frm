@@ -1,7 +1,7 @@
 borderType:"EmptyBorder,0,0,0,0",
 customProperties:"formComponent:false",
 dataSource:"db:/example_data/svy_fieldvalues",
-encapsulation:60,
+encapsulation:44,
 items:[
 {
 height:480,
@@ -10,7 +10,7 @@ typeid:19,
 uuid:"D35CAC19-0BDD-4B14-B3CB-05D821DB8247"
 }
 ],
-name:"svy_fieldvalues_template",
+name:"svy_fieldvalues_main",
 navigatorID:"-1",
 scrollbars:36,
 showInMenu:true,
