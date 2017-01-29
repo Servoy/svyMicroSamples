@@ -9,7 +9,6 @@
 	],
 	"model":
 	{
-		"codeLines" : { "type": "string[]", "pushToServer": "allow"},
 		"code"		: { "type": "string" }
 	}
 }
