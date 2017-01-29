@@ -1,11 +1,5 @@
-angular.module('svyhelp', ['servoy']).directive('helpDemo', function($services) {
-		return {
-			restrict: 'A',
-			controller: function($scope, $element, $attrs) {
-				console.log('found help-demo attribute on element ' + $element[0].id);
-			}
-		}
-	}).directive('svyLabel', function($window, $services, $sabloUtils) {
+angular.module('svyhelp', ['servoy'])
+	.directive('svyLabel', function($window, $services, $sabloUtils) {
 		return {
 			restrict: 'C',
 			controller: function($scope, $element, $attrs) {
