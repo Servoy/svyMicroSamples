@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: svycodebox
+Bundle-Name: svyCodeBox
+Bundle-Version: 1.0.0
+Package-Type: Web-Component
+
+Name: codebox/codebox.spec
+Web-Component: True
+
