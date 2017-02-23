@@ -84,7 +84,7 @@ function initInMemDatabase() {
 		sourceFS.loadAllRecords();
 		var destFS = databaseManager.getFoundSet(dataSource);
 
-		for (var j = 1; j <= sourceFS.getSize(); j++) {
+		for (var j = 1; j <= sourceFS.getSize() && j < 500; j++) {
 			var sourceRecord = sourceFS.getRecord(j);
 			destFS.newRecord();
 			databaseManager.copyMatchingFields(sourceRecord,destFS.getSelectedRecord());
