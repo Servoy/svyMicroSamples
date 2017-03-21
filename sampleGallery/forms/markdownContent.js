@@ -2,7 +2,7 @@
  * @public 
  * @param {String} str
  *
- * @properties={typeid:24,uuid:"E45FDCC2-E163-4783-8FF0-60C084C74314"}
+ * @properties={typeid:24,uuid:"5497F64A-C0DE-4E2E-9B1F-AAF4186AB832"}
  */
 function setContent(str){
 	elements.showdown_206.markdown = str;

@@ -32,5 +32,6 @@ uuid:"F0303013-A106-4BCD-80B9-54FA4240B17B"
 name:"bar",
 navigatorID:"-1",
 showInMenu:true,
+size:"640,480",
 typeid:3,
 uuid:"B19B260A-20B5-4D6B-BE65-79D6ED8F8B72"

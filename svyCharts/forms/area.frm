@@ -53,5 +53,6 @@ uuid:"E8F799BE-43FB-4AF0-9EB0-A3781587D1A1"
 name:"area",
 navigatorID:"-1",
 showInMenu:true,
+size:"643,480",
 typeid:3,
 uuid:"460753EC-32E0-4B89-83DC-D6C161997FDA"

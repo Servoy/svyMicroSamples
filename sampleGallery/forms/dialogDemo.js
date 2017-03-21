@@ -11,14 +11,13 @@ function showInfo() {
 
 /**
  * Perform the element default action.
- *
- * @param {JSEvent} event the event that triggered the action
- *
+
  * @private
- *
+ * @override 
+ * @return {Array<String>}
  * @properties={typeid:24,uuid:"FA88F057-2922-4C29-8784-F85FD2AAAD4E"}
  */
-function showContent(event) {
+function getMoreInfo(){
 	var content = [
 		'# Dialogs Plugin',
 		'-----',
@@ -27,7 +26,8 @@ function showContent(event) {
 		'* We can do **warnings**',
 		'* We can do **error**'
 	];
-	scopes.svyMicroSamples.showInfo(content.join('\n\n'));
+//	scopes.svyMicroSamples.showInfo(content.join('\n\n'));
+	return content;
 }
 
 /**

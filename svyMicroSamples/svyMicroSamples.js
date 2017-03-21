@@ -1,3 +1,17 @@
+/**
+ * @private 
+ * @properties={typeid:35,uuid:"52518A98-29C2-43E3-8815-5744A4D82ACF",variableType:-4}
+ */
+var log = scopes.svyLogManager.getLogger('com.servoy.extensions.svyMicroSamples');
+
+/**
+ * @public 
+ * @return {scopes.svyLogManager.Logger}
+ * @properties={typeid:24,uuid:"6111949E-153E-4729-A09C-BEECDBE4EE99"}
+ */
+function getLogger(){
+	return log;
+}
 
 /**
  * @public 
@@ -118,32 +132,4 @@ function onSolutionOpen(arg, queryParams) {
  */
 function onHelpCalled(event) {
 	application.output(event);
-}
-
-/**
- * @public 
- * @param {Array<String>} codeLines
- * @properties={typeid:24,uuid:"8BE213F4-FC5A-49AA-8635-97DCABFE55B1"}
- */
-function showCode(codeLines) {
-	forms.content.showCode(codeLines);
-}
-
-/**
- * @public 
- * @param {String} info / MARKDOWN supported
- *
- * @properties={typeid:24,uuid:"25F46BD7-71CD-417D-B9E7-960292A1CACB"}
- */
-function showInfo(info){
-	forms.content.showInfo(info);
-}
-/**
- * @public 
- * @param {Array<{imageUrl:String, caption:String}>} images
- *
- * @properties={typeid:24,uuid:"BB7DF8EA-69E2-4C4A-934C-42F095C79F09"}
- */
-function showMedia(images){
-	forms.content.showMedia(images);
 }

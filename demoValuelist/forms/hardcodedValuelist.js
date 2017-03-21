@@ -32,3 +32,19 @@ function getParent() {
 function getIconStyleClass() {
 	return 'fa-gear';
 }
+
+/**
+ * TODO generated, please specify type and doc for the params
+ * @param firstShow
+ * @param event
+ *
+ * @properties={typeid:24,uuid:"81B55AA9-8B36-4D47-AD2B-FB9E19E1257E"}
+ */
+function onShow(firstShow, event) {
+	 _super.onShow(firstShow, event)
+	 scopes.svyMicroSamples.showMedia([
+	 {imageUrl:"valuelist_1.png"},
+	 {imageUrl:"valuelist_2.png"},
+	 {imageUrl:"valuelist_3.png"}
+	 ]);
+}

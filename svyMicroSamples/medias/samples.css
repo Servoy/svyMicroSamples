@@ -63,6 +63,10 @@
 {
 	font-size: 24px;
 }
+.font-icon.inverted
+{
+	color: #fff;
+}
 .font-icon:HOVER
 {
 	color: #e77509;
@@ -123,4 +127,8 @@
 .margin{
 	
 	margin-top:15px;
+}
+.full_width
+{
+	width: 100%;
 }

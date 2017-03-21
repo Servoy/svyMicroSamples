@@ -4,7 +4,10 @@
 	<comment></comment>
 	<projects>
 		<project>resources</project>
-		<project>svyhelp</project>
+		<project>svycodebox</project>
+		<project>exampleBasicComponents</project>
+		<project>svyMicroSamples</project>
+		<project>svyUtils</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

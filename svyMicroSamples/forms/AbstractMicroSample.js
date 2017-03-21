@@ -40,7 +40,42 @@ function getIconStyleClass(){
 }
 
 /**
- * TODO generated, please specify type and doc for the params
+ * @public 
+ * @return {String} Additioanl info (wiki markdown supported)
+ * @properties={typeid:24,uuid:"C8EC085D-B075-42F6-B580-A3FFA4B928DB"}
+ */
+function getMoreInfo(){
+	return null;
+}
+
+/**
+ * @public 
+ * @return {Array<String>} code lines
+ * @properties={typeid:24,uuid:"68A0A486-8045-482D-809E-267A3BF5930F"}
+ */
+function getSampleCode(){
+	return [];
+}
+
+/**
+ * @public 
+ * @return {String} Website URL
+ * @properties={typeid:24,uuid:"8AD96BDB-DD9E-4429-BF27-8543B1635337"}
+ */
+function getWebSiteURL(){
+	return null;
+}
+
+/**
+ * @public 
+ * @return {String} Download URL
+ * @properties={typeid:24,uuid:"1E683413-5C01-4BA5-8070-2DEA092FD7D1"}
+ */
+function getDownloadURL(){
+	return null;
+}
+/**
+ * @deprecated 
  * @param functionToPrint
  * @return {Array<String>}
  * @properties={typeid:24,uuid:"EF846935-DDF2-4A8A-8635-FEF190847BDD"}
@@ -76,16 +111,3 @@ function printMethodCode(functionToPrint) {
 		return [];
 	}
 } 
-/**
- * Callback method for when form is shown.
- *
- * @param {Boolean} firstShow form is shown first time after load
- * @param {JSEvent} event the event that triggered the action
- *
- * @protected
- *
- * @properties={typeid:24,uuid:"BB075C8A-D9A6-4F4E-BB4C-DFC99F1B2814"}
- */
-function onShow(firstShow, event) {
-	scopes.svyMicroSamples.showInfo('');
-}

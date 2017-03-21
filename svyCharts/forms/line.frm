@@ -33,5 +33,6 @@ uuid:"E1E6EDB4-A35C-4E98-876E-F2C9174BA11C"
 name:"line",
 navigatorID:"-1",
 showInMenu:true,
+size:"643,480",
 typeid:3,
 uuid:"457DCD12-1A4B-4678-BD90-783AA4806450"

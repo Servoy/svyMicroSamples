@@ -33,5 +33,6 @@ uuid:"7F8A0CF1-2078-462C-A6E2-1FE6DB833A43"
 name:"doughnut",
 navigatorID:"-1",
 showInMenu:true,
+size:"646,480",
 typeid:3,
 uuid:"62F75DFA-D862-4F77-88CC-3BB8FAF8A91E"

@@ -7,10 +7,17 @@ extendsID:"CCD8084B-3484-41E7-8FBA-CBF44DD9BF67",
 height:480,
 typeid:19,
 uuid:"B25E47BC-BE30-4CA9-A5F8-EFC40E73E619"
+},
+{
+extendsID:"D2CC2424-957C-4C3A-9D6E-228F36A1D201",
+size:"616,460",
+typeid:16,
+uuid:"DE9599C8-F5D1-484D-9EAD-941E5E3E8380"
 }
 ],
 name:"parent",
 navigatorID:"-1",
 showInMenu:true,
+size:"641,480",
 typeid:3,
 uuid:"4F6DDEDA-DFED-4171-825A-8711D18A7392"
