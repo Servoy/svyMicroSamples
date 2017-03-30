@@ -8,6 +8,7 @@
 		<project>exampleBasicComponents</project>
 		<project>svyMicroSamples</project>
 		<project>svyUtils</project>
+		<project>svyhelp</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
