@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+
+<!-- Works with Ant 1.7.0 and higher -->
+<!-- These are useful combined with command line/ant test runners for mobile/smart client solutions exports; -->
+<!-- see Servoy Wiki - Building A Software Factory for how to use test runners with ant on these exports -->
+<!--<project name="Ant Solution Exporter" default="copy_fonts_dir" basedir=".">-->
+<project name="Ant Solution Exporter" default="main" basedir=".">
+
+    <property environment="env"/>
+	<property file="build.properties"/>
+
+    <taskdef resource="net/sf/antcontrib/antlib.xml">
+        <classpath>
+            <pathelement location="${ANT_CONTRIB_JAR}"/>
+        </classpath>
+    </taskdef>
+
+    <import file="servoy_utils.xml"/>
+    <import file="code_coverage.xml"/>
+
+    <target name="main" depends="setup, code_coverage, export_and_test_solutions, export_result_package_war, collect_logs, finish"/>
+
+    <target name="setup">
+		<if>
+        	 <equals arg1="${servoy.test_solution_name}" arg2=""/>
+        	 <then>
+        	 	<fail message="Test solution Name not specified (property 'test.solution')"/>
+        	 </then>
+		</if>
+
+        <!-- setup some default dirs -->
+        <echo level="info" message="*** Setting up folders and files for build***" />
+        <delete quiet="true" dir="${general.log_dir}" />
+        <mkdir dir="${general.log_dir}" />
+
+        <!--
+		<script language="javascript"><![CDATA[
+			var TEST_SUFFIX = '_test'
+
+			var testSolution = project.getProperty('test.solution')
+			var solutionUnderTesting = project.getProperty('solution_under_testing')
+
+			if (!testSolution) { //if 'test.solution' is not set, derive it from the Job name
+				testSolution = project.getProperty('env.JOB_NAME') + TEST_SUFFIX
+				project.setProperty('test.solution', testSolution)
+			}
+
+			if (!solutionUnderTesting) { //if 'solution_under_testing' is not set, derive it from the 'test.solution' value
+				if (testSolution.slice(-5) === TEST_SUFFIX) {
+					project.setProperty('solution_under_testing', testSolution.slice(0,-5))
+				} else {
+					project.setProperty('solution_under_testing', testSolution)
+				}
+			}
+		]]></script>-->
+	</target>
+
+    <target name="export_and_test_solutions" depends="get_equinox_jar">
+        <if>
+            <not>
+                <equals arg1="${servoy.junit_test.enabled}" arg2="true" />
+            </not>
+            <then>
+               <echo level="info" message="Servoy JSUnit Test disabled" />
+            </then>
+            <else>
+    	       <export-solution solutionNames="${servoy.test_solution_name}" workspace="${WORKSPACE}"/>
+               <antcall target="run_servoy_jsunit_tests" />
+           </else>
+       </if>
+    </target>
+
+    <target name="run_servoy_jsunit_tests" unless="export.failed" depends="prepare_classpath">
+        <run_servoy_jsunit_tests/>
+    	<if>
+    	    <not>
+    	        <isset property="test.failed"/>
+    	    </not>
+    	    <then>
+    	    	<antcall target="generate_code_coverage_reports"/>
+    	    	<!-- <antcall target="generate_code_analysis_reports"/> -->
+    	    </then>
+       </if>
+    </target>
+
+    <target name="export_result_package_war" depends="get_equinox_jar" unless="test.failed">
+        <export-war solutionNames="${servoy.solution_name}" workspace="${WORKSPACE}" warFileName="${war_file_name}"/>
+        <if>
+    	    <not>
+    	        <isset property="texport.failed"/>
+    	    </not>
+    	    <then>
+                <antcall target="deploy_war_exports"/>
+            </then>
+        </if>
+    </target>
+
+	<target name="deploy_war_exports">
+            <get src="http://${tomcat.server.address}:${tomcat.server.port}/manager/text/stop?path=/${tomcat.application.name}" username="${tomcat.username}" password="${tomcat.password}" dest="${general.log_dir}/war_undeploy.log" />
+            <get src="http://${tomcat.server.address}:${tomcat.server.port}/manager/text/undeploy?path=/${tomcat.application.name}" username="${tomcat.username}" password="${tomcat.password}" dest="${general.log_dir}/war_undeploy.log" />
+            <get src="http://${tomcat.server.address}:${tomcat.server.port}/manager/text/deploy?path=/${tomcat.application.name}&amp;war=${war_file}" username="${tomcat.username}" password="${tomcat.password}" dest="${general.log_dir}/war_deploy.log" />
+            <loadfile property="war_deploy_log" srcfile="${general.log_dir}/war_deploy.log"/>
+            <condition property="war_deploy.success">
+                <matches pattern="OK.*" string="${war_deploy_log}"/>
+            </condition>
+
+            <fail message="War deployment failed" unless="war_deploy.success" />
+
+	  <!-- <copy file="${war_file}" todir="${war_dest_dir}"/>
+      <sleep seconds="30"/> -->
+	</target>
+    <target name="collect_logs">
+    	<!-- Move workspace log to build/logs directory -->
+        <move file="${WORKSPACE}/.metadata/.log" tofile="${general.build.dir}/logs/workspace.log" failonerror="false"/>
+    </target>
+
+	<target name="finish">
+		<!-- Move the collected logs to the folder for the specific Jenkins build as artifacts -->
+		<!--<move todir="${current_job.dir}/builds/${env.BUILD_NUMBER}/archive">
+            <fileset dir="${general.build.dir}/logs" includes="*.log" />
+        </move> -->
+
+<!-- TODO fix the if statement... isn't taking it
+		<if>
+			<istrue value="${export.solution_under_testing.as.artifact}"/>
+			<then> --> <!-- export the solution_under_testing solution as artifact -->
+
+				<!--<export-solution solutionNames="${solution_under_testing}" workspace="${WORKSPACE}"/>
+				<move todir="${current_job.dir}/builds/${env.BUILD_NUMBER}/archive">
+		            <fileset dir="${test.exports.regular.dir}" includes="${solution_under_testing}.servoy" />
+		        </move>-->
+<!--
+			</then>
+		</if>
+-->
+		<fail message="Exports failed: please check exporter log files." if="export.failed" />
+		<fail message="Tests failed: please check test reports." if="test.failed" />
+	</target>
+
+</project>
