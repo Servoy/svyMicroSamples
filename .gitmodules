@@ -1,0 +1,9 @@
+[submodule "svyUtils"]
+	path = svyUtils
+url=https://github.com/Servoy/svyUtils.git
+[submodule "svyShowdown"]
+	path = svyShowdown
+url=https://github.com/Servoy/svyShowdown.git
+[submodule "svyChartJS"]
+	path = svyChartJS
+url=https://github.com/Servoy/svyChartJS.git
