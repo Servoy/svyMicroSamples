@@ -103,7 +103,7 @@ anchors:11,
 location:"0,0",
 size:"1000,100",
 styleClass:"banner",
-text:"Micro Sample Galleryyy",
+text:"Micro Sample Gallery",
 transparent:true,
 typeid:7,
 uuid:"D8756BED-30E7-41CB-8965-715C9F96A032"
