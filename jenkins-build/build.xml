@@ -32,6 +32,7 @@
         <echo level="info" message="*** Setting up folders and files for build***" />
         <delete quiet="true" dir="${general.log_dir}" />
         <mkdir dir="${general.log_dir}" />
+        <cleanOtherResources />
 
         <!--
 		<script language="javascript"><![CDATA[

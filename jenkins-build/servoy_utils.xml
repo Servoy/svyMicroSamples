@@ -256,6 +256,12 @@
         </path>
     </target>
 
+    <macrodef name="cleanOtherResources">
+        <delete>
+            <dirset dir="${basedir}" includes="*/resources" / excludes="resources/">
+        </delete>
+    </macrodef>
+
     <macrodef name="latest_jar">
         <attribute name="pathName"/>
         <attribute name="propertyName" default="@{pathName}_property"/>
