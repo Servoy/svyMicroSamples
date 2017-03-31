@@ -75,15 +75,20 @@
 
     <target name="run_servoy_jsunit_tests" unless="export.failed" depends="prepare_classpath">
         <run_servoy_jsunit_tests/>
-    	<if>
-    	    <not>
-    	        <isset property="test.failed"/>
-    	    </not>
-    	    <then>
-    	    	<antcall target="generate_code_coverage_reports"/>
-    	    	<!-- <antcall target="generate_code_analysis_reports"/> -->
-    	    </then>
-       </if>
+        <if>
+            <equals arg1="${code.coverage.enabled}" arg2="true" />
+            <then>
+            	<if>
+            	    <not>
+            	        <isset property="test.failed"/>
+            	    </not>
+            	    <then>
+            	    	<antcall target="generate_code_coverage_reports"/>
+            	    	<!-- <antcall target="generate_code_analysis_reports"/> -->
+            	    </then>
+               </if>
+           </then>
+        </if>
     </target>
 
     <target name="export_result_package_war" depends="get_equinox_jar" unless="test.failed">
