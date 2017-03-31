@@ -30,8 +30,8 @@
 
         <!-- setup some default dirs -->
         <echo level="info" message="*** Setting up folders and files for build***" />
-        <delete includeemptydirs="true">
-            <dirset dir="${WORKSPACE}" includes="**/resources" excludes="resources/" />
+        <delete includeEmptyDirs="true">
+            <fileset dir="${WORKSPACE}" includes="**/resources/"/>
         </delete>
         <delete quiet="true" dir="${general.log_dir}" />
         <mkdir dir="${general.log_dir}" />
