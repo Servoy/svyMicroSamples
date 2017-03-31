@@ -31,7 +31,7 @@
         <!-- setup some default dirs -->
         <echo level="info" message="*** Setting up folders and files for build***" />
         <delete includeEmptyDirs="true">
-            <fileset dir="${WORKSPACE}" includes="**/resources/" excludes="resources"/>
+            <fileset dir="${WORKSPACE}" includes="**/resources/" excludes="/resources/"/>
         </delete>
         <delete quiet="true" dir="${general.log_dir}" />
         <mkdir dir="${general.log_dir}" />
