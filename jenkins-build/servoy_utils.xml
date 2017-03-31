@@ -114,6 +114,7 @@
                 <arg value="-tables" />
                 <arg value="-modules" />
                 <arg value="-minimize" />
+                <arg value="-verbose" />
                 <arg value="-defaultAdminUser" />
                 <arg value="${servoy.default_admin_user}" />
                 <arg value="-defaultAdminPassword" />
