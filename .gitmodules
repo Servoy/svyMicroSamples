@@ -7,3 +7,12 @@ url=https://github.com/Servoy/svyShowdown.git
 [submodule "svyChartJS"]
 	path = svyChartJS
 url=https://github.com/Servoy/svyChartJS.git
+[submodule "example-solutions"]
+	path = example-solutions
+	url = https://github.com/Servoy/example-solutions.git
+[submodule "svySearch"]
+	path = svySearch
+	url = https://github.com/Servoy/svySearch.git
+[submodule "webnotifications"]
+	path = webnotifications
+	url = https://github.com/Servoy/webnotifications.git
