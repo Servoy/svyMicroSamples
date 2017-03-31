@@ -118,10 +118,10 @@ function initInMemDatabase() {
  * @properties={typeid:24,uuid:"3621BA7D-EB4B-4605-9553-A24BB456ED50"}
  */
 function onSolutionOpen(arg, queryParams) {
-	initInMemDatabase();
-	plugins.svyhelp.callback = onHelpCalled;
-	plugins.svyhelp.helpEvent = 'mouseover';
-	plugins.svyhelp.helpMode = false;
+//	initInMemDatabase();
+//	plugins.svyhelp.callback = onHelpCalled;
+//	plugins.svyhelp.helpEvent = 'mouseover';
+//	plugins.svyhelp.helpMode = false;
 }
 
 /**

@@ -33,7 +33,7 @@ uuid:"0A92FCD6-C8D2-4DC9-9F3C-0C2BC7CB1EA5"
 anchors:3,
 formIndex:1,
 location:"820,145",
-onActionMethodID:"B3EBAD0B-D8A0-4C8B-8C3F-81902A9B71F8",
+onActionMethodID:"B6C93985-9D0C-4777-A406-FB993D0602D6",
 rolloverCursor:12,
 showClick:false,
 showFocus:false,
@@ -109,7 +109,7 @@ typeid:7,
 uuid:"D8756BED-30E7-41CB-8965-715C9F96A032"
 },
 {
-imageMediaID:"5A1D5DE5-80DE-4F9C-957B-5DD679C3A2B7",
+imageMediaID:"4B6AD4F8-FE91-430C-BDAC-8638A60260CF",
 location:"10,0",
 size:"230,98",
 text:"",

@@ -130,7 +130,12 @@ function showWebSite(){
  * @properties={typeid:24,uuid:"B6C93985-9D0C-4777-A406-FB993D0602D6"}
  */
 function download(){
+	var sample = getActiveSample();
+	if(!sample) return;
+	var url = sample.getDownloadURL();
+	if(!url) return;
 	
+	application.showURL(url);
 }
 
 /**
