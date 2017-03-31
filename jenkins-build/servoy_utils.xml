@@ -258,7 +258,7 @@
 
     <macrodef name="cleanOtherResources">
         <delete>
-            <dirset dir="${basedir}" includes="*/resources" / excludes="resources/">
+            <dirset dir="${basedir}" includes="*/resources" excludes="resources/" />
         </delete>
     </macrodef>
 
