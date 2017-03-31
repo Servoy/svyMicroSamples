@@ -2,6 +2,11 @@ customProperties:"formComponent:false",
 encapsulation:60,
 items:[
 {
+partType:1,
+typeid:19,
+uuid:"6FDA4818-7E53-4F58-8DB0-3C2C6B5674E5"
+},
+{
 height:360,
 partType:5,
 typeid:19,

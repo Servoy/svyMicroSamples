@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <buildpath>
 	<buildpathentry excluding=".stp/|medias/" kind="src" path=""/>
-	<buildpathentry exported="true" kind="prj" path="/svyCharts"/>
+	<buildpathentry exported="true" kind="prj" path="/exampleCSS"/>
+	<buildpathentry exported="true" kind="prj" path="/exampleFilter"/>
+	<buildpathentry exported="true" kind="prj" path="/svyChartJSExample"/>
 	<buildpathentry exported="true" kind="prj" path="/svyMicroSamples"/>
+	<buildpathentry exported="true" kind="prj" path="/svySearchExample"/>
 	<buildpathentry exported="true" kind="prj" path="/svyUtils"/>
+	<buildpathentry exported="true" kind="prj" path="/webNotificationsExample"/>
 </buildpath>

@@ -11,7 +11,7 @@ showClick:false,
 showFocus:false,
 size:"30,30",
 styleClass:"font-icon",
-text:"<span class=\"fa fa-window-maximize\"/>",
+text:"<span class=\"fa fa-external-link\"/>",
 transparent:true,
 typeid:7,
 uuid:"65F51F16-D9E7-4416-821F-746DEA1B915B"
@@ -24,12 +24,19 @@ uuid:"7A3C8EE9-B5CA-4208-BBD9-49DD08DD9310"
 },
 {
 anchors:11,
+formIndex:-1,
 location:"0,2",
 size:"640,40",
 styleClass:"label_header_2",
 text:"Title",
 typeid:7,
 uuid:"98DD5206-4361-4887-911E-658FBD89BE66"
+},
+{
+height:42,
+partType:1,
+typeid:19,
+uuid:"C3600158-096B-4124-BA01-520A37F967FB"
 },
 {
 anchors:3,

@@ -75,7 +75,9 @@ function getDownloadURL(){
 	return null;
 }
 /**
- * @deprecated 
+ * TODO move to top level scope
+ * 
+ * @protected
  * @param functionToPrint
  * @return {Array<String>}
  * @properties={typeid:24,uuid:"EF846935-DDF2-4A8A-8635-FEF190847BDD"}
