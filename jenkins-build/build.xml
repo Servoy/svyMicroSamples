@@ -30,8 +30,8 @@
 
         <!-- setup some default dirs -->
         <echo level="info" message="*** Setting up folders and files for build***" />
-        <delete>
-            <dirset dir="${WORKSPACE}" includes="*/resources" excludes="resources/" />
+        <delete includeemptydirs="true">
+            <dirset dir="${WORKSPACE}" includes="**/resources" excludes="resources/" />
         </delete>
         <delete quiet="true" dir="${general.log_dir}" />
         <mkdir dir="${general.log_dir}" />
@@ -90,7 +90,7 @@
         <export-war solutionNames="${servoy.solution_name}" workspace="${WORKSPACE}" warFileName="${war_file_name}"/>
         <if>
     	    <not>
-    	        <isset property="texport.failed"/>
+    	        <isset property="export.failed"/>
     	    </not>
     	    <then>
                 <antcall target="deploy_war_exports"/>
