@@ -1,0 +1,21 @@
+customProperties:"formComponent:false",
+encapsulation:60,
+items:[
+{
+height:480,
+partType:5,
+typeid:19,
+uuid:"CB39431D-1A65-430E-AF85-2B7A5E21DD0D"
+},
+{
+location:"136,159",
+size:"80,20",
+text:"TEST TWO",
+typeid:7,
+uuid:"CE5A5B62-D939-4BCC-BF8C-05C4A19BD73C"
+}
+],
+name:"form1",
+showInMenu:true,
+typeid:3,
+uuid:"76230F14-CD06-4A2B-A9E0-3DFD3CDE99E6"
