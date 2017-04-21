@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>sampleGallery</name>
+	<name>exampleBasicComponents</name>
 	<comment></comment>
 	<projects>
 		<project>resources</project>
-		<project>svycodebox</project>
-		<project>exampleBasicComponents</project>
-		<project>svyMicroSamples</project>
-		<project>svyUtils</project>
-		<project>svyhelp</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
