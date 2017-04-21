@@ -1,0 +1,7 @@
+allowCreationRelatedRecords:true,
+foreignDataSource:"db:/servoy_training/orders",
+joinType:1,
+name:"orders_to_orders_splitpanel$foundset",
+primaryDataSource:"db:/servoy_training/orders",
+typeid:22,
+uuid:"258C2896-1F7B-4034-8F3A-FDB910753F27"

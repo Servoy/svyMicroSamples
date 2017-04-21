@@ -1,0 +1,8 @@
+addEmptyValue:1,
+customValues:"Value A|1\
+Value B|2\
+Value C|3\
+Value D|4",
+name:"listBoxValues",
+typeid:34,
+uuid:"F93813FF-0AA3-44C1-899D-C5139ACED16D"

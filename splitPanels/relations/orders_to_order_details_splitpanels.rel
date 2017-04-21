@@ -1,0 +1,10 @@
+allowCreationRelatedRecords:true,
+foreignDataSource:"db:/servoy_training/order_details",
+items:[
+{foreignColumnName:"order_id",primaryDataProviderID:"order_id",typeid:23,uuid:"B4F09E2C-9985-407D-9B90-9F4338DA8433"}
+],
+joinType:1,
+name:"orders_to_order_details_splitpanels",
+primaryDataSource:"db:/servoy_training/orders",
+typeid:22,
+uuid:"BE1DA1D4-01CF-46DE-8A1A-243EB1293416"

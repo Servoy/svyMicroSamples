@@ -3,8 +3,10 @@
 	<buildpathentry excluding=".stp/|medias/" kind="src" path=""/>
 	<buildpathentry exported="true" kind="prj" path="/exampleCSS"/>
 	<buildpathentry exported="true" kind="prj" path="/exampleFilter"/>
+	<buildpathentry exported="true" kind="prj" path="/splitPanels"/>
 	<buildpathentry exported="true" kind="prj" path="/svyChartJSExample"/>
 	<buildpathentry exported="true" kind="prj" path="/svySearchExample"/>
 	<buildpathentry exported="true" kind="prj" path="/svyUtils"/>
 	<buildpathentry exported="true" kind="prj" path="/testDan2"/>
+	<buildpathentry exported="true" kind="prj" path="/webElements"/>
 </buildpath>

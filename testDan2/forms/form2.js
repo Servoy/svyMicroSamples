@@ -1,16 +1,21 @@
 /**
+ * @type {Number}
+ *
+ * @properties={typeid:35,uuid:"04DFEE55-C7A0-4743-90C4-9470DE71C5D3",variableType:4}
+ */
+var demoIndex = null;
+
+/**
  * Perform the element default action.
  *
  * @param {JSEvent} event the event that triggered the action
  *
  * @private
  *
- * @properties={typeid:24,uuid:"0B5E9D4F-E9E8-4158-B737-BBEC4C7D03E6"}
+ * @properties={typeid:24,uuid:"854C34F8-E9E1-4A06-B401-2DE5EE3936BF"}
  */
-function onSubmit(event) {
-	application.output('listBox: ' + scopes.svyWebElements.listBox);
-	
-	forms.tabPanelBase.elements.tabs.tabIndex=2;
+function onAction(event) {
+	forms.tabPanelBase.elements.tabs.tabIndex=1;
 }
 
 /**
@@ -24,11 +29,24 @@ function onSubmit(event) {
  *
  * @private
  *
- * @properties={typeid:24,uuid:"4A37BA0C-AC6D-4ABF-99FD-446450C9485A"}
+ * @properties={typeid:24,uuid:"62D97605-2CAF-4632-A422-9F40AC7B1845"}
  */
 function onComboBoxChange(oldValue, newValue, event) {
-	application.output("newValue "+newValue);	
+	application.output("newValue "+newValue);
+	
 	foundset.selectRecord(newValue);
+	
+	//application.output("foundset.getSelectedIndex() "+foundset.getSelectedIndex());
+	
+	
+	
+	/*var initialIndex = controller.getSelectedIndex();
+	application.output("initialIndex "+initialIndex);
+	
+	application.output("newIndex "+newValue);*/
+	//controller.setSelectedIndex(newValue);
+	
+	
 	return true;
 }
 
@@ -39,10 +57,11 @@ function onComboBoxChange(oldValue, newValue, event) {
  *
  * @private
  *
- * @properties={typeid:24,uuid:"B76E3823-705D-46AA-8819-3DD4C4EECCDA"}
+ * @properties={typeid:24,uuid:"221F125A-46DF-4D79-B531-A2E4A4641DB6"}
  * @AllowToRunInFind
  */
 function onLoad(event) {
+	//application.output("hello");
 	controller.setSelectedIndex(3);
 }
 
@@ -53,7 +72,7 @@ function onLoad(event) {
  *
  * @private
  *
- * @properties={typeid:24,uuid:"B834D72F-F866-42D6-A321-18B80B40F578"}
+ * @properties={typeid:24,uuid:"B9225405-E150-4BD6-A565-69C229059CD4"}
  */
 function onActionNext(event) {
 	foundset.setSelectedIndex(foundset.getSelectedIndex() + 1)
@@ -66,7 +85,7 @@ function onActionNext(event) {
  *
  * @private
  *
- * @properties={typeid:24,uuid:"DA047C4C-701A-471C-A182-ADE50D9F7F79"}
+ * @properties={typeid:24,uuid:"874CDE4B-1C83-4215-8F78-BE64929D05C9"}
  */
 function onActionPrev(event) {
 	foundset.setSelectedIndex(foundset.getSelectedIndex() - 1)
@@ -83,7 +102,7 @@ function onActionPrev(event) {
  *
  * @private
  *
- * @properties={typeid:24,uuid:"F8B0DB5A-053B-492C-BD75-4A750074C4EC"}
+ * @properties={typeid:24,uuid:"7707D53C-D745-43BC-AE98-9F27B53FB3A9"}
  */
 function onDataChangeInputValue(oldValue, newValue, event) {
 	if(newValue)
