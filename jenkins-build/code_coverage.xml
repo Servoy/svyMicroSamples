@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+
+<!-- Works with Ant 1.7.0 and higher -->
+<project basedir=".">
+    <target name="code_coverage">
+        <if>
+            <not>
+                <equals arg1="${code.coverage.enabled}" arg2="true" />
+            </not>
+            <then>
+                <echo level="info" message="Code Coverage Reporting disabled" />
+            </then>
+            <else>
+                <antcall target="code_coverage_reporting_preparation" />
+                <antcall target="code_coverage_instrument_workspace" />
+                <antcall target="code_coverage_fix_instrumented_workspace_for_servoy" />
+            </else>
+        </if>
+    </target>
+
+    <!-- Step 1: clean the instrumented workspace -->
+    <target name="code_coverage_reporting_preparation">
+
+        <echo level="verbose" message="Using antRunner dir: ${general.antRunner.dir}"/>
+        <echo level="info" message="*** Setting up folders and files for code coverage***" />
+        <delete quiet="true" dir="${general.test.result.dir}" />
+        <mkdir dir="${general.test.result.dir}" />
+        <delete quiet="true" dir="${general.junit.result.dir}" />
+        <mkdir dir="${general.junit.result.dir}" />
+        <delete quiet="true" dir="$${general.istanbul.result.dir}" />
+        <mkdir dir="${general.istanbul.result.dir}" />
+
+
+        <delete quiet="true" dir="${code.coverage.temp.dir}"/>
+        <mkdir dir="${code.coverage.temp.dir}"/>
+        <delete quiet="true" dir="${general.istanbul.result.dir}"/>
+        <mkdir dir="${general.istanbul.result.dir}"/>
+
+        <delete quiet="true" dir="${code.coverage.instrumented.dir}"/>
+        <copy todir="${code.coverage.instrumented.dir}">
+            <fileset dir="${WORKSPACE}">
+            </fileset>
+        </copy>
+
+        <for list="${code.coverage.instrument.exclude}" param="instrumentExclude">
+            <sequential>
+                <delete dir="${code.coverage.instrumented.dir}/@{instrumentExclude}"/>
+            </sequential>
+        </for>
+
+        <delete quiet="true" dir="${code.coverage.instrumented.dir}/jenkins-build"/>
+        <delete quiet="true" dir="${code.coverage.instrumented.dir}/e2e-tests"/>
+
+        <replace file="${code.coverage.instrumented.dir}/${servoy.test_solution_name}/baseModule.js" token="___report_coverage___" value="${general.istanbul.result.dir}/coverage.json"/>
+        <replace file="${code.coverage.instrumented.dir}/${servoy.test_solution_name}/baseModule.js" token="\" value="/"/>
+
+    </target>
+
+    <!-- Step 2: instrument all code from workspace into the temp instrumented workspace-->
+    <target name="code_coverage_instrument_workspace">
+      <echo level="info" message="instrumenting workspace ${WORKSPACE} into temp workspace ${code.coverage.temp.dir}"/>
+      <echo level="info" message="Excluded by configuration : ${code.coverage.exclude}"/>
+      <exec executable="istanbul.cmd" failonerror="${code.coverage.failOnError}">
+        <arg value="instrument"/>
+        <arg value="${code.coverage.instrumented.dir}"/>
+        <arg value="--output"/>
+          <arg value="${code.coverage.temp.dir}"/>
+        <arg value="--preserve-comments"/>
+        <arg value="-x"/>
+          <arg value="${code.coverage.exclude}"/>
+      </exec>
+    </target>
+
+    <!-- Step 3: parse all the instrumented code from the temp instrumented workspace and save the modified instrumented file into the instrumented workspace-->
+    <target name="code_coverage_fix_instrumented_workspace_for_servoy">
+      <echo level="info" message="parsing Servoy code in instrumented workspace ${code.coverage.temp.dir}. Generate result into ${code.coverage.instrumented.dir}"/>
+      <echo level="info" message="*** ${servoy.test_solution_name}" />
+      <exec executable="cmd" failonerror="${code.coverage.failOnError}">
+          <arg value="/c"/>
+          <arg value="node"/>
+          <arg value="${JENKINS-BUILD}/ServoyParser.js"/>
+          <arg value="--d"/>
+          <arg value="${code.coverage.instrumented.dir}"/>
+          <arg value="${code.coverage.temp.dir}"/>
+          <arg value="--t"/>
+            <arg value="${servoy.test_solution_name}"/>
+          <arg value="--x"/>
+            <arg value="${code.coverage.instrument.exclude}"/>
+          <arg value="--e"/>
+            <arg value="${code.coverage.failOnError}"/>
+          <arg value="--i"/>
+            <arg value="${code.coverage.instrument.include}"/>
+        </exec>
+    </target>
+
+	<macrodef name="run-ng-client-tests">
+        <sequential>
+            <echo level="info" message="*** Servoy Solution JS unit ng client tests ***" />
+
+            <!-- Define a timeout so we know the test will finish eventually -->
+            <junit fork="yes" forkmode="once" timeout="${servoy.test.timeout}" dir="${servoy.app_server.dir}" haltonfailure="false" haltonerror="false" errorProperty="test.failed" failureProperty="test.failed" printsummary="on">
+                <jvmarg value="-XX:MaxPermSize=128m" />
+                <classpath refid="classpath.run_test" />
+
+                <formatter type="brief" usefile="false" />
+                <formatter type="xml" />
+
+                <!-- formatter similar to type="xml" but it shows test suite hierarchy nicely, in a tree-like result xml - useful to nicely show the place where a test failed (solution/form...)
+                but this formatter is not included in ant yet - you would need to patch it yourself and integrate in ant lib from https://issues.apache.org/bugzilla/show_bug.cgi?id=48529
+                if you plan on using it, either comment out the simple "xml" formatter or add "extension" attribute to one of them so they don't get into conflicts when generating xmls -->
+                <!-- <formatter type="xml.suites" /> -->
+
+                <test name="com.servoy.automation.jsunit.smartclient.ServoyJSUnitTestRunner" todir="${general.junit.result.dir}" />
+            </junit>
+
+            <antcall target="generate_code_coverage_reports"/>
+
+            <!-- don't fail directly here so that test artifacts can be prepared for Jenkins before failing - and also allow any mobile tests to run -->
+           </sequential>
+    </macrodef>
+
+    <target name="generate_code_coverage_reports" unless="test.failed">
+        <for list="lcov,cobertura" param="format">
+            <sequential>
+            <echo level="info" message="Generating @{format} report"/>
+                <exec executable="istanbul.cmd" failonerror="${code.coverage.failOnError}">
+                    <arg value="report" />
+                    <arg value="--root" />
+                    <arg value="${code.coverage.temp.dir}" />
+                    <arg value="--dir" />
+                    <arg value="${general.istanbul.result.dir}" />
+                    <arg value="@{format}" />
+                </exec>
+            </sequential>
+        </for>
+    </target>
+</project>

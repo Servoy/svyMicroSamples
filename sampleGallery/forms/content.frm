@@ -19,7 +19,6 @@ uuid:"65F51F16-D9E7-4416-821F-746DEA1B915B"
 {
 height:190,
 partType:5,
-styleClass:"body-dialog-main",
 typeid:19,
 uuid:"7A3C8EE9-B5CA-4208-BBD9-49DD08DD9310"
 },
