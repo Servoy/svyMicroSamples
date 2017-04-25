@@ -1,0 +1,9 @@
+addEmptyValue:1,
+customValues:"Action\r\
+Data Change\r\
+Focus Gained\r\
+Focus Lost\r\
+Right-Click",
+name:"textFieldEvents",
+typeid:34,
+uuid:"0B19359E-840C-4107-8B35-20AE9F62E4C7"

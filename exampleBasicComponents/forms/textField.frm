@@ -1,0 +1,14 @@
+customProperties:"formComponent:false",
+encapsulation:60,
+items:[
+{
+height:480,
+partType:5,
+typeid:19,
+uuid:"C7E2DBFF-C855-407D-A19D-C03F3AA12209"
+}
+],
+name:"textField",
+showInMenu:true,
+typeid:3,
+uuid:"BA41B015-DC9A-4F3F-A403-E09032C8AFE0"

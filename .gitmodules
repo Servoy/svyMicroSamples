@@ -17,3 +17,12 @@
 [submodule "webnotifications"]
 	path = webnotifications
 	url = https://github.com/Servoy/webnotifications.git
+[submodule "svyBlockUI"]
+	path = svyBlockUI
+	url = https://github.com/Servoy/svyBlockUI.git
+[submodule "svyKeyListener"]
+	path = svyKeyListener
+	url = https://github.com/Servoy/svyKeyListener.git
+[submodule "bootstrapextracomponents"]
+	path = bootstrapextracomponents
+	url = https://github.com/Servoy/bootstrapextracomponents.git
