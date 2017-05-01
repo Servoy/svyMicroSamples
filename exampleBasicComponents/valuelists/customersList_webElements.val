@@ -1,0 +1,10 @@
+addEmptyValue:1,
+dataProviderID1:"name",
+dataProviderID2:"customer_id",
+dataSource:"db:/servoy_training/customers",
+name:"customersList_webElements",
+returnDataProviders:2,
+showDataProviders:1,
+typeid:34,
+uuid:"971247C0-3FBB-4E94-8E1E-4D1CB6F1286E",
+valueListType:1
