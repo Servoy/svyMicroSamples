@@ -16,7 +16,7 @@ function getName() {
  * @properties={typeid:24,uuid:"CA6F6E74-CE88-4912-84B5-A14E35EE3EB9"}
  */
 function getDescription() {
-	return 'Split Panels Containers Demo';
+	return 'Split Panels Containers';
 }
 
 /**

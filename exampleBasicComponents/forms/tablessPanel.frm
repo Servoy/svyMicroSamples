@@ -4,7 +4,8 @@ encapsulation:60,
 extendsID:"1046CC5D-E653-4F9C-B8B9-E3FCDA83A211",
 items:[
 {
-location:"124,10",
+anchors:9,
+location:"10,24",
 onActionMethodID:"206FDA30-3909-4A7F-A865-B15D0D3A37D8",
 onDoubleClickMethodID:"-1",
 onRightClickMethodID:"-1",
@@ -57,7 +58,8 @@ typeid:16,
 uuid:"A18BC92F-9E6C-47AC-AFEE-E62B40BA1627"
 },
 {
-location:"214,10",
+anchors:9,
+location:"105,24",
 onActionMethodID:"5923FD73-5D08-43B9-9FD8-5CBCCA0703AF",
 onDoubleClickMethodID:"-1",
 onRightClickMethodID:"-1",

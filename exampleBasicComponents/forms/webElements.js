@@ -16,7 +16,7 @@ function getName() {
  * @properties={typeid:24,uuid:"33675DCE-0338-4D22-B025-B2B9A9620C43"}
  */
 function getDescription() {
-	return 'Servoy Web Elements - quick summary';
+	return 'Web Elements';
 }
 
 /**

@@ -77,6 +77,7 @@ function onMenuItemSelected(menuItemId, event) {
  * @properties={typeid:24,uuid:"63A2D10D-E05C-431D-B1A4-E5A190ED0B25"}
  */
 function onShow(firstShow, event) {
+
 	if(firstShow){
 		loadMenu();
 	}

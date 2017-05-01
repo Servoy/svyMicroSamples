@@ -16,7 +16,7 @@ function getName() {
  * @properties={typeid:24,uuid:"28223DAB-4CF1-455E-A549-594634F1AA2E"}
  */
 function getDescription() {
-	return 'Accordion Panel Example';
+	return 'Accordion Panel';
 }
 
 /**

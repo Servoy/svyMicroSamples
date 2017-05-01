@@ -40,7 +40,7 @@ uuid:"6D166334-44A8-4280-8CA1-830619221B14"
 ],
 location:"0,0",
 name:"accordion",
-size:"640,480",
+size:"480,480",
 tabOrientation:-4,
 transparent:true,
 typeid:16,
@@ -54,6 +54,7 @@ uuid:"93AFD8BE-3848-4AAB-9AC9-167B4632B6F3"
 }
 ],
 name:"accordionPanel",
+scrollbars:4,
 showInMenu:true,
 typeid:3,
 uuid:"AF3FB3BC-2AA6-45A3-9CA7-B020F774783C"

@@ -16,7 +16,7 @@ function getName() {
  * @properties={typeid:24,uuid:"5826C6B7-4F38-49FF-9031-47212009A1AC"}
  */
 function getDescription() {
-	return 'Tab Panels Example';
+	return 'Tab Panels';
 }
 
 /**
