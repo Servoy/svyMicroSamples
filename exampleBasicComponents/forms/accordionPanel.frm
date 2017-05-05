@@ -1,4 +1,10 @@
-customProperties:"formComponent:false",
+customProperties:"formComponent:false,\
+methods:{\
+onShowMethodID:{\
+arguments:null,\
+parameters:null\
+}\
+}",
 dataSource:"db:/servoy_training/customers",
 encapsulation:60,
 extendsID:"1046CC5D-E653-4F9C-B8B9-E3FCDA83A211",
@@ -54,6 +60,7 @@ uuid:"93AFD8BE-3848-4AAB-9AC9-167B4632B6F3"
 }
 ],
 name:"accordionPanel",
+onShowMethodID:"E7C2B6CF-8EC3-4E2B-9FD3-25A5EFA68D05",
 scrollbars:4,
 showInMenu:true,
 typeid:3,

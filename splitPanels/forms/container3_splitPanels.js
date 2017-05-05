@@ -10,6 +10,4 @@
  */
 function onLoad(event) {
 	elements.split.dividerLocation = elements.split.getWidth() / 2;
-	application.output("result 3: " + elements.split.getWidth() / 2)
-	application.output("form 3 " + controller.getFormWidth());
 }

@@ -1,6 +1,5 @@
 addEmptyValue:1,
-customValues:"\
-Albania\
+customValues:"Albania\
 Andorra\
 Armenia\
 Austria\
@@ -51,6 +50,6 @@ Turkey\
 Ukraine\
 United Kingdom (UK)\
 Vatican City (Holy See)",
-name:"countriesList_webElements",
+name:"countriesList_webElements_extraComponents",
 typeid:34,
-uuid:"E213EAA3-2507-4B8E-8378-A75D91BB5795"
+uuid:"9B113FD0-6263-4163-9056-1538452B9229"

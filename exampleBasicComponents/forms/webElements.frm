@@ -191,7 +191,7 @@ location:"131,990",
 onActionMethodID:"-1",
 onDoubleClickMethodID:"-1",
 onRightClickMethodID:"-1",
-size:"436,20",
+size:"436,34",
 text:"BUTTON",
 typeid:7,
 uuid:"7F51A3F2-7055-45BB-BA38-9EE471C2955B"

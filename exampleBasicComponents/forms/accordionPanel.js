@@ -25,3 +25,17 @@ function getDescription() {
 function getIconStyleClass() {
 	return 'fa fa-th-list';
 }
+
+/**
+ * Callback method for when form is shown.
+ *
+ * @param {Boolean} firstShow form is shown first time after load
+ * @param {JSEvent} event the event that triggered the action
+ *
+ * @private
+ *
+ * @properties={typeid:24,uuid:"E7C2B6CF-8EC3-4E2B-9FD3-25A5EFA68D05"}
+ */
+function onShow(firstShow, event) {
+
+}

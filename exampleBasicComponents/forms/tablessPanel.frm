@@ -6,9 +6,12 @@ items:[
 {
 anchors:9,
 location:"10,24",
+name:"buttonPrevious",
 onActionMethodID:"206FDA30-3909-4A7F-A865-B15D0D3A37D8",
 onDoubleClickMethodID:"-1",
 onRightClickMethodID:"-1",
+size:"80,42",
+styleClass:"my-button",
 text:"Previous",
 typeid:7,
 uuid:"87BA0EBD-3CE2-46A6-9C25-536E4CBC6BBB"
@@ -60,9 +63,14 @@ uuid:"A18BC92F-9E6C-47AC-AFEE-E62B40BA1627"
 {
 anchors:9,
 location:"105,24",
+name:"buttonNext",
 onActionMethodID:"5923FD73-5D08-43B9-9FD8-5CBCCA0703AF",
 onDoubleClickMethodID:"-1",
 onRightClickMethodID:"-1",
+rolloverCursor:12,
+showFocus:false,
+size:"80,42",
+styleClass:"my-button",
 text:"Next",
 typeid:7,
 uuid:"C2160447-EB2F-4622-9CB9-03DA8556197D"

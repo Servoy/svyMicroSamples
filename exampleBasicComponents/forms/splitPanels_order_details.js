@@ -9,5 +9,5 @@
  */
 function onRecordSelection(event) {
 	
-	forms.product_splitPanels.loadProduct(product_id);
+	forms.splitPanels_product.loadProduct(product_id);
 }

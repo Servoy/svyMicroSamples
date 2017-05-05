@@ -11,7 +11,6 @@
 function onShow(firstShow, event) {
 	//elements.split.dividerLocation = elements.split.getWidth() / 2;
 	//application.output("result 2: " + elements.split.getWidth() / 2);
-	application.output("form 2 " + controller.getFormWidth());
 	elements.split.dividerSize = 1
 }
 
