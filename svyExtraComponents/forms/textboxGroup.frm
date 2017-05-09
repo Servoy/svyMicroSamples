@@ -12,7 +12,6 @@ items:[
 {
 json:{
 faclass:"fa-mobile",
-format:"##-########",
 inputType:"text",
 location:{
 x:10,
@@ -23,14 +22,16 @@ placeholderText:"Insert your mobile phone number",
 size:{
 height:31,
 width:328
-}
+},
+visible:false
 },
 location:"10,51",
 name:"textfieldgroup_351cc",
 size:"328,31",
 typeName:"servoyextra-textfieldgroup",
 typeid:47,
-uuid:"4A2EE4FD-1BCC-4E41-9713-BFEB1FF0E353"
+uuid:"4A2EE4FD-1BCC-4E41-9713-BFEB1FF0E353",
+visible:false
 },
 {
 extendsID:"CCD8084B-3484-41E7-8FBA-CBF44DD9BF67",
@@ -63,7 +64,6 @@ uuid:"5F88715B-F70B-4AA2-877D-5ED2A01C7099"
 {
 json:{
 faclass:"fa-tags",
-format:"|L[5]",
 inputType:"text",
 inputValidation:"none",
 location:{
@@ -74,7 +74,7 @@ onActionMethodID:"5BC785A7-0E76-4EBC-9DFF-6E8EB7DBA8FE",
 onDataChangeMethodID:"92F97A96-1215-4DE0-8CD9-4553E1BFAB85",
 onFocusGainedMethodID:"56ACAC79-D7A6-4C28-AC5A-D4036F65B903",
 onFocusLostMethodID:"745509D3-6E00-4C68-9514-3FB0EE3C2918",
-placeholderText:"Insert text of maximum 5 characters",
+placeholderText:"Insert a text",
 size:{
 height:31,
 width:328

@@ -18,7 +18,8 @@ size:"176,42",
 styleClass:"my-button",
 text:"Remove Last Column",
 typeid:7,
-uuid:"2274CC58-2670-477F-BD90-BD1628568556"
+uuid:"2274CC58-2670-477F-BD90-BD1628568556",
+visible:false
 },
 {
 anchors:11,

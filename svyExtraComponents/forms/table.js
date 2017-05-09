@@ -37,8 +37,12 @@ function getIconStyleClass() {
 function removeColumn(event) {
 	var columnsCount = elements.table_811.getColumnsCount();
 	if (columnsCount == 0){
-		//elements.table_811.newColumn(datasources.db.servoy_training.customers.getTable().getColumn('Name').getDataProviderID());
+		//elements.table_811.newColumn(datasources.db.servoy_training.customers.getTable().getColumn('name').getDataProviderID());
+		elements.table_811.newColumn('customer_id');
+		elements.table_811.newColumn('name');
 		elements.table_811.newColumn('address');
+		elements.table_811.newColumn('city');
+		elements.table_811.newColumn('country');
 	}
 	else {
 		elements.table_811.removeColumn(columnsCount - 1);
