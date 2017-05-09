@@ -105,5 +105,5 @@ function collapseAll(){
  * @properties={typeid:24,uuid:"BDD03677-D70D-4BC3-A645-FDC5B606CD8D"}
  */
 function onNodeClicked() {
-	application.output('xxx '+ elements.tree.getSeletedNode());
+	//application.output('xxx '+ elements.tree.getSeletedNode());
 }

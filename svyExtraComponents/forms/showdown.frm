@@ -4,40 +4,52 @@ encapsulation:60,
 extendsID:"1046CC5D-E653-4F9C-B8B9-E3FCDA83A211",
 items:[
 {
-json:{
-location:{
-x:90,
-y:207
-},
-size:{
-height:20,
-width:140
-}
-},
-location:"90,207",
-name:"calendar_446",
-size:"140,20",
-typeName:"servoydefault-calendar",
-typeid:47,
-uuid:"4D78FFD9-4EFA-4BD5-89C6-26689FB8F1E7"
+location:"15,10",
+size:"480,111",
+text:"Markdown is a lightweight markup language with plain text <BR>formatting syntax. It's designed so that it can be converted <BR>to HTML and many other formats using a tool by the same name.<BR>Markdown is often used to create rich text using a plain text editor.",
+transparent:true,
+typeid:7,
+uuid:"90DE169C-C64F-4910-8C74-6B2938EC7AB5"
 },
 {
 json:{
 location:{
-x:20,
-y:19
+x:15,
+y:136
 },
+markdown:"# Heading\
+## Sub-heading\
+### Another deeper heading\
+\
+Paragraphs are separated by a line break.\
+\
+Text attributes _italic_, *italic*, __bold__, **bold**, `monospace`.\
+\
+Horizontal rule:\
+---\
+\
+Bullet list:\
+  * apples\
+  * oranges\
+  * pears\
+\
+Numbered list:\
+  1. apples\
+  2. oranges\
+  3. pears\
+\
+A [link](http://google.com).",
 size:{
-height:100,
-width:100
+height:224,
+width:455
 }
 },
-location:"20,19",
-name:"showdown_630",
-size:"100,100",
+location:"15,136",
+name:"showdown_359",
+size:"455,224",
 typeName:"showdown-showdown",
 typeid:47,
-uuid:"CC4375D6-9813-4C22-904B-A79BD8053A9D"
+uuid:"C7EBAD5F-E64A-44A9-ACD0-01C0CBD65308"
 },
 {
 extendsID:"CCD8084B-3484-41E7-8FBA-CBF44DD9BF67",
