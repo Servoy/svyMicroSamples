@@ -63,32 +63,32 @@ y:40
 },
 menuItems:[
 {
-iconName:"fa fa-car",
+iconName:"fa fa-car fa-fw",
 itemId:"fa-car",
 svyUUID:"FA5995A5-B195-4C64-852D-466CA6693FE0",
 text:"Car"
 },
 {
-iconName:"fa fa-rocket",
+iconName:"fa fa-rocket fa-fw",
 itemId:"fa-rocket",
 svyUUID:"E299458B-43A2-438E-A99C-925F2C65844B",
 text:"Rocket"
 },
 {
-iconName:"fa fa-bicycle",
+iconName:"fa fa-bicycle fa-fw",
 itemId:"fa-bicycle",
 svyUUID:"65FF0F4E-7832-40D3-A936-5EE2D91E5EF8",
 text:"Bike"
 },
 {
-iconName:"fa fa-fighter-jet",
+iconName:"fa fa-fighter-jet fa-fw",
 isDivider:false,
 itemId:"fa-fighter-jet",
 svyUUID:"E56D7DEA-F542-4331-9270-10B03F6E7A7B",
 text:"Fighter Jet"
 },
 {
-iconName:"fa fa-truck",
+iconName:"fa fa-truck fa-fw",
 isDivider:false,
 itemId:"fa-truck",
 svyUUID:"4020D963-40A2-4F68-8B33-6F0DCF08A10D",

@@ -2,11 +2,6 @@
 	color: #ff0000 !important;
 }
 
-.fontAwesomeContainer .fa {
-	width: 400px;
-	color: red;
-}
-
 .my-button {
 	border-radius: 4px; 	/** Here's how to get rounded borders */
 	background-color: #0080c0;
@@ -24,4 +19,8 @@
 	background-color: #eee;
 	color: #444;
 	cursor: pointer;
+}
+
+.fontAwesomeExample {
+	color: green;
 }
