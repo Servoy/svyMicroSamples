@@ -3,7 +3,35 @@
  * @type {String}
  * @properties={typeid:35,uuid:"67CA9FA8-9340-44BA-854D-965503647BD8"}
  */
-var title = 'Welcome to MicroSamples!'
+var title = 'Welcome to MicroSamples!';
+/**
+ * @type {String}
+ *
+ * @properties={typeid:35,uuid:"FA5788BD-F51B-4102-9178-5B4A636DAB6D"}
+ */
+var moreInfo = "";
+
+/**
+ * @type {String}
+ *
+ * @properties={typeid:35,uuid:"80F460AE-814E-4437-A13C-AEDAE75B31F0"}
+ */
+var sampleCode = "";
+
+/**
+ * @type {String}
+ *
+ * @properties={typeid:35,uuid:"8BDE58D5-5AFC-4CBE-8286-6B11BF8DFB37"}
+ */
+var webSiteURL = "";
+
+/**
+ * @type {String}
+ *
+ * @properties={typeid:35,uuid:"6A9E2F9D-76D3-4050-8880-3CA38E801B0F"}
+ */
+var downloadURL = "";
+
 
 /**
  * @private 
@@ -62,6 +90,42 @@ function onMenuItemSelected(menuItemId, event) {
 
 	// set title
 	title = form.getDescription();
+	moreInfo = form.getMoreInfo();
+	sampleCode = form.getSampleCode();
+	webSiteURL = form.getWebSiteURL();
+	downloadURL = form.getDownloadURL();
+	
+	application.output('sampleCode '+sampleCode);
+	
+	if (downloadURL == null){
+		forms.galleryMain.elements.downloadButton.visible = false;
+	}
+	else {
+		forms.galleryMain.elements.downloadButton.visible = true;
+	}
+	
+	if (webSiteURL == null){
+		forms.galleryMain.elements.webSiteURLButton.visible = false;
+	}
+	else {
+		forms.galleryMain.elements.webSiteURLButton.visible = true;
+	}
+	
+	if (sampleCode == null){
+		forms.galleryMain.elements.sampleCodeButton.visible = false;
+	}
+	else {
+		forms.galleryMain.elements.sampleCodeButton.visible = true;
+	}
+	
+	if (moreInfo == null){
+		forms.galleryMain.elements.moreInfoButton.visible = false;
+	}
+	else {
+		forms.galleryMain.elements.moreInfoButton.visible = true;
+	}
+	
+	
 	
 	return true;
 }
