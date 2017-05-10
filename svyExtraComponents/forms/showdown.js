@@ -23,5 +23,5 @@ function getDescription() {
  * @properties={typeid:24,uuid:"E5139735-4004-4240-8B35-82BE3A08BEAA"}
  */
 function getIconStyleClass() {
-	return 'fa fa-question';
+	return 'fa fa-pencil-square-o';
 }

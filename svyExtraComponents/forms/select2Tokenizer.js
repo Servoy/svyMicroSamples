@@ -29,6 +29,29 @@ function getIconStyleClass() {
 }
 
 /**
+ * @properties={typeid:24,uuid:"8391E39F-4F35-4CB1-8F54-BE27222863FF"}
+ */
+function getMoreInfo() {
+	return "Select2Tokenizer is a component which allow the user to select multiple values as 'tokens' from a search field. The component is implemented on top of the Select2 library.";
+}
+
+/**
+ * @properties={typeid:24,uuid:"8047B091-CB07-477C-B049-011D0A5248C7"}
+ */
+function getWebSiteURL() {
+	return 'https://github.com/Servoy/servoy-extra-components/wiki/Select2Tokenizer';
+}
+
+/**
+ * @properties={typeid:24,uuid:"AEADD915-C6FE-4F55-AEC9-D9C2CC33B001"}
+ */
+function getSampleCode() {
+	return printMethodCode(forms.select2Tokenizer.onFocusGained)
+		.concat(printMethodCode(forms.select2Tokenizer.onFocusLost))
+		.concat(printMethodCode(forms.select2Tokenizer.onAction))	
+}
+
+/**
  * @param {JSEvent} event
  *
  * @private

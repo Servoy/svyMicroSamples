@@ -27,6 +27,20 @@ function getIconStyleClass() {
 }
 
 /**
+ * @properties={typeid:24,uuid:"A568CBD0-176D-4B0C-9653-AF27270D6FB4"}
+ */
+function getMoreInfo() {
+	return 'Used to show a font awesome icon.';
+}
+
+/**
+ * @properties={typeid:24,uuid:"D7DE1856-6B4E-4F0B-BD5F-CA16A0300010"}
+ */
+function getWebSiteURL() {
+	return 'https://github.com/Servoy/servoy-extra-components';
+}
+
+/**
  * Callback method for when form is shown.
  *
  * @param {Boolean} firstShow form is shown first time after load
