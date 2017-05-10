@@ -89,10 +89,10 @@ function expandAll(event) {
  * @properties={typeid:24,uuid:"D2EEAE11-31F9-450B-BF7A-B2D9FC1FA85C"}
  */
 function collapseAll(){
-	var roots = elements.dbtreeview.roots;
+	/*var roots = elements.dbtreeview;
 	for (var i = 0; i < roots.length; i++) {
 		elements.dbtreeview.setExpandNode(roots[i], false);
-	}
+	}*/
 }
 
 /**
