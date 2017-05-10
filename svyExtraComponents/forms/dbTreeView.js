@@ -36,7 +36,7 @@ function getIconStyleClass() {
  *
  * @properties={typeid:24,uuid:"4808E350-D0BB-4C4F-92A4-C7DEE2A5C2AC"}
  */
-function onShow(firstShow, event) {
+function onShow(event) {
 	// TODO Auto-generated method stub
 	elements.dbtreeview.bindings = [{
 		datasource: databaseManager.getDataSource('example_data', 'customers'),
@@ -50,7 +50,49 @@ function onShow(firstShow, event) {
 	elements.dbtreeview.addRoots(foundset);
 	elements.dbtreeview.refresh();
 	
+	elements.dbtreeview.setCallBackInfo(databaseManager.getDataSource('example_data', 'orders'),callbackfunction,'orderid');
+	
 	return;
+}
+
+/**
+ * @properties={typeid:24,uuid:"D427688B-986A-46DA-AC18-872F8DD79BD4"}
+ */
+function callbackfunction(orderid){	
+	foundset.selectRecord(orderid);
+	
+	forms.dbTreevIewForm2.loadOrder(orderid);
+	
+	/*
+	var products = datasources.db.example_data.order_details.createSelect();
+	products.result.addPk();
+	products.where.add(products.columns.orderid.eq(orderid));*/
+	
+	return;
+}
+
+/**
+ * TODO generated, please specify type and doc for the params
+ * @param event
+ *
+ * @properties={typeid:24,uuid:"C327D034-7CA8-4111-ACDF-D106BE16448D"}
+ */
+function expandAll(event) {
+	var roots = elements.dbtreeview.roots;
+	//application.output("roots.length "+roots.length);
+	for (var i = 0; i < roots.length; i++) {
+		elements.dbtreeview.setExpandNode(roots[i],true)();
+	}
+}
+
+/**
+ * @properties={typeid:24,uuid:"D2EEAE11-31F9-450B-BF7A-B2D9FC1FA85C"}
+ */
+function collapseAll(){
+	var roots = elements.dbtreeview.roots;
+	for (var i = 0; i < roots.length; i++) {
+		elements.dbtreeview.setExpandNode(roots[i], false);
+	}
 }
 
 /**
