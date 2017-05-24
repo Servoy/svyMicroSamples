@@ -44,33 +44,18 @@ function getIconStyleClass() {
  * @properties={typeid:24,uuid:"BB05152A-EA54-4D36-AF52-BFBDAB15372D"}
  */
 function getSampleCode() {
-	return printMethodCode(forms.sideNav.initNav);
-	//.concat(printMethodCode(forms.filterOrdersList.filterCustomers))
+	return printMethodCode(forms.sideNav.initNav)
+	.concat(printMethodCode(forms.sideNav.createMenuItem))
+	.concat(printMethodCode(forms.sideNav.onMenuItemSelected))
+	.concat(printMethodCode(forms.sideNav.submenuActions))
 }
 
 /**
  * @properties={typeid:24,uuid:"73C1CD30-F22A-46C2-856F-BD3C0B817A32"}
  */
-function getDownloadURL() {
-	return 'https://github.com/Servoy/example-solutions/releases/download/v1.2.0/exampleFilter.servoy'
-}
-
-/**
- * @properties={typeid:24,uuid:"B01103AD-6CF0-4E8D-BD2C-2064315A36C7"}
- */
-function getMoreInfo() {
-	return 'More info here....';
-}
-
-/**
- * @properties={typeid:24,uuid:"9DB129B1-A360-4A77-AB4F-FA5B246E1E6C"}
- */
 function getWebSiteURL() {
-	return 'https://github.com/Servoy/example-solutions';
+	return 'https://github.com/Servoy/example-solutions/tree/master/sideNavExample'
 }
-
-
-
 
 /**
  * @properties={typeid:24,uuid:"893A2D35-A00A-4EF2-AB9A-55D726D20FE5"}
@@ -134,7 +119,7 @@ function initNav(){
  *
  * @param {JSEvent} event the event that triggered the action
  *
- * @private
+ * @public
  *
  * @properties={typeid:24,uuid:"F856C02A-56A7-4A36-B87F-67F39CB7995B"}
  */
@@ -167,7 +152,7 @@ function createMenuItem(event) {
 /**
  * @param {JSEvent} event
  *
- * @private
+ * @public
  *
  * @properties={typeid:24,uuid:"26270490-3A87-4944-A244-B7A5F8E2DD97"}
  */
@@ -181,7 +166,7 @@ function onMenuItemSelected(event, menuItem) {
  *
  * @param {JSEvent} event the event that triggered the action
  *
- * @private
+ * @public
  *
  * @properties={typeid:24,uuid:"B349CC4B-C846-4667-A131-74759905B561"}
  */

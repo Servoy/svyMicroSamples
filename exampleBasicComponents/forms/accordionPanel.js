@@ -20,6 +20,13 @@ function getDescription() {
 }
 
 /**
+ * @properties={typeid:24,uuid:"A27F794D-FB77-47F3-87E7-F0A6EA34933A"}
+ */
+function getMoreInfo() {
+	return 'Accordion Panels are useful when you want to hide and show large amount of content.';
+}
+
+/**
  * @properties={typeid:24,uuid:"C431B067-CC00-4196-8C49-52529CCB134B"}
  */
 function getIconStyleClass() {

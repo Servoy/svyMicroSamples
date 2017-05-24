@@ -27,12 +27,34 @@ function getIconStyleClass() {
 }
 
 /**
+ * @properties={typeid:24,uuid:"97CCF050-4089-4702-BABA-2B9082A35009"}
+ */
+function getMoreInfo() {
+	return "<a href='https://wiki.servoy.com/display/public/DOCS/DB+Tree+View' target=_blank>Servoy Wiki Documentation</a>";
+}
+
+/**
+ * @properties={typeid:24,uuid:"4D6951C8-2E41-4FEB-9CD8-7BB495ACEB7F"}
+ */
+function getWebSiteURL() {
+	return 'https://github.com/Servoy/servoy-extra-components/tree/master/dbtreeview';
+}
+
+/**
+ * @properties={typeid:24,uuid:"4978268A-D74C-434B-B2FB-5BEBB36FE75C"}
+ */
+function getSampleCode() {
+	return printMethodCode(forms.dbTreeView.onShow)
+		.concat(printMethodCode(forms.dbTreeView.callbackfunction));
+}
+
+/**
  * Callback method for when form is shown.
  *
  * @param {Boolean} firstShow form is shown first time after load
  * @param {JSEvent} event the event that triggered the action
  *
- * @protected
+ * @public
  *
  * @properties={typeid:24,uuid:"4808E350-D0BB-4C4F-92A4-C7DEE2A5C2AC"}
  */
@@ -79,9 +101,10 @@ function callbackfunction(orderid){
  */
 function expandAll(event) {
 	var roots = elements.dbtreeview.roots;
-	//application.output("roots.length "+roots.length);
-	for (var i = 0; i < roots.length; i++) {
-		elements.dbtreeview.setExpandNode(roots[i],true)();
+	//application.output("roots[0].length "+roots[0].length);
+	//application.output("roots[1] "+roots[1]);
+	for (var i = 0; i < roots[0].length; i++) {
+		//elements.dbtreeview.setExpandNode(roots[i],true)();
 	}
 }
 

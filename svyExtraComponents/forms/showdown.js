@@ -25,3 +25,10 @@ function getDescription() {
 function getIconStyleClass() {
 	return 'fa fa-pencil-square-o';
 }
+
+/**
+ * @properties={typeid:24,uuid:"86797725-14C9-406E-8782-A30D1DED1441"}
+ */
+function getMoreInfo() {
+	return "Markdown is a lightweight markup language with plain text formatting syntax. It's designed so that it can be converted to HTML and many other formats using a tool by the same name.<BR>Markdown is often used to create rich text using a plain text editor.<BR>Markdown Cheatsheet <a href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet' target=_blank>here</a>.";
+}

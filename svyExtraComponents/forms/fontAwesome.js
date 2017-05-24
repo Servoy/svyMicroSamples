@@ -30,14 +30,22 @@ function getIconStyleClass() {
  * @properties={typeid:24,uuid:"A568CBD0-176D-4B0C-9653-AF27270D6FB4"}
  */
 function getMoreInfo() {
-	return 'Used to show a font awesome icon.';
+	return "This component is used to show a Font Awesome icon. The user needs to only set the icon class in the 'faclass' property of the component.<BR>The class can be taken from any icon offered by Font Awesome <a href='http://fontawesome.io/icons/' target=_blank>here</a>.\
+	<BR>More info <a href='http://fontawesome.io/examples/' target=_blank>here</a>.";
 }
 
 /**
  * @properties={typeid:24,uuid:"D7DE1856-6B4E-4F0B-BD5F-CA16A0300010"}
  */
 function getWebSiteURL() {
-	return 'https://github.com/Servoy/servoy-extra-components';
+	return 'https://github.com/Servoy/servoy-extra-components/tree/master/fontawesome';
+}
+
+/**
+ * @properties={typeid:24,uuid:"9F357A33-7DF9-48CA-973B-86F7423237E4"}
+ */
+function getSampleCode() {
+	return printMethodCode(forms.fontAwesome.onAction);
 }
 
 /**
@@ -57,7 +65,7 @@ function onShow(firstShow, event) {
 /**
  * @param {JSEvent} event
  *
- * @private
+ * @public
  *
  * @properties={typeid:24,uuid:"804D44CF-0C6F-41A9-BF75-20A35CB5890A"}
  */

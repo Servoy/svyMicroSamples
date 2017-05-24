@@ -25,12 +25,27 @@ function getDescription() {
 function getIconStyleClass() {
 	return 'fa fa-table';
 }
+
+/**
+ * @properties={typeid:24,uuid:"F30FB838-2381-400D-A2E9-46BEC0F20E2C"}
+ */
+function getMoreInfo() {
+	return "The table is automatically generated once the 'foundset' is set in the property.";
+}
+
+/**
+ * @properties={typeid:24,uuid:"C2454EEB-C444-4417-A221-CF90A2A9834F"}
+ */
+function getWebSiteURL() {
+	return 'https://github.com/Servoy/servoy-extra-components/tree/master/table';
+}
+
 /**
  * Perform the element default action.
  *
  * @param {JSEvent} event the event that triggered the action
  *
- * @private
+ * @public
  *
  * @properties={typeid:24,uuid:"FE5E08C7-444C-4A42-87F9-A24CC56446AA"}
  */

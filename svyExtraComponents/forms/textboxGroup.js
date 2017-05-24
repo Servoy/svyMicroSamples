@@ -26,6 +26,19 @@ function getIconStyleClass() {
 	return 'fa fa-keyboard-o';
 }
 
+/**
+ * @properties={typeid:24,uuid:"AEC657D2-A4D2-4D7D-8781-53DA2098762B"}
+ */
+function getMoreInfo() {
+	return 'The Textbox Group component allows the user to attach an icon to a input type text element.';
+}
+
+/**
+ * @properties={typeid:24,uuid:"8952A70F-C469-4018-88FB-49E2E628FDD4"}
+ */
+function getWebSiteURL() {
+	return 'https://github.com/Servoy/servoy-extra-components/tree/master/textfieldgroup';
+}
 
 
 /**

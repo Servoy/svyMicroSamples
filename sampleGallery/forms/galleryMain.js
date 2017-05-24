@@ -72,6 +72,7 @@ function loadMenu(){
  * @private
  *
  * @properties={typeid:24,uuid:"D145E880-A184-47F5-8D59-2FBE7B1FDA48"}
+ * @AllowToRunInFind
  */
 function onMenuItemSelected(menuItemId, event) {
 	
@@ -91,12 +92,10 @@ function onMenuItemSelected(menuItemId, event) {
 	// set title
 	title = form.getDescription();
 	moreInfo = form.getMoreInfo();
-	sampleCode = form.getSampleCode();
+	sampleCode = "false";
 	webSiteURL = form.getWebSiteURL();
 	downloadURL = form.getDownloadURL();
-	
-	application.output('sampleCode '+sampleCode);
-	
+
 	if (downloadURL == null){
 		forms.galleryMain.elements.downloadButton.visible = false;
 	}
@@ -111,8 +110,17 @@ function onMenuItemSelected(menuItemId, event) {
 		forms.galleryMain.elements.webSiteURLButton.visible = true;
 	}
 	
-	if (sampleCode == null){
-		forms.galleryMain.elements.sampleCodeButton.visible = false;
+	//check if sample button should be displayed
+	var sample = getActiveSample();
+	if(sample){
+		var code = sample.getSampleCode();
+		//application.output("code "+code.length);
+		if (code.length > 0){
+			sampleCode = "true";
+		}
+	}
+	if (sampleCode == "false"){
+		forms.galleryMain.elements.sampleCodeButton.visible = false;		
 	}
 	else {
 		forms.galleryMain.elements.sampleCodeButton.visible = true;
@@ -230,7 +238,7 @@ function minimizeContent(){
 }
 
 /**
- * @private 
+ * @public 
  * @return {RuntimeForm<AbstractMicroSample>}
  * @properties={typeid:24,uuid:"BF8EDA3A-C500-4E35-9DA8-C17852385BE6"}
  */
