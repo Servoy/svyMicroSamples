@@ -1,5 +1,5 @@
 customProperties:"formComponent:false",
-dataSource:"db:/servoy_training/customers",
+dataSource:"db:/example_data/customers",
 encapsulation:60,
 items:[
 {

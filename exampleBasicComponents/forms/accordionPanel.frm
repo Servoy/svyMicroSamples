@@ -5,7 +5,7 @@ arguments:null,\
 parameters:null\
 }\
 }",
-dataSource:"db:/servoy_training/customers",
+dataSource:"db:/example_data/customers",
 encapsulation:60,
 extendsID:"1046CC5D-E653-4F9C-B8B9-E3FCDA83A211",
 items:[

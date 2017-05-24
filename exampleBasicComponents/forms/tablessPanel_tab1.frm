@@ -1,5 +1,5 @@
 customProperties:"formComponent:false",
-dataSource:"db:/servoy_training/customers",
+dataSource:"db:/example_data/customers",
 encapsulation:60,
 items:[
 {
@@ -37,7 +37,7 @@ uuid:"A4E78023-288F-41F1-B01C-EE7EDE501804"
 },
 {
 anchors:11,
-dataProviderID:"name",
+dataProviderID:"contactname",
 location:"60,70",
 size:"140,20",
 text:"Name",
@@ -46,7 +46,7 @@ uuid:"D59D5D8F-8883-4D97-81D1-26BBAA233658"
 },
 {
 anchors:11,
-dataProviderID:"customer_id",
+dataProviderID:"customerid",
 editable:false,
 location:"60,40",
 size:"140,20",

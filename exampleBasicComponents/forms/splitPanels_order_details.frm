@@ -1,5 +1,5 @@
 customProperties:"formComponent:false",
-dataSource:"db:/servoy_training/order_details",
+dataSource:"db:/example_data/order_details",
 encapsulation:60,
 items:[
 {
@@ -13,7 +13,7 @@ uuid:"2D6A14DB-09D8-4FC6-9FB1-C04DFCABFF46"
 },
 {
 anchors:11,
-dataProviderID:"product_id",
+dataProviderID:"productid",
 location:"60,70",
 size:"140,20",
 text:"Product ID",
@@ -28,7 +28,7 @@ uuid:"BE506A6A-965A-40D8-898C-8748B0921796"
 },
 {
 anchors:11,
-dataProviderID:"order_detail_id",
+dataProviderID:"orderid",
 editable:false,
 location:"60,40",
 size:"140,20",

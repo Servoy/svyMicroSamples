@@ -1,5 +1,5 @@
 customProperties:"formComponent:false",
-dataSource:"db:/servoy_training/customers",
+dataSource:"db:/example_data/customers",
 encapsulation:60,
 extendsID:"1046CC5D-E653-4F9C-B8B9-E3FCDA83A211",
 items:[
@@ -10,7 +10,7 @@ typeid:19,
 uuid:"0931947F-55CA-4CC3-9872-626A7F85AE4F"
 },
 {
-location:"15,274",
+location:"5,428",
 onActionMethodID:"FE5E08C7-444C-4A42-87F9-A24CC56446AA",
 onDoubleClickMethodID:"-1",
 onRightClickMethodID:"-1",
@@ -27,12 +27,12 @@ json:{
 anchors:11,
 columns:[
 {
-dataprovider:"customer_id",
+dataprovider:"customerid",
 headerText:"ID",
 svyUUID:"4FEFE473-E75A-4574-9F9A-06DD3DE7A662"
 },
 {
-dataprovider:"name",
+dataprovider:"contactname",
 headerText:"Name",
 svyUUID:"DEE3548D-A783-4393-813E-7C69DB4E1D90"
 },
@@ -60,13 +60,13 @@ x:10,
 y:15
 },
 size:{
-height:249,
+height:403,
 width:551
 }
 },
 location:"10,15",
 name:"table_811",
-size:"551,249",
+size:"551,403",
 typeName:"servoyextra-table",
 typeid:47,
 uuid:"736AFAF2-36F5-4F2F-8F34-F0967167F34B"

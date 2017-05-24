@@ -1,10 +1,10 @@
 customProperties:"formComponent:false",
-dataSource:"db:/servoy_training/orders",
+dataSource:"db:/example_data/orders",
 encapsulation:60,
 items:[
 {
 anchors:11,
-dataProviderID:"order_id",
+dataProviderID:"orderid",
 editable:false,
 location:"60,40",
 size:"140,20",
@@ -14,7 +14,7 @@ uuid:"4192E54B-6D2E-4B4D-B13F-6D3D78A1114A"
 },
 {
 anchors:11,
-dataProviderID:"remark",
+dataProviderID:"requireddate",
 location:"60,115",
 size:"140,20",
 text:"REMARK",
@@ -29,7 +29,7 @@ uuid:"D6850DCC-CEF0-4FBE-89B4-717708112763"
 },
 {
 anchors:11,
-dataProviderID:"order_date",
+dataProviderID:"orderdate",
 displayType:5,
 location:"60,80",
 size:"140,20",

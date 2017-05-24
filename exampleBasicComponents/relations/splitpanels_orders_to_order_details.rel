@@ -1,10 +1,10 @@
 allowCreationRelatedRecords:true,
-foreignDataSource:"db:/servoy_training/order_details",
+foreignDataSource:"db:/example_data/order_details",
 items:[
-{foreignColumnName:"order_id",primaryDataProviderID:"order_id",typeid:23,uuid:"C6516FD5-CB9A-4439-9AFF-D00932298CCB"}
+{foreignColumnName:"orderid",primaryDataProviderID:"orderid",typeid:23,uuid:"C6516FD5-CB9A-4439-9AFF-D00932298CCB"}
 ],
 joinType:1,
 name:"splitpanels_orders_to_order_details",
-primaryDataSource:"db:/servoy_training/orders",
+primaryDataSource:"db:/example_data/orders",
 typeid:22,
 uuid:"7B9C5853-F23D-46D2-BDEF-D2B82A036ABC"

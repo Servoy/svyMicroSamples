@@ -1,10 +1,10 @@
 customProperties:"formComponent:false",
-dataSource:"db:/servoy_training/products",
+dataSource:"db:/example_data/products",
 encapsulation:60,
 items:[
 {
 anchors:11,
-dataProviderID:"description",
+dataProviderID:"productname",
 location:"247,101",
 size:"140,20",
 text:"Description",
@@ -19,7 +19,7 @@ uuid:"6A3AE811-3C98-4597-986A-9CD7929D08BB"
 },
 {
 anchors:11,
-dataProviderID:"unit_price",
+dataProviderID:"unitprice",
 location:"247,131",
 size:"140,20",
 text:"Unit Price",
@@ -28,7 +28,7 @@ uuid:"7B509F52-E3EF-4FAA-A430-5BF8EAD5043A"
 },
 {
 anchors:11,
-dataProviderID:"product_id",
+dataProviderID:"productid",
 editable:false,
 location:"247,71",
 size:"140,20",

@@ -1,10 +1,10 @@
 customProperties:"formComponent:false",
-dataSource:"db:/servoy_training/orders",
+dataSource:"db:/example_data/orders",
 encapsulation:60,
 items:[
 {
 anchors:11,
-dataProviderID:"order_id",
+dataProviderID:"orderid",
 editable:false,
 location:"60,70",
 size:"140,20",
@@ -20,7 +20,7 @@ uuid:"5803E9CA-7773-4250-965C-97FBDEEB38C5"
 },
 {
 anchors:11,
-dataProviderID:"order_date",
+dataProviderID:"orderdate",
 displayType:5,
 location:"60,100",
 size:"140,20",

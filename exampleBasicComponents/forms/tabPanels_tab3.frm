@@ -1,10 +1,10 @@
 customProperties:"formComponent:false",
-dataSource:"db:/servoy_training/order_details",
+dataSource:"db:/example_data/order_details",
 encapsulation:60,
 items:[
 {
 anchors:11,
-dataProviderID:"product_id",
+dataProviderID:"productid",
 location:"60,100",
 size:"140,20",
 text:"Product ID",
@@ -28,11 +28,11 @@ uuid:"8A6366B3-C8F5-4F30-92EA-B7C533246E1A"
 },
 {
 anchors:11,
-dataProviderID:"order_detail_id",
+dataProviderID:"orderid",
 editable:false,
 location:"60,70",
 size:"140,20",
-text:"ORDER DETAIL ID",
+text:"Order Detail ID",
 typeid:4,
 uuid:"E0C1A7A5-DFEC-4E3B-AEAB-F4DD015887ED"
 }
