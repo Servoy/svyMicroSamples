@@ -7,36 +7,51 @@ var title = 'Welcome to MicroSamples!'
 
 /**
  * @private 
+ * @properties={typeid:35,uuid:"4683A024-0981-48E8-B92B-BE202C169507",variableType:-4}
+ */
+var suppressMenuEvent = false;
+
+/**
+ * @private 
  * @properties={typeid:24,uuid:"64939378-3178-4066-8729-07A7425DC6A9"}
  */
-function loadMenu(){
+function buildMenu(){
 	
+	elements.nav.clearMenuItems();
 	var parents = scopes.svyMicroSamples.getParentForms();
 	for(var i in parents){
-		var parent = parents[i];
-		parent.getName();
-		var parentID = parent.controller.getName();
-		elements.nav.addMenuItem({
-			id: parentID, 
-			text:parent.getName(), 
-			iconStyleClass:'fa '+parent.getIconStyleClass()+' svy-sidenav-font-icon'
-		});
-		
-		var children = scopes.svyMicroSamples.getChildren(parent);
-		for(var i in children){
-			var child = children[i];
-			elements.nav.addMenuItem({
-				id: child.controller.getName(), 
-				text:child.getName(), 
-				iconStyleClass:'fa '+child.getIconStyleClass()+' svy-sidenav-font-icon'
-			}, parent.controller.getName());
-		}
-	}
-	
+		createMenuItem(parents[i]);
+	}	
 }
+
+/**
+ * @private 
+ * @param {RuntimeForm<AbstractMicroSample>} item
+ *
+ * @properties={typeid:24,uuid:"436CC0CA-B2DC-43B6-9667-A2CAD0F531E0"}
+ */
+function createMenuItem(item){
+	
+	// add item
+	var parent = item.getParent();
+	var parentName = !parent ? null : parent.controller.getName();
+	elements.nav.addMenuItem({
+		id: item.controller.getName(), 
+		text:item.getName(), 
+		iconStyleClass:'fa '+item.getIconStyleClass()+' svy-sidenav-font-icon'
+	}, parentName);
+	
+	// recursively add children
+	var children = scopes.svyMicroSamples.getChildren(item);
+	for(var i in children){
+		var child = children[i];
+		createMenuItem(child);
+	}
+}
+
 /**
  *
- * @param {object} menuItemId
+ * @param {String} menuItemId
  * @param {JSEvent} event
  *
  * @return {boolean}
@@ -46,24 +61,10 @@ function loadMenu(){
  * @properties={typeid:24,uuid:"D145E880-A184-47F5-8D59-2FBE7B1FDA48"}
  */
 function onMenuItemSelected(menuItemId, event) {
-	
-	// clear tabs
-//	elements.tabs.removeAllTabs();
-	
-	// get selected item
-	/** @type {RuntimeForm<AbstractMicroSample>} */
-	var form = forms[menuItemId];
-
-	// add tab
-	elements.tabs.setLeftForm(form);
-	elements.tabs.setRightForm(forms.content);
-	elements.tabs.dividerLocation = .99;
-//	elements.tabs.addTab(form,form.getName(),form.getName(),form.getDescription());
-
-	// set title
-	title = form.getDescription();
-	
-	return true;
+	suppressMenuEvent = true;
+	var ret = showSample(menuItemId);
+	suppressMenuEvent = false;
+	return ret;
 }
 
 /**
@@ -78,7 +79,7 @@ function onMenuItemSelected(menuItemId, event) {
  */
 function onShow(firstShow, event) {
 	if(firstShow){
-		loadMenu();
+		buildMenu();
 	}
 }
 
@@ -173,4 +174,37 @@ function getActiveSample(){
 	/** @type {RuntimeForm<AbstractMicroSample>} */
 	var sample = elements.tabs.getLeftForm();
 	return sample;
+}
+/**
+ * @public 
+ * @param {String} id
+ * @return {Boolean}
+ * @properties={typeid:24,uuid:"2D133045-9DCC-4E68-87F1-E4BF10F582CD"}
+ */
+function showSample(id) {
+	
+	if(!suppressMenuEvent) {
+		elements.nav.setSelectedMenuItem(id);
+	}
+	
+	// get selected item
+	/** @type {RuntimeForm<AbstractMicroSample>} */
+	var form = forms[id];
+	if(!form){
+		application.output("Sample form with id="+id+" not found",LOGGINGLEVEL.ERROR);
+		return false;
+	}
+	
+	// add tab
+	elements.tabs.setLeftForm(form);
+	elements.tabs.setRightForm(forms.content);
+	elements.tabs.dividerLocation = .99;
+//	elements.tabs.addTab(form,form.getName(),form.getName(),form.getDescription());
+
+	// set title
+	title = form.getDescription();
+	
+	
+	
+	return true;
 }
