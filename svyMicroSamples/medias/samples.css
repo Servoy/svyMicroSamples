@@ -12,8 +12,10 @@
 
 .banner
 {
-	text-align: center;
-	font-size: 32px;
+	font-size: 32px;	
+}
+.banner-orange
+{
 	border: 0px solid #ff8000;
 	border-bottom-width: 2px;
 }
