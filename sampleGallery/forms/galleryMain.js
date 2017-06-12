@@ -19,9 +19,28 @@ function buildMenu(){
 	
 	elements.nav.clearMenuItems();
 	var parents = scopes.svyMicroSamples.getParentForms();
+	parents.sort(sort);
 	for(var i in parents){
 		createMenuItem(parents[i]);
 	}	
+}
+
+/**
+ * Sorts sample forms
+ * @protected 
+ * @param {RuntimeForm<AbstractMicroSample>} f1
+ * @param {RuntimeForm<AbstractMicroSample>} f2
+ * @return {Number}
+ * @properties={typeid:24,uuid:"04079FD1-C2DC-4222-AFB3-021A894AD71C"}
+ */
+function sort(f1,f2){
+	if(f1.getSort() > f2.getSort()){
+		return -1;
+	}
+	if(f1.getSort() < f2.getSort()){
+		return 1;   
+	}
+	return 0;
 }
 
 /**
@@ -43,6 +62,7 @@ function createMenuItem(item){
 	
 	// recursively add children
 	var children = scopes.svyMicroSamples.getChildren(item);
+	children.sort(sort);
 	for(var i in children){
 		var child = children[i];
 		createMenuItem(child);

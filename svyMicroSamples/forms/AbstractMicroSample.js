@@ -74,6 +74,15 @@ function getWebSiteURL(){
 function getDownloadURL(){
 	return null;
 }
+
+/**
+ * @public 
+ * @return {String} The sort order, i.e. 1, 1.1, 1.1.2
+ * @properties={typeid:24,uuid:"73D6C3E0-FCAC-4F36-8B8E-C9A10D1B6780"}
+ */
+function getSort(){
+	return '0';
+}
 /**
  * TODO move to top level scope
  * 

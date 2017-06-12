@@ -6,7 +6,7 @@
  * @properties={typeid:24,uuid:"24EB7B41-B24E-432A-B7F0-8ECFD7A63548"}
  */
 function getName() {
-	return 'NG Services';
+	return 'Browser Integrations';
 }
 
 /**
@@ -16,7 +16,7 @@ function getName() {
 * @properties={typeid:24,uuid:"58F07950-FA50-4827-9DDA-C2F2ACCA2F84"}
 */
 function getDescription() {
-	return 'Samples for NG (Broswer) Services';
+	return 'Examples of services to run any code in a browser';
 }
 
 /**
