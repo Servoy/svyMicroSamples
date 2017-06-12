@@ -1,0 +1,15 @@
+customProperties:"formComponent:false",
+encapsulation:60,
+extendsID:"1046CC5D-E653-4F9C-B8B9-E3FCDA83A211",
+items:[
+{
+extendsID:"CCD8084B-3484-41E7-8FBA-CBF44DD9BF67",
+height:480,
+typeid:19,
+uuid:"FE5E154F-5FA9-4282-972B-C979D0F8BD8B"
+}
+],
+name:"svyExtraComponentsMain",
+showInMenu:true,
+typeid:3,
+uuid:"CC52006F-CA00-4517-AA88-42C02E49EF66"

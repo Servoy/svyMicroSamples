@@ -1,0 +1,7 @@
+allowCreationRelatedRecords:true,
+foreignDataSource:"db:/example_data/orders",
+joinType:1,
+name:"splitpanel_orders_to_orders$foundset",
+primaryDataSource:"db:/example_data/orders",
+typeid:22,
+uuid:"EE804500-C792-49A7-A1A5-993874C7E8DC"
