@@ -1,10 +1,10 @@
 [submodule "svyUtils"]
 	path = svyUtils
-	url=https://github.com/Servoy/svyUtils.git
-	branch= develop
+	url = https://github.com/Servoy/svyUtils.git
+	branch = develop
 [submodule "svyShowdown"]
 	path = svyShowdown
-	url=https://github.com/Servoy/svyShowdown.git
+	url = https://github.com/Servoy/svyShowdown.git
 [submodule "svySearch"]
 	path = svySearch
 	url = https://github.com/Servoy/svySearch.git
