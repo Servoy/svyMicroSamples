@@ -33,7 +33,7 @@
         <delete includeEmptyDirs="true">
             <fileset dir="${WORKSPACE}">
                 <include name="**/resources/"/>
-                <exclude name="/resources/" />
+                <exclude name="resources/" />
             </fileset>
         </delete>
         <delete quiet="true" dir="${general.log_dir}" />
