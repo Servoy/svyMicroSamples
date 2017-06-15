@@ -74,7 +74,7 @@
         	<!-- now we are ready to start the workspace exporter -->
             <echo level="info" message="Using equinox launcher jar: ${equinox.launcher.jar.location_property}" />
 			<echo level="info" message="Exporting @{solutionNames} from workspace @{workspace}"/>
-
+            
             <java   classname="org.eclipse.equinox.launcher.Main"
                     classpathref="equinox.launcher.jar.location"
                     failonerror="@{failOnError}"
@@ -84,6 +84,7 @@
                 <jvmarg value="${servoy.exporter.memory.xmx}" />
                 <jvmarg value="${servoy.exporter.memory.maxpermsize}" />
                 <jvmarg value="-Dosgi.configuration.cascaded=false" />
+                <jvmarg value="${servoy.exporter.pluginLocation}" />
                 <jvmarg value="-Dservoy.application_server.dir=${servoy.servoy_install.app_server_dir}" />
                 <!--<jvmarg value="-Djava.awt.headless=true" />-->
                 <arg value="-application" />
@@ -113,7 +114,7 @@
                 <arg value="-users" />
                 <arg value="-tables" />
                 <arg value="-modules" />
-                <!--<arg value="-minimize" />-->
+                <arg value="-minimize" />
                 <arg value="-verbose" />
                 <arg value="-defaultAdminUser" />
                 <arg value="${servoy.default_admin_user}" />
