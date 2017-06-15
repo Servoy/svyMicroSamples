@@ -31,8 +31,8 @@
         <!-- setup some default dirs -->
         <echo level="info" message="*** Setting up folders and files for build***" />
         <!-- Test fix to get it working on linux -->
-        <move todir="tempJenkinsResource">
-          <fileset dir="resources"/>
+        <move todir="${WORKSPACE}/tempJenkinsResource">
+          <fileset dir="${WORKSPACE}/resources"/>
         </move>
 
         <delete includeEmptyDirs="true">
@@ -41,8 +41,8 @@
             </fileset>
         </delete>
 
-        <move todir="resources">
-          <fileset dir="tempJenkinsResource"/>
+        <move todir="${WORKSPACE}/resources">
+          <fileset dir="${WORKSPACE}/tempJenkinsResource"/>
         </move>
 
         <delete quiet="true" dir="${general.log_dir}" />
