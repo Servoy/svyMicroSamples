@@ -30,12 +30,14 @@
 
         <!-- setup some default dirs -->
         <echo level="info" message="*** Setting up folders and files for build***" />
+        <!-- Test fix to get it working on linux -->
+        <move file="/resources" tofile="/tempJenkinsResource"/>
         <delete includeEmptyDirs="true">
             <fileset dir="${WORKSPACE}">
                 <include name="**/resources/"/>
-                <exclude name="/resources/" />
             </fileset>
         </delete>
+        <move file="/tempJenkinsResource" tofile="/resources"/>
         <delete quiet="true" dir="${general.log_dir}" />
         <mkdir dir="${general.log_dir}" />
 
