@@ -102,7 +102,7 @@
                 <arg value="-warFileName" />
                 <arg value="@{warFileName}" />
                 <arg value="-allowSQLKeywords" />
-                <arg value="-sw" />
+                <arg value="-pl" />
                 <arg value="-dbi" />
                 <arg value="-md ws" />
                 <arg value="-i18n" />
