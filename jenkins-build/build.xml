@@ -48,6 +48,8 @@
         <delete quiet="true" dir="${general.log_dir}" />
         <mkdir dir="${general.log_dir}" />
 
+        <setup-servoy-properties dbName="${db.name}" dbServerUrl="${db.url}" dbServerPort="${db.port}" dbServerUsername="${db.username}" dbServerPassword="${db.password}"/>
+
         <!--
 		<script language="javascript"><![CDATA[
 			var TEST_SUFFIX = '_test'
@@ -79,7 +81,9 @@
                <echo level="info" message="Servoy JSUnit Test disabled" />
             </then>
             <else>
-    	       <export-solution solutionNames="${servoy.test_solution_name}" workspace="${WORKSPACE}"/>
+    	       <export-solution-as-dot-servoy solutionNames="${servoy.test_solution_name}"/>
+               <fail-if-export-failed />
+
                <antcall target="run_servoy_jsunit_tests" />
            </else>
        </if>
@@ -104,7 +108,7 @@
     </target>
 
     <target name="export_result_package_war" depends="get_equinox_jar" unless="test.failed">
-        <export-war solutionNames="${servoy.solution_name}" workspace="${WORKSPACE}" warFileName="${war_file_name}"/>
+        <export-solution-as-war solutionNames="${servoy.solution_name}" workspace="${WORKSPACE}" warFileName="${war_file_name}"/>
         <if>
     	    <not>
     	        <isset property="export.failed"/>
@@ -116,19 +120,22 @@
     </target>
 
 	<target name="deploy_war_exports">
-            <get src="http://${tomcat.server.address}:${tomcat.server.port}/manager/text/stop?path=/${tomcat.application.name}" username="${tomcat.username}" password="${tomcat.password}" dest="${general.log_dir}/war_undeploy.log" />
-            <get src="http://${tomcat.server.address}:${tomcat.server.port}/manager/text/undeploy?path=/${tomcat.application.name}" username="${tomcat.username}" password="${tomcat.password}" dest="${general.log_dir}/war_undeploy.log" />
-            <get src="http://${tomcat.server.address}:${tomcat.server.port}/manager/text/deploy?path=/${tomcat.application.name}&amp;war=${war_file}" username="${tomcat.username}" password="${tomcat.password}" dest="${general.log_dir}/war_deploy.log" />
-            <loadfile property="war_deploy_log" srcfile="${general.log_dir}/war_deploy.log"/>
-            <condition property="war_deploy.success">
-                <matches pattern="OK.*" string="${war_deploy_log}"/>
-            </condition>
+        <if>
+            <equals arg1="${tomcat.war_deployment.enabled}" arg2="true" />
+            <then>
+                <get src="http://${tomcat.server.address}:${tomcat.server.port}/manager/text/stop?path=/${tomcat.application.name}" username="${tomcat.username}" password="${tomcat.password}" dest="${general.log_dir}/war_undeploy.log" />
+                <get src="http://${tomcat.server.address}:${tomcat.server.port}/manager/text/undeploy?path=/${tomcat.application.name}" username="${tomcat.username}" password="${tomcat.password}" dest="${general.log_dir}/war_undeploy.log" />
+                <get src="http://${tomcat.server.address}:${tomcat.server.port}/manager/text/deploy?path=/${tomcat.application.name}&amp;war=${war_file}" username="${tomcat.username}" password="${tomcat.password}" dest="${general.log_dir}/war_deploy.log" />
+                <loadfile property="war_deploy_log" srcfile="${general.log_dir}/war_deploy.log"/>
+                <condition property="war_deploy.success">
+                    <matches pattern="OK.*" string="${war_deploy_log}"/>
+                </condition>
 
-            <fail message="War deployment failed" unless="war_deploy.success" />
-
-	  <!-- <copy file="${war_file}" todir="${war_dest_dir}"/>
-      <sleep seconds="30"/> -->
+                <fail message="War deployment failed" unless="war_deploy.success" />
+            </then>
+        </if>
 	</target>
+
     <target name="collect_logs">
     	<!-- Move workspace log to build/logs directory -->
         <move file="${WORKSPACE}/.metadata/.log" tofile="${general.build.dir}/logs/workspace.log" failonerror="false"/>
