@@ -79,7 +79,7 @@
                <echo level="info" message="Servoy JSUnit Test disabled" />
             </then>
             <else>
-    	       <export-solution-as-dot-servoy solutionNames="${servoy.test_solution_name}" workspace="${WORKSPACE}"/>
+    	       <export-solution-as-dot-servoy solutionNames="${servoy.test_solution_name}"/>
                <antcall target="run_servoy_jsunit_tests" />
            </else>
        </if>
