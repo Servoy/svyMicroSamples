@@ -118,19 +118,22 @@
     </target>
 
 	<target name="deploy_war_exports">
-            <get src="http://${tomcat.server.address}:${tomcat.server.port}/manager/text/stop?path=/${tomcat.application.name}" username="${tomcat.username}" password="${tomcat.password}" dest="${general.log_dir}/war_undeploy.log" />
-            <get src="http://${tomcat.server.address}:${tomcat.server.port}/manager/text/undeploy?path=/${tomcat.application.name}" username="${tomcat.username}" password="${tomcat.password}" dest="${general.log_dir}/war_undeploy.log" />
-            <get src="http://${tomcat.server.address}:${tomcat.server.port}/manager/text/deploy?path=/${tomcat.application.name}&amp;war=${war_file}" username="${tomcat.username}" password="${tomcat.password}" dest="${general.log_dir}/war_deploy.log" />
-            <loadfile property="war_deploy_log" srcfile="${general.log_dir}/war_deploy.log"/>
-            <condition property="war_deploy.success">
-                <matches pattern="OK.*" string="${war_deploy_log}"/>
-            </condition>
+        <if>
+            <equals arg1="${tomcat.war_deployment.enabled}" arg2="true" />
+            <then>
+                <get src="http://${tomcat.server.address}:${tomcat.server.port}/manager/text/stop?path=/${tomcat.application.name}" username="${tomcat.username}" password="${tomcat.password}" dest="${general.log_dir}/war_undeploy.log" />
+                <get src="http://${tomcat.server.address}:${tomcat.server.port}/manager/text/undeploy?path=/${tomcat.application.name}" username="${tomcat.username}" password="${tomcat.password}" dest="${general.log_dir}/war_undeploy.log" />
+                <get src="http://${tomcat.server.address}:${tomcat.server.port}/manager/text/deploy?path=/${tomcat.application.name}&amp;war=${war_file}" username="${tomcat.username}" password="${tomcat.password}" dest="${general.log_dir}/war_deploy.log" />
+                <loadfile property="war_deploy_log" srcfile="${general.log_dir}/war_deploy.log"/>
+                <condition property="war_deploy.success">
+                    <matches pattern="OK.*" string="${war_deploy_log}"/>
+                </condition>
 
-            <fail message="War deployment failed" unless="war_deploy.success" />
-
-	  <!-- <copy file="${war_file}" todir="${war_dest_dir}"/>
-      <sleep seconds="30"/> -->
+                <fail message="War deployment failed" unless="war_deploy.success" />
+            </then>
+        </if>
 	</target>
+
     <target name="collect_logs">
     	<!-- Move workspace log to build/logs directory -->
         <move file="${WORKSPACE}/.metadata/.log" tofile="${general.build.dir}/logs/workspace.log" failonerror="false"/>
