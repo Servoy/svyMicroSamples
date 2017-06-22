@@ -80,6 +80,8 @@
             </then>
             <else>
     	       <export-solution-as-dot-servoy solutionNames="${servoy.test_solution_name}"/>
+               <fail-if-export-failed />
+
                <antcall target="run_servoy_jsunit_tests" />
            </else>
        </if>

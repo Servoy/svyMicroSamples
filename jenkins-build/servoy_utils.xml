@@ -12,15 +12,20 @@
              <echo level="verbose" message="Using equinox launcher jar: ${equinox.launcher.jar.location_property}" />
              <make-clean-dir dir="@{outputDir}" />
              <make-clean-dir dir="${general.build.dir}/logs"/>
+             <delete failonerror="false" file="@{workspace}/.metadata/.log" />
+
              <var name="export.result" unset="true"/>
+             <echo level="info" message="Exporting @{solutionNames} from workspace @{workspace}"/>
              <java   classname="org.eclipse.equinox.launcher.Main"
                      classpathref="equinox.launcher.jar.location"
                      failonerror="#{failOnError}"
                      resultproperty="export.result"
                      fork="true">
-                 <jvmarg value="-Xms40m" />
-                 <jvmarg value="-Xmx1024m" />
-                 <jvmarg value="-XX:MaxPermSize=256M" />
+
+                 <jvmarg value="${servoy.exporter.memory.xms}" />
+                 <jvmarg value="${servoy.exporter.memory.xmx}" />
+                 <jvmarg value="${servoy.exporter.memory.maxpermsize}" />
+                 <jvmarg value="-Dosgi.configuration.cascaded=false" />
                  <jvmarg value="-Dosgi.configuration.cascaded=false" />
 
                  <arg value="-application" />
@@ -41,10 +46,11 @@
                  <!--arg value="-help" /-->
                  <arg value="-verbose" />
                  <arg value="${export.dash.pl.if_needed}" />
+                 <arg value="-sw" />
+                 <arg value="-pl" />
                  <arg value="-dbd" />
                  <arg value="-dbi" />
-                 <arg value="-md" />
-                 <arg value="ws" />
+                 <arg value="-md ws" />
                  <arg value="-i18n" />
                  <arg value="-users" />
                  <arg value="-tables" />
@@ -130,38 +136,73 @@
     </macrodef>
 
     <macrodef name="run_servoy_jsunit_tests">
-        <sequential>
-            <make-clean-dir dir="${general.junit.result.dir}" />
-            <echo level="info" message="${general.test.exports.regular.dir}" />
-            <echo level="info">
-                *** Servoy Solution JS unit (smart) client tests ***
-            </echo>
+		<sequential>
+			<echo level="info" message="*** Preparing build directory for Unit Tests ***"/>
+			<make-clean-dir dir="${general.junit.result.dir}" />
 
-            <var name="absolute.jsunit.servoy.properties" unset="true"/>
-            <var name="absolute.smart.test.exports.dir" unset="true"/>
-            <property name="absolute.jsunit.servoy.properties" location="${servoy.servoy_properties}"/>
-            <property name="absolute.smart.test.exports.dir" location="${general.test.exports.regular.dir}"/>
+			<make-clean-dir dir="${general.passed.exports.dir}"/>
+			<make-clean-dir dir="${general.passed.exports.regular.dir"/>
 
-            <junit fork="yes" forkmode="once" timeout="${servoy.test.timeout}" dir="${servoy.servoy_install.app_server_dir}" haltonfailure="false" haltonerror="false" errorProperty="test.failed" failureProperty="test.failed" printsummary="on">
-                <jvmarg value="-Xms40m" />
-                <jvmarg value="-Xmx1024m" />
-                <jvmarg value="-XX:MaxPermSize=256M" />
+			<delete includeemptydirs="true" quiet="true">
+	            <fileset dir="${general.build.dir}" includes="junit*.properties" />
+	        </delete>
+
+			<script language="javascript"><![CDATA[
+				//Set internal property for test timeout in milliseconds
+				var value = parseInt(project.getProperty('test.timeout.minutes'));
+				project.setProperty('test.timeout', value * 60 * 1000);
+				//Set internal property for solution load timeout in milliseconds
+				value = parseInt(project.getProperty('solution-load.timeout.minutes')||project.getProperty('test.timeout.minutes'))
+				project.setProperty('servoy.test.solution-load.timeout', value * 60 * 1000);
+
+				//Record startTime for logging total duration after finishing running the tests
+				project.setProperty('servoy.test.start-time', Date.now());
+			]]></script>
+
+			<echo level="info" message="*** Running Unit Tests ***"/>
+
+	    	<!-- Define a timeout so we know the test will finish eventually -->
+            <junit fork="yes" forkmode="once" timeout="${servoy.test.timeout}" dir="${servoy.servoy_install.app_server_dir}" haltonfailure="false" haltonerror="false" showoutput="true" errorProperty="test.failed" failureProperty="test.failed" printsummary="withOutAndErr">
+            	<jvmarg value="${servoy.tester.memory.xms}" />
+            	<jvmarg value="${servoy.tester.memory.xmx}" />
+            	<jvmarg value="${servoy.tester.memory.maxpermsize}" />
+            	<jvmarg value="-Dtest.log.location=${general.build.dir}/logs/test.log" />
                 <classpath refid="classpath.run_test" />
 
-                <sysproperty key="servoy.test.target-exports" value="${absolute.smart.test.exports.dir}" />
-                <sysproperty key="servoy.test.property-file" value="${absolute.jsunit.servoy.properties}" />
-                <sysproperty key="servoy.test.target-file-ext" value=".servoy" />
+                <sysproperty key="servoy.test.target-exports" value="${general.test.exports.regular.dir}" />
+                <sysproperty key="servoy.test.property-file" value="${servoy.servoy_properties}" />
+            	<sysproperty key="servoy.test.solution-load.timeout" value="${servoy.solution-load.timeout}" />
+                <!-- <sysproperty key="servoy.test.target-file-ext" value=".servoy" /> -->
 
-                <formatter type="brief" usefile="false" />
-                <formatter type="xml" />
+                <formatter type="xml" extension=".xm1"/>
+
+                <!-- formatter similar to type="xml" but it shows test suite hierarchy nicely, in a tree-like result xml - useful to nicely show the place where a test failed (solution/form...)
+                but this formatter is not included in ant yet - you would need to patch it yourself and integrate in ant lib from https://issues.apache.org/bugzilla/show_bug.cgi?id=48529
+                if you plan on using it, either comment out the simple "xml" formatter or add "extension" attribute to one of them so they don't get into conflicts when generating xmls -->
+                <formatter type="xml.suites"/>
 
                 <test name="com.servoy.automation.jsunit.smartclient.ServoyJSUnitTestRunner" todir="${general.junit.result.dir}" />
             </junit>
 
-            <move file="${servoy.servoy_install.app_server_dir}/servoy_log.txt" tofile="${general.test.exports.regular.dir}/smart_import_test_client_log.txt" failonerror="false"/>
+			<script language="javascript"><![CDATA[
+				var start = parseInt(project.getProperty('servoy.test.start-time'))
+				var delta = Math.round((Date.now() - start)/1000)
+
+				var seconds = delta % 60
+				delta -= seconds
+				var minutePart = delta%3600
+				delta -= minutePart
+
+				var value = delta ? delta/3600 + ' hours ': '' //hours
+				value += (minutePart ? minutePart / 60 : '0') + ' minutes ' //minutes
+				value += seconds + ' seconds' //secondsvalue
+
+				project.log("Solution import and Unit Test execution finished in " + value, project.MSG_INFO)
+			]]></script>
+
             <antcall target="create_test_report"/>
             <fail-if-unittests-failed/>
-       </sequential>
+           </sequential>
     </macrodef>
 
     <macrodef name="fail-if-unittests-failed">
