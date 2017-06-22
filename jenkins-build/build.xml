@@ -48,6 +48,8 @@
         <delete quiet="true" dir="${general.log_dir}" />
         <mkdir dir="${general.log_dir}" />
 
+        <setup-servoy-properties   dbName="${db.name}" dbServerUrl="${db.url}" dbServerPort="${db.name}" dbServerUsername="${db.username}" dbServerPassword="${db.password}"/>
+
         <!--
 		<script language="javascript"><![CDATA[
 			var TEST_SUFFIX = '_test'

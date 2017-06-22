@@ -266,6 +266,27 @@
         </path>
     </target>
 
+    <macrodef name="setup-servoy-properties">
+        <attribute name="dbName"/>
+        <attribute name="dbServerUrl"/>
+        <attribute name="dbServerPort" />
+        <attribute name="dbServerUsername" />
+        <attribute name="dbServerPassword" />
+        <sequential>
+            <echo level="info" message="Updating servoy.properties with databasename information" />
+            <delete file="${servoy.servoy_properties}" />
+            <copy file="${servoy.property.template.file}" tofile="${servoy.servoy_properties}" />
+
+            <replace file="${servoy.servoy_properties}" token="##DbServerUrl##" value="@{dbServerUrl}" />
+            <replace file="${servoy.servoy_properties}" token="##dbServerPort##" value="@{dbServerPort}" />
+            <replace file="${servoy.servoy_properties}" token="##DbName##" value="@{dbName}" />
+            <replace file="${servoy.servoy_properties}" token="##dbServerUsername##" value="@{dbServerUsername}" />
+            <replace file="${servoy.servoy_properties}" token="##dbServerPassword##" value="@{dbServerPassword}" />
+
+        </sequential>
+    </macrodef>
+
+
     <macrodef name="latest_jar">
         <attribute name="pathName"/>
         <attribute name="propertyName" default="@{pathName}_property"/>
