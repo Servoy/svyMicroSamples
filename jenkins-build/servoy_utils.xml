@@ -2,63 +2,63 @@
 
 <!-- Works with Ant 1.7.0 and higher -->
 <project basedir=".">
-    <macrodef name="export-solution">
-		<attribute name="workspace" default="${WORKSPACE}"/>
-        <attribute name="solutionNames"/>
-        <attribute name="outputDir" default="${general.test.exports.regular.dir}"/>
-        <attribute name="failOnError" default="false"/>
-        <sequential>
-            <!-- now we are ready to start the workspace exporter -->
-            <echo level="info" message="Using equinox launcher jar: ${equinox.launcher.jar.location_property}" />
-            <echo level="info" message="Exporting @{solutionNames} from workspace @{workspace}"/>
+    <macrodef name="export-solution-as-dot-servoy">
+         <attribute name="solutionNames"/>
+         <attribute name="failOnError" default="true"/>
+         <attribute name="outputDir" default="${general.test.exports.regular.dir}"/>
 
-            <java   classname="org.eclipse.equinox.launcher.Main"
-                    classpathref="equinox.launcher.jar.location"
-                    failonerror="#{failOnError}"
-                    resultproperty="export.result"
-                    fork="true">
-                <jvmarg value="${servoy.exporter.memory.xms}" />
-                <jvmarg value="${servoy.exporter.memory.xmx}" />
-                <jvmarg value="${servoy.exporter.memory.maxpermsize}" />
-                <jvmarg value="-Dosgi.configuration.cascaded=false" />
+         <sequential>
+             <!-- now we are ready to start the workspace exporter -->
+             <echo level="verbose" message="Using equinox launcher jar: ${equinox.launcher.jar.location_property}" />
+             <make-clean-dir dir="@{outputDir}" />
+             <make-clean-dir dir="${general.build.dir}/logs"/>
+             <var name="export.result" unset="true"/>
+             <java   classname="org.eclipse.equinox.launcher.Main"
+                     classpathref="equinox.launcher.jar.location"
+                     failonerror="#{failOnError}"
+                     resultproperty="export.result"
+                     fork="true">
+                 <jvmarg value="-Xms40m" />
+                 <jvmarg value="-Xmx1024m" />
+                 <jvmarg value="-XX:MaxPermSize=256M" />
+                 <jvmarg value="-Dosgi.configuration.cascaded=false" />
 
-                <arg value="-application" />
-                <arg value="com.servoy.eclipse.exporter.solution.application" />
+                 <arg value="-application" />
+                 <arg value="com.servoy.eclipse.exporter.solution.application" />
 
-                <arg value="-data" />
-                <arg value="@{workspace}" />
-                <arg value="-s" />
-                <arg value="@{solutionNames}" />
-                <arg value="-o" />
-                <arg value="@{outputDir}" />
-                <arg value="-as" />
-                <arg value="${servoy.app_server.dir}" />
-                <arg value="-p" />
-                <arg value="${servoy.servoy_properties}" />
-				<arg value="-pfw" />
-                <arg value="${servoy.servoy_properties}" />
+                 <arg value="-data" />
+                 <arg value="${WORKSPACE}" />
+                 <arg value="-s" />
+                 <arg value="@{solutionNames}" />
+                 <arg value="-o" />
+                 <arg value="@{outputDir}" />
+                 <arg value="-as" />
+                 <arg value="${servoy.app_server.dir}" />
+                 <arg value="-p" />
+                 <arg value="${servoy.servoy_properties}" />
 
-                <!-- add here any of the optional arguments supported by the exporter; see 'export -help' for more info; for example: -->
-                <!--arg value="-help" /-->
-                <arg value="-verbose" />
-                <arg value="${export.dash.pl.if_needed}" />
-                <arg value="-dbd" />
-                <arg value="-dbi" />
-                <arg value="-md ws" />
-                <arg value="-i18n" />
-                <arg value="-users" />
-                <arg value="-tables" />
-                <arg value="-modules" />
-            </java>
-            <condition property="export.failed">
-                <not>
-                    <equals arg1="${export.result}" arg2="0"/>
-                </not>
-            </condition>
-        </sequential>
-    </macrodef>
+                 <!-- add here any of the optional arguments supported by the exporter; see 'export -help' for more info; for example: -->
+                 <!--arg value="-help" /-->
+                 <arg value="-verbose" />
+                 <arg value="${export.dash.pl.if_needed}" />
+                 <arg value="-dbd" />
+                 <arg value="-dbi" />
+                 <arg value="-md" />
+                 <arg value="ws" />
+                 <arg value="-i18n" />
+                 <arg value="-users" />
+                 <arg value="-tables" />
+                 <arg value="-modules" />
+             </java>
+             <condition property="export.failed">
+                 <not>
+                     <equals arg1="${export.result}" arg2="0"/>
+                 </not>
+             </condition>
+         </sequential>
+     </macrodef>
 
-    <macrodef name="export-war">
+    <macrodef name="export-solution-as-war">
         <attribute name="solutionNames"/>
     	<attribute name="workspace"/>
         <attribute name="outputDir" default="${general.output_dir}"/>
@@ -130,75 +130,50 @@
     </macrodef>
 
     <macrodef name="run_servoy_jsunit_tests">
-		<sequential>
-			<echo level="info" message="*** Preparing build directory for Unit Tests ***"/>
-			<make-clean-dir dir="${general.junit.result.dir}" />
+        <sequential>
+            <make-clean-dir dir="${general.junit.result.dir}" />
+            <echo level="info" message="${general.test.exports.regular.dir}" />
+            <echo level="info">
+                *** Servoy Solution JS unit (smart) client tests ***
+            </echo>
 
-			<make-clean-dir dir="${general.passed.exports.dir}"/>
-			<make-clean-dir dir="${general.passed.exports.regular.dir}"/>
+            <var name="absolute.jsunit.servoy.properties" unset="true"/>
+            <var name="absolute.smart.test.exports.dir" unset="true"/>
+            <property name="absolute.jsunit.servoy.properties" location="${servoy.servoy_properties}"/>
+            <property name="absolute.smart.test.exports.dir" location="${general.test.exports.regular.dir}"/>
 
-			<delete includeemptydirs="true" quiet="true">
-	            <fileset dir="${general.build.dir}" includes="junit*.properties" />
-	        </delete>
-
-			<script language="javascript"><![CDATA[
-				//Set internal property for test timeout in milliseconds
-				var value = parseInt(project.getProperty('test.timeout.minutes'));
-				project.setProperty('test.timeout', value * 60 * 1000);
-				//Set internal property for solution load timeout in milliseconds
-				value = parseInt(project.getProperty('solution-load.timeout.minutes')||project.getProperty('test.timeout.minutes'))
-				project.setProperty('servoy.test.solution-load.timeout', value * 60 * 1000);
-
-				//Record startTime for logging total duration after finishing running the tests
-				project.setProperty('servoy.test.start-time', Date.now());
-			]]></script>
-
-			<echo level="info" message="*** Running Unit Tests ***"/>
-
-	    	<!-- Define a timeout so we know the test will finish eventually -->
             <junit fork="yes" forkmode="once" timeout="${servoy.test.timeout}" dir="${servoy.servoy_install.app_server_dir}" haltonfailure="false" haltonerror="false" errorProperty="test.failed" failureProperty="test.failed" printsummary="on">
-            	<jvmarg value="${servoy.tester.memory.xms}" />
-            	<jvmarg value="${servoy.tester.memory.xmx}" />
-            	<jvmarg value="${servoy.tester.memory.maxpermsize}" />
-            	<jvmarg value="-Dtest.log.location=${general.build.dir}/logs/test.log" />
+                <jvmarg value="-Xms40m" />
+                <jvmarg value="-Xmx1024m" />
+                <jvmarg value="-XX:MaxPermSize=256M" />
                 <classpath refid="classpath.run_test" />
 
-                <sysproperty key="servoy.test.target-exports" value="${general.test.exports.regular.dir}" />
-                <sysproperty key="servoy.test.property-file" value="${servoy.test.servoy_properties}" />
-            	<sysproperty key="servoy.test.solution-load.timeout" value="${servoy.solution-load.timeout}" />
-                <!-- <sysproperty key="servoy.test.target-file-ext" value=".servoy" /> -->
+                <sysproperty key="servoy.test.target-exports" value="${absolute.smart.test.exports.dir}" />
+                <sysproperty key="servoy.test.property-file" value="${absolute.jsunit.servoy.properties}" />
+                <sysproperty key="servoy.test.target-file-ext" value=".servoy" />
 
                 <formatter type="brief" usefile="false" />
-                <formatter type="xml" extension=".xm1"/>
-
-                <!-- formatter similar to type="xml" but it shows test suite hierarchy nicely, in a tree-like result xml - useful to nicely show the place where a test failed (solution/form...)
-                but this formatter is not included in ant yet - you would need to patch it yourself and integrate in ant lib from https://issues.apache.org/bugzilla/show_bug.cgi?id=48529
-                if you plan on using it, either comment out the simple "xml" formatter or add "extension" attribute to one of them so they don't get into conflicts when generating xmls -->
-                <!--<formatter type="xml.suites"/>-->
+                <formatter type="xml" />
 
                 <test name="com.servoy.automation.jsunit.smartclient.ServoyJSUnitTestRunner" todir="${general.junit.result.dir}" />
             </junit>
 
-			<script language="javascript"><![CDATA[
-				var start = parseInt(project.getProperty('servoy.test.start-time'))
-				var delta = Math.round((Date.now() - start)/1000)
-
-				var seconds = delta % 60
-				delta -= seconds
-				var minutePart = delta%3600
-				delta -= minutePart
-
-				var value = delta ? delta/3600 + ' hours ': '' //hours
-				value += (minutePart ? minutePart / 60 : '0') + ' minutes ' //minutes
-				value += seconds + ' seconds' //secondsvalue
-
-				project.log("Solution import and Unit Test execution finished in " + value, project.MSG_INFO)
-			]]></script>
-
+            <move file="${servoy.servoy_install.app_server_dir}/servoy_log.txt" tofile="${general.test.exports.regular.dir}/smart_import_test_client_log.txt" failonerror="false"/>
             <antcall target="create_test_report"/>
+            <fail-if-unittests-failed/>
+       </sequential>
+    </macrodef>
 
-            <!-- don't fail directly here so that test artifacts can be prepared for Jenkins before failing - and also allow any mobile tests to run -->
-           </sequential>
+    <macrodef name="fail-if-unittests-failed">
+        <sequential>
+            <fail message="Unit tests failed: please check test reports." if="test.failed" />
+        </sequential>
+    </macrodef>
+
+    <macrodef name="fail-if-export-failed">
+        <sequential>
+            <fail message="Exports failed: please check the exporter log files." if="export.failed" />
+        </sequential>
     </macrodef>
 
     <target name="create_test_report">
@@ -221,7 +196,7 @@
     </target>
 
     <target name="prepare_classpath">
-        <mkdir dir="${general.build.dir}"/>
+        <mkdir dir="${LIB-DIR}/jsUnit"/>
 
         <latest_jar pathName="cse.jsunit.jar.location" dir="${servoy.servoy_install.developer}/plugins" includes="**/com.servoy.eclipse.jsunit_*.jar"/>
         <latest_jar pathName="cse.model.jar.location" dir="${servoy.servoy_install.developer}/plugins" includes="**/com.servoy.eclipse.model_*.jar"/>
@@ -232,7 +207,7 @@
         <echo level="info" message="Using in importer classpath: ${servoy_debug.jar.location_property}" />
         <echo level="info" message="Using in importer classpath: ${cse.exporter.mobile.location_property}" />
 
-        <unzip src="${cse.jsunit.jar.location_property}" dest="${general.build.dir}">
+        <unzip src="${cse.jsunit.jar.location_property}" dest="${LIB-DIR}/jsUnit">
             <patternset>
                 <include name="jsunit-*.jar"/>
                 <include name="j2db_test.jar"/>
@@ -244,7 +219,7 @@
                 <include name="*.jar" />
                 <exclude name="slf4j-jdk14.jar"/>
             </fileset>
-            <fileset dir="${general.build.dir}">
+            <fileset dir="${LIB-DIR}/jsUnit">
                 <include name="*.jar" />
             </fileset>
             <fileset file="${cse.jsunit.jar.location_property}"/>
