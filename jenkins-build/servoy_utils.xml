@@ -157,7 +157,7 @@
             	<jvmarg value="${servoy.tester.memory.xms}" />
             	<jvmarg value="${servoy.tester.memory.xmx}" />
             	<jvmarg value="${servoy.tester.memory.maxpermsize}" />
-            	<jvmarg value="-Dtest.log.location=${general.build.dir}/logs/test.log" />
+            	<jvmarg value="-Dtest.log.location=${general.log_dir}/test.log" />
                 <classpath refid="classpath.run_test" />
 
                 <sysproperty key="servoy.test.target-exports" value="${general.test.exports.regular.dir}" />
