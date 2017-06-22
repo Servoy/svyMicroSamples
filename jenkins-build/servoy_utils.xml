@@ -163,7 +163,7 @@
                 <sysproperty key="servoy.test.target-exports" value="${general.test.exports.regular.dir}" />
                 <sysproperty key="servoy.test.property-file" value="${servoy.servoy_properties}" />
             	<sysproperty key="servoy.test.solution-load.timeout" value="${servoy.solution-load.timeout}" />
-                <sysproperty key="servoy.test.target-file-ext" value=".servoy" />
+                <!--<sysproperty key="servoy.test.target-file-ext" value=".servoy" /> -->
 
                 <formatter type="xml" extension=".xm1"/>
                 <formatter type="xml" />
