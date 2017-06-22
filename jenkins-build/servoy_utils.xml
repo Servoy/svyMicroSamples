@@ -141,7 +141,7 @@
 			<make-clean-dir dir="${general.junit.result.dir}" />
 
 			<make-clean-dir dir="${general.passed.exports.dir}"/>
-			<make-clean-dir dir="${general.passed.exports.regular.dir"/>
+			<make-clean-dir dir="${general.passed.exports.regular.dir}"/>
 
 			<delete includeemptydirs="true" quiet="true">
 	            <fileset dir="${general.build.dir}" includes="junit*.properties" />
