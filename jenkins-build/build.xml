@@ -79,7 +79,7 @@
                <echo level="info" message="Servoy JSUnit Test disabled" />
             </then>
             <else>
-    	       <export-solution solutionNames="${servoy.test_solution_name}" workspace="${WORKSPACE}"/>
+    	       <export-solution-as-dot-servoy solutionNames="${servoy.test_solution_name}" workspace="${WORKSPACE}"/>
                <antcall target="run_servoy_jsunit_tests" />
            </else>
        </if>
@@ -104,7 +104,7 @@
     </target>
 
     <target name="export_result_package_war" depends="get_equinox_jar" unless="test.failed">
-        <export-war solutionNames="${servoy.solution_name}" workspace="${WORKSPACE}" warFileName="${war_file_name}"/>
+        <export-solution-as-war solutionNames="${servoy.solution_name}" workspace="${WORKSPACE}" warFileName="${war_file_name}"/>
         <if>
     	    <not>
     	        <isset property="export.failed"/>
