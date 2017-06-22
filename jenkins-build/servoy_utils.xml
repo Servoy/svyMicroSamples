@@ -10,9 +10,7 @@
          <sequential>
              <!-- now we are ready to start the workspace exporter -->
              <echo level="verbose" message="Using equinox launcher jar: ${equinox.launcher.jar.location_property}" />
-             <make-clean-dir dir="@{outputDir}" />
-             <make-clean-dir dir="${general.build.dir}/logs"/>
-             <delete failonerror="false" file="@{workspace}/.metadata/.log" />
+             <delete failonerror="false" file="${WORKSPACE}/.metadata/.log" />
 
              <var name="export.result" unset="true"/>
              <echo level="info" message="Exporting @{solutionNames} from workspace ${WORKSPACE}"/>
@@ -72,8 +70,6 @@
 
     	<sequential>
             <echo level="info" message="*** Preparing build directory for export ***"/>
-        	<make-clean-dir dir="@{outputDir}" />
-        	<make-clean-dir dir="${general.build.dir}/logs"/>
         	<delete failonerror="false" file="@{workspace}/.metadata/.log" />
 
         	<!-- now we are ready to start the workspace exporter -->
@@ -137,10 +133,6 @@
     <macrodef name="run_servoy_jsunit_tests">
 		<sequential>
 			<echo level="info" message="*** Preparing build directory for Unit Tests ***"/>
-			<make-clean-dir dir="${general.junit.result.dir}" />
-
-			<make-clean-dir dir="${general.passed.exports.dir}"/>
-			<make-clean-dir dir="${general.passed.exports.regular.dir}"/>
 
 			<delete includeemptydirs="true" quiet="true">
 	            <fileset dir="${general.build.dir}" includes="junit*.properties" />
@@ -196,7 +188,6 @@
 			]]></script>
 
             <antcall target="create_test_report"/>
-            <!-- TODO: <fail-if-unittests-failed/> -->
            </sequential>
     </macrodef>
 
