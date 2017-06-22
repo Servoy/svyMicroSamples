@@ -26,7 +26,6 @@
                  <jvmarg value="${servoy.exporter.memory.xmx}" />
                  <jvmarg value="${servoy.exporter.memory.maxpermsize}" />
                  <jvmarg value="-Dosgi.configuration.cascaded=false" />
-                 <jvmarg value="-Dosgi.configuration.cascaded=false" />
 
                  <arg value="-application" />
                  <arg value="com.servoy.eclipse.exporter.solution.application" />
