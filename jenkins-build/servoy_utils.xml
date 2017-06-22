@@ -151,7 +151,7 @@
 			]]></script>
 
 			<echo level="info" message="*** Running Unit Tests ***"/>
-
+            <echo level="info" message="${servoy.servoy_install.app_server_dir}" />
 	    	<!-- Define a timeout so we know the test will finish eventually -->
             <junit fork="yes" forkmode="once" timeout="${servoy.test.timeout}" dir="${servoy.servoy_install.app_server_dir}" haltonfailure="false" haltonerror="false" showoutput="true" errorProperty="test.failed" failureProperty="test.failed" printsummary="withOutAndErr">
             	<jvmarg value="${servoy.tester.memory.xms}" />
