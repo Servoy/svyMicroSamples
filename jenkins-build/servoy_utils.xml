@@ -90,7 +90,7 @@
                 <jvmarg value="${servoy.exporter.memory.xmx}" />
                 <jvmarg value="${servoy.exporter.memory.maxpermsize}" />
                 <jvmarg value="-Dosgi.configuration.cascaded=false" />
-                <jvmarg value="-Dservoy.application_server.dir=${servoy_install.app_server_dir}" />
+                <jvmarg value="-Dservoy.application_server.dir=${servoy.servoy_install.app_server_dir}" />
                 <!--<jvmarg value="-Djava.awt.headless=true" />-->
                 <arg value="-application" />
                 <arg value="com.servoy.eclipse.exporter.war.application" />
