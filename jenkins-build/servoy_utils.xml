@@ -219,16 +219,7 @@
                 <include name="TEST-*.xml" />
             </fileset>
 
-            <trycatch>
-                <try>
-                    <!-- report similar to format="noframes" but it shows test suite hierarchy nicely, in a tree-like result html - useful to nicely show the place where a test failed (solution/form...)
-                    but this report is not included in ant yet - you would need to patch it yourself and integrate in ant lib from https://issues.apache.org/bugzilla/show_bug.cgi?id=48529 -->
-                    <report format="noframes-suiteaware" todir="${general.junit.result.dir}" />
-                </try>
-                <catch>
-                    <report format="noframes" todir="${general.junit.result.dir}" />
-                </catch>
-            </trycatch>
+            <report format="noframes" todir="${general.junit.result.dir}" />
         </junitreport>
     </target>
 
