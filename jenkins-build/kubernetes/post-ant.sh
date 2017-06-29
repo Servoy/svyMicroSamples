@@ -1,4 +1,12 @@
 #!/bin/bash
-curl --upload-file /var/lib/jenkins/workspace/svyMicroSamples/jenkins-build/build/export/sampleGallery.war "http://admin:1c1052da6e5f89cf0@tomcat-service:8080/manager/text/deploy?path=/sampleGallery"
-sudo umount /usr/local/servoy
+#
+#
+#
+#
 
+echo "Uploading artifact into Tomcat.."
+curl --upload-file /var/lib/jenkins/workspace/svyMicroSamples/jenkins-build/build/export/sampleGallery.war "http://$T_USER:$T_PASS@tomcat-service:8080/manager/text/deploy?path=/sampleGallery"
+echo "Umounting NFS share from dev-app pod"
+sudo umount /usr/local/servoy
+echo "Delete dev-app-pod container.."
+./api-calls/del-app-pod.sh -n demo -a developerapp
