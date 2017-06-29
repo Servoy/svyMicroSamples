@@ -9,4 +9,4 @@ curl --upload-file /var/lib/jenkins/workspace/svyMicroSamples/jenkins-build/buil
 echo "Umounting NFS share from dev-app pod"
 sudo umount /usr/local/servoy
 echo "Delete dev-app-pod container.."
-/var/lib/jenkins/workspace/svyMicroSamples/jenkins-build/kubernetes/api-calls/del-app-pod.sh -n demo -a developerapp
+/var/lib/jenkins/workspace/svyMicroSamples/jenkins-build/kubernetes/api-calls/delete-pod.sh -n demo -a developerapp
