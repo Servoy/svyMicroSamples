@@ -25,8 +25,8 @@ spec:
           protocol: UDP
         - containerPort: 2049
           protocol: TCP
-#      securityContext:
-#        privileged: true
+      securityContext:
+        privileged: true
   volumes:
     - name: servoy-volume
       emptyDir: {}
