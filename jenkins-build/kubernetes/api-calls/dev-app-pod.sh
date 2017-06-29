@@ -42,8 +42,6 @@ if [[ -z $POD_NAME ]] || [[ -z $K8S_NAMESPACE ]] || [[ -z $APP_LABEL ]] || [[ -z
     exit 1
 fi
 
-. vars
-
 POD_TMP_YAML=$(mktemp)
 cp yaml-templates/dev-app-pod.yaml $POD_TMP_YAML
 sed -i "s/POD_NAME/$POD_NAME/g" $POD_TMP_YAML
