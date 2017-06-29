@@ -5,7 +5,7 @@
 #
 
 echo "Spinning-up a container with Servoy $SVY_VERSION"
-./api-calls/dev-app-pod.sh -a developerapp -n demo -l developerapp -c developerapp -i servoy/alpine-appserver-developer-nfs:$SVY_VERSION
+api-calls/dev-app-pod.sh -a developerapp -n demo -l developerapp -c developerapp -i servoy/alpine-appserver-developer-nfs:$SVY_VERSION
 sleep 120
 echo "Scanning for dev-app Pod IP.."
 devapppod=$(sudo kubectl get pods -n demo -o wide | grep developerapp | awk '{print $6}')
