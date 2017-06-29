@@ -43,7 +43,7 @@ if [[ -z $POD_NAME ]] || [[ -z $K8S_NAMESPACE ]] || [[ -z $APP_LABEL ]] || [[ -z
 fi
 
 POD_TMP_YAML=$(mktemp)
-cp yaml-templates/dev-app-pod.yaml $POD_TMP_YAML
+cp /var/lib/jenkins/workspace/svyMicroSamples/jenkins-build/kubernetes/api-calls/templates/dev-app-pod.yaml $POD_TMP_YAML
 sed -i "s/POD_NAME/$POD_NAME/g" $POD_TMP_YAML
 sed -i "s/K8S_NAMESPACE/$K8S_NAMESPACE/g" $POD_TMP_YAML
 sed -i "s/APP_LABEL/$APP_LABEL/g" $POD_TMP_YAML
