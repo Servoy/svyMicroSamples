@@ -33,5 +33,4 @@ if [[ -z $POD_NAME ]] || [[ -z $K8S_NAMESPACE ]]
     exit 1
 fi
 
-curl -k -X DELETE -u jenkins:$AUTH -H "Content-Type: application/yaml" \
-    https://$API_URL/api/v1/namespaces/$K8S_NAMESPACE/pods/$POD_NAME
+kubectl delete pod -n $K8S_NAMESPACE $POD_NAME

@@ -49,7 +49,7 @@ sed -i "s/K8S_NAMESPACE/$K8S_NAMESPACE/g" $POD_TMP_YAML
 sed -i "s/APP_LABEL/$APP_LABEL/g" $POD_TMP_YAML
 sed -i "s/CONTAINER_NAME/$CONTAINER_NAME/g" $POD_TMP_YAML
 sed -i "s#SOURCE_IMAGE#$SOURCE_IMAGE#g" $POD_TMP_YAML
-curl -k -X POST -u jenkins:$AUTH -H "Content-Type: application/yaml"\
-  -d"$(cat $POD_TMP_YAML)" https://$API_URL/api/v1/namespaces/$K8S_NAMESPACE/pods
+
+kubectl create -f $POD_TMP_YAML
 
 rm -f $POD_TMP_YAML
