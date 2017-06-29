@@ -102,6 +102,7 @@
                 <arg value="${servoy.servoy_properties}" />
                 <arg value="-warFileName" />
                 <arg value="@{warFileName}" />
+		<arg value="-pluginLocations ${servoy.exporter.plugin_locations}" />
                 <arg value="-allowSQLKeywords" />
                 <arg value="-pl" />
                 <arg value="-dbi" />
