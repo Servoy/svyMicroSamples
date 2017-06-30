@@ -28,7 +28,7 @@ printable:false,
 size:"600,330",
 transparent:true,
 typeid:16,
-uuid:"76E87697-D9D8-4B29-89AE-D97D0C7440A6"
+uuid:"2A5F4A4C-AB7B-4911-B94F-34313023357A"
 },
 {
 anchors:3,
@@ -46,4 +46,4 @@ name:"mainBase",
 navigatorID:"-1",
 showInMenu:true,
 typeid:3,
-uuid:"E312C5EB-2C22-4BD1-9252-141E3665B147"
+uuid:"E8B2A839-18F1-4D54-9A85-9CB949C9841E"

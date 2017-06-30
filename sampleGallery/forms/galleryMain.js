@@ -1,19 +1,19 @@
 /**
  * @private 
  * @type {String}
- * @properties={typeid:35,uuid:"67CA9FA8-9340-44BA-854D-965503647BD8"}
+ * @properties={typeid:35,uuid:"4C94E620-F8D4-474F-83E3-59BC13F5DFB2"}
  */
-var title = 'Welcome to MicroSamples!'
+var title = 'Welcome to MicroSamples!';
 
 /**
  * @private 
- * @properties={typeid:35,uuid:"4683A024-0981-48E8-B92B-BE202C169507",variableType:-4}
+ * @properties={typeid:35,uuid:"1B44FA52-FF45-4089-9C89-5F79AB82312F",variableType:-4}
  */
 var suppressMenuEvent = false;
 
 /**
  * @private 
- * @properties={typeid:24,uuid:"64939378-3178-4066-8729-07A7425DC6A9"}
+ * @properties={typeid:24,uuid:"2BB0DE65-2A70-47AD-AA3E-5730F6083A0D"}
  */
 function buildMenu(){
 	
@@ -31,7 +31,7 @@ function buildMenu(){
  * @param {RuntimeForm<AbstractMicroSample>} f1
  * @param {RuntimeForm<AbstractMicroSample>} f2
  * @return {Number}
- * @properties={typeid:24,uuid:"04079FD1-C2DC-4222-AFB3-021A894AD71C"}
+ * @properties={typeid:24,uuid:"D910A7A9-D554-4409-9246-B9723C150004"}
  */
 function sort(f1,f2){
 	if(f1.getSort() > f2.getSort()){
@@ -47,7 +47,7 @@ function sort(f1,f2){
  * @private 
  * @param {RuntimeForm<AbstractMicroSample>} item
  *
- * @properties={typeid:24,uuid:"436CC0CA-B2DC-43B6-9667-A2CAD0F531E0"}
+ * @properties={typeid:24,uuid:"99B290AF-3597-4D1D-B812-D334CF1B964C"}
  */
 function createMenuItem(item){
 	
@@ -78,7 +78,7 @@ function createMenuItem(item){
  *
  * @private
  *
- * @properties={typeid:24,uuid:"D145E880-A184-47F5-8D59-2FBE7B1FDA48"}
+ * @properties={typeid:24,uuid:"26BAA020-52A7-46ED-B0CC-F0A1E8FE04E3"}
  */
 function onMenuItemSelected(menuItemId, event) {
 	suppressMenuEvent = true;
@@ -95,7 +95,7 @@ function onMenuItemSelected(menuItemId, event) {
  *
  * @private
  *
- * @properties={typeid:24,uuid:"63A2D10D-E05C-431D-B1A4-E5A190ED0B25"}
+ * @properties={typeid:24,uuid:"696B263B-32A1-4978-A630-785906095510"}
  */
 function onShow(firstShow, event) {
 	if(firstShow){
@@ -103,9 +103,8 @@ function onShow(firstShow, event) {
 	}
 }
 
-
 /**
- * @properties={typeid:24,uuid:"067E4CCA-0D0C-43E4-BC4E-6A459B30C5D5"}
+ * @properties={typeid:24,uuid:"F5F20A0C-4458-4B94-B666-B453CA14C92D"}
  */
 function showInfo(){
 
@@ -119,7 +118,7 @@ function showInfo(){
 }
 
 /**
- * @properties={typeid:24,uuid:"F2098145-23B6-4C08-8FBC-BCFC2823829B"}
+ * @properties={typeid:24,uuid:"09880D3C-A938-42AF-A7CC-0BD1B6FBBB24"}
  */
 function showCode(){
 	
@@ -136,7 +135,7 @@ function showCode(){
 }
 
 /**
- * @properties={typeid:24,uuid:"B3EBAD0B-D8A0-4C8B-8C3F-81902A9B71F8"}
+ * @properties={typeid:24,uuid:"AF953A2B-DEAC-4511-914A-A7F97396ADDB"}
  */
 function showWebSite(){
 	var sample = getActiveSample();
@@ -148,7 +147,7 @@ function showWebSite(){
 }
 
 /**
- * @properties={typeid:24,uuid:"B6C93985-9D0C-4777-A406-FB993D0602D6"}
+ * @properties={typeid:24,uuid:"199B63E5-0FA2-4110-84BA-8060C9FAAC5D"}
  */
 function download(){
 	var sample = getActiveSample();
@@ -160,7 +159,7 @@ function download(){
 }
 
 /**
- * @properties={typeid:24,uuid:"5BF89434-1E75-44B1-B1C1-CABD5393BFBB"}
+ * @properties={typeid:24,uuid:"D372854A-7FBC-4CAB-A810-3AE7891FBB92"}
  */
 function maximizeContent(){
 	var form = elements.tabs.getRightForm();
@@ -177,7 +176,7 @@ function maximizeContent(){
 }
 
 /**
- * @properties={typeid:24,uuid:"433B8501-8870-4636-BC48-9122B52D7789"}
+ * @properties={typeid:24,uuid:"E127CE48-394A-4750-8E7A-FD8E08EB1EA0"}
  */
 function minimizeContent(){
 	elements.tabs.setRightForm(null);
@@ -188,18 +187,19 @@ function minimizeContent(){
 /**
  * @private 
  * @return {RuntimeForm<AbstractMicroSample>}
- * @properties={typeid:24,uuid:"BF8EDA3A-C500-4E35-9DA8-C17852385BE6"}
+ * @properties={typeid:24,uuid:"AD40C270-1EB2-4D64-982D-50C3F0F40D8C"}
  */
 function getActiveSample(){
 	/** @type {RuntimeForm<AbstractMicroSample>} */
 	var sample = elements.tabs.getLeftForm();
 	return sample;
 }
+
 /**
  * @public 
  * @param {String} id
  * @return {Boolean}
- * @properties={typeid:24,uuid:"2D133045-9DCC-4E68-87F1-E4BF10F582CD"}
+ * @properties={typeid:24,uuid:"179AA8C9-DC13-473D-9B09-BCD08BA34BE3"}
  */
 function showSample(id) {
 	

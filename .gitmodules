@@ -1,19 +1,28 @@
-[submodule "svyUtils"]
-	path = svyUtils
+[submodule "subModules/svyUtils"]
+	path = subModules/svyUtils
 	url = https://github.com/Servoy/svyUtils.git
 	branch = develop
-[submodule "svyShowdown"]
-	path = svyShowdown
+[submodule "subModules/svyShowdown"]
+	path = subModules/svyShowdown
 	url = https://github.com/Servoy/svyShowdown.git
-[submodule "svySearch"]
-	path = svySearch
+[submodule "subModules/svySearch"]
+	path = subModules/svySearch
 	url = https://github.com/Servoy/svySearch.git
-[submodule "svyBlockUI"]
-	path = svyBlockUI
+[submodule "subModules/svyBlockUI"]
+	path = subModules/svyBlockUI
 	url = https://github.com/Servoy/svyBlockUI.git
-[submodule "svyKeyListener"]
-	path = svyKeyListener
+[submodule "subModules/svyKeyListener"]
+	path = subModules/svyKeyListener
 	url = https://github.com/Servoy/svyKeyListener.git
-[submodule "bootstrapextracomponents"]
-	path = bootstrapextracomponents
+[submodule "subModules/bootstrapextracomponents"]
+	path = subModules/bootstrapextracomponents
 	url = https://github.com/Servoy/bootstrapextracomponents.git
+[submodule "subModules/svyChartJS"]
+	path = subModules/svyChartJS
+	url = https://github.com/Servoy/svyChartJS.git
+[submodule "subModules/example-solutions"]
+	path = subModules/example-solutions
+	url = https://github.com/Servoy/example-solutions.git
+[submodule "subModules/webnotifications"]
+	path = subModules/webnotifications
+	url = https://github.com/Servoy/webnotifications.git
