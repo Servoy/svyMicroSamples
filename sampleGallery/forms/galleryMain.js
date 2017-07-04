@@ -204,10 +204,6 @@ function getActiveSample(){
  */
 function showSample(id) {
 	
-	if(!suppressMenuEvent) {
-		elements.nav.setSelectedMenuItem(id);
-	}
-	
 	// get selected item
 	/** @type {RuntimeForm<AbstractMicroSample>} */
 	var form = forms[id];
@@ -216,16 +212,24 @@ function showSample(id) {
 		return false;
 	}
 	
+	if(!suppressMenuEvent) {
+		if(scopes.svySystem.isNGClient()) {
+			elements.nav.setSelectedMenuItem(id);
+		}
+	}
+	
 	// add tab
 	elements.tabs.setLeftForm(form);
 	elements.tabs.setRightForm(forms.content);
 	elements.tabs.dividerLocation = .99;
 //	elements.tabs.addTab(form,form.getName(),form.getName(),form.getDescription());
 
-	// set title
-	title = form.getDescription();
-	
-	
-	
+	// set title, only if method is there
+	if(form.getDescription) {
+		title = form.getDescription();
+	} else {
+		application.output("Can't set title, method `getDescription` is missing on form `" + id + '`', LOGGINGLEVEL.INFO);
+		title = '';
+	}
 	return true;
 }

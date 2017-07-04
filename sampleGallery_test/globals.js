@@ -20,7 +20,7 @@ function test_showSample__runWithWrongID__ExpectReturnFalse() {
  */
 function test_showSample__runWithCorrectID__ExpectReturnTrue() {
 	// Assign
-	var correctFormName = 'galleryMain'
+	var correctFormName = 'welcome'
 	// Act
 	var vResult = globals.showSample(correctFormName);
 	
