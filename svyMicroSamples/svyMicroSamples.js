@@ -26,8 +26,10 @@ function getParentForms() {
 	for(var i in samples){
 		/** @type {RuntimeForm<AbstractMicroSample>} */
 		var form = samples[i];
-		if(!form.getParent()){
-			parents.push(form); 
+		if(form.allowFormIncludedInMenu() === true) {
+			if(!form.getParent()){
+				parents.push(form); 
+			}
 		}
 	}
 	

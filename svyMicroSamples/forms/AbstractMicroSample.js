@@ -1,4 +1,15 @@
 /**
+ * If return true, the form will be included in the navigation.
+ * This to easy hide items that are not finished.
+ * @public 
+ *
+ * @properties={typeid:24,uuid:"F694EC92-27EE-4251-ADED-5A5E06D615EB"}
+ */
+function allowFormIncludedInMenu() {
+	return true;
+}
+
+/**
  * Show the display name of the sample for navigation 
  * @public 
  * @return {String}
@@ -83,6 +94,7 @@ function getDownloadURL(){
 function getSort(){
 	return '0';
 }
+
 /**
  * TODO move to top level scope
  * 
@@ -121,4 +133,4 @@ function printMethodCode(functionToPrint) {
 	} else {
 		return [];
 	}
-} 
+}

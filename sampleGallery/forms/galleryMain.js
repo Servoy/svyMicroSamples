@@ -208,8 +208,10 @@ function showSample(id) {
 	/** @type {RuntimeForm<AbstractMicroSample>} */
 	var form = forms[id];
 	if(!form){
-		application.output("Sample form with id="+id+" not found",LOGGINGLEVEL.ERROR);
+		application.output("Sample form with id `"+id+"` not found",LOGGINGLEVEL.ERROR);
 		return false;
+	} else {
+		application.output("Sample form with id `" +id+ "` selected", LOGGINGLEVEL.DEBUG);
 	}
 	
 	if(!suppressMenuEvent) {

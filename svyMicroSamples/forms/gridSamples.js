@@ -1,4 +1,10 @@
 /**
+ * @properties={typeid:24,uuid:"72D6E277-9E1C-46ED-9701-46CD5334E2EE"}
+ */
+function allowFormIncludedInMenu() {
+	return false;
+}
+/**
  *
  * @return {String}
  *
