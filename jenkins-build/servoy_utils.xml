@@ -4,19 +4,20 @@
 <project basedir=".">
     <macrodef name="export-solution-as-dot-servoy">
          <attribute name="solutionNames"/>
-         <attribute name="failOnError" default="true"/>
+         <attribute name="workspace" default="${WORKSPACE}"/>
          <attribute name="outputDir" default="${general.test.exports.regular.dir}"/>
+         <attribute name="failOnError" default="true"/>
 
          <sequential>
-             <!-- now we are ready to start the workspace exporter -->
-             <echo level="verbose" message="Using equinox launcher jar: ${equinox.launcher.jar.location_property}" />
-             <delete failonerror="false" file="${WORKSPACE}/.metadata/.log" />
+             <echo level="info" message="*** Preparing build directory for export .servoy file ***"/>
+             <delete failonerror="false" file="@{workspace}/.metadata/.log" />
 
              <var name="export.result" unset="true"/>
-             <echo level="info" message="Exporting @{solutionNames} from workspace ${WORKSPACE}"/>
+             <echo level="info" message="Exporting @{solutionNames} from workspace @{workspace}"/>
+
              <java   classname="org.eclipse.equinox.launcher.Main"
                      classpathref="equinox.launcher.jar.location"
-                     failonerror="#{failOnError}"
+                     failonerror="@{failOnError}"
                      resultproperty="export.result"
                      fork="true">
 
@@ -24,28 +25,24 @@
                  <jvmarg value="${servoy.exporter.memory.xmx}" />
                  <jvmarg value="${servoy.exporter.memory.maxpermsize}" />
                  <jvmarg value="-Dosgi.configuration.cascaded=false" />
+                 <jvmarg value="-Dservoy.application_server.dir=${servoy.servoy_install.app_server_dir}" />
 
                  <arg value="-application" />
                  <arg value="com.servoy.eclipse.exporter.solution.application" />
 
                  <arg value="-data" />
-                 <arg value="${WORKSPACE}" />
+                 <arg value="@{workspace}" />
                  <arg value="-s" />
                  <arg value="@{solutionNames}" />
                  <arg value="-o" />
                  <arg value="@{outputDir}" />
                  <arg value="-as" />
-                 <arg value="${servoy.app_server.dir}" />
+                 <arg value="${servoy.servoy_install.app_server_dir}" />
                  <arg value="-p" />
                  <arg value="${servoy.servoy_properties}" />
-
-                 <!-- add here any of the optional arguments supported by the exporter; see 'export -help' for more info; for example: -->
-                 <!--arg value="-help" /-->
                  <arg value="-verbose" />
                  <arg value="${export.dash.pl.if_needed}" />
-                 <arg value="-sw" />
                  <arg value="-pl" />
-                 <arg value="-dbd" />
                  <arg value="-dbi" />
                  <arg value="-md ws" />
                  <arg value="-i18n" />
@@ -69,11 +66,10 @@
         <attribute name="warFileName"/>
 
     	<sequential>
-            <echo level="info" message="*** Preparing build directory for export ***"/>
+            <echo level="info" message="*** Preparing build directory for export .war file ***"/>
         	<delete failonerror="false" file="@{workspace}/.metadata/.log" />
 
         	<!-- now we are ready to start the workspace exporter -->
-            <echo level="info" message="Using equinox launcher jar: ${equinox.launcher.jar.location_property}" />
 			<echo level="info" message="Exporting @{solutionNames} from workspace @{workspace}"/>
 
             <java   classname="org.eclipse.equinox.launcher.Main"
@@ -102,7 +98,7 @@
                 <arg value="${servoy.servoy_properties}" />
                 <arg value="-warFileName" />
                 <arg value="@{warFileName}" />
-		<arg value="-pluginLocations ${servoy.exporter.plugin_locations}" />
+                <arg value="-pluginLocations ${servoy.exporter.plugin_locations}" />
                 <arg value="-allowSQLKeywords" />
                 <arg value="-pl" />
                 <arg value="-dbi" />
