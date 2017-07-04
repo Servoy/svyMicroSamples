@@ -37,6 +37,20 @@
         <make-clean-dir dir="${general.log_dir}" />
         <make-clean-dir dir="${general.test.exports.regular.dir}" />
         <make-clean-dir dir="${general.build.dir}/archive}" />
+
+        <script language="javascript"><![CDATA[
+        var TEST_SUFFIX = '_test'
+        var testSolution = project.getProperty('servoy.test_solution_name')
+		var solutionUnderTesting = project.getProperty('servoy.solution_under_testing')
+
+        if (!solutionUnderTesting) {
+				if (testSolution.slice(-5) === TEST_SUFFIX) {
+					project.setProperty('servoy.solution_under_testing', testSolution.slice(0,-5))
+				} else {
+					project.setProperty('servoy.solution_under_testing', testSolution)
+				}
+			}
+        ]]></script>
 	</target>
 
     <target name="2-SetupCodecoverage">

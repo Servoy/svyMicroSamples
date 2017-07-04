@@ -22,12 +22,12 @@
 
     <!-- Step 2: instrument all code from workspace into the temp instrumented workspace-->
     <target name="code_coverage_instrument_workspace">
-        <echo level="info" message="instrumenting ${servoy.test_solution_name} into ${code.coverage.instrumented.dir.temp}"/>
+        <echo level="info" message="instrumenting ${servoy.solution_under_testing} into ${code.coverage.instrumented.dir.temp}"/>
         <exec executable="istanbul.cmd" failonerror="${code.coverage.failOnError}">
             <arg value="instrument"/>
-            <arg value="${WORKSPACE}\${servoy.test_solution_name}"/>
+            <arg value="${WORKSPACE}\${servoy.solution_under_testing}"/>
             <arg value="--output"/>
-            <arg value="${code.coverage.instrumented.dir.temp}/${servoy.test_solution_name}"/>
+            <arg value="${code.coverage.instrumented.dir.temp}/${servoy.solution_under_testing}"/>
             <arg value="--preserve-comments"/>
             <arg value="--no-compact"/>
             <arg value="--save-baseline"/>
