@@ -2,22 +2,6 @@
 
 <!-- Works with Ant 1.7.0 and higher -->
 <project basedir=".">
-    <target name="code_coverage">
-        <if>
-            <not>
-                <equals arg1="${code.coverage.enabled}" arg2="true" />
-            </not>
-            <then>
-                <echo level="info" message="Code Coverage Reporting disabled" />
-            </then>
-            <else>
-                <antcall target="code_coverage_reporting_preparation" />
-                <antcall target="code_coverage_instrument_workspace" />
-                <antcall target="code_coverage_fix_instrumented_workspace_for_servoy" />
-            </else>
-        </if>
-    </target>
-
     <!-- Step 1: clean the instrumented workspace -->
     <target name="code_coverage_reporting_preparation">
 

@@ -4,7 +4,7 @@
 <!-- These are useful combined with command line/ant test runners for mobile/smart client solutions exports; -->
 <!-- see Servoy Wiki - Building A Software Factory for how to use test runners with ant on these exports -->
 <!--<project name="Ant Solution Exporter" default="copy_fonts_dir" basedir=".">-->
-<project name="Ant Solution Exporter" default="main" basedir=".">
+<project name="Ant Solution Exporter" default="ALL" basedir=".">
 
     <property environment="env"/>
 	<property file="build.properties"/>
@@ -15,155 +15,113 @@
         </classpath>
     </taskdef>
 
+    <import file="shared_utils.xml" />
     <import file="servoy_utils.xml"/>
     <import file="code_coverage.xml"/>
+    <import file="tomcat_utils.xml" />
 
-    <target name="main" depends="setup, code_coverage, export_and_test_solutions, export_result_package_war, collect_logs, finish"/>
+    <target name="ALL" depends="1-SetupEnvironment, 2-SetupCodecoverage, 3-RunJSUnitTest, 4-ExportDeployWarFile, 5-GenerateReports, 6-StoreData" />
 
-    <target name="setup">
-		<if>
-        	 <equals arg1="${servoy.test_solution_name}" arg2=""/>
-        	 <then>
-        	 	<fail message="Test solution Name not specified (property 'test.solution')"/>
-        	 </then>
-		</if>
 
-        <!-- setup some default dirs -->
+    <target name="1-SetupEnvironment">
         <echo level="info" message="*** Setting up folders and files for build***" />
-        <!-- Test fix to get it working on linux -->
-        <move todir="${WORKSPACE}/tempJenkinsResource">
-          <fileset dir="${WORKSPACE}/resources"/>
-        </move>
-
+        <move-folder fromDir="${WORKSPACE}/resources" toDir="${WORKSPACE}/tempJenkinsResource" />
         <delete includeEmptyDirs="true">
             <fileset dir="${WORKSPACE}">
                 <include name="**/resources/"/>
             </fileset>
         </delete>
-
-        <move todir="${WORKSPACE}/resources">
-          <fileset dir="${WORKSPACE}/tempJenkinsResource"/>
-        </move>
+        <move-folder fromDir="${WORKSPACE}/tempJenkinsResource" toDir="${WORKSPACE}/resources" />
 
         <make-clean-dir dir="${general.output_dir}" />
-        <make-clean-dir dir="${general.junit.result.dir}" />
         <make-clean-dir dir="${general.log_dir}" />
         <make-clean-dir dir="${general.test.exports.regular.dir}" />
-
-        <setup-servoy-properties dbName="${db.name}" dbServerUrl="${db.url}" dbServerPort="${db.port}" dbServerUsername="${db.username}" dbServerPassword="${db.password}"/>
-
-        <!--
-		<script language="javascript"><![CDATA[
-			var TEST_SUFFIX = '_test'
-
-			var testSolution = project.getProperty('test.solution')
-			var solutionUnderTesting = project.getProperty('solution_under_testing')
-
-			if (!testSolution) { //if 'test.solution' is not set, derive it from the Job name
-				testSolution = project.getProperty('env.JOB_NAME') + TEST_SUFFIX
-				project.setProperty('test.solution', testSolution)
-			}
-
-			if (!solutionUnderTesting) { //if 'solution_under_testing' is not set, derive it from the 'test.solution' value
-				if (testSolution.slice(-5) === TEST_SUFFIX) {
-					project.setProperty('solution_under_testing', testSolution.slice(0,-5))
-				} else {
-					project.setProperty('solution_under_testing', testSolution)
-				}
-			}
-		]]></script>-->
+        <make-clean-dir dir="${general.build.dir}/archive}" />
 	</target>
 
-    <target name="export_and_test_solutions" depends="get_equinox_jar">
+    <target name="2-SetupCodecoverage">
+        <if>
+            <not>
+                <equals arg1="${code.coverage.enabled}" arg2="true" />
+            </not>
+            <then>
+                <echo level="info" message="*** Code Coverage Reporting disabled (Skip step) ***" />
+            </then>
+            <else>
+                <echo level="info" message="*** Setting up folders for Code Coverage ***" />
+                <antcall target="code_coverage_reporting_preparation" />
+                <antcall target="code_coverage_instrument_workspace" />
+                <antcall target="code_coverage_fix_instrumented_workspace_for_servoy" />
+            </else>
+        </if>
+    </target>
+
+    <target name="3-RunJSUnitTest" depends="get_equinox_jar, prepare_classpath">
         <if>
             <not>
                 <equals arg1="${servoy.junit_test.enabled}" arg2="true" />
             </not>
             <then>
-               <echo level="info" message="Servoy JSUnit Test disabled" />
+               <echo level="info" message="*** Servoy JSUnit Test disabled (Skip step) ***" />
             </then>
             <else>
-    	       <export-solution-as-dot-servoy solutionNames="${servoy.test_solution_name}"/>
-               <fail-if-export-failed />
-
-               <antcall target="run_servoy_jsunit_tests" />
+                <setup-servoy-properties dbName="${db.name}" dbServerUrl="${db.url}" dbServerPort="${db.port}" dbServerUsername="${db.username}" dbServerPassword="${db.password}"/>
+                <export-solution-as-dot-servoy solutionNames="${servoy.test_solution_name}"/>
+                <run_servoy_jsunit_tests/>
            </else>
        </if>
     </target>
 
-    <target name="run_servoy_jsunit_tests" unless="export.failed" depends="prepare_classpath">
-        <run_servoy_jsunit_tests/>
-        <if>
-            <equals arg1="${code.coverage.enabled}" arg2="true" />
-            <then>
-            	<if>
-            	    <not>
-            	        <isset property="test.failed"/>
-            	    </not>
-            	    <then>
-            	    	<antcall target="generate_code_coverage_reports"/>
-            	    	<!-- <antcall target="generate_code_analysis_reports"/> -->
-            	    </then>
-               </if>
-           </then>
-        </if>
-    </target>
-
-    <target name="export_result_package_war" depends="get_equinox_jar" unless="test.failed">
+    <target name="4-ExportDeployWarFile" depends="get_equinox_jar" unless="test.failed">
+        <setup-servoy-properties dbName="${db.name}" dbServerUrl="${db.url}" dbServerPort="${db.port}" dbServerUsername="${db.username}" dbServerPassword="${db.password}"/>
         <export-solution-as-war solutionNames="${servoy.solution_name}" workspace="${WORKSPACE}" warFileName="${war_file_name}"/>
         <if>
     	    <not>
     	        <isset property="export.failed"/>
     	    </not>
     	    <then>
-                <antcall target="deploy_war_exports"/>
+                <antcall target="deploy-war-on-tomcat-server"/>
             </then>
         </if>
     </target>
 
-	<target name="deploy_war_exports">
+	<target name="5-GenerateReports">
         <if>
-            <equals arg1="${tomcat.war_deployment.enabled}" arg2="true" />
+            <equals arg1="${code.coverage.enabled}" arg2="true" />
             <then>
-                <get src="http://${tomcat.server.address}:${tomcat.server.port}/manager/text/stop?path=/${tomcat.application.name}" username="${tomcat.username}" password="${tomcat.password}" dest="${general.log_dir}/war_undeploy.log" />
-                <get src="http://${tomcat.server.address}:${tomcat.server.port}/manager/text/undeploy?path=/${tomcat.application.name}" username="${tomcat.username}" password="${tomcat.password}" dest="${general.log_dir}/war_undeploy.log" />
-                <get src="http://${tomcat.server.address}:${tomcat.server.port}/manager/text/deploy?path=/${tomcat.application.name}&amp;war=${war_file}" username="${tomcat.username}" password="${tomcat.password}" dest="${general.log_dir}/war_deploy.log" />
-                <loadfile property="war_deploy_log" srcfile="${general.log_dir}/war_deploy.log"/>
-                <condition property="war_deploy.success">
-                    <matches pattern="OK.*" string="${war_deploy_log}"/>
-                </condition>
-
-                <fail message="War deployment failed" unless="war_deploy.success" />
-            </then>
+                <if>
+                    <not>
+                        <isset property="test.failed"/>
+                    </not>
+                    <then>
+                        <antcall target="generate_code_coverage_reports"/>
+                        <!-- <antcall target="generate_code_analysis_reports"/> -->
+                    </then>
+               </if>
+           </then>
         </if>
 	</target>
 
-    <target name="collect_logs">
-    	<!-- Move workspace log to build/logs directory -->
+    <target name="6-StoreData">
+        <!-- Move the collected logs to the folder for the specific Jenkins build as artifacts -->
         <move file="${WORKSPACE}/.metadata/.log" tofile="${general.build.dir}/logs/workspace.log" failonerror="false"/>
-    </target>
+        <move todir="${general.build.dir}/archive" failonerror="false">
+            <fileset dir="${general.log_dir}" includes="*.log" />
+        </move>
 
-	<target name="finish">
-		<!-- Move the collected logs to the folder for the specific Jenkins build as artifacts -->
-		<!--<move todir="${current_job.dir}/builds/${env.BUILD_NUMBER}/archive">
-            <fileset dir="${general.build.dir}/logs" includes="*.log" />
-        </move> -->
+        <!-- Move .servoy JSUnit test to archive folder -->
+        <move todir="${general.build.dir}/archive" failonerror="false">
+            <fileset dir="${general.test.exports.regular.dir}" includes="*.servoy" />
+        </move>
 
-<!-- TODO fix the if statement... isn't taking it
-		<if>
-			<istrue value="${export.solution_under_testing.as.artifact}"/>
-			<then> --> <!-- export the solution_under_testing solution as artifact -->
+        <!-- Move war file to archive folder -->
+        <move todir="${general.build.dir}/archive" failonerror="false">
+            <fileset dir="${general.output_dir}" includes="*.war" />
+        </move>
 
-				<!--<export-solution solutionNames="${solution_under_testing}" workspace="${WORKSPACE}"/>
-				<move todir="${current_job.dir}/builds/${env.BUILD_NUMBER}/archive">
-		            <fileset dir="${test.exports.regular.dir}" includes="${solution_under_testing}.servoy" />
-		        </move>-->
-<!--
-			</then>
-		</if>
--->
-		<fail message="Exports failed: please check exporter log files." if="export.failed" />
+
+        <fail message="Exports failed: please check exporter log files." if="export.failed" />
 		<fail message="Tests failed: please check test reports." if="test.failed" />
-	</target>
+    </target>
 
 </project>

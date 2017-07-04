@@ -125,7 +125,7 @@
     <macrodef name="run_servoy_jsunit_tests">
 		<sequential>
 			<echo level="info" message="*** Preparing build directory for Unit Tests ***"/>
-
+            <make-clean-dir dir="${general.junit.result.dir}" />
 			<delete includeemptydirs="true" quiet="true">
 	            <fileset dir="${general.build.dir}" includes="junit*.properties" />
 	        </delete>
@@ -289,14 +289,6 @@
 
             <!-- create a property as well -->
            <property name="@{propertyName}" refid="@{pathName}" />
-       </sequential>
-    </macrodef>
-
-    <macrodef name="make-clean-dir">
-        <attribute name="dir"/>
-        <sequential>
-            <delete dir="@{dir}" quiet="true"/>
-            <mkdir dir="@{dir}"/>
        </sequential>
     </macrodef>
 </project>

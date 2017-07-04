@@ -10,4 +10,14 @@
        </sequential>
     </macrodef>
 
+    <macrodef name="move-folder">
+        <attribute name="fromDir" />
+        <attribute name="toDir" />
+        <sequential>
+            <move todir="@{toDir}">
+              <fileset dir="@{fromDir}"/>
+            </move>
+        </sequential>
+    </macrodef>
+
 </project>
