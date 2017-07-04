@@ -101,6 +101,7 @@ function onShow(firstShow, event) {
 	if(firstShow){
 		buildMenu();
 	}
+	elements.tabs.dividerLocation = .99;
 }
 
 /**
