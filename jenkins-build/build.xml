@@ -16,8 +16,9 @@
     </taskdef>
 
     <import file="shared_utils.xml" />
-    <import file="servoy_utils.xml"/>
-    <import file="code_coverage.xml"/>
+    <import file="servoy_utils.xml" />
+    <import file="code_coverage.xml" />
+    <import file="code_analyis.xml" />
     <import file="tomcat_utils.xml" />
 
     <target name="ALL" depends="1-SetupEnvironment, 2-SetupCodecoverage, 3-RunJSUnitTest, 4-ExportDeployWarFile, 5-GenerateReports, 6-StoreData" />
@@ -40,16 +41,12 @@
         <make-clean-dir dir="${general.build.dir}/archive}" />
 
         <script language="javascript"><![CDATA[
-        var TEST_SUFFIX = '_test'
-        var testSolution = project.getProperty('servoy.test_solution_name')
-        var solutionUnderTesting = project.getProperty('servoy.solution_under_testing')
+            var testSolution = project.getProperty('servoy.test_solution_name');
 
-        if (!solutionUnderTesting) {
-                if (testSolution.slice(-5) === TEST_SUFFIX) {
-                    project.setProperty('servoy.solution_under_testing', testSolution.slice(0,-5))
-                } else {
-                    project.setProperty('servoy.solution_under_testing', testSolution)
-                }
+            if (testSolution.slice(-5) === '_test') {
+                project.setProperty('servoy.solution_under_testing', testSolution.slice(0,-5));
+            } else {
+                project.setProperty('servoy.solution_under_testing', testSolution);
             }
         ]]></script>
     </target>
@@ -110,7 +107,7 @@
                     </not>
                     <then>
                         <antcall target="generate_code_coverage_reports"/>
-                        <!-- <antcall target="generate_code_analysis_reports"/> -->
+                        <antcall target="generate_code_analysis_reports"/>
                     </then>
                </if>
            </then>
