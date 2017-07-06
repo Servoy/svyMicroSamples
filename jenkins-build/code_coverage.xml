@@ -3,7 +3,8 @@
 <!-- Works with Ant 1.7.0 and higher -->
 <project basedir=".">
     <!-- Step 1: clean the instrumented workspace -->
-    <target name="code_coverage_reporting_preparation">
+    <target name="code_coverage_reporting_preparation" depends="install_istanbul">
+
             <make-clean-dir dir="${code.coverage.instrumented.dir.temp}" />
             <make-clean-dir dir="${code.coverage.outputDir}" />
             <make-clean-dir dir="${code.coverage.instrumented.dir}" />
@@ -17,13 +18,23 @@
                 </fileset>
                 <globmapper from="scopes.codeCoverageReporting.js" to="codeCoverageReporting.js"/>
             </copy>
-            <!--<delete dir="${code.coverage.instrumented.dir.temp}"/>-->
     </target>
 
     <!-- Step 2: instrument all code from workspace into the temp instrumented workspace-->
     <target name="code_coverage_instrument_workspace">
         <echo level="info" message="instrumenting ${servoy.solution_under_testing} into ${code.coverage.instrumented.dir.temp}"/>
-        <exec executable="istanbul.cmd" failonerror="${code.coverage.failOnError}">
+        <exec executable="istanbul.cmd" dir="${TOOLS-DIR}" osfamily="windows" failonerror="${code.coverage.failOnError}">
+            <arg value="instrument"/>
+            <arg value="${WORKSPACE}\${servoy.solution_under_testing}"/>
+            <arg value="--output"/>
+            <arg value="${code.coverage.instrumented.dir.temp}/${servoy.solution_under_testing}"/>
+            <arg value="--preserve-comments"/>
+            <arg value="--no-compact"/>
+            <arg value="--save-baseline"/>
+            <arg value="--baseline-file"/>
+            <arg value="${code.coverage.outputDir}/coverage-baseline.json"/>
+        </exec>
+        <exec executable="istanbul" dir="${TOOLS-DIR}" osfamily="unix" failonerror="${code.coverage.failOnError}">
             <arg value="instrument"/>
             <arg value="${WORKSPACE}\${servoy.solution_under_testing}"/>
             <arg value="--output"/>
@@ -65,7 +76,15 @@
         <for list="${code.coverage.report-formats}" param="format">
           <sequential>
             <echo level="info" message="Generating @{format} report"/>
-            <exec executable="istanbul.cmd" failonerror="${code.coverage.failOnError}">
+            <exec executable="istanbul.cmd" dir="${TOOLS-DIR}" osfamily="windows" failonerror="${code.coverage.failOnError}">
+                <arg value="report" />
+                <arg value="--root" />
+                <arg value="${code.coverage.outputDir}" />
+                <arg value="--dir" />
+                <arg value="${code.coverage.outputDir}" />
+                <arg value="@{format}" />
+            </exec>
+            <exec executable="istanbul" dir="${TOOLS-DIR}" osfamily="unix" failonerror="${code.coverage.failOnError}">
                 <arg value="report" />
                 <arg value="--root" />
                 <arg value="${code.coverage.outputDir}" />
@@ -75,6 +94,17 @@
             </exec>
           </sequential>
         </for>
+    </target>
+
+    <!-- Install istanbul -->
+    <target name="install_istanbul">
+        <exec executable="cmd" osfamily="windows" failonerror="true">
+            <arg line="/c npm install --prefix ${TOOLS-DIR} istanbul -g" />
+        </exec>
+        <exec executable="bash" osfamily="unix" failonerror="true">
+            <arg line="-c" />
+            <arg value="npm install --prefix ${TOOLS-DIR} istanbul -g"/>
+        </exec>
     </target>
 
 </project>

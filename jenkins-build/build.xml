@@ -33,6 +33,7 @@
         </delete>
         <move-folder fromDir="${WORKSPACE}/tempJenkinsResource" toDir="${WORKSPACE}/resources" />
 
+        <make-clean-dir dir="${TOOLS-DIR}" />
         <make-clean-dir dir="${general.output_dir}" />
         <make-clean-dir dir="${general.log_dir}" />
         <make-clean-dir dir="${general.test.exports.regular.dir}" />
