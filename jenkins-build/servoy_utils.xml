@@ -60,17 +60,17 @@
 
     <macrodef name="export-solution-as-war">
         <attribute name="solutionNames"/>
-    	<attribute name="workspace"/>
+        <attribute name="workspace"/>
         <attribute name="outputDir" default="${general.output_dir}"/>
         <attribute name="failOnError" default="false"/>
         <attribute name="warFileName"/>
 
-    	<sequential>
+        <sequential>
             <echo level="info" message="*** Preparing build directory for export .war file ***"/>
-        	<delete failonerror="false" file="@{workspace}/.metadata/.log" />
+            <delete failonerror="false" file="@{workspace}/.metadata/.log" />
 
-        	<!-- now we are ready to start the workspace exporter -->
-			<echo level="info" message="Exporting @{solutionNames} from workspace @{workspace}"/>
+            <!-- now we are ready to start the workspace exporter -->
+            <echo level="info" message="Exporting @{solutionNames} from workspace @{workspace}"/>
 
             <java   classname="org.eclipse.equinox.launcher.Main"
                     classpathref="equinox.launcher.jar.location"
@@ -123,61 +123,61 @@
     </macrodef>
 
     <macrodef name="run_servoy_jsunit_tests">
-		<sequential>
-			<echo level="info" message="*** Preparing build directory for Unit Tests ***"/>
+        <sequential>
+            <echo level="info" message="*** Preparing build directory for Unit Tests ***"/>
+            <make-clean-dir dir="${servoy.test.junit.report.dir}" />
+            <delete includeemptydirs="true" quiet="true">
+                <fileset dir="${general.build.dir}" includes="junit*.properties" />
+            </delete>
 
-			<delete includeemptydirs="true" quiet="true">
-	            <fileset dir="${general.build.dir}" includes="junit*.properties" />
-	        </delete>
+            <script language="javascript"><![CDATA[
+                //Set internal property for test timeout in milliseconds
+                var value = parseInt(project.getProperty('test.timeout.minutes'));
+                project.setProperty('test.timeout', value * 60 * 1000);
+                //Set internal property for solution load timeout in milliseconds
+                value = parseInt(project.getProperty('solution-load.timeout.minutes')||project.getProperty('test.timeout.minutes'))
+                project.setProperty('servoy.test.solution-load.timeout', value * 60 * 1000);
 
-			<script language="javascript"><![CDATA[
-				//Set internal property for test timeout in milliseconds
-				var value = parseInt(project.getProperty('test.timeout.minutes'));
-				project.setProperty('test.timeout', value * 60 * 1000);
-				//Set internal property for solution load timeout in milliseconds
-				value = parseInt(project.getProperty('solution-load.timeout.minutes')||project.getProperty('test.timeout.minutes'))
-				project.setProperty('servoy.test.solution-load.timeout', value * 60 * 1000);
+                //Record startTime for logging total duration after finishing running the tests
+                project.setProperty('servoy.test.start-time', Date.now());
+            ]]></script>
 
-				//Record startTime for logging total duration after finishing running the tests
-				project.setProperty('servoy.test.start-time', Date.now());
-			]]></script>
-
-			<echo level="info" message="*** Running Unit Tests ***"/>
+            <echo level="info" message="*** Running Unit Tests ***"/>
             <echo level="info" message="${servoy.servoy_install.app_server_dir}" />
-	    	<!-- Define a timeout so we know the test will finish eventually -->
+            <!-- Define a timeout so we know the test will finish eventually -->
             <junit fork="yes" forkmode="once" timeout="${servoy.test.timeout}" dir="${servoy.servoy_install.app_server_dir}" haltonfailure="false" haltonerror="false" showoutput="true" errorProperty="test.failed" failureProperty="test.failed" printsummary="withOutAndErr">
-            	<jvmarg value="${servoy.tester.memory.xms}" />
-            	<jvmarg value="${servoy.tester.memory.xmx}" />
-            	<jvmarg value="${servoy.tester.memory.maxpermsize}" />
-            	<jvmarg value="-Dtest.log.location=${general.log_dir}/test.log" />
+                <jvmarg value="${servoy.tester.memory.xms}" />
+                <jvmarg value="${servoy.tester.memory.xmx}" />
+                <jvmarg value="${servoy.tester.memory.maxpermsize}" />
+                <jvmarg value="-Dtest.log.location=${general.log_dir}/test.log" />
                 <classpath refid="classpath.run_test" />
 
                 <sysproperty key="servoy.test.target-exports" value="${general.test.exports.regular.dir}" />
                 <sysproperty key="servoy.test.property-file" value="${servoy.servoy_properties}" />
-            	<sysproperty key="servoy.test.solution-load.timeout" value="${servoy.solution-load.timeout}" />
+                <sysproperty key="servoy.test.solution-load.timeout" value="${servoy.solution-load.timeout}" />
                 <!--<sysproperty key="servoy.test.target-file-ext" value=".servoy" /> -->
 
                 <formatter type="xml" extension=".xm1"/>
                 <formatter type="xml" />
 
-                <test name="com.servoy.automation.jsunit.smartclient.ServoyJSUnitTestRunner" todir="${general.junit.result.dir}" />
+                <test name="com.servoy.automation.jsunit.smartclient.ServoyJSUnitTestRunner" todir="${servoy.test.junit.report.dir}" />
             </junit>
 
-			<script language="javascript"><![CDATA[
-				var start = parseInt(project.getProperty('servoy.test.start-time'))
-				var delta = Math.round((Date.now() - start)/1000)
+            <script language="javascript"><![CDATA[
+                var start = parseInt(project.getProperty('servoy.test.start-time'))
+                var delta = Math.round((Date.now() - start)/1000)
 
-				var seconds = delta % 60
-				delta -= seconds
-				var minutePart = delta%3600
-				delta -= minutePart
+                var seconds = delta % 60
+                delta -= seconds
+                var minutePart = delta%3600
+                delta -= minutePart
 
-				var value = delta ? delta/3600 + ' hours ': '' //hours
-				value += (minutePart ? minutePart / 60 : '0') + ' minutes ' //minutes
-				value += seconds + ' seconds' //secondsvalue
+                var value = delta ? delta/3600 + ' hours ': '' //hours
+                value += (minutePart ? minutePart / 60 : '0') + ' minutes ' //minutes
+                value += seconds + ' seconds' //secondsvalue
 
-				project.log("Solution import and Unit Test execution finished in " + value, project.MSG_INFO)
-			]]></script>
+                project.log("Solution import and Unit Test execution finished in " + value, project.MSG_INFO)
+            ]]></script>
 
             <antcall target="create_test_report"/>
            </sequential>
@@ -196,12 +196,12 @@
     </macrodef>
 
     <target name="create_test_report">
-        <junitreport todir="${general.junit.result.dir}">
-            <fileset dir="${general.junit.result.dir}">
+        <junitreport todir="${servoy.test.junit.report.dir}">
+            <fileset dir="${servoy.test.junit.report.dir}">
                 <include name="TEST-*.xml" />
             </fileset>
 
-            <report format="noframes" todir="${general.junit.result.dir}" />
+            <report format="noframes" todir="${servoy.test.junit.report.dir}" />
         </junitreport>
     </target>
 
@@ -289,14 +289,6 @@
 
             <!-- create a property as well -->
            <property name="@{propertyName}" refid="@{pathName}" />
-       </sequential>
-    </macrodef>
-
-    <macrodef name="make-clean-dir">
-        <attribute name="dir"/>
-        <sequential>
-            <delete dir="@{dir}" quiet="true"/>
-            <mkdir dir="@{dir}"/>
        </sequential>
     </macrodef>
 </project>
