@@ -5,14 +5,14 @@
     <!-- Step 1: clean the instrumented workspace -->
     <target name="code_coverage_reporting_preparation" depends="install_istanbul">
 
-            <make-clean-dir dir="${code.coverage.instrumented.dir.temp}" />
-            <make-clean-dir dir="${code.coverage.outputDir}" />
-            <make-clean-dir dir="${code.coverage.instrumented.dir}" />
-            <copy todir="${code.coverage.instrumented.dir}">
+            <make-clean-dir dir="${code.coverage.instrumented.workspace.temp}" />
+            <make-clean-dir dir="${code.coverage.report.dir}" />
+            <make-clean-dir dir="${code.coverage.instrumented.workspace}" />
+            <copy todir="${code.coverage.instrumented.workspace}">
                 <fileset dir="${WORKSPACE}" />
             </copy>
 
-            <copy todir="${code.coverage.instrumented.dir}/${servoy.test_solution_name}">
+            <copy todir="${code.coverage.instrumented.workspace}/${servoy.test_solution_name}">
                 <fileset dir="${LIB-DIR}">
                     <include name="scopes.codeCoverageReporting.js" />
                 </fileset>
@@ -20,56 +20,56 @@
             </copy>
             <exec executable="node" failonerror="true">
                 <arg value="${LIB-DIR}/servoyIstanbulInstrumentCleaner.js" />
-                <arg value="${code.coverage.instrumented.dir}" />
+                <arg value="${code.coverage.instrumented.workspace}" />
             </exec>
     </target>
 
     <!-- Step 2: instrument all code from workspace into the temp instrumented workspace-->
     <target name="code_coverage_instrument_workspace">
-        <echo level="info" message="instrumenting ${servoy.solution_under_testing} into ${code.coverage.instrumented.dir.temp}"/>
-        <exec executable="istanbul.cmd" dir="${TOOLS-DIR}" osfamily="windows" failonerror="${code.coverage.failOnError}">
+        <echo level="info" message="instrumenting ${servoy.solution_under_testing} into ${code.coverage.instrumented.workspace.temp}"/>
+        <exec executable="istanbul.cmd" dir="${TOOLS-DIR}" osfamily="windows" failonerror="true">
             <arg value="instrument"/>
-            <arg value="${code.coverage.instrumented.dir}"/>
+            <arg value="${code.coverage.instrumented.workspace}"/>
             <arg value="--output"/>
-            <arg value="${code.coverage.instrumented.dir.temp}"/>
+            <arg value="${code.coverage.instrumented.workspace.temp}"/>
             <arg value="--preserve-comments"/>
             <arg value="--no-compact"/>
             <arg value="--save-baseline"/>
             <arg value="--baseline-file"/>
-            <arg value="${code.coverage.outputDir}/coverage-baseline.json"/>
+            <arg value="${code.coverage.report.dir}/coverage-baseline.json"/>
         </exec>
-        <exec executable="istanbul" dir="${TOOLS-DIR}" osfamily="unix" failonerror="${code.coverage.failOnError}">
+        <exec executable="istanbul" dir="${TOOLS-DIR}" osfamily="unix" failonerror="true">
             <arg value="instrument"/>
             <arg value="${WORKSPACE}"/>
             <arg value="--output"/>
-            <arg value="${code.coverage.instrumented.dir.temp}"/>
+            <arg value="${code.coverage.instrumented.workspace.temp}"/>
             <arg value="--preserve-comments"/>
             <arg value="--no-compact"/>
             <arg value="--save-baseline"/>
             <arg value="--baseline-file"/>
-            <arg value="${code.coverage.outputDir}/coverage-baseline.json"/>
+            <arg value="${code.coverage.report.dir}/coverage-baseline.json"/>
         </exec>
     </target>
 
     <!-- Step 3: parse all the instrumented code from the temp instrumented workspace and save the modified instrumented file into the instrumented workspace-->
     <target name="code_coverage_fix_instrumented_workspace_for_servoy">
-        <echo level="info" message="node ${LIB-DIR}/servoyCodeCoverageInstrumentationFixer.js --d ${code.coverage.instrumented.dir} ${code.coverage.instrumented.dir.temp} --tsp ${code.coverage.instrumented.dir}/${servoy.test_solution_name} --rp ${code.coverage.outputDir} --i ${code.coverage.instrument.include} --x ${code.coverage.instrument.exclude} --e ${code.coverage.failOnError} --v false" />
-        <echo level="info" message="Processing instrumented code from ${code.coverage.instrumented.dir.temp} to ${code.coverage.instrumented.dir}, fixing Servoy incompatibilities"/>
-        <exec executable="node" failonerror="${code.coverage.failOnError}">
+        <echo level="info" message="node ${LIB-DIR}/servoyCodeCoverageInstrumentationFixer.js --d ${code.coverage.instrumented.workspace} ${code.coverage.instrumented.workspace.temp} --tsp ${code.coverage.instrumented.workspace}/${servoy.test_solution_name} --rp ${code.coverage.report.dir} --i ${code.coverage.instrument.include} --x ${code.coverage.instrument.exclude} --e true --v false" />
+        <echo level="info" message="Processing instrumented code from ${code.coverage.instrumented.workspace.temp} to ${code.coverage.instrumented.workspace}, fixing Servoy incompatibilities"/>
+        <exec executable="node" failonerror="true">
             <arg value="${LIB-DIR}/servoyCodeCoverageInstrumentationFixer.js"/>
             <arg value="--d"/>
-            <arg value="${code.coverage.instrumented.dir}"/>
-            <arg value="${code.coverage.instrumented.dir.temp}"/>
+            <arg value="${code.coverage.instrumented.workspace}"/>
+            <arg value="${code.coverage.instrumented.workspace.temp}"/>
             <arg value="--tsp"/>
-            <arg value="${code.coverage.instrumented.dir}/${servoy.test_solution_name}"/>
+            <arg value="${code.coverage.instrumented.workspace}/${servoy.test_solution_name}"/>
             <arg value="--rp"/>
-            <arg value="${code.coverage.outputDir}"/>
+            <arg value="${code.coverage.report.dir}"/>
             <arg value="--i"/>
             <arg value="${code.coverage.instrument.include}"/>
             <arg value="--x"/>
             <arg value="${code.coverage.instrument.exclude}"/>
             <arg value="--e"/>
-            <arg value="${code.coverage.failOnError}"/>
+            <arg value="true"/>
             <arg value="--v"/>
             <arg value="false"/>
         </exec>
@@ -80,20 +80,20 @@
         <for list="${code.coverage.report-formats}" param="format">
           <sequential>
             <echo level="info" message="Generating @{format} report"/>
-            <exec executable="istanbul.cmd" dir="${TOOLS-DIR}" osfamily="windows" failonerror="${code.coverage.failOnError}">
+            <exec executable="istanbul.cmd" dir="${TOOLS-DIR}" osfamily="windows" failonerror="true">
                 <arg value="report" />
                 <arg value="--root" />
-                <arg value="${code.coverage.outputDir}" />
+                <arg value="${code.coverage.report.dir}" />
                 <arg value="--dir" />
-                <arg value="${code.coverage.outputDir}" />
+                <arg value="${code.coverage.report.dir}" />
                 <arg value="@{format}" />
             </exec>
-            <exec executable="istanbul" dir="${TOOLS-DIR}" osfamily="unix" failonerror="${code.coverage.failOnError}">
+            <exec executable="istanbul" dir="${TOOLS-DIR}" osfamily="unix" failonerror="true">
                 <arg value="report" />
                 <arg value="--root" />
-                <arg value="${code.coverage.outputDir}" />
+                <arg value="${code.coverage.report.dir}" />
                 <arg value="--dir" />
-                <arg value="${code.coverage.outputDir}" />
+                <arg value="${code.coverage.report.dir}" />
                 <arg value="@{format}" />
             </exec>
           </sequential>

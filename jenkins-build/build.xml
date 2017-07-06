@@ -7,7 +7,7 @@
 <project name="Ant Solution Exporter" default="ALL" basedir=".">
 
     <property environment="env"/>
-	<property file="build.properties"/>
+    <property file="build.properties"/>
 
     <taskdef resource="net/sf/antcontrib/antlib.xml">
         <classpath>
@@ -42,17 +42,17 @@
         <script language="javascript"><![CDATA[
         var TEST_SUFFIX = '_test'
         var testSolution = project.getProperty('servoy.test_solution_name')
-		var solutionUnderTesting = project.getProperty('servoy.solution_under_testing')
+        var solutionUnderTesting = project.getProperty('servoy.solution_under_testing')
 
         if (!solutionUnderTesting) {
-				if (testSolution.slice(-5) === TEST_SUFFIX) {
-					project.setProperty('servoy.solution_under_testing', testSolution.slice(0,-5))
-				} else {
-					project.setProperty('servoy.solution_under_testing', testSolution)
-				}
-			}
+                if (testSolution.slice(-5) === TEST_SUFFIX) {
+                    project.setProperty('servoy.solution_under_testing', testSolution.slice(0,-5))
+                } else {
+                    project.setProperty('servoy.solution_under_testing', testSolution)
+                }
+            }
         ]]></script>
-	</target>
+    </target>
 
     <target name="2-SetupCodecoverage">
         <if>
@@ -91,16 +91,16 @@
         <setup-servoy-properties dbName="${db.name}" dbServerUrl="${db.url}" dbServerPort="${db.port}" dbServerUsername="${db.username}" dbServerPassword="${db.password}"/>
         <export-solution-as-war solutionNames="${servoy.solution_name}" workspace="${WORKSPACE}" warFileName="${war_file_name}"/>
         <if>
-    	    <not>
-    	        <isset property="export.failed"/>
-    	    </not>
-    	    <then>
+            <not>
+                <isset property="export.failed"/>
+            </not>
+            <then>
                 <antcall target="deploy-war-on-tomcat-server"/>
             </then>
         </if>
     </target>
 
-	<target name="5-GenerateReports">
+    <target name="5-GenerateReports">
         <if>
             <equals arg1="${code.coverage.enabled}" arg2="true" />
             <then>
@@ -115,7 +115,7 @@
                </if>
            </then>
         </if>
-	</target>
+    </target>
 
     <target name="6-StoreData">
         <!-- Move the collected logs to the folder for the specific Jenkins build as artifacts -->
@@ -136,7 +136,7 @@
 
 
         <fail message="Exports failed: please check exporter log files." if="export.failed" />
-		<fail message="Tests failed: please check test reports." if="test.failed" />
+        <fail message="Tests failed: please check test reports." if="test.failed" />
     </target>
 
 </project>

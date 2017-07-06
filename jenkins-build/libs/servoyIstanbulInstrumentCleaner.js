@@ -45,11 +45,8 @@ function clearInstrumentDirectory(dirToClear) {
             var dirname = files[i];
             var name = dirToClear + '/' + dirname;
             if (fs.statSync(name).isDirectory()) {
-                if(dirname.charAt(0) == ".") continue; //Hidden dirs
-
                 var subFiles = fs.readdirSync(name);
                 if(subFiles.indexOf(".git") != -1) {
-                    //It is a git submodule
                     for(var j in subFiles) {
                         if (!subFiles.hasOwnProperty(j)) {
                             continue;
@@ -70,5 +67,3 @@ function clearInstrumentDirectory(dirToClear) {
         }
     }
 }
-
-//project.setProperty('code.coverage.instrument.exclude', foldersToSkip.join('-x '));
