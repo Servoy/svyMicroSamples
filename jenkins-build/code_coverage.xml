@@ -18,6 +18,10 @@
                 </fileset>
                 <globmapper from="scopes.codeCoverageReporting.js" to="codeCoverageReporting.js"/>
             </copy>
+            <exec executable="node" failonerror="true">
+                <arg value="${LIB-DIR}/servoyIstanbulInstrumentCleaner.js" />
+                <arg value="${code.coverage.instrumented.dir}" />
+            </exec>
     </target>
 
     <!-- Step 2: instrument all code from workspace into the temp instrumented workspace-->
@@ -25,9 +29,9 @@
         <echo level="info" message="instrumenting ${servoy.solution_under_testing} into ${code.coverage.instrumented.dir.temp}"/>
         <exec executable="istanbul.cmd" dir="${TOOLS-DIR}" osfamily="windows" failonerror="${code.coverage.failOnError}">
             <arg value="instrument"/>
-            <arg value="${WORKSPACE}\${servoy.solution_under_testing}"/>
+            <arg value="${code.coverage.instrumented.dir}"/>
             <arg value="--output"/>
-            <arg value="${code.coverage.instrumented.dir.temp}/${servoy.solution_under_testing}"/>
+            <arg value="${code.coverage.instrumented.dir.temp}"/>
             <arg value="--preserve-comments"/>
             <arg value="--no-compact"/>
             <arg value="--save-baseline"/>
@@ -36,9 +40,9 @@
         </exec>
         <exec executable="istanbul" dir="${TOOLS-DIR}" osfamily="unix" failonerror="${code.coverage.failOnError}">
             <arg value="instrument"/>
-            <arg value="${WORKSPACE}\${servoy.solution_under_testing}"/>
+            <arg value="${WORKSPACE}"/>
             <arg value="--output"/>
-            <arg value="${code.coverage.instrumented.dir.temp}/${servoy.solution_under_testing}"/>
+            <arg value="${code.coverage.instrumented.dir.temp}"/>
             <arg value="--preserve-comments"/>
             <arg value="--no-compact"/>
             <arg value="--save-baseline"/>
