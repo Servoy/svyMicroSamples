@@ -26,6 +26,7 @@
 
     <!-- Step 2: instrument all code from workspace into the temp instrumented workspace-->
     <target name="code_coverage_instrument_workspace">
+        <echo level="info" message="istanbul ${CODE.COVERAGE.INSTRUMENTED.WORKSPACE} --output ${CODE.COVERAGE.INSTRUMENTED.WORKSPACE.TEMP} --preserve-comments --no-compact --save-baseline --baseline-file ${CODE.COVERAGE.REPORT.DIR}/coverage-baseline.json"
         <echo level="info" message="instrumenting ${SERVOY.SOLUTION_UNDER_TESTING} into ${CODE.COVERAGE.INSTRUMENTED.WORKSPACE.TEMP}"/>
         <exec executable="istanbul.cmd" dir="${TOOLS-DIR}" osfamily="windows" failonerror="true">
             <arg value="instrument"/>
@@ -40,7 +41,7 @@
         </exec>
         <exec executable="istanbul" dir="${TOOLS-DIR}" osfamily="unix" failonerror="true">
             <arg value="instrument"/>
-            <arg value="${WORKSPACE}"/>
+            <arg value="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE}"/>
             <arg value="--output"/>
             <arg value="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE.TEMP}"/>
             <arg value="--preserve-comments"/>
