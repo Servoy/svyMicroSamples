@@ -42,7 +42,8 @@
             <equals arg1="${code.analysis.linter}" arg2="jshint" />
         </condition>
 
-        <exec executable="plato.cmd" dir="${TOOLS-DIR}" osfamily="windows" failonerror="true">
+        <echo level="info" message='plato.cmd --recurse --dir ${code.analysis.result.dir} --exclude "${code.analysis.exclude.regex}" ${code.analysis.internal.linter-option} ${code.analysis.internal.linter-option.value} ${code.analysis.input.dir}' />
+        <exec executable="plato.cmd" dir="${WORKSPACE}" osfamily="windows" failonerror="true">
             <arg value="--recurse"/>
             <arg value="--dir"/>
             <arg value="${code.analysis.result.dir}"/>
@@ -52,7 +53,7 @@
             <arg value='${code.analysis.internal.linter-option.value}'/>
             <arg value="${code.analysis.input.dir}"/>
         </exec>
-        <exec executable="plato" dir="${TOOLS-DIR}" osfamily="unix" failonerror="true">
+        <exec executable="plato" dir="${WORKSPACE}" osfamily="unix" failonerror="true">
             <arg value="--recurse"/>
             <arg value="--dir"/>
             <arg value="${code.analysis.result.dir}"/>
@@ -77,6 +78,9 @@
                     <arg value="npm install --prefix ${TOOLS-DIR} plato"/>
                 </exec>
             </then>
+            <else>
+                <echo level="info" message="Install of software disabled from config, trying to execute PLATO" />
+            </else>
         </if>
     </target>
 

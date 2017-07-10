@@ -113,6 +113,9 @@
                     <arg value="npm install --prefix ${TOOLS-DIR} istanbul"/>
                 </exec>
             </then>
+            <else>
+                <echo level="info" message="Install of software disabled from config, trying to execute ISTANBUL" />
+            </else>
         </if>
     </target>
 
