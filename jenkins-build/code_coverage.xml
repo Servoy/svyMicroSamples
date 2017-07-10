@@ -102,13 +102,18 @@
 
     <!-- Install istanbul -->
     <target name="install_istanbul">
-        <exec executable="cmd" osfamily="windows" failonerror="true">
-            <arg line="/c npm install --prefix ${TOOLS-DIR} istanbul" />
-        </exec>
-        <exec executable="bash" osfamily="unix" failonerror="true">
-            <arg line="-c" />
-            <arg value="npm install --prefix ${TOOLS-DIR} istanbul"/>
-        </exec>
+        <if>
+            <equals arg1="${general.installNeededSoftware}" arg2="true" />
+            <then>
+                <exec executable="cmd" osfamily="windows" failonerror="true">
+                    <arg line="/c npm install --prefix ${TOOLS-DIR} istanbul" />
+                </exec>
+                <exec executable="bash" osfamily="unix" failonerror="true">
+                    <arg line="-c" />
+                    <arg value="npm install --prefix ${TOOLS-DIR} istanbul"/>
+                </exec>
+            </then>
+        </if>
     </target>
 
 </project>
