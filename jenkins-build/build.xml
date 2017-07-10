@@ -7,6 +7,7 @@
 <project name="Ant Solution Exporter" default="ALL" basedir=".">
 
     <property environment="env"/>
+    <property name="WORKSPACE" value="${env.WORKSPACE}"/>
     <property file="build.properties"/>
 
     <taskdef resource="net/sf/antcontrib/antlib.xml">
@@ -35,18 +36,18 @@
         <move-folder fromDir="${WORKSPACE}/tempJenkinsResource" toDir="${WORKSPACE}/resources" />
 
         <make-clean-dir dir="${TOOLS-DIR}" />
-        <make-clean-dir dir="${general.output.dir}" />
-        <make-clean-dir dir="${general.log.dir}" />
-        <make-clean-dir dir="${general.test.exports.regular.dir}" />
-        <make-clean-dir dir="${general.artifacts.dir}" />
+        <make-clean-dir dir="${OUTPUT.DIR}" />
+        <make-clean-dir dir="${LOG.DIR}" />
+        <make-clean-dir dir="${OUTPUT.DIR.TEST.EXPORTS}" />
+        <make-clean-dir dir="${ARTIFACTS.DIR}" />
 
         <script language="javascript"><![CDATA[
-            var testSolution = project.getProperty('servoy.test_solution_name');
+            var testSolution = project.getProperty('SERVOY.TEST-SOLUTION');
 
             if (testSolution.slice(-5) === '_test') {
-                project.setProperty('servoy.solution_under_testing', testSolution.slice(0,-5));
+                project.setProperty('SERVOY.SOLUTION_UNDER_TESTING', testSolution.slice(0,-5));
             } else {
-                project.setProperty('servoy.solution_under_testing', testSolution);
+                project.setProperty('SERVOY.SOLUTION_UNDER_TESTING', testSolution);
             }
         ]]></script>
     </target>
@@ -54,7 +55,7 @@
     <target name="2-SetupCodecoverage">
         <if>
             <not>
-                <equals arg1="${code.coverage.enabled}" arg2="true" />
+                <equals arg1="${CODE.COVERAGE.ENABLED}" arg2="true" />
             </not>
             <then>
                 <echo level="info" message="*** Code Coverage Reporting disabled (Skip step) ***" />
@@ -71,22 +72,22 @@
     <target name="3-RunJSUnitTest" depends="get_equinox_jar, prepare_classpath">
         <if>
             <not>
-                <equals arg1="${servoy.junit_test.enabled}" arg2="true" />
+                <equals arg1="${SERVOY.JUNIT.ENABLED}" arg2="true" />
             </not>
             <then>
                <echo level="info" message="*** Servoy JSUnit Test disabled (Skip step) ***" />
             </then>
             <else>
-                <setup-servoy-properties dbName="${db.name}" dbServerUrl="${db.url}" dbServerPort="${db.port}" dbServerUsername="${db.username}" dbServerPassword="${db.password}"/>
-                <export-solution-as-dot-servoy solutionNames="${servoy.test_solution_name}"/>
+                <setup-servoy-properties dbName="${DB.NAME}" dbServerUrl="${DB.URL}" dbServerPort="${DB.PORT}" dbServerUsername="${DB.USERNAME}" dbServerPassword="${DB.PASSWORD}"/>
+                <export-solution-as-dot-servoy solutionNames="${SERVOY.TEST-SOLUTION}"/>
                 <run_servoy_jsunit_tests/>
            </else>
        </if>
     </target>
 
     <target name="4-ExportDeployWarFile" depends="get_equinox_jar" unless="test.failed">
-        <setup-servoy-properties dbName="${db.name}" dbServerUrl="${db.url}" dbServerPort="${db.port}" dbServerUsername="${db.username}" dbServerPassword="${db.password}"/>
-        <export-solution-as-war solutionNames="${servoy.solution_name}" workspace="${WORKSPACE}" warFileName="${war_file_name}"/>
+        <setup-servoy-properties dbName="${DB.NAME}" dbServerUrl="${DB.URL}" dbServerPort="${DB.PORT}" dbServerUsername="${DB.USERNAME}" dbServerPassword="${DB.PASSWORD}"/>
+        <export-solution-as-war solutionNames="${SERVOY.SOLUTION}" workspace="${WORKSPACE}" warFileName="${WAR-FILE.NAME}"/>
         <if>
             <not>
                 <isset property="export.failed"/>
@@ -99,7 +100,7 @@
 
     <target name="5-GenerateReports">
         <if>
-            <equals arg1="${code.coverage.enabled}" arg2="true" />
+            <equals arg1="${CODE.COVERAGE.ENABLED}" arg2="true" />
             <then>
                 <if>
                     <not>
@@ -116,19 +117,19 @@
 
     <target name="6-StoreData">
         <!-- Move the collected logs to the folder for the specific Jenkins build as artifacts -->
-        <move file="${WORKSPACE}/.metadata/.log" tofile="${general.build.dir}/logs/workspace.log" failonerror="false"/>
-        <move todir="${general.artifacts.dir}" failonerror="false">
-            <fileset dir="${general.log.dir}" includes="*.log" />
+        <move file="${WORKSPACE}/.metadata/.log" tofile="${BUILD.DIR}/logs/workspace.log" failonerror="false"/>
+        <move todir="${ARTIFACTS.DIR}" failonerror="false">
+            <fileset dir="${LOG.DIR}" includes="*.log" />
         </move>
 
         <!-- Move .servoy JSUnit test to archive folder -->
-        <move todir="${general.artifacts.dir}" failonerror="false">
-            <fileset dir="${general.test.exports.regular.dir}" includes="*.servoy" />
+        <move todir="${ARTIFACTS.DIR}" failonerror="false">
+            <fileset dir="${OUTPUT.DIR.TEST.EXPORTS}" includes="*.servoy" />
         </move>
 
         <!-- Move war file to archive folder -->
-        <move todir="${general.artifacts.dir}" failonerror="false">
-            <fileset dir="${general.output.dir}" includes="*.war" />
+        <move todir="${ARTIFACTS.DIR}" failonerror="false">
+            <fileset dir="${OUTPUT.DIR}" includes="*.war" />
         </move>
 
 
