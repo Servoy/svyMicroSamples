@@ -102,13 +102,21 @@
 
     <!-- Install istanbul -->
     <target name="install_istanbul">
-        <exec executable="cmd" osfamily="windows" failonerror="true">
-            <arg line="/c npm install --prefix ${TOOLS-DIR} istanbul -g" />
-        </exec>
-        <exec executable="bash" osfamily="unix" failonerror="true">
-            <arg line="-c" />
-            <arg value="npm install --prefix ${TOOLS-DIR} istanbul -g"/>
-        </exec>
+        <if>
+            <equals arg1="${general.installNeededSoftware}" arg2="true" />
+            <then>
+                <exec executable="cmd" osfamily="windows" failonerror="true">
+                    <arg line="/c npm install --prefix ${TOOLS-DIR} istanbul" />
+                </exec>
+                <exec executable="bash" osfamily="unix" failonerror="true">
+                    <arg line="-c" />
+                    <arg value="npm install --prefix ${TOOLS-DIR} istanbul"/>
+                </exec>
+            </then>
+            <else>
+                <echo level="info" message="Install of software disabled from config, will use manual install of ISTANBUL" />
+            </else>
+        </if>
     </target>
 
 </project>

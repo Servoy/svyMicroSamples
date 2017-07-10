@@ -61,7 +61,7 @@
     <macrodef name="export-solution-as-war">
         <attribute name="solutionNames"/>
         <attribute name="workspace"/>
-        <attribute name="outputDir" default="${general.output_dir}"/>
+        <attribute name="outputDir" default="${general.output.dir}"/>
         <attribute name="failOnError" default="false"/>
         <attribute name="warFileName"/>
 
@@ -149,7 +149,7 @@
                 <jvmarg value="${servoy.tester.memory.xms}" />
                 <jvmarg value="${servoy.tester.memory.xmx}" />
                 <jvmarg value="${servoy.tester.memory.maxpermsize}" />
-                <jvmarg value="-Dtest.log.location=${general.log_dir}/test.log" />
+                <jvmarg value="-Dtest.log.location=${general.log.dir}/test.log" />
                 <classpath refid="classpath.run_test" />
 
                 <sysproperty key="servoy.test.target-exports" value="${general.test.exports.regular.dir}" />
