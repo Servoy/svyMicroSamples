@@ -35,10 +35,10 @@
         <move-folder fromDir="${WORKSPACE}/tempJenkinsResource" toDir="${WORKSPACE}/resources" />
 
         <make-clean-dir dir="${TOOLS-DIR}" />
-        <make-clean-dir dir="${general.output_dir}" />
-        <make-clean-dir dir="${general.log_dir}" />
+        <make-clean-dir dir="${general.output.dir}" />
+        <make-clean-dir dir="${general.log.dir}" />
         <make-clean-dir dir="${general.test.exports.regular.dir}" />
-        <make-clean-dir dir="${general.build.dir}/archive}" />
+        <make-clean-dir dir="${general.artifacts.dir}" />
 
         <script language="javascript"><![CDATA[
             var testSolution = project.getProperty('servoy.test_solution_name');
@@ -117,18 +117,18 @@
     <target name="6-StoreData">
         <!-- Move the collected logs to the folder for the specific Jenkins build as artifacts -->
         <move file="${WORKSPACE}/.metadata/.log" tofile="${general.build.dir}/logs/workspace.log" failonerror="false"/>
-        <move todir="${general.build.dir}/archive" failonerror="false">
-            <fileset dir="${general.log_dir}" includes="*.log" />
+        <move todir="${general.artifacts.dir}" failonerror="false">
+            <fileset dir="${general.log.dir}" includes="*.log" />
         </move>
 
         <!-- Move .servoy JSUnit test to archive folder -->
-        <move todir="${general.build.dir}/archive" failonerror="false">
+        <move todir="${general.artifacts.dir}" failonerror="false">
             <fileset dir="${general.test.exports.regular.dir}" includes="*.servoy" />
         </move>
 
         <!-- Move war file to archive folder -->
-        <move todir="${general.build.dir}/archive" failonerror="false">
-            <fileset dir="${general.output_dir}" includes="*.war" />
+        <move todir="${general.artifacts.dir}" failonerror="false">
+            <fileset dir="${general.output.dir}" includes="*.war" />
         </move>
 
 

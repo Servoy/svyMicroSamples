@@ -8,10 +8,10 @@
     <if>
         <equals arg1="${tomcat.war_deployment.enabled}" arg2="true" />
         <then>
-            <get quiet="true" src="http://${tomcat.server.address}:${tomcat.server.port}/manager/text/undeploy?path=/${tomcat.application.name}" username="${tomcat.username}" password="${tomcat.password}" dest="${general.log_dir}/war_undeploy.log" />
-            <get quiet="true" src="http://${tomcat.server.address}:${tomcat.server.port}/manager/text/deploy?path=/${tomcat.application.name}&amp;war=${war_file}" username="${tomcat.username}" password="${tomcat.password}" dest="${general.log_dir}/war_deploy.log" />
+            <get quiet="true" src="http://${tomcat.server.address}:${tomcat.server.port}/manager/text/undeploy?path=/${tomcat.application.name}" username="${tomcat.username}" password="${tomcat.password}" dest="${general.log.dir}/war_undeploy.log" />
+            <get quiet="true" src="http://${tomcat.server.address}:${tomcat.server.port}/manager/text/deploy?path=/${tomcat.application.name}&amp;war=${war_file}" username="${tomcat.username}" password="${tomcat.password}" dest="${general.log.dir}/war_deploy.log" />
 
-            <loadfile property="war_deploy_log" srcfile="${general.log_dir}/war_deploy.log"/>
+            <loadfile property="war_deploy_log" srcfile="${general.log.dir}/war_deploy.log"/>
             <condition property="war_deploy.success">
                 <matches pattern="OK.*" string="${war_deploy_log}"/>
             </condition>

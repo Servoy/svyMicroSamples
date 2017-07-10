@@ -25,7 +25,7 @@
                     }
                 ]]></script>
                 <echo level="verbose" message="plato exclude regex=${code.analysis.exclude.regex}" />
-
+                <make-clean-dir dir="${code.analysis.result.dir}" />
                 <antcall target="execute_plato_for_code_analysis" />
             </else>
         </if>
@@ -42,7 +42,6 @@
             <equals arg1="${code.analysis.linter}" arg2="jshint" />
         </condition>
 
-        <echo level="info" message='plato.cmd --recurse --dir ${code.analysis.result.dir} --exclude "${code.analysis.exclude.regex}" ${code.analysis.internal.linter-option} ${code.analysis.internal.linter-option.value} ${code.analysis.input.dir}' />
         <exec executable="plato.cmd" dir="${WORKSPACE}" osfamily="windows" failonerror="true">
             <arg value="--recurse"/>
             <arg value="--dir"/>
@@ -79,7 +78,7 @@
                 </exec>
             </then>
             <else>
-                <echo level="info" message="Install of software disabled from config, trying to execute PLATO" />
+                <echo level="info" message="Install of software disabled from config, will use manual install of PLATO" />
             </else>
         </if>
     </target>

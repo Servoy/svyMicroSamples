@@ -114,7 +114,7 @@
                 </exec>
             </then>
             <else>
-                <echo level="info" message="Install of software disabled from config, trying to execute ISTANBUL" />
+                <echo level="info" message="Install of software disabled from config, will use manual install of ISTANBUL" />
             </else>
         </if>
     </target>
