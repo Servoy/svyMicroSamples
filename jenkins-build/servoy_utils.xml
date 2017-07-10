@@ -41,7 +41,6 @@
                  <arg value="-p" />
                  <arg value="${SERVOY.PROPERTIES.FILE}" />
                  <arg value="-verbose" />
-                 <arg value="${export.dash.pl.if_needed}" />
                  <arg value="-pl" />
                  <arg value="-dbi" />
                  <arg value="-md ws" />
@@ -132,7 +131,7 @@
 
             <script language="javascript"><![CDATA[
                 //Set internal property for test timeout in milliseconds
-                var value = parseInt(project.getProperty('test.timeout.minutes'));
+                var value = parseInt(project.getProperty('test.timeout.minutes'))||2;
                 project.setProperty('test.timeout', value * 60 * 1000);
                 //Set internal property for solution load timeout in milliseconds
                 value = parseInt(project.getProperty('solution-load.timeout.minutes')||project.getProperty('test.timeout.minutes'))
