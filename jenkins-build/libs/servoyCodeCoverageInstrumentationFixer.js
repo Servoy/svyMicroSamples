@@ -176,7 +176,6 @@ function processInputArgs(args) {
 				break;
 			default:
 				throw new Error(args[i] + ' is not a valid argument !');
-				break;
 		}
 	}
 }
@@ -209,7 +208,8 @@ function buildListOfFilesToProcess(dir, fileList) {
 		if (!files.hasOwnProperty(i)) {
 			continue;
 		}
-		var filePath = dir + '\\' + files[i];
+		
+		var filePath = dir + path.sep + files[i];
 		
 		if (isFileExcluded(files[i])) { // skip the file or folder if is listed in the excluded files
 			log('Skipping excluded file: ' + files[i])
@@ -254,8 +254,8 @@ function isFileIncluded(filePath) {
 	if (!INCLUDES) {
 		return true
 	}
-	var paths = filePath.split('\\')
-	for (var i = WORKSPACE_PATH.split('\\').length; i < paths.length; i++) {
+	var paths = filePath.split(path.sep)
+	for (var i = WORKSPACE_PATH.split(path.sep).length; i < paths.length; i++) {
 		if (INCLUDES.hasOwnProperty(paths[i])) {
 			return true;
 		}
@@ -312,7 +312,7 @@ function processJSFile() {
 			var bits =  /\s*(var (__cov_\S*).*)\n([\S\s]*(if \(!\(__cov.*(\[.*\])[\S\s]*)\n__cov_[\S\s]*.js'];)/g.exec(data)
 			
 			// Write init code to codeCoverageReporting.js (only for calculatiosn and entity method .js files as they cannot contain variables)
-			if (inFilePath.indexOf('\\datasources\\') !== -1) {
+			if (inFilePath.indexOf(path.sep+'datasources'+path.sep) !== -1) {
 				var src = bits[4].replace(new RegExp(bits[2].replace(/\$/g, '\\$'), 'g'), '__coverage__') + '\n'
 				
 //				TODO str.replace(/("\d+":)(1)/g, '$10') //Also resetting the baseline coverage info for functions to 0 
@@ -331,7 +331,7 @@ function processJSFile() {
 				}
 
 				var fileBuffer
-				if (inFilePath.indexOf('\\datasources\\') !== -1) {
+				if (inFilePath.indexOf(path.sep+'datasources'+path.sep) !== -1) {
 					/* Handle .js files for entity methods and calculations differently, as they cannot contain variables
 					 * The ccInitCode will be pushed into codeCoverageReporting.js
 					 * References to the __cov_xxxxx variable in the file itself will be replaced by a reference to the __coverage__ variable in the scopes.codeCoverageReporting
