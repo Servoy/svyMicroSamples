@@ -36,3 +36,5 @@ server.1.validationQuery=
 servoy.rmiStartPort=1099
 servoy.server.start.rmi=false
 servoy.use.client.timezone=true
+servoy.ngclient.enableWebResourceOptimizer=true
+servoy.ngclient.testingMode=true
