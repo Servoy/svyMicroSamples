@@ -181,7 +181,6 @@
 
             <antcall target="create_test_report"/>
            </sequential>
-           <fail message="Temp fail" />
     </macrodef>
 
     <macrodef name="fail-if-unittests-failed">
@@ -197,6 +196,7 @@
     </macrodef>
 
     <target name="create_test_report">
+        <fail message="Temp fail" />
         <junitreport todir="${SERVOY.TEST.JUNIT.REPORT.DIR}">
             <fileset dir="${SERVOY.TEST.JUNIT.REPORT.DIR}">
                 <include name="TEST-*.xml" />
