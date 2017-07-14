@@ -20,4 +20,9 @@
         </sequential>
     </macrodef>
 
+    <macrodef name="move-log-to-logDir">
+        <attribute name="logFileToCopy" />
+        <attribute name="newName" / >
+        <copy file="@{logFileToCopy}" tofile="${LOG.DIR}/@{newName}" />
+    </macrodef>
 </project>

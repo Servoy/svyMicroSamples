@@ -179,6 +179,7 @@
                 project.log("Solution import and Unit Test execution finished in " + value, project.MSG_INFO)
             ]]></script>
 
+            <move-log-to-logDir logFileToCopy="${SERVOY.INSTALL.APPSERVER.DIR}/servoy_log.txt" newName="${LOG.DIR}/servoy_log_junit.txt"/>
             <antcall target="create_test_report"/>
            </sequential>
     </macrodef>
@@ -196,7 +197,6 @@
     </macrodef>
 
     <target name="create_test_report">
-        <fail message="Temp fail" />
         <junitreport todir="${SERVOY.TEST.JUNIT.REPORT.DIR}">
             <fileset dir="${SERVOY.TEST.JUNIT.REPORT.DIR}">
                 <include name="TEST-*.xml" />
