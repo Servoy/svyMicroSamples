@@ -132,9 +132,8 @@
             <fileset dir="${OUTPUT.DIR}" includes="*.war" />
         </move>
 
-
-        <fail message="Exports failed: please check exporter log files." if="export.failed" />
-        <fail message="Tests failed: please check test reports." if="test.failed" />
+        <fail-if-export-failed />
+        <fail-if-unittests-failed />
     </target>
 
 </project>

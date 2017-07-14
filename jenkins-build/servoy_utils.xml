@@ -181,6 +181,7 @@
 
             <antcall target="create_test_report"/>
            </sequential>
+           <fail message="Temp fail" />
     </macrodef>
 
     <macrodef name="fail-if-unittests-failed">
