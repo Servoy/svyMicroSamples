@@ -13,7 +13,7 @@
              <delete failonerror="false" file="@{workspace}/.metadata/.log" />
 
              <var name="export.result" unset="true"/>
-             <echo level="info" message="Exporting @{solutionNames} from workspace @{workspace}"/>
+             <echo level="verbose" message="Exporting @{solutionNames} from workspace @{workspace}"/>
 
              <java   classname="org.eclipse.equinox.launcher.Main"
                      classpathref="equinox.launcher.jar.location"
@@ -72,7 +72,7 @@
             <delete failonerror="false" file="@{workspace}/.metadata/.log" />
 
             <!-- now we are ready to start the workspace exporter -->
-            <echo level="info" message="Exporting @{solutionNames} from workspace @{workspace}"/>
+            <echo level="verbose" message="Exporting @{solutionNames} from workspace @{workspace}"/>
 
             <java   classname="org.eclipse.equinox.launcher.Main"
                     classpathref="equinox.launcher.jar.location"
@@ -148,7 +148,6 @@
             ]]></script>
 
             <echo level="info" message="*** Running Unit Tests ***"/>
-            <echo level="info" message="${SERVOY.INSTALL.APPSERVER.DIR}" />
             <!-- Define a timeout so we know the test will finish eventually -->
             <junit fork="yes" forkmode="once" timeout="${SERVOY.TEST.TIMEOUT}" dir="${SERVOY.INSTALL.APPSERVER.DIR}" haltonfailure="false" haltonerror="false" showoutput="true" errorProperty="test.failed" failureProperty="test.failed" printsummary="withOutAndErr">
                 <jvmarg value="${SERVOY.TEST.MEMORY.XMS}" />
@@ -225,10 +224,10 @@
         <latest_jar pathName="cse.model.jar.location" dir="${SERVOY.INSTALL.DEVELOPER.DIR}/plugins" includes="**/com.servoy.eclipse.model_*.jar"/>
         <latest_jar pathName="servoy_debug.jar.location" dir="${SERVOY.INSTALL.DEVELOPER.DIR}/plugins" includes="**/servoy_debug_*.jar"/>
         <latest_jar pathName="cse.exporter.mobile.location" dir="${SERVOY.INSTALL.DEVELOPER.DIR}/plugins" includes="**/com.servoy.eclipse.exporter.mobile_*.jar"/>
-        <echo level="info" message="Using in importer classpath: ${cse.jsunit.jar.location_property}" />
-        <echo level="info" message="Using in importer classpath: ${cse.model.jar.location_property}" />
-        <echo level="info" message="Using in importer classpath: ${servoy_debug.jar.location_property}" />
-        <echo level="info" message="Using in importer classpath: ${cse.exporter.mobile.location_property}" />
+        <echo level="verbose" message="Using in importer classpath: ${cse.jsunit.jar.location_property}" />
+        <echo level="verbose" message="Using in importer classpath: ${cse.model.jar.location_property}" />
+        <echo level="verbose" message="Using in importer classpath: ${servoy_debug.jar.location_property}" />
+        <echo level="verbose" message="Using in importer classpath: ${cse.exporter.mobile.location_property}" />
 
         <unzip src="${cse.jsunit.jar.location_property}" dest="${LIB-DIR}/jsUnit">
             <patternset>
