@@ -79,7 +79,18 @@
             </then>
             <else>
                 <setup-servoy-properties dbName="${DB.NAME}" dbServerUrl="${DB.URL}" dbServerPort="${DB.PORT}" dbServerUsername="${DB.USERNAME}" dbServerPassword="${DB.PASSWORD}"/>
-                <export-solution-as-dot-servoy solutionNames="${SERVOY.TEST-SOLUTION}"/>
+                <if>
+                    <not>
+                        <equals arg1="${CODE.COVERAGE.ENABLED}" arg2="true" />
+                    </not>
+                    <then>
+                        <export-solution-as-dot-servoy workspace="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE}" solutionNames="${SERVOY.TEST-SOLUTION}"/>
+                    </then>
+                    <else>
+                        <export-solution-as-dot-servoy solutionNames="${SERVOY.TEST-SOLUTION}"/>
+                    </else>
+                </if>
+                
                 <run_servoy_jsunit_tests/>
            </else>
        </if>

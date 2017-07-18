@@ -56,15 +56,15 @@
                  </not>
              </condition>
             <move-log-to-logDir logFileToCopy="${SERVOY.INSTALL.APPSERVER.DIR}/servoy_log.txt" newName="export-solution-as-dot-servoy$servoy_log.txt"/>
-            <move-log-to-logDir logFileToCopy="${WORKSPACE}/.metadata/.log" newName="export-solution-as-dot-servoy$workspace_log.log"/>
+            <move-log-to-logDir logFileToCopy="@{workspace}/.metadata/.log" newName="export-solution-as-dot-servoy$workspace_log.log"/>
          </sequential>
      </macrodef>
 
     <macrodef name="export-solution-as-war">
         <attribute name="solutionNames"/>
-        <attribute name="workspace"/>
+        <attribute name="workspace" default="${WORKSPACE}"/>
         <attribute name="outputDir" default="${OUTPUT.DIR}"/>
-        <attribute name="failOnError" default="false"/>
+        <attribute name="failOnError" default="true"/>
         <attribute name="warFileName"/>
 
         <sequential>
@@ -123,7 +123,7 @@
             </condition>
 
             <move-log-to-logDir logFileToCopy="${SERVOY.INSTALL.APPSERVER.DIR}/servoy_log.txt" newName="export-solution-as-war$servoy_log.txt"/>
-            <move-log-to-logDir logFileToCopy="${WORKSPACE}/.metadata/.log" newName="export-solution-as-war$workspace_log.log"/>
+            <move-log-to-logDir logFileToCopy="@{workspace}/.metadata/.log" newName="export-solution-as-war$workspace_log.log"/>
         </sequential>
     </macrodef>
 
