@@ -24,7 +24,7 @@
         <attribute name="logFileToCopy" />
         <attribute name="newName" />
         <sequential>
-            <copy file="@{logFileToCopy}" tofile="${LOG.DIR}/@{newName}" />
+            <move file="@{logFileToCopy}" tofile="${LOG.DIR}/@{newName}" quiet="true"/>
         </sequential>
     </macrodef>
 </project>

@@ -180,6 +180,7 @@
             ]]></script>
 
             <move-log-to-logDir logFileToCopy="${SERVOY.INSTALL.APPSERVER.DIR}/servoy_log.txt" newName="servoy_log_junit.txt"/>
+            <move-log-to-logDir logFileToCopy="${WORKSPACE}/.metadata/.log" newName="workspace_log_junit.log"/>
             <antcall target="create_test_report"/>
            </sequential>
     </macrodef>
