@@ -17,3 +17,11 @@ Thumbs.db
 .zip
 */.DS_Store
 *.DS_Store
+
+# Visual studio code metadata #
+*/.vscode
+.vscode
+
+# Node JS Modules #
+*/node_modules
+node_modules
