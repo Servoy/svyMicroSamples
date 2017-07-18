@@ -22,7 +22,7 @@
 
     <macrodef name="move-log-to-logDir">
         <attribute name="logFileToCopy" />
-        <attribute name="newName" / >
+        <attribute name="newName" />
         <sequential>
             <copy file="@{logFileToCopy}" tofile="${LOG.DIR}/@{newName}" />
         </sequential>
