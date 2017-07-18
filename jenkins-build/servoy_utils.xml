@@ -179,7 +179,7 @@
                 project.log("Solution import and Unit Test execution finished in " + value, project.MSG_INFO)
             ]]></script>
 
-            <move-log-to-logDir logFileToCopy="${SERVOY.INSTALL.APPSERVER.DIR}/servoy_log.txt" newName="${LOG.DIR}/servoy_log_junit.txt"/>
+            <move-log-to-logDir logFileToCopy="${SERVOY.INSTALL.APPSERVER.DIR}/servoy_log.txt" newName="servoy_log_junit.txt"/>
             <antcall target="create_test_report"/>
            </sequential>
     </macrodef>
