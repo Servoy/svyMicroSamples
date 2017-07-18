@@ -55,6 +55,8 @@
                      <equals arg1="${export.result}" arg2="0"/>
                  </not>
              </condition>
+            <move-log-to-logDir logFileToCopy="${SERVOY.INSTALL.APPSERVER.DIR}/servoy_log.txt" newName="export-solution-as-dot-servoy$servoy_log.txt"/>
+            <move-log-to-logDir logFileToCopy="${WORKSPACE}/.metadata/.log" newName="export-solution-as-dot-servoy$workspace_log.log"/>
          </sequential>
      </macrodef>
 
@@ -119,6 +121,9 @@
                     <equals arg1="${export.result}" arg2="0"/>
                 </not>
             </condition>
+
+            <move-log-to-logDir logFileToCopy="${SERVOY.INSTALL.APPSERVER.DIR}/servoy_log.txt" newName="export-solution-as-war$servoy_log.txt"/>
+            <move-log-to-logDir logFileToCopy="${WORKSPACE}/.metadata/.log" newName="export-solution-as-war$workspace_log.log"/>
         </sequential>
     </macrodef>
 
@@ -179,8 +184,8 @@
                 project.log("Solution import and Unit Test execution finished in " + value, project.MSG_INFO)
             ]]></script>
 
-            <move-log-to-logDir logFileToCopy="${SERVOY.INSTALL.APPSERVER.DIR}/servoy_log.txt" newName="servoy_log_junit.txt"/>
-            <move-log-to-logDir logFileToCopy="${WORKSPACE}/.metadata/.log" newName="workspace_log_junit.log"/>
+            <move-log-to-logDir logFileToCopy="${SERVOY.INSTALL.APPSERVER.DIR}/servoy_log.txt" newName="junit$servoy_log.txt"/>
+            <move-log-to-logDir logFileToCopy="${WORKSPACE}/.metadata/.log" newName="junit$workspace_log.log"/>
             <antcall target="create_test_report"/>
            </sequential>
     </macrodef>
