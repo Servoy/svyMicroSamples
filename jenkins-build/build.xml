@@ -22,7 +22,7 @@
     <import file="code_analyis.xml" />
     <import file="tomcat_utils.xml" />
 
-    <target name="ALL" depends="1-SetupEnvironment, 2-SetupCodecoverage, 3-RunJSUnitTest, 5-ExportDeployWarFile, 6-GenerateReports, 7-StoreData" />
+    <target name="ALL" depends="1-SetupEnvironment, 2-SetupCodecoverage, 3-RunJSUnitTest, 4-RunE2ETests, 5-ExportDeployWarFile, 6-GenerateReports, 7-StoreData" />
 
 
     <target name="1-SetupEnvironment">
