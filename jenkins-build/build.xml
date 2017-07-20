@@ -102,6 +102,7 @@
         <export-solution-as-war solutionNames="${SERVOY.SOLUTION}" workspace="${WORKSPACE}" warFileName="${PROTRACTOR.E2E.WAR-FILE.NAME}"/>
         <deploy-war-on-tomcat-server applicationName="${PROTRACTOR.E2E.WAR-FILE.NAME}" warFile="${PROTRACTOR.E2E.WAR-FILE}"/>
         <antcall target="run_e2e_tests" />
+        <undeploy-war-on-tomcat-server applicationName="${PROTRACTOR.E2E.WAR-FILE.NAME}" warFile="${PROTRACTOR.E2E.WAR-FILE}"/>
     </target>
 
     <target name="5-ExportDeployWarFile" depends="get_equinox_jar" unless="test.failed">
@@ -112,7 +113,7 @@
                 <isset property="export.failed"/>
             </not>
             <then>
-                <antcall target="deploy-war-on-tomcat-server"/>
+                <deploy-war-on-tomcat-server />
             </then>
         </if>
     </target>
@@ -124,6 +125,9 @@
                 <if>
                     <not>
                         <isset property="test.failed"/>
+                        <and>
+                            <isset property="e2e.failed"/>
+                        </and>
                     </not>
                     <then>
                         <antcall target="generate_code_coverage_reports"/>
@@ -150,6 +154,7 @@
             <fileset dir="${OUTPUT.DIR}" includes="*.war" />
         </move>
 
+        <fail-if-e2e-failed />
         <fail-if-export-failed />
         <fail-if-unittests-failed />
     </target>
