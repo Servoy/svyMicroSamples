@@ -22,9 +22,9 @@
 		    <echo level="verbose" message="Run tests script started"/>
 			<echo level="verbose" message="Testing solution: ${SERVOY.SOLUTION}"/>
 
-		<exec executable="${PROTRACTOR.DIR}/node_modules/protractor/bin/protractor" failonerror="true">
+		<exec executable="node" failonerror="true">
+            <arg value="${PROTRACTOR.DIR}/node_modules/protractor/bin/protractor" />
 			<arg value="${PROTRACTOR.CONF}"/>
-			<arg value="--params.solutionName=${SERVOY.SOLUTION}"/>
 		</exec>
 	</target>
 </project>
