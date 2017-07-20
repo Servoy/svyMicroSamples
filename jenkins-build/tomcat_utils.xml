@@ -8,7 +8,7 @@
         <attribute name="warFile" default="${WAR-FILE}" />
         <sequential>
             <get quiet="true" src="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/undeploy?path=/@{applicationName}" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" dest="${LOG.DIR}/war_undeploy.log" />
-            <get quiet="true" src="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/deploy?path=/@{applicationName}&amp;war=${WAR-FILE}" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" dest="${LOG.DIR}/war_deploy.log" />
+            <get quiet="true" src="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/deploy?path=/@{applicationName}&amp;war=@{warFile}" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" dest="${LOG.DIR}/war_deploy.log" />
 
             <loadfile property="war_deploy_log" srcfile="${LOG.DIR}/war_deploy.log"/>
             <condition property="war_deploy.success">
