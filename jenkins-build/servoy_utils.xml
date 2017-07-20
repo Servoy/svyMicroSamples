@@ -41,7 +41,6 @@
                  <arg value="-p" />
                  <arg value="${SERVOY.PROPERTIES.FILE}" />
                  <arg value="-verbose" />
-                 <arg value="${export.dash.pl.if_needed}" />
                  <arg value="-pl" />
                  <arg value="-dbi" />
                  <arg value="-md ws" />
