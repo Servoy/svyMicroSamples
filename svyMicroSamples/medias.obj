@@ -2,13 +2,6 @@
 {
 encapsulation:0,
 mimeType:"text/css",
-name:"basicComponents.css",
-typeid:37,
-uuid:"29F7973B-0DE0-414C-8775-B5625BA711C6"
-},
-{
-encapsulation:0,
-mimeType:"text/css",
 name:"samples.css",
 typeid:37,
 uuid:"A060BE9A-592F-49BF-A6FC-9F46ADFA6356"
