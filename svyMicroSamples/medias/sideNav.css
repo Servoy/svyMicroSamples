@@ -1,5 +1,5 @@
 .svy-sidenav-menu {
-	font-size: 14px;
+	font-size: 12px;
 	line-height: 36px;
 	padding-left: 0px;
 	
@@ -10,9 +10,11 @@
 	border-style: solid;
 	border-width: 0px;
 }
-
+.svy-sidenav-item.sn-level-1 {
+	font-size: 12px;
+}
 .svy-sidenav-item.sn-level-2 {
-	font-size: 14px;
+	font-size: 12px;
 	width: 100%;
 }
 .svy-sidenav {
@@ -60,7 +62,7 @@
 
 .svy-sidenav-font-icon
 {
-	font-size: 20px;
+	font-size: 18px;
 	width: 30px;
 	text-align: center;
 }

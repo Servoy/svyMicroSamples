@@ -2,7 +2,7 @@
  * @properties={typeid:24,uuid:"0EC572C3-6818-4402-B41D-678636A709D8"}
  */
 function allowFormIncludedInMenu() {
-	return false;
+	return true;
 }
 /**
  *

@@ -1,6 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i');
 @IMPORT url("sideNav.css");
 @IMPORT url("webElements.css");
 
+body
+{
+	font-family: 'Roboto', sans-serif;
+}
 .svy-main-window-container
 {
 	background-color: #2c3e50;
@@ -8,12 +13,11 @@
 
 .svy-label
 {
-	font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 11pt;
+	font-size: 10px;
 }
 .body_main
 {
-	width: 85%;
+	width: 90%;
     margin-left: auto;
     margin-right: auto;
 	background-color: #fff;
@@ -21,7 +25,8 @@
 
 .banner
 {
-	font-size: 32px;	
+	font-size: 28px;
+	font-style: oblique;	
 }
 .banner-orange
 {
@@ -36,7 +41,6 @@
 	color: #008040;
 	background-color: #c2e7c4;
 	font-size: 12pt;
-	border-radius: 4px;
 }
 .label_header_2
 {
@@ -45,18 +49,17 @@
 	color: #005177;
 	background-color: #eee;
 	font-size: 12pt;
-	border-radius: 4px;
 }
 .label_header_1
 {
 	font-weight: bold;
 	padding-left: 12px;
 	color: #fff;
-	background-color: #5a96e1;
-	font-size: 16pt;
-	border-radius: 4px;
+	background-color: #006fa4;
+	font-size: 16px;
 	padding-left: 20px;
 	padding-right: 20px;
+	border-radius: 0px;
 }
 .center
 {

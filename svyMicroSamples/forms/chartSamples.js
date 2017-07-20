@@ -2,7 +2,7 @@
  * @properties={typeid:24,uuid:"BAD8E4BE-6CB4-4613-B055-652F2355B858"}
  */
 function allowFormIncludedInMenu() {
-	return false;
+	return true;
 }
 /**
  *
@@ -42,4 +42,14 @@ function getIconStyleClass() {
 */
 function getMoreInfo() {
 	return 'More info';
+}
+
+/**
+ *
+ * @return {String} The sort order, i.e. 1, 1.1, 1.1.2
+ *
+ * @properties={typeid:24,uuid:"D78599C4-EE65-44C0-B243-B87D1EA08374"}
+ */
+function getSort() {
+	return '3';
 }
