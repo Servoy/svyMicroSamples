@@ -3,8 +3,23 @@
 <!-- Works with Ant 1.7.0 and higher -->
 <project basedir=".">
 
+    <macrodef name="deploy-war-on-tomcat-server">
+        <attribute name="applicationName" default="${TOMCAT.APPLICATION.NAME}" />
+        <attribute name="warFile" default="${WAR-FILE}" />
+        <sequential>
+            <get quiet="true" src="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/undeploy?path=/@{applicationName}" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" dest="${LOG.DIR}/war_undeploy.log" />
+            <get quiet="true" src="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/deploy?path=/@{applicationName}&amp;war=${WAR-FILE}" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" dest="${LOG.DIR}/war_deploy.log" />
+
+            <loadfile property="war_deploy_log" srcfile="${LOG.DIR}/war_deploy.log"/>
+            <condition property="war_deploy.success">
+                <matches pattern="OK.*" string="${war_deploy_log}"/>
+            </condition>
+
+            <fail message="War deployment failed" unless="war_deploy.success" />
+        </sequential>
+    </macrodef>
+
 <target name="deploy-war-on-tomcat-server">
-    <!-- TODO: Add attributes to make it more dynamic -->
     <if>
         <equals arg1="${TOMCAT.WAR_DEPLOY.ENABLED}" arg2="true" />
         <then>
