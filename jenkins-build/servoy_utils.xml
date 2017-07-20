@@ -49,13 +49,15 @@
                  <arg value="-tables" />
                  <arg value="-modules" />
              </java>
-             <condition property="export.failed">
+            <move-log-to-logDir logFileToCopy="${SERVOY.INSTALL.APPSERVER.DIR}/servoy_log.txt" newName="export-solution-as-dot-servoy$servoy_log.txt"/>
+            <move-log-to-logDir logFileToCopy="@{workspace}/.metadata/.log" newName="export-solution-as-dot-servoy$workspace_log.log"/>
+            
+            <condition property="export.failed">
                  <not>
                      <equals arg1="${export.result}" arg2="0"/>
                  </not>
              </condition>
-            <move-log-to-logDir logFileToCopy="${SERVOY.INSTALL.APPSERVER.DIR}/servoy_log.txt" newName="export-solution-as-dot-servoy$servoy_log.txt"/>
-            <move-log-to-logDir logFileToCopy="@{workspace}/.metadata/.log" newName="export-solution-as-dot-servoy$workspace_log.log"/>
+
          </sequential>
      </macrodef>
 
@@ -115,14 +117,14 @@
                 <arg value="${SERVOY.DEFAULT.PASSWORD}" />
 
             </java>
+            <move-log-to-logDir logFileToCopy="${SERVOY.INSTALL.APPSERVER.DIR}/servoy_log.txt" newName="export-solution-as-war$servoy_log.txt"/>
+            <move-log-to-logDir logFileToCopy="@{workspace}/.metadata/.log" newName="export-solution-as-war$workspace_log.log"/>
+            
             <condition property="export.failed">
                 <not>
                     <equals arg1="${export.result}" arg2="0"/>
                 </not>
             </condition>
-
-            <move-log-to-logDir logFileToCopy="${SERVOY.INSTALL.APPSERVER.DIR}/servoy_log.txt" newName="export-solution-as-war$servoy_log.txt"/>
-            <move-log-to-logDir logFileToCopy="@{workspace}/.metadata/.log" newName="export-solution-as-war$workspace_log.log"/>
         </sequential>
     </macrodef>
 
