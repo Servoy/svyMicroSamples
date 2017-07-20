@@ -5,11 +5,11 @@
             <equals arg1="${INSTALL_SOFTWARE_FROM_SCRIPT}" arg2="true" />
             <then>-->
                 <exec executable="cmd" dir="${PROTRACTOR.DIR}" osfamily="windows" failonerror="true">
-			        <arg line="/c npm install" />
+			        <arg line="/c npm install --production" />
 		        </exec>
                 <exec executable="bash" dir="${PROTRACTOR.DIR}" osfamily="unix" failonerror="true">
                     <arg value="-c" />
-                    <arg value="npm install"/>
+                    <arg value="npm install --production"/>
                 </exec>
             <!--</then>
             <else>

@@ -11,10 +11,12 @@
     "expect": "latest",
     "protractor": "latest",
     "restler": "latest",
-    //"selenium-webdriver": "latest",
     "universal-analytics": "latest",
-    //"webdriver-manager": "latest",
     "protractor-cucumber-framework": "^3.1.2"
+  },
+  "devDependencies": {
+    "selenium-webdriver": "latest",
+    "webdriver-manager": "latest"
   },
   "engine": "node >= 7.5.0"
 }
