@@ -100,6 +100,7 @@
         <setup-servoy-properties dbName="${DB.NAME}" dbServerUrl="${DB.URL}" dbServerPort="${DB.PORT}" dbServerUsername="${DB.USERNAME}" dbServerPassword="${DB.PASSWORD}"/>
         <export-solution-as-war solutionNames="${SERVOY.SOLUTION}" workspace="${WORKSPACE}" warFileName="${PROTRACTOR.E2E.WAR-FILE.NAME}"/>
         <deploy-war-on-tomcat-server applicationName="${PROTRACTOR.E2E.WAR-FILE.NAME}" warFile="${PROTRACTOR.E2E.WAR-FILE}"/>
+        <antcall target="run_e2e_tests" />
     </target>
 
     <target name="5-ExportDeployWarFile" depends="get_equinox_jar" unless="test.failed">

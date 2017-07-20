@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project basedir=".">
 	<target name="install_dependencies">
-        <if>
+        <!--<if>
             <equals arg1="${INSTALL_SOFTWARE_FROM_SCRIPT}" arg2="true" />
-            <then>
-                <exec executable="cmd" osfamily="windows" failonerror="true">
+            <then>-->
+                <exec executable="cmd" dir="${PROTRACTOR.DIR}" osfamily="windows" failonerror="true">
 			        <arg line="/c npm install" />
 		        </exec>
-                <exec executable="bash" osfamily="unix" failonerror="true">
+                <exec executable="bash" dir="${PROTRACTOR.DIR}" osfamily="unix" failonerror="true">
                     <arg value="-c" />
                     <arg value="npm install"/>
                 </exec>
-            </then>
+            <!--</then>
             <else>
                 <echo level="info" message="Install of software disabled from config, will use manual install of E2E Dependencies" />
             </else>
-        </if>
+        </if>-->
 	</target>
 
-	<target name="run_tests" depends="install_dependencies">
-		    <echo message="Run tests script started"/>
-			<echo message="Testing solution: ${SERVOY.SOLUTION}"/>
+	<target name="run_e2e_tests" depends="install_dependencies">
+		    <echo level="verbose" message="Run tests script started"/>
+			<echo level="verbose" message="Testing solution: ${SERVOY.SOLUTION}"/>
 
 		<exec executable="protractor.cmd" osfamily="windows" failonerror="true">
 			<arg value="${PROTRACTOR.CONF}"/>
