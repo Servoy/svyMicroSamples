@@ -111,6 +111,9 @@
         <if>
             <not>
                 <isset property="export.failed"/>
+                 <and>
+                    <isset property="e2e.failed"/>
+                </and>
             </not>
             <then>
                 <deploy-war-on-tomcat-server />
@@ -125,9 +128,6 @@
                 <if>
                     <not>
                         <isset property="test.failed"/>
-                        <and>
-                            <isset property="e2e.failed"/>
-                        </and>
                     </not>
                     <then>
                         <antcall target="generate_code_coverage_reports"/>
