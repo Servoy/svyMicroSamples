@@ -2,7 +2,7 @@
  * @properties={typeid:24,uuid:"27446438-C6C4-45AB-A2E6-3E66EDF285D6"}
  */
 function getParent() {
-	return forms.basicComponents;
+	return forms.containerSamples;
 }
 
 /**

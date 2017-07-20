@@ -28,3 +28,22 @@ function getDescription() {
 function getIconStyleClass() {
 	return 'fa fa-cogs';
 }
+
+/**
+ * @public
+ * @return {Boolean} 
+ * @properties={typeid:24,uuid:"45E7FA70-5FF5-423E-9F30-3C1ECFF68E0B"}
+ */
+function allowFormIncludedInMenu() {
+	return true;
+}
+
+/**
+ * @public 
+ * @return {String} The sort order, i.e. 1, 1.1, 1.1.2
+ *
+ * @properties={typeid:24,uuid:"A941F633-1BD2-4ADA-BFE7-80E286A1A87F"}
+ */
+function getSort() {
+	return '6'
+}

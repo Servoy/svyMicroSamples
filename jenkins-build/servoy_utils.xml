@@ -13,7 +13,7 @@
              <delete failonerror="false" file="@{workspace}/.metadata/.log" />
 
              <var name="export.result" unset="true"/>
-             <echo level="info" message="Exporting @{solutionNames} from workspace @{workspace}"/>
+             <echo level="verbose" message="Exporting @{solutionNames} from workspace @{workspace}"/>
 
              <java   classname="org.eclipse.equinox.launcher.Main"
                      classpathref="equinox.launcher.jar.location"
@@ -54,14 +54,16 @@
                      <equals arg1="${export.result}" arg2="0"/>
                  </not>
              </condition>
+            <move-log-to-logDir logFileToCopy="${SERVOY.INSTALL.APPSERVER.DIR}/servoy_log.txt" newName="export-solution-as-dot-servoy$servoy_log.txt"/>
+            <move-log-to-logDir logFileToCopy="@{workspace}/.metadata/.log" newName="export-solution-as-dot-servoy$workspace_log.log"/>
          </sequential>
      </macrodef>
 
     <macrodef name="export-solution-as-war">
         <attribute name="solutionNames"/>
-        <attribute name="workspace"/>
+        <attribute name="workspace" default="${WORKSPACE}"/>
         <attribute name="outputDir" default="${OUTPUT.DIR}"/>
-        <attribute name="failOnError" default="false"/>
+        <attribute name="failOnError" default="true"/>
         <attribute name="warFileName"/>
 
         <sequential>
@@ -69,7 +71,7 @@
             <delete failonerror="false" file="@{workspace}/.metadata/.log" />
 
             <!-- now we are ready to start the workspace exporter -->
-            <echo level="info" message="Exporting @{solutionNames} from workspace @{workspace}"/>
+            <echo level="verbose" message="Exporting @{solutionNames} from workspace @{workspace}"/>
 
             <java   classname="org.eclipse.equinox.launcher.Main"
                     classpathref="equinox.launcher.jar.location"
@@ -118,6 +120,9 @@
                     <equals arg1="${export.result}" arg2="0"/>
                 </not>
             </condition>
+
+            <move-log-to-logDir logFileToCopy="${SERVOY.INSTALL.APPSERVER.DIR}/servoy_log.txt" newName="export-solution-as-war$servoy_log.txt"/>
+            <move-log-to-logDir logFileToCopy="@{workspace}/.metadata/.log" newName="export-solution-as-war$workspace_log.log"/>
         </sequential>
     </macrodef>
 
@@ -142,7 +147,6 @@
             ]]></script>
 
             <echo level="info" message="*** Running Unit Tests ***"/>
-            <echo level="info" message="${SERVOY.INSTALL.APPSERVER.DIR}" />
             <!-- Define a timeout so we know the test will finish eventually -->
             <junit fork="yes" forkmode="once" timeout="${SERVOY.TEST.TIMEOUT}" dir="${SERVOY.INSTALL.APPSERVER.DIR}" haltonfailure="false" haltonerror="false" showoutput="true" errorProperty="test.failed" failureProperty="test.failed" printsummary="withOutAndErr">
                 <jvmarg value="${SERVOY.TEST.MEMORY.XMS}" />
@@ -178,6 +182,8 @@
                 project.log("Solution import and Unit Test execution finished in " + value, project.MSG_INFO)
             ]]></script>
 
+            <move-log-to-logDir logFileToCopy="${SERVOY.INSTALL.APPSERVER.DIR}/servoy_log.txt" newName="junit$servoy_log.txt"/>
+            <move-log-to-logDir logFileToCopy="${WORKSPACE}/.metadata/.log" newName="junit$workspace_log.log"/>
             <antcall target="create_test_report"/>
            </sequential>
     </macrodef>
@@ -217,10 +223,10 @@
         <latest_jar pathName="cse.model.jar.location" dir="${SERVOY.INSTALL.DEVELOPER.DIR}/plugins" includes="**/com.servoy.eclipse.model_*.jar"/>
         <latest_jar pathName="servoy_debug.jar.location" dir="${SERVOY.INSTALL.DEVELOPER.DIR}/plugins" includes="**/servoy_debug_*.jar"/>
         <latest_jar pathName="cse.exporter.mobile.location" dir="${SERVOY.INSTALL.DEVELOPER.DIR}/plugins" includes="**/com.servoy.eclipse.exporter.mobile_*.jar"/>
-        <echo level="info" message="Using in importer classpath: ${cse.jsunit.jar.location_property}" />
-        <echo level="info" message="Using in importer classpath: ${cse.model.jar.location_property}" />
-        <echo level="info" message="Using in importer classpath: ${servoy_debug.jar.location_property}" />
-        <echo level="info" message="Using in importer classpath: ${cse.exporter.mobile.location_property}" />
+        <echo level="verbose" message="Using in importer classpath: ${cse.jsunit.jar.location_property}" />
+        <echo level="verbose" message="Using in importer classpath: ${cse.model.jar.location_property}" />
+        <echo level="verbose" message="Using in importer classpath: ${servoy_debug.jar.location_property}" />
+        <echo level="verbose" message="Using in importer classpath: ${cse.exporter.mobile.location_property}" />
 
         <unzip src="${cse.jsunit.jar.location_property}" dest="${LIB-DIR}/jsUnit">
             <patternset>

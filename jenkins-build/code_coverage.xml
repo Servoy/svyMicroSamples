@@ -26,8 +26,7 @@
 
     <!-- Step 2: instrument all code from workspace into the temp instrumented workspace-->
     <target name="code_coverage_instrument_workspace">
-        <echo level="info" message="istanbul ${CODE.COVERAGE.INSTRUMENTED.WORKSPACE} --output ${CODE.COVERAGE.INSTRUMENTED.WORKSPACE.TEMP} --preserve-comments --no-compact --save-baseline --baseline-file ${CODE.COVERAGE.REPORT.DIR}/coverage-baseline.json" />
-        <echo level="info" message="instrumenting ${SERVOY.SOLUTION_UNDER_TESTING} into ${CODE.COVERAGE.INSTRUMENTED.WORKSPACE.TEMP}"/>
+        <echo level="verbose" message="instrumenting ${SERVOY.SOLUTION_UNDER_TESTING} into ${CODE.COVERAGE.INSTRUMENTED.WORKSPACE.TEMP}"/>
         <exec executable="istanbul.cmd" dir="${TOOLS-DIR}" osfamily="windows" failonerror="true">
             <arg value="instrument"/>
             <arg value="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE}"/>
@@ -54,8 +53,7 @@
 
     <!-- Step 3: parse all the instrumented code from the temp instrumented workspace and save the modified instrumented file into the instrumented workspace-->
     <target name="code_coverage_fix_instrumented_workspace_for_servoy">
-        <echo level="info" message="node ${LIB-DIR}/servoyCodeCoverageInstrumentationFixer.js --d ${CODE.COVERAGE.INSTRUMENTED.WORKSPACE} ${CODE.COVERAGE.INSTRUMENTED.WORKSPACE.TEMP} --tsp ${CODE.COVERAGE.INSTRUMENTED.WORKSPACE}/${SERVOY.TEST-SOLUTION} --rp ${CODE.COVERAGE.REPORT.DIR} --i ${CODE.COVERAGE.INSTRUMENTED.INCLUDE} --x ${CODE.COVERAGE.INSTRUMENTED.EXCLUDE} --e true --v false" />
-        <echo level="info" message="Processing instrumented code from ${CODE.COVERAGE.INSTRUMENTED.WORKSPACE.TEMP} to ${CODE.COVERAGE.INSTRUMENTED.WORKSPACE}, fixing Servoy incompatibilities"/>
+        <echo level="verbose" message="Processing instrumented code from ${CODE.COVERAGE.INSTRUMENTED.WORKSPACE.TEMP} to ${CODE.COVERAGE.INSTRUMENTED.WORKSPACE}, fixing Servoy incompatibilities"/>
         <exec executable="node" failonerror="true">
             <arg value="${LIB-DIR}/servoyCodeCoverageInstrumentationFixer.js"/>
             <arg value="--d"/>

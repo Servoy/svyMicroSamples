@@ -6,7 +6,7 @@
  * @properties={typeid:24,uuid:"F694EC92-27EE-4251-ADED-5A5E06D615EB"}
  */
 function allowFormIncludedInMenu() {
-	return true;
+	return false;
 }
 
 /**

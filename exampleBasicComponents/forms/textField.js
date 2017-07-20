@@ -234,7 +234,7 @@ function getIconStyleClass() {
 * @properties={typeid:24,uuid:"BB0827A3-E10A-4BB3-82EF-62ED77A85830"}
 */
 function getParent() {
-	return forms.basicComponents;
+	return forms.commonComponentSamples;
 }
 
 /**
@@ -245,4 +245,10 @@ function getParent() {
  */
 function getMoreInfo() {
 	return 'Foo'
+}
+/**
+ * @properties={typeid:24,uuid:"B2F4E5E8-1220-4C98-AFF1-CB86579F6704"}
+ */
+function allowFormIncludedInMenu() {
+	return true;
 }

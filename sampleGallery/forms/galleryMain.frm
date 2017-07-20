@@ -10,7 +10,7 @@ items:[
 {
 anchors:3,
 formIndex:1,
-location:"915,145",
+location:"915,125",
 mnemonic:"",
 name:"sampleCodeButton",
 onActionMethodID:"09880D3C-A938-42AF-A7CC-0BD1B6FBBB24",
@@ -30,7 +30,7 @@ uuid:"2A3C644B-743B-4EC4-8D9F-649F0A21A665"
 extendsID:"6B51B180-F396-4524-AC67-5B85B0660373",
 formIndex:0,
 location:"10,0",
-size:"980,109",
+size:"980,79",
 typeid:7,
 uuid:"5B99CE05-A522-4D4B-8CCA-880073D380A6"
 },
@@ -38,8 +38,8 @@ uuid:"5B99CE05-A522-4D4B-8CCA-880073D380A6"
 anchors:11,
 dataProviderID:"title",
 formIndex:2,
-location:"310,112",
-size:"680,30",
+location:"280,86",
+size:"710,30",
 styleClass:"label_header_1 center",
 text:"Title",
 typeid:7,
@@ -51,17 +51,17 @@ json:{
 anchors:13,
 location:{
 x:10,
-y:110
+y:80
 },
 onMenuItemSelected:"26BAA020-52A7-46ED-B0CC-F0A1E8FE04E3",
 size:{
 height:534,
-width:290
+width:260
 }
 },
-location:"10,110",
+location:"10,80",
 name:"nav",
-size:"290,534",
+size:"260,534",
 typeName:"servoyextra-sidenav",
 typeid:47,
 uuid:"96079B40-4EA0-47F9-8C9E-0D4083C5EE0E"
@@ -69,7 +69,7 @@ uuid:"96079B40-4EA0-47F9-8C9E-0D4083C5EE0E"
 {
 anchors:3,
 formIndex:1,
-location:"835,145",
+location:"835,125",
 name:"downloadButton",
 onActionMethodID:"199B63E5-0FA2-4110-84BA-8060C9FAAC5D",
 rolloverCursor:12,
@@ -86,7 +86,7 @@ uuid:"B1DADCB8-ECB8-45ED-8CBE-7EBBD06405BE"
 {
 anchors:3,
 formIndex:1,
-location:"875,145",
+location:"875,125",
 name:"webSiteURLButton",
 onActionMethodID:"AF953A2B-DEAC-4511-914A-A7F97396ADDB",
 rolloverCursor:12,
@@ -106,7 +106,7 @@ extendsID:"C06E4EC7-A9FC-4ED9-B9FD-B089F8CCC5B1",
 formIndex:1,
 horizontalAlignment:0,
 location:"309,20",
-size:"680,80",
+size:"680,60",
 text:"Micro Sample Gallery",
 typeid:7,
 uuid:"D8F27D10-7A3B-417B-B1FE-AD5D7CFCB5A2"
@@ -119,8 +119,8 @@ uuid:"E95FA31D-9C85-44DB-ADAF-29B8C29328B5"
 },
 {
 extendsID:"2A5F4A4C-AB7B-4911-B94F-34313023357A",
-location:"310,180",
-size:"680,460",
+location:"280,140",
+size:"700,470",
 tabOrientation:-3,
 typeid:16,
 uuid:"F10ACA6A-0066-449D-97E1-D6DF72FF4011"
@@ -128,7 +128,7 @@ uuid:"F10ACA6A-0066-449D-97E1-D6DF72FF4011"
 {
 anchors:3,
 formIndex:1,
-location:"955,145",
+location:"955,125",
 name:"moreInfoButton",
 onActionMethodID:"F5F20A0C-4458-4B94-B666-B453CA14C92D",
 rolloverCursor:12,

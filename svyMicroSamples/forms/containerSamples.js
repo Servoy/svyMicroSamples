@@ -2,7 +2,7 @@
  * @properties={typeid:24,uuid:"3C591CC9-1648-4537-8265-D81E3B7BE20F"}
  */
 function allowFormIncludedInMenu() {
-	return false;
+	return true;
 }
 /**
  *
@@ -31,5 +31,15 @@ function getDescription() {
  * @properties={typeid:24,uuid:"D29047B9-0A2D-43D3-B695-21D0DAC61128"}
  */
 function getIconStyleClass() {
-	return 'fa fa-plug';
+	return 'fa fa-clone';
+}
+
+/**
+ * @public 
+ * @return {String} The sort order, i.e. 1, 1.1, 1.1.2
+ *
+ * @properties={typeid:24,uuid:"AF623797-EB88-4CCE-A18B-30B4F8C799DC"}
+ */
+function getSort() {
+	return '2'
 }

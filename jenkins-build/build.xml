@@ -79,7 +79,18 @@
             </then>
             <else>
                 <setup-servoy-properties dbName="${DB.NAME}" dbServerUrl="${DB.URL}" dbServerPort="${DB.PORT}" dbServerUsername="${DB.USERNAME}" dbServerPassword="${DB.PASSWORD}"/>
-                <export-solution-as-dot-servoy solutionNames="${SERVOY.TEST-SOLUTION}"/>
+                <if>
+                    <not>
+                        <equals arg1="${CODE.COVERAGE.ENABLED}" arg2="true" />
+                    </not>
+                    <then>
+                        <export-solution-as-dot-servoy workspace="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE}" solutionNames="${SERVOY.TEST-SOLUTION}"/>
+                    </then>
+                    <else>
+                        <export-solution-as-dot-servoy solutionNames="${SERVOY.TEST-SOLUTION}"/>
+                    </else>
+                </if>
+                
                 <run_servoy_jsunit_tests/>
            </else>
        </if>
@@ -117,9 +128,8 @@
 
     <target name="6-StoreData">
         <!-- Move the collected logs to the folder for the specific Jenkins build as artifacts -->
-        <move file="${WORKSPACE}/.metadata/.log" tofile="${BUILD.DIR}/logs/workspace.log" failonerror="false"/>
         <move todir="${ARTIFACTS.DIR}" failonerror="false">
-            <fileset dir="${LOG.DIR}" includes="*.log" />
+            <fileset dir="${LOG.DIR}" includes="*.*" />
         </move>
 
         <!-- Move .servoy JSUnit test to archive folder -->
@@ -132,9 +142,8 @@
             <fileset dir="${OUTPUT.DIR}" includes="*.war" />
         </move>
 
-
-        <fail message="Exports failed: please check exporter log files." if="export.failed" />
-        <fail message="Tests failed: please check test reports." if="test.failed" />
+        <fail-if-export-failed />
+        <fail-if-unittests-failed />
     </target>
 
 </project>

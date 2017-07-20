@@ -75,6 +75,12 @@ function getChildren(parent){
  * @properties={typeid:24,uuid:"A59D5FA2-2656-4BDB-913C-56CD8156F9E4"}
  */
 function sortSamples(form1,form2){
+	if(form1.getSort() < form2.getSort()){
+		return -1
+	}
+	if(form1.getSort() > form2.getSort()){
+		return 1;
+	}
 	if(form1.getName() < form2.getName()){
 		return -1
 	}
