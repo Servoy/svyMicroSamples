@@ -111,10 +111,13 @@
         <if>
             <not>
                 <isset property="export.failed"/>
-                 <and>
-                    <isset property="e2e.failed"/>
-                </and>
             </not>
+            <and>
+                <not>
+                    <isset property="e2e.failed"/>
+                </not>
+            </and>
+            
             <then>
                 <deploy-war-on-tomcat-server />
             </then>
