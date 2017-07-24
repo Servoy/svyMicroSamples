@@ -1,0 +1,167 @@
+[
+  {
+    "description": "Protractor and Cucumber Test",
+    "assertions": [
+      {
+        "passed": true
+      },
+      {
+        "passed": true
+      },
+      {
+        "passed": true
+      },
+      {
+        "passed": true
+      },
+      {
+        "passed": true
+      }
+    ],
+    "events": [
+      {
+        "emitterEvent": "testPass",
+        "name": "Given I go to \"http://demo.servoy.com/micro-samples/solutions/sampleGallery/index.html?f=galleryMain\"",
+        "category": "Testing the Servoy Sample Galery - Foundset: Protractor and Cucumber Test",
+        "durationMillis": 3252,
+        "sourceLocation": {
+          "filePath": "c:\\Users\\alexz\\Documents\\git_servoy\\svyMicroSamples\\jenkins-build\\e2e\\features\\sample_application\\foundset.feature",
+          "line": 5,
+          "column": 1
+        }
+      },
+      {
+        "emitterEvent": "testPass",
+        "name": "When servoy sidenav component with name galleryMain.nav tab Working with Data is clicked",
+        "category": "Testing the Servoy Sample Galery - Foundset: Protractor and Cucumber Test",
+        "durationMillis": 1735,
+        "sourceLocation": {
+          "filePath": "c:\\Users\\alexz\\Documents\\git_servoy\\svyMicroSamples\\jenkins-build\\e2e\\features\\sample_application\\foundset.feature",
+          "line": 6,
+          "column": 1
+        }
+      },
+      {
+        "emitterEvent": "testPass",
+        "name": "When servoy sidenav component with name galleryMain.nav tab Working with Data is clicked",
+        "category": "Testing the Servoy Sample Galery - Foundset: Protractor and Cucumber Test",
+        "durationMillis": 1234,
+        "sourceLocation": {
+          "filePath": "c:\\Users\\alexz\\Documents\\git_servoy\\svyMicroSamples\\jenkins-build\\e2e\\features\\sample_application\\foundset.feature",
+          "line": 7,
+          "column": 1
+        }
+      }
+    ],
+    "duration": 6221
+  },
+  {
+    "description": "Protractor and Cucumber Test",
+    "assertions": [
+      {
+        "passed": true
+      },
+      {
+        "passed": true
+      },
+      {
+        "passed": true
+      },
+      {
+        "passed": true
+      },
+      {
+        "passed": true
+      }
+    ],
+    "events": [
+      {
+        "emitterEvent": "testPass",
+        "name": "Given I go to \"http://demo.servoy.com/micro-samples/solutions/sampleGallery/index.html?f=galleryMain\"",
+        "category": "Testing the Servoy Sample Galery - Foundset: Protractor and Cucumber Test",
+        "durationMillis": 618,
+        "sourceLocation": {
+          "filePath": "c:\\Users\\alexz\\Documents\\git_servoy\\svyMicroSamples\\jenkins-build\\e2e\\features\\sample_application\\foundset.feature",
+          "line": 5,
+          "column": 1
+        }
+      },
+      {
+        "emitterEvent": "testPass",
+        "name": "When servoy sidenav component with name galleryMain.nav tab Working with Data is clicked",
+        "category": "Testing the Servoy Sample Galery - Foundset: Protractor and Cucumber Test",
+        "durationMillis": 680,
+        "sourceLocation": {
+          "filePath": "c:\\Users\\alexz\\Documents\\git_servoy\\svyMicroSamples\\jenkins-build\\e2e\\features\\sample_application\\foundset.feature",
+          "line": 6,
+          "column": 1
+        }
+      },
+      {
+        "emitterEvent": "testPass",
+        "name": "When servoy sidenav component with name galleryMain.nav tab Working with Data is clicked",
+        "category": "Testing the Servoy Sample Galery - Foundset: Protractor and Cucumber Test",
+        "durationMillis": 1216,
+        "sourceLocation": {
+          "filePath": "c:\\Users\\alexz\\Documents\\git_servoy\\svyMicroSamples\\jenkins-build\\e2e\\features\\sample_application\\foundset.feature",
+          "line": 7,
+          "column": 1
+        }
+      }
+    ],
+    "duration": 2514
+  },
+  {
+    "description": "Protractor and Cucumber Test",
+    "assertions": [
+      {
+        "passed": true
+      },
+      {
+        "passed": true
+      },
+      {
+        "passed": false
+      },
+      {
+        "passed": true
+      }
+    ],
+    "events": [
+      {
+        "emitterEvent": "testPass",
+        "name": "Given I go to \"http://demo.servoy.com/micro-samples/solutions/sampleGallery/index.html?f=galleryMain\"",
+        "category": "Testing the Servoy Sample Galery - Foundset: Protractor and Cucumber Test",
+        "durationMillis": 394,
+        "sourceLocation": {
+          "filePath": "c:\\Users\\alexz\\Documents\\git_servoy\\svyMicroSamples\\jenkins-build\\e2e\\features\\sample_application\\foundset.feature",
+          "line": 5,
+          "column": 1
+        }
+      },
+      {
+        "emitterEvent": "testFail",
+        "name": "When servoy sidenav component with name cookietwo tab cookie is clicked",
+        "category": "Testing the Servoy Sample Galery - Foundset: Protractor and Cucumber Test",
+        "durationMillis": 10015,
+        "sourceLocation": {
+          "filePath": "c:\\Users\\alexz\\Documents\\git_servoy\\svyMicroSamples\\jenkins-build\\e2e\\features\\sample_application\\foundset.feature",
+          "line": 6,
+          "column": 1
+        }
+      },
+      {
+        "emitterEvent": "testPass",
+        "name": "When servoy sidenav component with name cookietwo tab cookie is clicked",
+        "category": "Testing the Servoy Sample Galery - Foundset: Protractor and Cucumber Test",
+        "durationMillis": null,
+        "sourceLocation": {
+          "filePath": "c:\\Users\\alexz\\Documents\\git_servoy\\svyMicroSamples\\jenkins-build\\e2e\\features\\sample_application\\foundset.feature",
+          "line": 7,
+          "column": 1
+        }
+      }
+    ],
+    "duration": null
+  }
+]
