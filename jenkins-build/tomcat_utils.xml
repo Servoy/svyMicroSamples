@@ -2,20 +2,31 @@
 
 <!-- Works with Ant 1.7.0 and higher -->
 <project basedir=".">
+    <echo level="verbose" message="${CATALINA_ANT_JAR.DIR}" />
+    <path id="catalina-ant-classpath">
+        <fileset dir="${CATALINA_ANT_JAR.DIR}">
+            <include name="catalina-ant.jar"/>
+            <include name="tomcat-coyote.jar"/>
+            <include name="tomcat-util.jar"/>
+            <include name="tomcat-juli.jar"/>
+        </fileset>
+    </path>
+    <taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask" classpathref="catalina-ant-classpath" />
+    <taskdef name="undeploy" classname="org.apache.catalina.ant.UndeployTask" classpathref="catalina-ant-classpath" />
 
     <macrodef name="deploy-war-on-tomcat-server">
         <attribute name="applicationName" default="${TOMCAT.APPLICATION.NAME}" />
         <attribute name="warFile" default="${WAR-FILE}" />
         <sequential>
             <undeploy-war-on-tomcat-server applicationName="@{applicationName}" warFile="@{warFile}" />
-            <get quiet="true" src="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/deploy?path=/@{applicationName}&amp;war=@{warFile}" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" dest="${LOG.DIR}/war_deploy.log" />
+            <deploy failonerror="yes" url="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" path="/@{applicationName}" war="file:@{warFile}" />
 
-            <loadfile property="war_deploy_log" srcfile="${LOG.DIR}/war_deploy.log"/>
+ <!-->           <loadfile property="war_deploy_log" srcfile="${LOG.DIR}/war_deploy.log"/>
             <condition property="war_deploy.success">
                 <matches pattern="OK.*" string="${war_deploy_log}"/>
             </condition>
 
-            <fail message="War deployment failed" unless="war_deploy.success" />
+            <fail message="War deployment failed" unless="war_deploy.success" />-->
         </sequential>
     </macrodef>
 
@@ -23,8 +34,7 @@
         <attribute name="applicationName" default="${TOMCAT.APPLICATION.NAME}" />
         <attribute name="warFile" default="${WAR-FILE}" />
         <sequential>
-            <get quiet="true" src="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/undeploy?path=/@{applicationName}" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" dest="${LOG.DIR}/war_undeploy.log" />
-        </sequential>
+            <undeploy failonerror="no" url="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" path="/@{applicationName}" />
+       </sequential>
     </macrodef>
-
 </project>

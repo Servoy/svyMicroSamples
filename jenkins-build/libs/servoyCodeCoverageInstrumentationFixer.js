@@ -21,6 +21,7 @@ var util = require('util');
 var uuid = require('uuid/v4');
 var Transform = stream.Transform || require('readable-stream').Transform;
 
+
 var HELP = 'servoyCodeCoverageInstrumentationFixer arguments\n\
 --h help\n\
 --d <output_dir> <input_dir>\n\
@@ -36,28 +37,28 @@ include folders. List all folder to be included in a string. Use comma to separa
 --x "<exclude_folder>[,<exclude_folder>]"\n\
 Exclude folders or files. List all files and folder to be excluded in a string. Use comma to separate folder or file names.\n\n\
 --v <true|false>\n\
-verbose logging. set verbose to true to view the log messages during execution\n'
+verbose logging. set verbose to true to view the log messages during execution\n';
 
-var WORKSPACE
-var TEMP_WORKSPACE // input directory to parse the file.
-var WORKSPACE_PATH // output directory for the parsed file.
-var TEST_SOLUTION_PATH // name of the test solution.
-var EXCLUDES // list of files to be excluded
-var INCLUDES // all included folder
+var WORKSPACE;
+var TEMP_WORKSPACE; // input directory to parse the file.
+var WORKSPACE_PATH; // output directory for the parsed file.
+var TEST_SOLUTION_PATH; // name of the test solution.
+var EXCLUDES; // list of files to be excluded
+var INCLUDES; // all included folder
 var FAIL_IF_INSTRUMENTATION_FAIL = false; // return error if processed file is not instrumented
 var VERBOSE = false;
-var REPORT_PATH
+var REPORT_PATH;
 
 // process and validate the input arguments
-processInputArgs(process.argv.slice(2))
+processInputArgs(process.argv.slice(2));
 
-var ccScopePath = TEST_SOLUTION_PATH.replace(TEMP_WORKSPACE, WORKSPACE_PATH)  + '/codeCoverageReporting.js'
+var ccScopePath = TEST_SOLUTION_PATH.replace(TEMP_WORKSPACE, WORKSPACE_PATH)  + '/codeCoverageReporting.js';
 if (!ccScopePath) {
-	throw new Error('Path to test solution cannot be determined')
+	throw new Error('Path to test solution cannot be determined');
 }
-log('Path to test solution: ' + ccScopePath)
+log('Path to test solution: ' + ccScopePath);
 
-var reportPath = REPORT_PATH.replace(/\\/g, '/')
+var reportPath = REPORT_PATH.replace(/\\/g, '/');
 fs.readFile(ccScopePath, 'utf8', function (err,data) {
   if (err) {
     return console.log(err);
@@ -68,7 +69,7 @@ fs.readFile(ccScopePath, 'utf8', function (err,data) {
 });
 
 //Create writeStream for the scope.codeCoverageReporting.js file that processJSFile will write to
-var ccScopeWriteStream = fs.createWriteStream(ccScopePath, { flags: 'a', encoding: 'utf-8', mode: 0666 })
+var ccScopeWriteStream = fs.createWriteStream(ccScopePath, { flags: 'a', encoding: 'utf-8', mode: 0666 });
 
 var jsFilesToProcess = []; // the list of js files in workspace
 // 1 get all js files in directory.
@@ -79,7 +80,7 @@ processJSFile();
 
 function errorHandler(err) {
 	if(err) {
-	    console.error(err)
+	    console.error(err);
 	}
 }
 
@@ -88,7 +89,7 @@ function errorHandler(err) {
  * */
 function log(msg) {
 	if (VERBOSE) {
-		console.log(msg)
+		console.log(msg);
 	}
 }
 
@@ -98,81 +99,81 @@ function log(msg) {
 function processInputArgs(args) {
 	for (var i = 0; i < args.length; i++) {
 		if (!isArgument(args[i])) {
-			continue
+			continue;
 		}
 		
 		switch (args[i]) {
 			case '--x': // exclude
 				if (!args[i + 1] || isArgument(args[i + 1]) || args[i + 1] === "${instrument.exclude.modules}") {
-					log("must specify a list of folder names after option --x. Exclude will be ignored")
+					log("must specify a list of folder names after option --x. Exclude will be ignored");
 					break;
 				}
 				/** @type {String} */
-				var excludes = args[i + 1].split(',')
-				var excludedFile
+				var excludes = args[i + 1].split(',');
+				var excludedFile;
 				for (var x = 0; x < excludes.length; x++) {
 					excludedFile = excludes[x].trim();
 					if (!EXCLUDES) {
-						log('init exclude')
-						EXCLUDES = { }
+						log('init exclude');
+						EXCLUDES = { };
 					}
-					log('exclude ' + excludedFile)
-					EXCLUDES[excludedFile] = -1
+					log('exclude ' + excludedFile);
+					EXCLUDES[excludedFile] = -1;
 				}
 				// utils.stringTrim(textString)
 				break;
 			case '--e': // fail if instrumentation fails
-				var value = args[i + 1]
+				var value = args[i + 1];
 				if (value === 'true') {
-					FAIL_IF_INSTRUMENTATION_FAIL = true
-					log('FAIL IF INSTRUMENTATION FAILS ' + FAIL_IF_INSTRUMENTATION_FAIL)
+					FAIL_IF_INSTRUMENTATION_FAIL = true;
+					log('FAIL IF INSTRUMENTATION FAILS ' + FAIL_IF_INSTRUMENTATION_FAIL);
 				} else if (value === 'false') {
-					FAIL_IF_INSTRUMENTATION_FAIL = false
+					FAIL_IF_INSTRUMENTATION_FAIL = false;
 				} else {
 					throw new Error(value + ' is not a valid value for argument ' + args[i] + '. value must be true or false ! run node ServoyParser.js --help for help');
 				}
 				break;
 			case '--i': // include arguments
 				if (!args[i + 1] || isArgument(args[i + 1]) || args[i + 1] == "${instrument.include.modules}") {
-					log("must specify a list of folder names after option --i. Include will be ignored")
+					log("must specify a list of folder names after option --i. Include will be ignored");
 					break;
 				}
 				/** @type {String} */
-				var includes = args[i + 1].split(',')
-				var includedFile
+				var includes = args[i + 1].split(',');
+				var includedFile;
 				for (var j = 0; j < includes.length; j++) {
 					includedFile = includes[j].trim();
 					if (!INCLUDES) {
-						log('init includes')
-						INCLUDES = { }
+						log('init includes');
+						INCLUDES = { };
 					}
-					log('include ' + includedFile)
-					INCLUDES[includedFile] = -1
+					log('include ' + includedFile);
+					INCLUDES[includedFile] = -1;
 				}
 				break;
 			case '--tsp': // test solution path
-				TEST_SOLUTION_PATH = args[i + 1]
+				TEST_SOLUTION_PATH = args[i + 1];
 				break;
 			case '--rp': // report path
-				REPORT_PATH = args[i + 1]
+				REPORT_PATH = args[i + 1];
 				break;
 			case '--d': // input directory
-				WORKSPACE = args[i + 1]
+				WORKSPACE = args[i + 1];
 				TEMP_WORKSPACE = path.resolve(args[i + 2]);
 				WORKSPACE_PATH = path.resolve(WORKSPACE);
 				break;
 			case '--v': // Verbose logging
-				var value = args[i + 1]
-				if (value == 'true') {
-					VERBOSE = true
-					log('Verbose logging')
-				} else if (value == 'false') {
-					VERBOSE = false
+				var valueVerbose = args[i + 1];
+				if (valueVerbose == 'true') {
+					VERBOSE = true;
+					log('Verbose logging');
+				} else if (valueVerbose == 'false') {
+					VERBOSE = false;
 				}
 				break;
 			case '--h': //show help menu
-				console.log(HELP)
-				process.exit(1)
+				console.log(HELP);
+				process.exit(1);
 				break;
 			default:
 				throw new Error(args[i] + ' is not a valid argument !');
@@ -187,7 +188,7 @@ function isArgument(arg) {
 	if (!arg) {
 		return false;
 	}
-	return arg.slice(0, 2) === '--'
+	return arg.slice(0, 2) === '--';
 }
 
 /**
@@ -195,12 +196,12 @@ function isArgument(arg) {
  */
 function buildListOfFilesToProcess(dir, fileList) {
 	if (!dir) {
-		console.error("Directory 'dir' is undefined or NULL")
-		return
+		console.error("Directory 'dir' is undefined or NULL");
+		return;
 	}
 	if (!fileList) {
-		console.error("Variable 'fileList' is undefined or NULL.")
-		return
+		console.error("Variable 'fileList' is undefined or NULL.");
+		return;
 	}
 	
 	var files = fs.readdirSync(dir);
@@ -212,7 +213,7 @@ function buildListOfFilesToProcess(dir, fileList) {
 		var filePath = dir + path.sep + files[i];
 		
 		if (isFileExcluded(files[i])) { // skip the file or folder if is listed in the excluded files
-			log('Skipping excluded file: ' + files[i])
+			log('Skipping excluded file: ' + files[i]);
 			continue;
 		}
 		
@@ -228,11 +229,11 @@ function buildListOfFilesToProcess(dir, fileList) {
 			}
 			
 			if (!isFileIncluded(filePath)) { // if one of parent directory of file is not in INCLUDED list skip the file
-				log('file ' + filePath + ' is not in the included list')
+				log('file ' + filePath + ' is not in the included list');
 				continue;
 			}
 			
-			fileList[fileList.length] = filePath //Add file to list
+			fileList[fileList.length] = filePath; //Add file to list
 		}
 	}
 }
@@ -244,7 +245,7 @@ function isFileExcluded(fileName) {
 	if (!EXCLUDES) {
 		return false;
 	}
-	return EXCLUDES.hasOwnProperty(fileName)
+	return EXCLUDES.hasOwnProperty(fileName);
 }
 
 /**
@@ -252,15 +253,15 @@ function isFileExcluded(fileName) {
  */
 function isFileIncluded(filePath) {
 	if (!INCLUDES) {
-		return true
+		return true;
 	}
-	var paths = filePath.split(path.sep)
+	var paths = filePath.split(path.sep);
 	for (var i = WORKSPACE_PATH.split(path.sep).length; i < paths.length; i++) {
 		if (INCLUDES.hasOwnProperty(paths[i])) {
 			return true;
 		}
 	}
-	return false
+	return false;
 }
 
 /**
@@ -270,14 +271,14 @@ function isFileIncluded(filePath) {
  */
 function processJSFile() {
 	var inFilePath = jsFilesToProcess.pop();
-	var outFilePath = WORKSPACE_PATH + inFilePath.substring(TEMP_WORKSPACE.length)
+	var outFilePath = WORKSPACE_PATH + inFilePath.substring(TEMP_WORKSPACE.length);
 	log('processing file: ' + outFilePath);
 
 	// TODO bad performance. read all file in once.
 	// copy the content into a different file.
 	fs.readFile(inFilePath, { flags: "r", encoding: 'utf8', mode: 0666 }, function(err, data) {
 		if (err) {
-			throw new Error(err)
+			throw new Error(err);
 		}
 
 		if (data.substring(0, 11) === '\nvar __cov_' && data.search('__coverage__') !== -1) {
@@ -309,14 +310,14 @@ function processJSFile() {
 			 * bits[4]: The subset of the update code that sets a default value
 			 * bits[5]: the fileName, surrounded by square brackets
 			 */
-			var bits =  /\s*(var (__cov_\S*).*)\n([\S\s]*(if \(!\(__cov.*(\[.*\])[\S\s]*)\n__cov_[\S\s]*.js'];)/g.exec(data)
+			var bits =  /\s*(var (__cov_\S*).*)\n([\S\s]*(if \(!\(__cov.*(\[.*\])[\S\s]*)\n__cov_[\S\s]*.js'];)/g.exec(data);
 			
 			// Write init code to codeCoverageReporting.js (only for calculatiosn and entity method .js files as they cannot contain variables)
 			if (inFilePath.indexOf(path.sep+'datasources'+path.sep) !== -1) {
-				var src = bits[4].replace(new RegExp(bits[2].replace(/\$/g, '\\$'), 'g'), '__coverage__') + '\n'
+				var src = bits[4].replace(new RegExp(bits[2].replace(/\$/g, '\\$'), 'g'), '__coverage__') + '\n';
 				
 //				TODO str.replace(/("\d+":)(1)/g, '$10') //Also resetting the baseline coverage info for functions to 0 
-				ccScopeWriteStream.write(src) 
+				ccScopeWriteStream.write(src);
 			} 
 			
 			//If the last file is processed, 'close' the codeCoverageReporting.js file
@@ -327,16 +328,16 @@ function processJSFile() {
 			// Update file content to previous content but with JSDoc and init code wrapped in an iife
 			fs.open(outFilePath, "w", "0666", function(oerr, fd) {
 				if (oerr) {
-					throw new Error(oerr)
+					throw new Error(oerr);
 				}
 
-				var fileBuffer
+				var fileBuffer;
 				if (inFilePath.indexOf(path.sep+'datasources'+path.sep) !== -1) {
 					/* Handle .js files for entity methods and calculations differently, as they cannot contain variables
 					 * The ccInitCode will be pushed into codeCoverageReporting.js
 					 * References to the __cov_xxxxx variable in the file itself will be replaced by a reference to the __coverage__ variable in the scopes.codeCoverageReporting
 					 */
-					fileBuffer = data.slice(data.indexOf('/*')).replace(new RegExp(bits[2].replace(/\$/g, '\\$'), 'g'), 'scopes.codeCoverageReporting.__coverage__' + bits[5])
+					fileBuffer = data.slice(data.indexOf('/*')).replace(new RegExp(bits[2].replace(/\$/g, '\\$'), 'g'), 'scopes.codeCoverageReporting.__coverage__' + bits[5]);
 				} else {
 					/* Add JSDoc to the __cov_xxxx variable
 					 * Wrap the init code in a iife with JSDoc
@@ -344,10 +345,10 @@ function processJSFile() {
 					 * 		instead of having '__cov_OQM1Zv_fD$FYkYtAaXevrA.s['x']++;' before the JSDoc block
 					 * 		to before the value assignment like 'var myVar = (__cov_OQM1Zv_fD$FYkYtAaXevrA.s['x']++,null)||myValue'
 					 */
-					var WRAPPER_PRE = '('
-					var WRAPPER_POST = ',\'\')||'
-					var WRAPPER_EQUAL = '='
-					var WRAPPER_UNDEFINED = 'undefined'
+					var WRAPPER_PRE = '(';
+					var WRAPPER_POST = ',\'\')||';
+					var WRAPPER_EQUAL = '=';
+					var WRAPPER_UNDEFINED = 'undefined';
 					
 					var newContent = [
 						'/**@properties={typeid:35,uuid:"' + uuid() + '",variableType:-4}*/',
@@ -355,49 +356,49 @@ function processJSFile() {
 						'/**@properties={typeid:35,uuid:"' + uuid() + '",variableType:-4}*/var init' + bits[2] + ' = (function(){',
 						bits[3],
 						'}());'
-					]
+					];
 					
 					/* Regex to find all scope variable declarations in a file
 					 * m[0]: entire match from init code up to variable value
 					 * m[1]: the init code
 					 * m[2]: the ' = ' part of the value assignment if exists
 					 */
-					var varCCCodeRegex = /(__cov_[a-zA-Z0-9\$\_]*\.s\['(\d+)']\+\+;)(?:\s|\n\s*(?:\/{2}|\/?\*).*)*\/\*{2}(?:.*\n\s*\*\s*)*@properties={typeid:35,.*\n[\s\S]*?\*\/\s*var\s*[a-zA-z0-9\_\$]*(\s*=\s*)?/gm
-					var code = data.slice(bits[0].length)
-					var m
-					var lastPosition = 0
+					var varCCCodeRegex = /(__cov_[a-zA-Z0-9\$\_]*\.s\['(\d+)']\+\+;)(?:\s|\n\s*(?:\/{2}|\/?\*).*)*\/\*{2}(?:.*\n\s*\*\s*)*@properties={typeid:35,.*\n[\s\S]*?\*\/\s*var\s*[a-zA-z0-9\_\$]*(\s*=\s*)?/gm;
+					var code = data.slice(bits[0].length);
+					var m;
+					var lastPosition = 0;
 					
                     while ((m = varCCCodeRegex.exec(code)) !== null) {
-                    	newContent[newContent.length] = code.slice(lastPosition, m.index) //Add all non-matched code since last match
-						newContent[newContent.length] = code.slice(m.index + m[1].length, varCCCodeRegex.lastIndex) //Add matched code minus init code
+                    	newContent[newContent.length] = code.slice(lastPosition, m.index); //Add all non-matched code since last match
+						newContent[newContent.length] = code.slice(m.index + m[1].length, varCCCodeRegex.lastIndex); //Add matched code minus init code
 						if (!m[3]) {
-							newContent[newContent.length] = WRAPPER_EQUAL //Add missing assignment operator on variables without value
+							newContent[newContent.length] = WRAPPER_EQUAL; //Add missing assignment operator on variables without value
 						}
-						newContent[newContent.length] = WRAPPER_PRE
-						newContent[newContent.length] = m[1].slice(0, -1) //Add varInitCode (and strip the semicolon at the end to make the code valid)
-						newContent[newContent.length] = WRAPPER_POST
+						newContent[newContent.length] = WRAPPER_PRE;
+						newContent[newContent.length] = m[1].slice(0, -1); //Add varInitCode (and strip the semicolon at the end to make the code valid)
+						newContent[newContent.length] = WRAPPER_POST;
 						if (!m[3]) {
-							newContent[newContent.length] = WRAPPER_UNDEFINED //Add 'undefined' as value for variables without value
+							newContent[newContent.length] = WRAPPER_UNDEFINED; //Add 'undefined' as value for variables without value
 						}
-                        lastPosition = varCCCodeRegex.lastIndex
+                        lastPosition = varCCCodeRegex.lastIndex;
 					}
-                    newContent[newContent.length] = code.slice(lastPosition) //Add the remainder of the code in the file
+                    newContent[newContent.length] = code.slice(lastPosition); //Add the remainder of the code in the file
 						
-					fileBuffer = new Buffer(newContent.join(''))
+					fileBuffer = new Buffer(newContent.join(''));
 				}
 				
 				fs.write(fd, fileBuffer, 0, fileBuffer.length, null, function(werr) {
 					if (werr) {
-						throw new Error(werr)
+						throw new Error(werr);
 					}
-					fs.close(fd, function() {})
+					fs.close(fd, function() {});
 				});
 			});
 		}
 
 		//process next file
 		if (jsFilesToProcess.length) {
-			processJSFile()
+			processJSFile();
 		}
-	})
+	});
 }
