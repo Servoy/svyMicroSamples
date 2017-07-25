@@ -79,7 +79,8 @@
                 <if>
                     <istrue value="${CODE.COVERAGE.ENABLED}"/>
                     <then>
-                        <export-solution-as-dot-servoy workspace="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE}" solutionNames="${SERVOY.TEST-SOLUTION}"/>
+                        <!--<export-solution-as-dot-servoy workspace="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE}" solutionNames="${SERVOY.TEST-SOLUTION}"/>-->
+                        <export-solution-as-dot-servoy solutionNames="${SERVOY.TEST-SOLUTION}"/>
                     </then>
                     <else>
                         <export-solution-as-dot-servoy solutionNames="${SERVOY.TEST-SOLUTION}"/>
