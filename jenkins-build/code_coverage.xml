@@ -107,22 +107,23 @@
                 <exec executable="cmd" osfamily="windows" failonerror="true">
                     <arg line="/c npm install --prefix ${TOOLS-DIR} istanbul" />
                 </exec>
-                <exec executable="cmd" osfamily="windows" failonerror="true">
-                    <arg line="/c npm install --prefix ${TOOLS-DIR} uuid" />
-                </exec>
                 <exec executable="bash" osfamily="unix" failonerror="true">
                     <arg line="-c" />
                     <arg value="npm install --prefix ${TOOLS-DIR} istanbul"/>
-                </exec>
-                <exec executable="bash" osfamily="unix" failonerror="true">
-                    <arg line="-c" />
-                    <arg value="npm install --prefix ${TOOLS-DIR} uuid"/>
                 </exec>
             </then>
             <else>
                 <echo level="info" message="Install of software disabled from config, will use manual install of ISTANBUL" />
             </else>
         </if>
+        <echo level="info" message="Install UUID in lib dir, needed because global ref is not workingL" />
+        <exec executable="bash" osfamily="unix" failonerror="true">
+            <arg line="-c" />
+            <arg value="npm install --prefix ${LIBS-DIR} uuid"/>
+        </exec>
+        <exec executable="cmd" osfamily="windows" failonerror="true">
+            <arg line="/c npm install --prefix ${LIB-DIR} uuid" />
+        </exec>
     </target>
 
 </project>
