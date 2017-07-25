@@ -55,9 +55,7 @@
 
     <target name="2-SetupCodecoverage">
         <if>
-            <not>
-                <equals arg1="${CODE.COVERAGE.ENABLED}" arg2="true" />
-            </not>
+            <isfalse value="${SERVOY.COVERAGE.ENABLED}"/>
             <then>
                 <echo level="info" message="*** Code Coverage Reporting disabled (Skip step) ***" />
             </then>
@@ -72,18 +70,14 @@
 
     <target name="3-RunJSUnitTest" depends="get_equinox_jar, prepare_classpath">
         <if>
-            <not>
-                <equals arg1="${SERVOY.JUNIT.ENABLED}" arg2="true" />
-            </not>
+            <isfalse value="${SERVOY.JUNIT.ENABLED}"/>
             <then>
                <echo level="info" message="*** Servoy JSUnit Test disabled (Skip step) ***" />
             </then>
             <else>
                 <setup-servoy-properties dbName="${DB.NAME}" dbServerUrl="${DB.URL}" dbServerPort="${DB.PORT}" dbServerUsername="${DB.USERNAME}" dbServerPassword="${DB.PASSWORD}"/>
                 <if>
-                    <not>
-                        <equals arg1="${CODE.COVERAGE.ENABLED}" arg2="true" />
-                    </not>
+                    <istrue value="${CODE.COVERAGE.ENABLED}"/>
                     <then>
                         <export-solution-as-dot-servoy workspace="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE}" solutionNames="${SERVOY.TEST-SOLUTION}"/>
                     </then>
@@ -110,8 +104,8 @@
         <export-solution-as-war solutionNames="${SERVOY.SOLUTION}" workspace="${WORKSPACE}" warFileName="${WAR-FILE.NAME}"/>
         <if>
             <or>
-                <istrue property="e2e.failed"/>
-                <istrue property="export.failed" />
+                <istrue value="${e2e.failed}"/>
+                <istrue value="${export.failed}" />
             </or>
             <then>
                 <deploy-war-on-tomcat-server />
@@ -124,7 +118,7 @@
             <equals arg1="${CODE.COVERAGE.ENABLED}" arg2="true" />
             <then>
                 <if>
-                    <istrue property="test.failed"/>
+                    <istrue value="${test.failed}"/>
                     <then>
                         <antcall target="generate_code_coverage_reports"/>
                         <antcall target="generate_code_analysis_reports"/>
