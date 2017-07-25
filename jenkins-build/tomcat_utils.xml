@@ -20,7 +20,7 @@
         <sequential>
             <undeploy-war-on-tomcat-server applicationName="@{applicationName}" warFile="@{warFile}" />
             <echo level="info" message="Deploy war file: @{applicationName}" />
-            <deploy failonerror="yes" url="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" path="/@{applicationName}" localWar="@{warFile}" update="true" />
+            <deploy failonerror="yes" url="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" path="/@{applicationName}" localWar="file:@{warFile}" update="true" />
 
  <!-->           <loadfile property="war_deploy_log" srcfile="${LOG.DIR}/war_deploy.log"/>
             <condition property="war_deploy.success">
