@@ -18,7 +18,7 @@ var readline = require('readline');
 var stream = require('stream');
 var path = require('path');
 var util = require('util');
-var uuid = require('uuid/v4');
+var uuid = require('uuid');
 var Transform = stream.Transform || require('readable-stream').Transform;
 
 var HELP = 'servoyCodeCoverageInstrumentationFixer arguments\n\
@@ -350,9 +350,9 @@ function processJSFile() {
 					var WRAPPER_UNDEFINED = 'undefined'
 					
 					var newContent = [
-						'/**@properties={typeid:35,uuid:"' + uuid() + '",variableType:-4}*/',
+						'/**@properties={typeid:35,uuid:"' + uuid.v4() + '",variableType:-4}*/',
 						bits[1],
-						'/**@properties={typeid:35,uuid:"' + uuid() + '",variableType:-4}*/var init' + bits[2] + ' = (function(){',
+						'/**@properties={typeid:35,uuid:"' + uuid.v4() + '",variableType:-4}*/var init' + bits[2] + ' = (function(){',
 						bits[3],
 						'}());'
 					]

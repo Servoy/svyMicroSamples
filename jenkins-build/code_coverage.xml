@@ -107,9 +107,16 @@
                 <exec executable="cmd" osfamily="windows" failonerror="true">
                     <arg line="/c npm install --prefix ${TOOLS-DIR} istanbul" />
                 </exec>
+                <exec executable="cmd" osfamily="windows" failonerror="true">
+                    <arg line="/c npm install --prefix ${TOOLS-DIR} uuid" />
+                </exec>
                 <exec executable="bash" osfamily="unix" failonerror="true">
                     <arg line="-c" />
                     <arg value="npm install --prefix ${TOOLS-DIR} istanbul"/>
+                </exec>
+                <exec executable="bash" osfamily="unix" failonerror="true">
+                    <arg line="-c" />
+                    <arg value="npm install --prefix ${TOOLS-DIR} uuid"/>
                 </exec>
             </then>
             <else>
