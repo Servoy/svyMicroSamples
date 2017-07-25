@@ -4,7 +4,7 @@
 <project basedir=".">
     <target name="generate_code_analysis_reports">
         <if>
-            <isfalse value="${SERVOY.ANALYSIS.ENABLED}"/>
+            <isfalse value="${CODE.ANALYSIS.ENABLED}"/>
             <then>
                 <echo level="info" message="Code Analysis Reporting disabled" />
             </then>

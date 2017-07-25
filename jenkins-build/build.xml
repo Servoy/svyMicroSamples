@@ -98,24 +98,34 @@
        </if>
     </target>
 
-    <target name="4-RunE2ETests" depends="get_equinox_jar" unless="TEST.FAILED">
-        <setup-servoy-properties dbName="${DB.NAME}" dbServerUrl="${DB.URL}" dbServerPort="${DB.PORT}" dbServerUsername="${DB.USERNAME}" dbServerPassword="${DB.PASSWORD}"/>
-        <export-solution-as-war solutionNames="${SERVOY.SOLUTION}" workspace="${WORKSPACE}" warFileName="${PROTRACTOR.E2E.WAR-FILE.NAME}"/>
-        <deploy-war-on-tomcat-server applicationName="${PROTRACTOR.E2E.WAR-FILE.NAME}" warFile="${PROTRACTOR.E2E.WAR-FILE}"/>
-        <antcall target="run_e2e_tests" />
-        <undeploy-war-on-tomcat-server applicationName="${PROTRACTOR.E2E.WAR-FILE.NAME}" warFile="${PROTRACTOR.E2E.WAR-FILE}"/>
+    <target name="4-RunE2ETests" depends="get_equinox_jar">
+        <if>
+            <isfalse value="${TEST.FAILED}" />
+            <then>
+                <setup-servoy-properties dbName="${DB.NAME}" dbServerUrl="${DB.URL}" dbServerPort="${DB.PORT}" dbServerUsername="${DB.USERNAME}" dbServerPassword="${DB.PASSWORD}"/>
+                <export-solution-as-war solutionNames="${SERVOY.SOLUTION}" workspace="${WORKSPACE}" warFileName="${PROTRACTOR.E2E.WAR-FILE.NAME}"/>
+                <deploy-war-on-tomcat-server applicationName="${PROTRACTOR.E2E.WAR-FILE.NAME}" warFile="${PROTRACTOR.E2E.WAR-FILE}"/>
+                <antcall target="run_e2e_tests" />
+                <undeploy-war-on-tomcat-server applicationName="${PROTRACTOR.E2E.WAR-FILE.NAME}" warFile="${PROTRACTOR.E2E.WAR-FILE}"/>
+            </then>
+        </if>
     </target>
 
-    <target name="5-ExportDeployWarFile" depends="get_equinox_jar" unless="TEST.FAILED">
-        <setup-servoy-properties dbName="${DB.NAME}" dbServerUrl="${DB.URL}" dbServerPort="${DB.PORT}" dbServerUsername="${DB.USERNAME}" dbServerPassword="${DB.PASSWORD}"/>
-        <export-solution-as-war solutionNames="${SERVOY.SOLUTION}" workspace="${WORKSPACE}" warFileName="${WAR-FILE.NAME}"/>
+    <target name="5-ExportDeployWarFile" depends="get_equinox_jar">
         <if>
-            <or>
-                <istrue value="${E2E.FAILED}"/>
-                <istrue value="${EXPORT.FAILED}" />
-            </or>
+            <and>
+                <isfalse value="${TEST.FAILED}" />
+                <isfalse value="${E2E.FAILED}"/>
+            </and>
             <then>
-                <deploy-war-on-tomcat-server />
+                <setup-servoy-properties dbName="${DB.NAME}" dbServerUrl="${DB.URL}" dbServerPort="${DB.PORT}" dbServerUsername="${DB.USERNAME}" dbServerPassword="${DB.PASSWORD}"/>
+                <export-solution-as-war solutionNames="${SERVOY.SOLUTION}" workspace="${WORKSPACE}" warFileName="${WAR-FILE.NAME}"/>
+                <if>
+                    <isfalse value="${EXPORT.FAILED}" />
+                    <then>
+                        <deploy-war-on-tomcat-server />
+                    </then>
+                </if>
             </then>
         </if>
     </target>
