@@ -55,7 +55,7 @@
 
     <target name="2-SetupCodecoverage">
         <if>
-            <isfalse value="${SERVOY.COVERAGE.ENABLED}"/>
+            <isfalse value="${CODE.COVERAGE.ENABLED}"/>
             <then>
                 <echo level="info" message="*** Code Coverage Reporting disabled (Skip step) ***" />
             </then>
