@@ -119,7 +119,7 @@
         <echo level="info" message="Install UUID in lib dir, needed because global ref is not workingL" />
         <exec executable="bash" osfamily="unix" failonerror="true">
             <arg line="-c" />
-            <arg value="npm install --prefix ${LIBS-DIR} uuid"/>
+            <arg value="npm install --prefix ${LIB-DIR} uuid"/>
         </exec>
         <exec executable="cmd" osfamily="windows" failonerror="true">
             <arg line="/c npm install --prefix ${LIB-DIR} uuid" />
