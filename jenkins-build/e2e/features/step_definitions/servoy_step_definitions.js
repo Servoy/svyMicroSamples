@@ -1,5 +1,6 @@
 'use strict';
 module.exports = function () {
+	var protractor = require('protractor');
 	var EC = protractor.ExpectedConditions;
 	var expect = require('expect');
 	var startDate = new Date();
@@ -12,23 +13,36 @@ module.exports = function () {
 
 	//FOUNDSET SAMPLE GALERY FUNCTIONS//
 	this.Given(/^I go to "([^"]*)"$/, { timeout: 60 * 1000 }, function (site, callback) {
-		browser.get(site).then(function () {
-			wrapUp(callback, "URL Navigation event");
-		}).catch(function (error) {
-			console.log(error.message);
-			tierdown(true);
-		});
+		if(browser.params.testDomainURL !== ''){
+			browser.get(browser.params.testDomainURL).then(function (){				
+				wrapUp(callback, "URL Navigation event");
+			}).catch(function (error) {
+				console.log(error.message);
+				tierdown(true);
+			});
+		} else { 
+			browser.get(site).then(function () {
+				wrapUp(callback, "URL Navigation event");
+			}).catch(function (error) {
+				console.log(error.message);
+				tierdown(true);
+			});
+		}
 	});
 
-	this.When(/^servoy sidenav component with name (.*) tab (.*) is clicked$/, { timeout: 10 * 1000 }, function (elementName, tabName, callback) {
+	this.When(/^servoy sidenav component with name "([^"]*)" tab "([^"]*)" is clicked$/, { timeout: 10 * 1000 }, function (elementName, tabName, callback) {
 		var menuItems = element.all(by.xpath("//data-servoyextra-sidenav[@data-svy-name='" + elementName + "']"));
-		menuItems.each(function (menuItem) {
-			clickElement(menuItem.element(by.cssContainingText('a', tabName))).then(function () {
-				wrapUp(callback, "Click event");
-			})
-		}).catch(function (error) {
-			console.log(error.message);
-			tierdown(true);
+		browser.wait(EC.presenceOf(menuItems).call(), 10000, 'Menu items not visible').then(function () {
+			browser.wait(EC.elementToBeClickable(menuItems).call(), 10000, 'Item not clickable').then(function () {
+				menuItems.each(function (menuItem) {
+					clickElement(menuItem.element(by.cssContainingText('a', tabName))).then(function () {
+						wrapUp(callback, "Click event");
+					});
+				}).catch(function (error) {
+					console.log(error);
+					tierdown(true);
+				});
+			});
 		});
 	});
 

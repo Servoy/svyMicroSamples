@@ -3,9 +3,10 @@ exports.config = {
   seleniumAddress: 'http://127.0.0.1:4444/wd/hub',
   // seleniumAddress: 'selenium-hub:4444',
 
-
   framework: 'custom',
-
+  params: {
+    testDomainURL: ''
+  },
   // path relative to the current config file
   frameworkPath: require.resolve('protractor-cucumber-framework'),
 
@@ -22,12 +23,14 @@ exports.config = {
     'browserName': 'chrome'
   }],
 
+  // restartBrowserBetweenTests: true,
+
   // Spec patterns are relative to this directory.
   specs: [
-    'features/sample_application/foundset.feature'
+    'features/sample_application/hashing.feature'
   ],
 
-  resultJsonOutputFile: 'reports/cucumber_reports/report.json',
+  resultJsonOutputFile: 'reports//cucumber_reports//report.json',
 
   cucumberOpts: {
     require: ['features/step_definitions/servoy_step_definitions.js',
@@ -72,7 +75,7 @@ exports.config = {
     console.log('afterLaunch');
     var proc = require('process');
     var fs = require('fs');
-    var json = fs.readFileSync(proc.cwd() + '/reports/cucumber_reports/report.json');
+    var json = fs.readFileSync(proc.cwd() + '//reports//cucumber_reports//report.json');
     var a = JSON.parse(json);
     var scenarioSucceeded = a.length;
     for (var x in a) {
@@ -117,5 +120,6 @@ exports.config = {
     console.log('Scenarios failed:\t' + (a.length - scenarioSucceeded));
     console.log('Test(s) ended after: ' + ((new Date() - startDate) / 1000) + ' seconds.');
     // console.log(JSON.stringify(a, null, "    "));
+    browser.restart();
   }
 };
