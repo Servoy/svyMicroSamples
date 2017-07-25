@@ -2,20 +2,32 @@
 
 <!-- Works with Ant 1.7.0 and higher -->
 <project basedir=".">
+	<taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask" />
+	<taskdef name="undeploy" classname="org.apache.catalina.ant.UndeployTask" />
+	
+	<target name="undeploy" description="undeploy from tomcat">
+		<undeploy 
+			failonerror="no"
+			url="${tomcat-manager-url}"
+			username="${tomcat-manager-username}"
+			password="${tomcat-manager-password}"
+			path="/${project-name}"
+		/>
+	</target>
 
     <macrodef name="deploy-war-on-tomcat-server">
         <attribute name="applicationName" default="${TOMCAT.APPLICATION.NAME}" />
         <attribute name="warFile" default="${WAR-FILE}" />
         <sequential>
             <undeploy-war-on-tomcat-server applicationName="@{applicationName}" warFile="@{warFile}" />
-            <get quiet="false" src="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/deploy?path=/@{applicationName}&amp;war=@{warFile}" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" dest="${LOG.DIR}/war_deploy.log" verbose="true"/>
+            <deploy failonerror="yes" url="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" path="/@{applicationName}" war="file:@{warFile}" />
 
-            <loadfile property="war_deploy_log" srcfile="${LOG.DIR}/war_deploy.log"/>
+ <!-->           <loadfile property="war_deploy_log" srcfile="${LOG.DIR}/war_deploy.log"/>
             <condition property="war_deploy.success">
                 <matches pattern="OK.*" string="${war_deploy_log}"/>
             </condition>
 
-            <fail message="War deployment failed" unless="war_deploy.success" />
+            <fail message="War deployment failed" unless="war_deploy.success" />-->
         </sequential>
     </macrodef>
 
@@ -23,7 +35,7 @@
         <attribute name="applicationName" default="${TOMCAT.APPLICATION.NAME}" />
         <attribute name="warFile" default="${WAR-FILE}" />
         <sequential>
-            <get quiet="false" src="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/undeploy?path=/@{applicationName}" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" dest="${LOG.DIR}/war_undeploy.log" verbose="true"/>
-        </sequential>
+            <undeploy failonerror="no" url="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" path="/@{applicationName}" />
+       </sequential>
     </macrodef>
 </project>
