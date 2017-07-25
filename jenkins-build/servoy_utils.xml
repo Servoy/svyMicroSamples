@@ -49,13 +49,15 @@
                  <arg value="-tables" />
                  <arg value="-modules" />
              </java>
-             <condition property="export.failed">
+            <move-log-to-logDir logFileToCopy="${SERVOY.INSTALL.APPSERVER.DIR}/servoy_log.txt" newName="export-solution-as-dot-servoy$servoy_log.txt"/>
+            <move-log-to-logDir logFileToCopy="@{workspace}/.metadata/.log" newName="export-solution-as-dot-servoy$workspace_log.log"/>
+            
+            <condition property="EXPORT.FAILED">
                  <not>
                      <equals arg1="${export.result}" arg2="0"/>
                  </not>
              </condition>
-            <move-log-to-logDir logFileToCopy="${SERVOY.INSTALL.APPSERVER.DIR}/servoy_log.txt" newName="export-solution-as-dot-servoy$servoy_log.txt"/>
-            <move-log-to-logDir logFileToCopy="@{workspace}/.metadata/.log" newName="export-solution-as-dot-servoy$workspace_log.log"/>
+
          </sequential>
      </macrodef>
 
@@ -115,14 +117,14 @@
                 <arg value="${SERVOY.DEFAULT.PASSWORD}" />
 
             </java>
-            <condition property="export.failed">
+            <move-log-to-logDir logFileToCopy="${SERVOY.INSTALL.APPSERVER.DIR}/servoy_log.txt" newName="export-solution-as-war$servoy_log.txt"/>
+            <move-log-to-logDir logFileToCopy="@{workspace}/.metadata/.log" newName="export-solution-as-war$workspace_log.log"/>
+            
+            <condition property="EXPORT.FAILED">
                 <not>
                     <equals arg1="${export.result}" arg2="0"/>
                 </not>
             </condition>
-
-            <move-log-to-logDir logFileToCopy="${SERVOY.INSTALL.APPSERVER.DIR}/servoy_log.txt" newName="export-solution-as-war$servoy_log.txt"/>
-            <move-log-to-logDir logFileToCopy="@{workspace}/.metadata/.log" newName="export-solution-as-war$workspace_log.log"/>
         </sequential>
     </macrodef>
 
@@ -148,7 +150,7 @@
 
             <echo level="info" message="*** Running Unit Tests ***"/>
             <!-- Define a timeout so we know the test will finish eventually -->
-            <junit fork="yes" forkmode="once" timeout="${SERVOY.TEST.TIMEOUT}" dir="${SERVOY.INSTALL.APPSERVER.DIR}" haltonfailure="false" haltonerror="false" showoutput="true" errorProperty="test.failed" failureProperty="test.failed" printsummary="withOutAndErr">
+            <junit fork="yes" forkmode="once" timeout="${SERVOY.TEST.TIMEOUT}" dir="${SERVOY.INSTALL.APPSERVER.DIR}" haltonfailure="false" haltonerror="false" showoutput="true" errorProperty="TEST.FAILED" failureProperty="TEST.FAILED" printsummary="withOutAndErr">
                 <jvmarg value="${SERVOY.TEST.MEMORY.XMS}" />
                 <jvmarg value="${SERVOY.TEST.MEMORY.XMX}" />
                 <jvmarg value="${SERVOY.TEST.MEMORY.MAXPERM}" />
@@ -190,13 +192,13 @@
 
     <macrodef name="fail-if-unittests-failed">
         <sequential>
-            <fail message="Unit tests failed: please check test reports." if="test.failed" />
+            <fail message="Unit tests failed: please check test reports." if="TEST.FAILED" />
         </sequential>
     </macrodef>
 
     <macrodef name="fail-if-export-failed">
         <sequential>
-            <fail message="Exports failed: please check the exporter log files." if="export.failed" />
+            <fail message="Exports failed: please check the exporter log files." if="EXPORT.FAILED" />
         </sequential>
     </macrodef>
 

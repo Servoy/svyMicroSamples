@@ -3,13 +3,12 @@
 <!-- Works with Ant 1.7.0 and higher -->
 <project basedir=".">
 
-<target name="deploy-war-on-tomcat-server">
-    <!-- TODO: Add attributes to make it more dynamic -->
-    <if>
-        <equals arg1="${TOMCAT.WAR_DEPLOY.ENABLED}" arg2="true" />
-        <then>
-            <get quiet="true" src="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/undeploy?path=/${TOMCAT.APPLICATION.NAME}" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" dest="${LOG.DIR}/war_undeploy.log" />
-            <get quiet="true" src="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/deploy?path=/${TOMCAT.APPLICATION.NAME}&amp;war=${WAR-FILE}" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" dest="${LOG.DIR}/war_deploy.log" />
+    <macrodef name="deploy-war-on-tomcat-server">
+        <attribute name="applicationName" default="${TOMCAT.APPLICATION.NAME}" />
+        <attribute name="warFile" default="${WAR-FILE}" />
+        <sequential>
+            <undeploy-war-on-tomcat-server applicationName="@{applicationName}" warFile="@{warFile}" />
+            <get quiet="true" src="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/deploy?path=/@{applicationName}&amp;war=@{warFile}" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" dest="${LOG.DIR}/war_deploy.log" />
 
             <loadfile property="war_deploy_log" srcfile="${LOG.DIR}/war_deploy.log"/>
             <condition property="war_deploy.success">
@@ -17,8 +16,15 @@
             </condition>
 
             <fail message="War deployment failed" unless="war_deploy.success" />
-        </then>
-    </if>
-</target>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="undeploy-war-on-tomcat-server">
+        <attribute name="applicationName" default="${TOMCAT.APPLICATION.NAME}" />
+        <attribute name="warFile" default="${WAR-FILE}" />
+        <sequential>
+            <get quiet="true" src="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/undeploy?path=/@{applicationName}" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" dest="${LOG.DIR}/war_undeploy.log" />
+        </sequential>
+    </macrodef>
 
 </project>

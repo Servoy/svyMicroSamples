@@ -4,9 +4,7 @@
 <project basedir=".">
     <target name="generate_code_analysis_reports">
         <if>
-            <not>
-                <equals arg1="${CODE.ANALYSIS.ENABLED}" arg2="true" />
-            </not>
+            <isfalse value="${CODE.ANALYSIS.ENABLED}"/>
             <then>
                 <echo level="info" message="Code Analysis Reporting disabled" />
             </then>
@@ -67,7 +65,7 @@
     <!-- Install istanbul -->
     <target name="install_plato">
         <if>
-            <equals arg1="${INSTALL_SOFTWARE_FROM_SCRIPT}" arg2="true" />
+            <istrue value="${INSTALL_SOFTWARE_FROM_SCRIPT}"/>
             <then>
                 <exec executable="cmd" osfamily="windows" failonerror="true">
                     <arg line="/c npm install --prefix ${TOOLS-DIR} plato" />

@@ -8,6 +8,12 @@
 
     <property environment="env"/>
     <property name="WORKSPACE" value="${env.WORKSPACE}"/>
+    
+    <!-- Init set result properties -->
+    <property name="TEST.FAILED" value="false" />
+    <property name="E2E.FAILED" value="false" />
+    <property name="EXPORT.FAILED" value="false" />
+
     <property file="build.properties"/>
 
     <taskdef resource="net/sf/antcontrib/antlib.xml">
@@ -21,8 +27,9 @@
     <import file="code_coverage.xml" />
     <import file="code_analyis.xml" />
     <import file="tomcat_utils.xml" />
+    <import file="e2e.xml" />
 
-    <target name="ALL" depends="1-SetupEnvironment, 2-SetupCodecoverage, 3-RunJSUnitTest, 4-ExportDeployWarFile, 5-GenerateReports, 6-StoreData" />
+    <target name="ALL" depends="1-SetupEnvironment, 2-SetupCodecoverage, 3-RunJSUnitTest, 4-RunE2ETests, 5-ExportDeployWarFile, 6-GenerateReports, 7-StoreData" />
 
 
     <target name="1-SetupEnvironment">
@@ -54,9 +61,7 @@
 
     <target name="2-SetupCodecoverage">
         <if>
-            <not>
-                <equals arg1="${CODE.COVERAGE.ENABLED}" arg2="true" />
-            </not>
+            <isfalse value="${CODE.COVERAGE.ENABLED}"/>
             <then>
                 <echo level="info" message="*** Code Coverage Reporting disabled (Skip step) ***" />
             </then>
@@ -71,20 +76,17 @@
 
     <target name="3-RunJSUnitTest" depends="get_equinox_jar, prepare_classpath">
         <if>
-            <not>
-                <equals arg1="${SERVOY.JUNIT.ENABLED}" arg2="true" />
-            </not>
+            <isfalse value="${SERVOY.JUNIT.ENABLED}"/>
             <then>
                <echo level="info" message="*** Servoy JSUnit Test disabled (Skip step) ***" />
             </then>
             <else>
                 <setup-servoy-properties dbName="${DB.NAME}" dbServerUrl="${DB.URL}" dbServerPort="${DB.PORT}" dbServerUsername="${DB.USERNAME}" dbServerPassword="${DB.PASSWORD}"/>
                 <if>
-                    <not>
-                        <equals arg1="${CODE.COVERAGE.ENABLED}" arg2="true" />
-                    </not>
+                    <istrue value="${CODE.COVERAGE.ENABLED}"/>
                     <then>
-                        <export-solution-as-dot-servoy workspace="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE}" solutionNames="${SERVOY.TEST-SOLUTION}"/>
+                        <!--<export-solution-as-dot-servoy workspace="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE}" solutionNames="${SERVOY.TEST-SOLUTION}"/>-->
+                        <export-solution-as-dot-servoy solutionNames="${SERVOY.TEST-SOLUTION}"/>
                     </then>
                     <else>
                         <export-solution-as-dot-servoy solutionNames="${SERVOY.TEST-SOLUTION}"/>
@@ -96,37 +98,55 @@
        </if>
     </target>
 
-    <target name="4-ExportDeployWarFile" depends="get_equinox_jar" unless="test.failed">
-        <setup-servoy-properties dbName="${DB.NAME}" dbServerUrl="${DB.URL}" dbServerPort="${DB.PORT}" dbServerUsername="${DB.USERNAME}" dbServerPassword="${DB.PASSWORD}"/>
-        <export-solution-as-war solutionNames="${SERVOY.SOLUTION}" workspace="${WORKSPACE}" warFileName="${WAR-FILE.NAME}"/>
+    <target name="4-RunE2ETests" depends="get_equinox_jar">
         <if>
-            <not>
-                <isset property="export.failed"/>
-            </not>
+            <isfalse value="${TEST.FAILED}" />
             <then>
-                <antcall target="deploy-war-on-tomcat-server"/>
+                <setup-servoy-properties dbName="${DB.NAME}" dbServerUrl="${DB.URL}" dbServerPort="${DB.PORT}" dbServerUsername="${DB.USERNAME}" dbServerPassword="${DB.PASSWORD}"/>
+                <export-solution-as-war solutionNames="${SERVOY.SOLUTION}" workspace="${WORKSPACE}" warFileName="${PROTRACTOR.E2E.WAR-FILE.NAME}"/>
+                <deploy-war-on-tomcat-server applicationName="${PROTRACTOR.E2E.WAR-FILE.NAME}" warFile="${PROTRACTOR.E2E.WAR-FILE}"/>
+                <antcall target="run_e2e_tests" />
+                <undeploy-war-on-tomcat-server applicationName="${PROTRACTOR.E2E.WAR-FILE.NAME}" warFile="${PROTRACTOR.E2E.WAR-FILE}"/>
             </then>
         </if>
     </target>
 
-    <target name="5-GenerateReports">
+    <target name="5-ExportDeployWarFile" depends="get_equinox_jar">
         <if>
-            <equals arg1="${CODE.COVERAGE.ENABLED}" arg2="true" />
+            <and>
+                <isfalse value="${TEST.FAILED}" />
+                <isfalse value="${E2E.FAILED}"/>
+            </and>
             <then>
+                <setup-servoy-properties dbName="${DB.NAME}" dbServerUrl="${DB.URL}" dbServerPort="${DB.PORT}" dbServerUsername="${DB.USERNAME}" dbServerPassword="${DB.PASSWORD}"/>
+                <export-solution-as-war solutionNames="${SERVOY.SOLUTION}" workspace="${WORKSPACE}" warFileName="${WAR-FILE.NAME}"/>
                 <if>
-                    <not>
-                        <isset property="test.failed"/>
-                    </not>
+                    <and>
+                        <isfalse value="${EXPORT.FAILED}" />
+                        <istrue value="${TOMCAT.WAR_DEPLOY.ENABLED}" />
+                    </and>
                     <then>
-                        <antcall target="generate_code_coverage_reports"/>
-                        <antcall target="generate_code_analysis_reports"/>
+                        <deploy-war-on-tomcat-server />
                     </then>
-               </if>
+                </if>
+            </then>
+        </if>
+    </target>
+
+    <target name="6-GenerateReports">
+        <if>
+            <and>
+                <istrue value="${CODE.COVERAGE.ENABLED}" />
+                <isfalse value="${TEST.FAILED}"/>
+            </and>
+            <then>
+                <antcall target="generate_code_coverage_reports"/>
+                <antcall target="generate_code_analysis_reports"/>
            </then>
         </if>
     </target>
 
-    <target name="6-StoreData">
+    <target name="7-StoreData">
         <!-- Move the collected logs to the folder for the specific Jenkins build as artifacts -->
         <move todir="${ARTIFACTS.DIR}" failonerror="false">
             <fileset dir="${LOG.DIR}" includes="*.*" />
@@ -142,6 +162,7 @@
             <fileset dir="${OUTPUT.DIR}" includes="*.war" />
         </move>
 
+        <fail-if-e2e-failed />
         <fail-if-export-failed />
         <fail-if-unittests-failed />
     </target>
