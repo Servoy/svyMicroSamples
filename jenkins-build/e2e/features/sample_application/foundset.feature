@@ -1,8 +1,11 @@
 Feature: Testing the Servoy Sample Galery - Foundset   
     Scenario Outline: Protractor and Cucumber Test
 
-Given I go to "http://demo.servoy.com/sampleGallery/solutions/sampleGallery/index.html?f=galleryMain"
-When servoy sidenav component with name "galleryMain.nav" tab "FoundSet Filters" is clicked
+#Given I go to "http://demo.servoy.com/sampleGallery/solutions/sampleGallery/index.html?f=galleryMain"
+Given I go to "http://demo.servoy.com/micro-samples/solutions/sampleGallery/index.html?f=galleryMain"
+When servoy sidenav component with name <nav> tab <tab> is clicked
+When servoy sidenav component with name <nav> tab <tab> is clicked
+# When servoy sidenav component with name "galleryMain.nav" tab "FoundSet Filters" is clicked
 
 # When servoy calendar component with name "filterOrdersList.startDate" is clicked
 # When servoy calendar component is clicked untill I reach month <startMonth> in year <startYear>
@@ -23,17 +26,20 @@ When servoy sidenav component with name "galleryMain.nav" tab "FoundSet Filters"
 # When servoy select2tokenizer component with class name "select2-results__options" record number "1" is clicked
 
 
-When servoy table component with name "filterOrdersList.svy_lvp_filterOrdersList" I scroll to the record with <customer> as text
+# When servoy table component with name "filterOrdersList.svy_lvp_filterOrdersList" I scroll to the record with <customer> as text
 
-Then I am done
+# Then I am done
 
 
 @data_table_servoy
 Examples:
-|startMonth      | startYear   | endMonth   | endYear   | customer      | employee             |
-# |september       | 2016       | september  | 2017      | Ernst Handel  |  Laura Callahan       |
+|startMonth      | startYear   | endMonth   | endYear   | customer      | employee             | tab                | nav               |
+# |september       | 2016       | september  | 2017      | Ernst Handel  |  Laura Callahan       | cookies |
 #|february        | 2016        | september  | 2017      | Ernst Handel  |  Eastern Connection   |
 #|january         | 2017        | september  | 2017      | Ernst Handel  |  Folies gourmandes    |
 #|december        | 2017        | september  | 2017      | Ernst Handel  |          |
 #|december        | 2018        | september  | 2017      | Ernst Handel  |          |
-|july            | 1997        | september  | 2017      | Romero y tomillo  | Anne Dodsworth    |
+# |july            | 1997        | september  | 2017      | Romero y tomillo  | Anne Dodsworth    |
+|july            | 1997        | september  | 2017      | Romero y tomillo  | Anne Dodsworth    | Working with Data |  galleryMain.nav |
+|july            | 1997        | september  | 2017      | Romero y tomillo  | Anne Dodsworth    | Working with Data |  galleryMain.nav |
+|july            | 1997        | september  | 2017      | Romero y tomillo  | Anne Dodsworth    | cookie            |  cookietwo       | 
