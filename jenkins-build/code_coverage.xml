@@ -75,7 +75,7 @@
     </target>
 
     <!-- Generate Code Coverage reports after the tests have run -->
-    <target name="generate_code_coverage_reports" unless="test.failed">
+    <target name="generate_code_coverage_reports" unless="TEST.FAILED">
         <for list="${CODE.COVERAGE.REPORT-FORMATS}" param="format">
           <sequential>
             <echo level="info" message="Generating @{format} report"/>

@@ -8,6 +8,12 @@
 
     <property environment="env"/>
     <property name="WORKSPACE" value="${env.WORKSPACE}"/>
+    
+    <!-- Init set result properties -->
+    <property name="TEST.FAILED" value="false" />
+    <property name="E2E.FAILED" value="false" />
+    <property name="EXPORT.FAILED" value="false" />
+
     <property file="build.properties"/>
 
     <taskdef resource="net/sf/antcontrib/antlib.xml">
@@ -92,7 +98,7 @@
        </if>
     </target>
 
-    <target name="4-RunE2ETests" depends="get_equinox_jar" unless="test.failed">
+    <target name="4-RunE2ETests" depends="get_equinox_jar" unless="TEST.FAILED">
         <setup-servoy-properties dbName="${DB.NAME}" dbServerUrl="${DB.URL}" dbServerPort="${DB.PORT}" dbServerUsername="${DB.USERNAME}" dbServerPassword="${DB.PASSWORD}"/>
         <export-solution-as-war solutionNames="${SERVOY.SOLUTION}" workspace="${WORKSPACE}" warFileName="${PROTRACTOR.E2E.WAR-FILE.NAME}"/>
         <deploy-war-on-tomcat-server applicationName="${PROTRACTOR.E2E.WAR-FILE.NAME}" warFile="${PROTRACTOR.E2E.WAR-FILE}"/>
@@ -100,13 +106,13 @@
         <undeploy-war-on-tomcat-server applicationName="${PROTRACTOR.E2E.WAR-FILE.NAME}" warFile="${PROTRACTOR.E2E.WAR-FILE}"/>
     </target>
 
-    <target name="5-ExportDeployWarFile" depends="get_equinox_jar" unless="test.failed">
+    <target name="5-ExportDeployWarFile" depends="get_equinox_jar" unless="TEST.FAILED">
         <setup-servoy-properties dbName="${DB.NAME}" dbServerUrl="${DB.URL}" dbServerPort="${DB.PORT}" dbServerUsername="${DB.USERNAME}" dbServerPassword="${DB.PASSWORD}"/>
         <export-solution-as-war solutionNames="${SERVOY.SOLUTION}" workspace="${WORKSPACE}" warFileName="${WAR-FILE.NAME}"/>
         <if>
             <or>
-                <istrue value="${e2e.failed}"/>
-                <istrue value="${export.failed}" />
+                <istrue value="${E2E.FAILED}"/>
+                <istrue value="${EXPORT.FAILED}" />
             </or>
             <then>
                 <deploy-war-on-tomcat-server />
@@ -116,15 +122,13 @@
 
     <target name="6-GenerateReports">
         <if>
-            <equals arg1="${CODE.COVERAGE.ENABLED}" arg2="true" />
+            <and>
+                <istrue value="${CODE.COVERAGE.ENABLED}" />
+                <isfalse value="${TEST.FAILED}"/>
+            </and>
             <then>
-                <if>
-                    <istrue value="${test.failed}"/>
-                    <then>
-                        <antcall target="generate_code_coverage_reports"/>
-                        <antcall target="generate_code_analysis_reports"/>
-                    </then>
-               </if>
+                <antcall target="generate_code_coverage_reports"/>
+                <antcall target="generate_code_analysis_reports"/>
            </then>
         </if>
     </target>

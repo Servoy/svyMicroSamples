@@ -22,7 +22,7 @@
 		    <echo level="verbose" message="Run tests script started"/>
 			<echo level="verbose" message="Testing solution: ${SERVOY.SOLUTION}"/>
 
-		<exec executable="node" resultproperty="e2e.failed">
+		<exec executable="node" resultproperty="E2E.FAILED">
             <arg value="${PROTRACTOR.DIR}/node_modules/protractor/bin/protractor" />
 			<arg value="${PROTRACTOR.CONF}"/>
 		</exec>
@@ -30,7 +30,7 @@
 
     <macrodef name="fail-if-e2e-failed">
         <sequential>
-            <fail message="E2E failed: please check reports." if="e2e.failed" />
+            <fail message="E2E failed: please check reports." if="E2E.FAILED" />
         </sequential>
     </macrodef>
 </project>
