@@ -121,7 +121,10 @@
                 <setup-servoy-properties dbName="${DB.NAME}" dbServerUrl="${DB.URL}" dbServerPort="${DB.PORT}" dbServerUsername="${DB.USERNAME}" dbServerPassword="${DB.PASSWORD}"/>
                 <export-solution-as-war solutionNames="${SERVOY.SOLUTION}" workspace="${WORKSPACE}" warFileName="${WAR-FILE.NAME}"/>
                 <if>
-                    <isfalse value="${EXPORT.FAILED}" />
+                    <and>
+                        <isfalse value="${EXPORT.FAILED}" />
+                        <istrue value="${TOMCAT.WAR_DEPLOY.ENABLED}" />
+                    </and>
                     <then>
                         <deploy-war-on-tomcat-server />
                     </then>
