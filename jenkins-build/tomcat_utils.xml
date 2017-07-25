@@ -19,7 +19,8 @@
         <attribute name="warFile" default="${WAR-FILE}" />
         <sequential>
             <undeploy-war-on-tomcat-server applicationName="@{applicationName}" warFile="@{warFile}" />
-            <deploy failonerror="yes" url="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" path="/@{applicationName}" war="file:@{warFile}" />
+            <echo level="info" message="Deploy war file: @{applicationName}" />
+            <deploy failonerror="yes" url="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" path="/@{applicationName}" localWar="@{warFile}" update="true" />
 
  <!-->           <loadfile property="war_deploy_log" srcfile="${LOG.DIR}/war_deploy.log"/>
             <condition property="war_deploy.success">
@@ -34,6 +35,7 @@
         <attribute name="applicationName" default="${TOMCAT.APPLICATION.NAME}" />
         <attribute name="warFile" default="${WAR-FILE}" />
         <sequential>
+            <echo level="info" message="Undeploy war file: @{applicationName}" />
             <undeploy failonerror="no" url="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" path="/@{applicationName}" />
        </sequential>
     </macrodef>
