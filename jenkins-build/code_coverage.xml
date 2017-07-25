@@ -102,7 +102,7 @@
     <!-- Install istanbul -->
     <target name="install_istanbul">
         <if>
-            <istrue value=${"INSTALL_SOFTWARE_FROM_SCRIPT}"/>
+            <istrue value="${INSTALL_SOFTWARE_FROM_SCRIPT}"/>
             <then>
                 <exec executable="cmd" osfamily="windows" failonerror="true">
                     <arg line="/c npm install --prefix ${TOOLS-DIR} istanbul" />
