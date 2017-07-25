@@ -18,7 +18,7 @@ var readline = require('readline');
 var stream = require('stream');
 var path = require('path');
 var util = require('util');
-var uuid = require('uuid');
+var uuid = require('uuid/v4');
 var Transform = stream.Transform || require('readable-stream').Transform;
 
 var HELP = 'servoyCodeCoverageInstrumentationFixer arguments\n\
