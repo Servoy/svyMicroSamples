@@ -1,4 +1,5 @@
 var startDate;
+var browserName;
 exports.config = {
   seleniumAddress: 'http://127.0.0.1:4444/wd/hub',
   framework: 'custom',
@@ -76,6 +77,9 @@ multiCapabilities: [{
 
   onComplete: () => {
     console.log('onComplete');
+    browser.getCapabilities().then((c) => {
+      browserName = c.get('browserName');
+    });
   },
 
   onCleanUp: () => {
@@ -89,6 +93,7 @@ multiCapabilities: [{
     var json = fs.readFileSync(proc.cwd() + '/reports/cucumber_reports/report.json');
     var a = JSON.parse(json);
     var scenarioSucceeded = a.length;
+    console.log('Browser: ' + browserName)
     for (var x in a) {
       var duration = 0;
       var failed = 0;
