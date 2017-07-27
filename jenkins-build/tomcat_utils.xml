@@ -16,7 +16,7 @@
                     </exec>
                 </then>
                 <else>
-                    <get quiet="false" src="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/deploy?path=/@{applicationName}&amp;war=@{warFile}" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" dest="${LOG.DIR}/war_deploy.log" verbose="true"/>
+                    <get quiet="true" src="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/deploy?path=/@{applicationName}&amp;war=@{warFile}" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" dest="${LOG.DIR}/war_deploy.log"/>
                 </else>
             </if>
 
@@ -41,7 +41,7 @@
                     </exec>
                 </then>
                 <else>
-                    <get quiet="false" src="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/undeploy?path=/@{applicationName}" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" dest="${LOG.DIR}/war_undeploy.log" verbose="true"/>
+                    <get quiet="true" src="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/undeploy?path=/@{applicationName}" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" dest="${LOG.DIR}/war_undeploy.log"/>
                 </else>
             </if>
        </sequential>
