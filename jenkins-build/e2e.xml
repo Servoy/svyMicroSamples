@@ -31,7 +31,7 @@
 
     <macrodef name="fail-if-e2e-failed">
         <sequential>
-            <fail message="E2E failed: please check reports." if="E2E.FAILED" />
+            <fail message="E2E failed: please check reports." if="${E2E.FAILED}" />
         </sequential>
     </macrodef>
 </project>

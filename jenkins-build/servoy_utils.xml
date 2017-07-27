@@ -192,13 +192,13 @@
 
     <macrodef name="fail-if-unittests-failed">
         <sequential>
-            <fail message="Unit tests failed: please check test reports." if="TEST.FAILED" />
+            <fail message="Unit tests failed: please check test reports." if="${TEST.FAILED}" />
         </sequential>
     </macrodef>
 
     <macrodef name="fail-if-export-failed">
         <sequential>
-            <fail message="Exports failed: please check the exporter log files." if="EXPORT.FAILED" />
+            <fail message="Exports failed: please check the exporter log files." if="${EXPORT.FAILED}" />
         </sequential>
     </macrodef>
 

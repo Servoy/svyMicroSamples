@@ -112,6 +112,9 @@
                 <antcall target="run_e2e_tests" />
                 <undeploy-war-on-tomcat-server applicationName="${PROTRACTOR.E2E.WAR-FILE.NAME}" warFile="${PROTRACTOR.E2E.WAR-FILE}"/>
             </then>
+            <else>
+                <echo level="info" message="*** E2E Test disabled (Skip step) ***" />
+            </else>
         </if>
     </target>
 
