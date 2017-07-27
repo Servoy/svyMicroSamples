@@ -8,7 +8,18 @@
         <attribute name="warFile" default="${WAR-FILE}" />
         <sequential>
             <undeploy-war-on-tomcat-server applicationName="@{applicationName}" warFile="@{warFile}" />
-            <get quiet="false" src="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/deploy?path=/@{applicationName}&amp;war=@{warFile}" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" dest="${LOG.DIR}/war_deploy.log" verbose="true"/>
+            <if>
+                <os family="unix" />
+                <then>
+                    <exec executable="curl">
+                        <arg value="--upload-file @{warFile}"/>
+                        <arg value="http://${TOMCAT.USERNAME}:${TOMCAT.PASSWORD}@${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/deploy?path=/@{applicationName} ">
+                    </exec>
+                </then>
+                <else>
+                    <get quiet="false" src="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/deploy?path=/@{applicationName}&amp;war=@{warFile}" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" dest="${LOG.DIR}/war_deploy.log" verbose="true"/>
+                </else>
+            </if>
 
             <loadfile property="war_deploy_log" srcfile="${LOG.DIR}/war_deploy.log"/>
             <condition property="war_deploy.success">
@@ -24,6 +35,6 @@
         <attribute name="warFile" default="${WAR-FILE}" />
         <sequential>
             <get quiet="false" src="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/undeploy?path=/@{applicationName}" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" dest="${LOG.DIR}/war_undeploy.log" verbose="true"/>
-        </sequential>
+       </sequential>
     </macrodef>
 </project>
