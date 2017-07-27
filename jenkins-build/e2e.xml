@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project basedir=".">
-	<target name="install_dependencies">
-        <!--<if>
+    <target name="install_dependencies">
+        <if>
             <istrue property="INSTALL_SOFTWARE_FROM_SCRIPT"/>
-            <then>-->
+            <then>
                 <exec executable="cmd" dir="${PROTRACTOR.DIR}" osfamily="windows" failonerror="true">
-			        <arg line="/c npm install --production" />
-		        </exec>
+                    <arg line="/c npm install --production" />
+                </exec>
                 <exec executable="bash" dir="${PROTRACTOR.DIR}" osfamily="unix" failonerror="true">
                     <arg value="-c" />
                     <arg value="npm install --production"/>
                 </exec>
-            <!--</then>
+            </then>
             <else>
                 <echo level="info" message="Install of software disabled from config, will use manual install of E2E Dependencies" />
             </else>
-        </if>-->
-	</target>
+        </if>
+    </target>
 
-	<target name="run_e2e_tests" depends="install_dependencies">
-		    <echo level="verbose" message="Run tests script started"/>
-			<echo level="verbose" message="Testing solution: ${SERVOY.SOLUTION}"/>
+    <target name="run_e2e_tests" depends="install_dependencies">
+            <echo level="verbose" message="Run tests script started"/>
+            <echo level="verbose" message="Testing solution: ${SERVOY.SOLUTION}"/>
 
-		<exec executable="node" dir="${PROTRACTOR.DIR}" resultproperty="E2E.FAILED">
+    <!-- TODO: Add fail handler for PROTRACTOR -->
+        <exec executable="node" dir="${PROTRACTOR.DIR}">
             <arg value="${PROTRACTOR.DIR}/node_modules/protractor/bin/protractor" />
-			<arg value="${PROTRACTOR.CONF}"/>
-		</exec>
-	</target>
+            <arg value="${PROTRACTOR.CONF}"/>
+        </exec>
+    </target>
 
     <macrodef name="fail-if-e2e-failed">
         <sequential>
