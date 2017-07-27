@@ -30,7 +30,7 @@ exports.config = {
     'features/sample_application/hashing.feature'
   ],
 
-  resultJsonOutputFile: 'reports//cucumber_reports//report.json',
+  resultJsonOutputFile: 'reports/cucumber_reports/report.json',
 
   cucumberOpts: {
     require: ['features/step_definitions/servoy_step_definitions.js',
@@ -47,6 +47,17 @@ exports.config = {
   beforeLaunch: () => {
     console.log('beforeLaunch');
     startDate = new Date();
+    var path = require('path');
+    var proc = require('process');
+    var fs = require('fs');
+    var pathToCreate = proc.cwd() + '/reports/cucumber_reports';
+    pathToCreate.split(path.sep).reduce(function(currentPath, folder){
+      currentPath += folder + path.sep;
+      if(!fs.existsSync(currentPath)) {
+        fs.mkdirSync(currentPath);
+      }
+      return currentPath;
+    },'');
   },
 
   onPrepare: () => {
@@ -75,7 +86,7 @@ exports.config = {
     console.log('afterLaunch');
     var proc = require('process');
     var fs = require('fs');
-    var json = fs.readFileSync(proc.cwd() + '//reports//cucumber_reports//report.json');
+    var json = fs.readFileSync(proc.cwd() + '/reports/cucumber_reports/report.json');
     var a = JSON.parse(json);
     var scenarioSucceeded = a.length;
     for (var x in a) {
