@@ -1,3 +1,8 @@
+license.0.code=##ServoyLicKey## 
+license.0.company_name=##ServoyLicName##
+license.0.licenses=##ServoyLicType##
+license.0.product=0
+licenseManager.numberOfLicenses=1
 ServerManager.numberOfServers=2
 SocketFactory.compress=true
 SocketFactory.rmiServerFactory=com.servoy.j2db.server.rmi.tunnel.ServerTunnelRMISocketFactoryFactory

@@ -271,6 +271,9 @@
             <replace file="${SERVOY.PROPERTIES.FILE}" token="##DbName##" value="@{dbName}" />
             <replace file="${SERVOY.PROPERTIES.FILE}" token="##dbServerUsername##" value="@{dbServerUsername}" />
             <replace file="${SERVOY.PROPERTIES.FILE}" token="##dbServerPassword##" value="@{dbServerPassword}" />
+            <replace file="${SERVOY.PROPERTIES.FILE}" token="##ServoyLicKey##" value="${SERVOY.LIC.KEY}"/>
+            <replace file="${SERVOY.PROPERTIES.FILE}" token="##ServoyLicName##" value="${SERVOY.LIC.NAME}"/>
+            <replace file="${SERVOY.PROPERTIES.FILE}" token="##ServoyLicType##" value="${SERVOY.LIC.TYPE}"/>
 
         </sequential>
     </macrodef>
