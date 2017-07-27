@@ -22,7 +22,7 @@
 		    <echo level="verbose" message="Run tests script started"/>
 			<echo level="verbose" message="Testing solution: ${SERVOY.SOLUTION}"/>
 
-		<exec executable="node" resultproperty="E2E.FAILED">
+		<exec executable="node" dir="${PROTRACTOR.DIR}" resultproperty="E2E.FAILED">
             <arg value="${PROTRACTOR.DIR}/node_modules/protractor/bin/protractor" />
 			<arg value="${PROTRACTOR.CONF}"/>
 		</exec>
