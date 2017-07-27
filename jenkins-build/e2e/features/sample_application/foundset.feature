@@ -2,7 +2,7 @@ Feature: Testing the Servoy Sample Galery - Foundset
     Scenario Outline: Protractor and Cucumber Test
 
 #Given I go to "http://demo.servoy.com/sampleGallery/solutions/sampleGallery/index.html?f=galleryMain"
-Given I go to "http://demo.servoy.com/micro-samples/solutions/sampleGallery/index.html?f=galleryMain"
+Given I go to "My Application to Test"
 When servoy sidenav component with name "galleryMain.nav" tab "Working with Data" is clicked
 When servoy sidenav component with name "galleryMain.nav" tab "Basic Filtering" is clicked
 

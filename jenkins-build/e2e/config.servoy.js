@@ -1,11 +1,9 @@
 var startDate;
 exports.config = {
   seleniumAddress: 'http://127.0.0.1:4444/wd/hub',
-  // seleniumAddress: 'selenium-hub:4444',
-
   framework: 'custom',
   params: {
-    testDomainURL: ''
+    testDomainURL: 'http://demo.servoy.com/sampleGallery/solutions/sampleGallery/index.html?f=galleryMain'
   },
   // path relative to the current config file
   frameworkPath: require.resolve('protractor-cucumber-framework'),
@@ -19,15 +17,17 @@ exports.config = {
   //       }
   //     }*/
   //   },
-  multiCapabilities: [{
-    'browserName': 'chrome'
-  }],
+multiCapabilities: [{
+  'browserName': 'chrome'
+}, {
+  'browserName': 'firefox'
+}],
 
   // restartBrowserBetweenTests: true,
 
   // Spec patterns are relative to this directory.
   specs: [
-    'features/sample_application/hashing.feature'
+    'features/sample_application/*.feature'
   ],
 
   resultJsonOutputFile: 'reports/cucumber_reports/report.json',
