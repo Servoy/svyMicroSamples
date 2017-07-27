@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project basedir=".">
     <target name="install_dependencies">
-        <if>
+        <!--<if>
             <istrue value="${INSTALL_SOFTWARE_FROM_SCRIPT}"/>
-            <then>
+            <then> -->
                 <exec executable="cmd" dir="${PROTRACTOR.DIR}" osfamily="windows" failonerror="true">
                     <arg line="/c npm install --production" />
                 </exec>
@@ -11,11 +11,11 @@
                     <arg value="-c" />
                     <arg value="npm install --production"/>
                 </exec>
-            </then>
+            <!--</then>
             <else>
                 <echo level="info" message="Install of software disabled from config, will use manual install of E2E Dependencies" />
             </else>
-        </if>
+        </if>-->
     </target>
 
     <target name="run_e2e_tests" depends="install_dependencies">
