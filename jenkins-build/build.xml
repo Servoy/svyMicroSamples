@@ -47,6 +47,7 @@
         <make-clean-dir dir="${LOG.DIR}" />
         <make-clean-dir dir="${OUTPUT.DIR.TEST.EXPORTS}" />
         <make-clean-dir dir="${ARTIFACTS.DIR}" />
+        <make-clean-dir dir="${PROTRACTOR.REPORT.DIR}" />
 
         <script language="javascript"><![CDATA[
             var testSolution = project.getProperty('SERVOY.TEST-SOLUTION');
