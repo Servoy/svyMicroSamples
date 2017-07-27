@@ -46,8 +46,8 @@
             <arg value="${CODE.ANALYSIS.REPORT.DIR}"/>
             <arg value="--exclude"/>
             <arg value='"${CODE.ANALYSIS.EXCLUDE.REGEX}"'/>
-            <arg value="${CODE.ANALYSIS.SETTINGS.LINTER-OPTION}"/>
-            <arg value='${CODE.ANALYSIS.SETTINGS.LINTER-OPTION.VALUE}'/>
+            <!--<arg value="${CODE.ANALYSIS.SETTINGS.LINTER-OPTION}"/>
+            <arg value='${CODE.ANALYSIS.SETTINGS.LINTER-OPTION.VALUE}'/> -->
             <arg value="${CODE.ANALYSIS.INPUT.DIR}"/>
         </exec>
         <exec executable="plato" dir="${WORKSPACE}" osfamily="unix" failonerror="true">
@@ -56,8 +56,8 @@
             <arg value="${CODE.ANALYSIS.REPORT.DIR}"/>
             <arg value="--exclude"/>
             <arg value='"${CODE.ANALYSIS.EXCLUDE.REGEX}"'/>
-            <arg value="${CODE.ANALYSIS.SETTINGS.LINTER-OPTION}"/>
-            <arg value='${CODE.ANALYSIS.SETTINGS.LINTER-OPTION.VALUE}'/>
+            <!--<arg value="${CODE.ANALYSIS.SETTINGS.LINTER-OPTION}"/>
+            <arg value='${CODE.ANALYSIS.SETTINGS.LINTER-OPTION.VALUE}'/> -->
             <arg value="${CODE.ANALYSIS.INPUT.DIR}"/>
         </exec>
     </target>
