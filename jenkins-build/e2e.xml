@@ -2,7 +2,7 @@
 <project basedir=".">
     <target name="install_dependencies">
         <if>
-            <istrue property="INSTALL_SOFTWARE_FROM_SCRIPT"/>
+            <istrue value="${INSTALL_SOFTWARE_FROM_SCRIPT}"/>
             <then>
                 <exec executable="cmd" dir="${PROTRACTOR.DIR}" osfamily="windows" failonerror="true">
                     <arg line="/c npm install --production" />
