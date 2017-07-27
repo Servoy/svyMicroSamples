@@ -26,6 +26,8 @@
         <exec executable="node" dir="${PROTRACTOR.DIR}">
             <arg value="${PROTRACTOR.DIR}/node_modules/protractor/bin/protractor" />
             <arg value="${PROTRACTOR.CONF}"/>
+            <arg value="--seleniumAddress=${PROTRACTOR.SELENIUM.URL}" />
+            <arg value="--params.testDomainURL=${PROTRACTOR.TEST.URL}"/>
         </exec>
     </target>
 
