@@ -136,6 +136,5 @@ multiCapabilities: [{
     console.log('Scenarios failed:\t' + (a.length - scenarioSucceeded));
     console.log('Test(s) ended after: ' + ((new Date() - startDate) / 1000) + ' seconds.');
     // console.log(JSON.stringify(a, null, "    "));
-    browser.restart();
   }
 };
