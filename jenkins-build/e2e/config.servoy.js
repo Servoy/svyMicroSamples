@@ -4,7 +4,7 @@ exports.config = {
   seleniumAddress: 'http://127.0.0.1:4444/wd/hub',
   framework: 'custom',
   params: {
-    testDomainURL: 'http://demo.servoy.com/sampleGallery/solutions/sampleGallery/index.html?f=galleryMain'
+    testDomainURL: 'http://localhost:8080/solutions/sampleGallery/index.html?f=galleryMain'
   },
   // path relative to the current config file
   frameworkPath: require.resolve('protractor-cucumber-framework'),
