@@ -28,7 +28,7 @@ multiCapabilities: [{
 
   // Spec patterns are relative to this directory.
   specs: [
-    'features/sample_application/*.feature'
+    'features/sample_application/hashing.feature'
   ],
 
   resultJsonOutputFile: 'reports/cucumber_reports/report.json',

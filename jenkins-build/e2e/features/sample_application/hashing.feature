@@ -1,6 +1,8 @@
 Feature: Testing the Servoy Sample Galery - Hashing   
     Scenario Outline: Sample Galery - Test Hashing with different algorithm
 Given I go to "My Application to Test"
+Then I expect the url to be "http://localhost:8080/solutions/sampleGallery/index.html?f=galleryMain"
+Then I expect the class to not be "sablowaitcursor"
 When servoy sidenav component with name "galleryMain.nav" tab "Working with Data" is clicked
 When servoy sidenav component with name "galleryMain.nav" tab "Secure Hashing" is clicked
 When servoy combobox component with name "exampleHash.algrothim" is clicked

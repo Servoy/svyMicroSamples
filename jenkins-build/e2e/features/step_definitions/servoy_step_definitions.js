@@ -13,14 +13,14 @@ module.exports = function () {
 
 	//FOUNDSET SAMPLE GALERY FUNCTIONS//
 	this.Given(/^I go to "([^"]*)"$/, { timeout: 60 * 1000 }, function (site, callback) {
-		if(browser.params.testDomainURL !== ''){
-			browser.get(browser.params.testDomainURL).then(function (){				
+		if (browser.params.testDomainURL !== '') {
+			browser.get(browser.params.testDomainURL).then(function () {
 				wrapUp(callback, "URL Navigation event");
 			}).catch(function (error) {
 				console.log(error.message);
 				tierdown(true);
 			});
-		} else { 
+		} else {
 			browser.get(site).then(function () {
 				wrapUp(callback, "URL Navigation event");
 			}).catch(function (error) {
@@ -28,6 +28,21 @@ module.exports = function () {
 				tierdown(true);
 			});
 		}
+	});
+
+	this.Then(/^I expect the url to be "([^"]*)"$/, { timeout: 60 * 1000 }, function (site, callback) {
+		browser.getCurrentUrl().then(function (url) {
+			validate(url, site);
+		}).then(function () {
+			callback();
+		});
+	});
+
+	this.Then(/^I expect the class to not be "([^"]*)"$/, { timeout: 60 * 1000 }, function (site, callback) {
+		var elem = element(by.css('body'));
+		elem.getAttribute('class').then(function (classes) {
+			return classes.indexOf(site) !== -1;
+		}).then(callback);
 	});
 
 	this.When(/^servoy sidenav component with name "([^"]*)" tab "([^"]*)" is clicked$/, { timeout: 10 * 1000 }, function (elementName, tabName, callback) {
