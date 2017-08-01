@@ -1,5 +1,5 @@
 Feature: Testing the Servoy Sample Galery - Foundset   
-    Scenario Outline: Protractor and Cucumber Test
+    Scenario Outline: Sample Galery - Test Basic Foundset Filter
 
 #Given I go to "http://demo.servoy.com/sampleGallery/solutions/sampleGallery/index.html?f=galleryMain"
 Given I go to "My Application to Test"

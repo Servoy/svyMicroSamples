@@ -20,9 +20,9 @@ exports.config = {
   //   },
 multiCapabilities: [{
   'browserName': 'chrome'
-}, {
+}/*, {
   'browserName': 'firefox'
-}],
+}*/],
 
   // restartBrowserBetweenTests: true,
 

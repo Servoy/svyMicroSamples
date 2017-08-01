@@ -1,5 +1,5 @@
 Feature: Testing the Servoy Sample Galery - Hashing   
-    Scenario Outline: Protractor and Cucumber Test
+    Scenario Outline: Sample Galery - Test Hashing with different algorithm
 Given I go to "My Application to Test"
 When servoy sidenav component with name "galleryMain.nav" tab "Working with Data" is clicked
 When servoy sidenav component with name "galleryMain.nav" tab "Secure Hashing" is clicked

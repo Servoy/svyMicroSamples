@@ -1,5 +1,5 @@
 Feature: Testing the Servoy Sample Galery - Cyptogrophy
-    Scenario Outline: Protractor and Cucumber Test
+    Scenario Outline: Sample Galery - Test Cryptography with different algorithm
 
 Given I go to "My Application to Test"
 When servoy sidenav component with name "galleryMain.nav" tab "Working with Data" is clicked
