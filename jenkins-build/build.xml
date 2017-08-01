@@ -148,6 +148,15 @@
             </and>
             <then>
                 <antcall target="generate_code_coverage_reports"/>
+           </then>
+        </if>
+        
+        <if>
+            <and>
+                <istrue value="${CODE.ANALYSIS.ENABLED}"/>
+                <isfalse value="${TEST.FAILED}"/>
+            </and>
+            <then>
                 <antcall target="generate_code_analysis_reports"/>
            </then>
         </if>
