@@ -49,9 +49,8 @@ multiCapabilities: [{
     console.log('beforeLaunch');
     startDate = new Date();
     var path = require('path');
-    var proc = require('process');
     var fs = require('fs');
-    var pathToCreate = proc.cwd() + '/reports/cucumber_reports';
+    var pathToCreate = __dirname + '/reports/cucumber_reports';
     pathToCreate.split(path.sep).reduce(function(currentPath, folder){
       currentPath += folder + path.sep;
       if(!fs.existsSync(currentPath)) {
