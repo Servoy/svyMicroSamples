@@ -40,9 +40,14 @@ module.exports = function () {
 
 	this.Then(/^I expect the class to not be "([^"]*)"$/, { timeout: 60 * 1000 }, function (site, callback) {
 		var elem = element(by.css('body'));
-		elem.getAttribute('class').then(function (classes) {
-			return classes.indexOf(site) !== -1;
-		}).then(callback);
+		browser.wait(function () {
+			elem.getAttribute('class').then(function (classes) {
+				return classes.indexOf(site) !== -1;
+			}).then(callback);
+		}).catch(function (error) {
+			console.log(error.message);
+			tierdown(true);
+		});
 	});
 
 	this.When(/^servoy sidenav component with name "([^"]*)" tab "([^"]*)" is clicked$/, { timeout: 10 * 1000 }, function (elementName, tabName, callback) {
@@ -292,14 +297,14 @@ module.exports = function () {
 				console.log(error.message);
 				tierdown(true);
 			});
-		})
+		});
 	});
 
 	this.When(/^"([^"]*)" with name "([^"]*)" is clicked on servoy row "([^"]*)"$/, { timeout: 60 * 1000 }, function (elementType, elementName, rowNumber, callback) {
 		browser.wait(EC.presenceOf(element(by.xpath("//" + elementType + "[@data-svy-name='" + elementName + "']"))).call(), 20000, 'Not visible').then(function () {
 			element.all(by.xpath("//" + elementType + "[@data-svy-name='" + elementName + "']")).each(function (childElement) {
 				clickElement(childElement.all(by.css('.ui-grid-row.ng-scope')).get(rowNumber - 1));
-			})
+			});
 		}).then(function () {
 			wrapUp(callback, "Click event");
 		}).catch(function (error) {
@@ -382,7 +387,7 @@ module.exports = function () {
 		console.log('Flow completed');
 		browser.sleep(5000).then(function () {
 			callback();
-		})
+		});
 	});
 
 	this.After(function () {
@@ -396,10 +401,6 @@ module.exports = function () {
 	this.Before(function () {
 		hasErrorDuringSuite = false;
 		console.log('Starting scenario');
-		// browser.sleep(4000).then(function(){
-		// 	// setupDatabase(1, 'sql_creation');
-		// 	setupDatabase(setupVersion, 'onStartup');
-		// });
 	});
 
 	function validate(input, inputToCompare) {
