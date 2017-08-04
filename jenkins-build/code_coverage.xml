@@ -85,7 +85,7 @@
                     <exec executable="istanbul.cmd" dir="${TOOLS-DIR}" osfamily="windows" failonerror="true">
                         <arg value="report" />
                         <arg value="--root" />
-                        <arg value="${CODE.COVERAGE.REPORT.DIR}" />
+                        <arg value="${WORKSPACE}" />
                         <arg value="--dir" />
                         <arg value="${CODE.COVERAGE.REPORT.DIR}" />
                         <arg value="@{format}" />
@@ -93,7 +93,7 @@
                     <exec executable="istanbul" dir="${TOOLS-DIR}" osfamily="unix" failonerror="true">
                         <arg value="report" />
                         <arg value="--root" />
-                        <arg value="${CODE.COVERAGE.REPORT.DIR}" />
+                        <arg value="${WORKSPACE}" />
                         <arg value="--dir" />
                         <arg value="${CODE.COVERAGE.REPORT.DIR}" />
                         <arg value="@{format}" />
