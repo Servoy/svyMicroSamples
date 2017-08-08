@@ -13,14 +13,20 @@
     <property name="TEST.FAILED" value="false" />
     <property name="E2E.FAILED" value="false" />
     <property name="EXPORT.FAILED" value="false" />
-
     <property file="build.properties"/>
 
-    <taskdef resource="net/sf/antcontrib/antlib.xml">
+    <tstamp>
+        <format property="TODAY_TIMEFORMAT" pattern="yyyyMMdd-HHmm"  locale="nl,NL" />
+    </tstamp>
+
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties" >
         <classpath>
             <pathelement location="${ANT_CONTRIB_JAR}"/>
         </classpath>
     </taskdef>
+
+    <!-- Fixed workspace path for windows -->
+    <propertyregex property="WORKSPACE_FIX" input="${WORKSPACE}" regexp="\\" replace="/" global="true" />
 
     <import file="shared_utils.xml" />
     <import file="servoy_utils.xml" />
@@ -58,6 +64,15 @@
                 project.setProperty('SERVOY.SOLUTION_UNDER_TESTING', testSolution);
             }
         ]]></script>
+
+        <exec executable="node" outputproperty="unmergedChanged" failonerror="true" append="true">
+                <arg value="${LIB-DIR}/pendingSourceMerges.js" />
+                <arg value="${WORKSPACE_FIX}" />
+        </exec>
+        <condition property="unmergedfiles.found">
+                <matches pattern="FOUND*" string="${unmergedChanged}"/>
+        </condition>
+        <fail message="${unmergedChanged}" if="unmergedfiles.found" />
     </target>
 
     <target name="2-SetupCodecoverage">
