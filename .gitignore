@@ -27,5 +27,6 @@ Thumbs.db
 node_modules
 
 # Protractor Report #
-jenkins-build/e2e/reports/cucumber_reports/**
+jenkins-build/e2e/reports/**
+jenkins-build/e2e/screenshots/**
 

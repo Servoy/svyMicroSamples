@@ -1,5 +1,3 @@
-'use strict';
-
 var reporter = require('../../index');
 var assertHtmlReports = require('../../assert/assertHtmlReports');
 var path = require('path');
@@ -14,20 +12,6 @@ defineSupportCode(function ({ After, Before, registerHandler }) {
         this.scenario = scenario;
         callback();
     });
-
-    // Before({ tags: '@testPassing' }, function (scenario, callback) {
-    //     this.attach('Tests INFO will print here.<br>To attach INFO to Any steps, use scenario.attach function in your step definitions as shown below.<br><br>If you pass HTML\'s to scenario.attach then reporter will format accordingly <br>' +
-    //         '<br>Simple String  : scenario.attach(\'sample data\')' +
-    //         '<br>Pretty JSON    : scenario.attach(JSON.stringify(json, null, 2))' +
-    //         '<br>HTML Link      : scenario.attach(\'format the link with html-a tag\'', 'application/json');
-
-    //     this.attach('some text');
-    //     callback();
-    // });
-
-    // After({ tags: '@testPassing' }, function (scenario, callback) {
-    //     callback();
-    // });
 
     After({timeout: 20 * 1000}, function (scenario, callback) {
         if (scenario.isFailed()) {
@@ -96,44 +80,21 @@ defineSupportCode(function ({ After, Before, registerHandler }) {
 
         function assertJsonFile() {
 
-            //Generate Hierarchy theme report
-            // reporter.generate(getJsonFileOptions(theme.hierarchy));
-
             //Generate Bootstrap theme report
             reporter.generate(getJsonFileOptions(theme.bootstrap));
-
-            //Generate Foundation theme report
-            // reporter.generate(getJsonFileOptions(theme.foundation));
-
-            //Generate Simple theme report
-            // reporter.generate(getJsonFileOptions(theme.simple));
 
             //assert reports
             assertHtmlReports(outputDirectory);
         }
 
         function assertJsonDir() {
-            //Generate Hierarchy theme report
-            // reporter.generate(getJsonDirOptions(theme.hierarchy));
 
             // Generate Bootstrap theme report
             reporter.generate(getJsonDirOptions(theme.bootstrap));
 
-            // //Generate Foundation theme report
-            // reporter.generate(getJsonDirOptions(theme.foundation));
-
-            // //Generate Simple theme report
-            // reporter.generate(getJsonDirOptions(theme.simple));
-
-            //assert reports
-            // assertHtmlReports(outputDirectory);
         }
 
         assertJsonDir();
-
-        // removeHtmlReports();
-
-        // assertJsonFile();
 
         callback();
     });

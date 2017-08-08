@@ -1,4 +1,3 @@
-'use strict';
 var protractor = require('protractor');
 var proc = require('process');
 var { defineSupportCode } = require(proc.cwd() + '/lib/cucumberLoader').load();
@@ -13,9 +12,22 @@ var hasErrorDuringSuite = false;
 var userAnalytics = require('universal-analytics');
 var analytics = userAnalytics('UA-93980847-1');
 defineSupportCode(({ Given, Then, When, Before, After }) => {
-	// Given('I go to {url}', { timeout: 60 * 1000 }, function (url) {
-	Given('I go to {url}', { timeout: 60 * 1000 }, function (url) {
-		return browser.get(url);
+	Given('I go to {url}', { timeout: 60 * 1000 }, function (url, callback) {
+		if (browser.params.testDomainURL !== '') {
+			browser.get(browser.params.testDomainURL).then(function () {
+				wrapUp(callback, "URL Navigation event");
+			}).catch(function (error) {
+				console.log(error.message);
+				tierdown(true);
+			});
+		} else {
+			browser.get(url).then(function () {
+				wrapUp(callback, "URL Navigation event");
+			}).catch(function (error) {
+				console.log(error.message);
+				tierdown(true);
+			});
+		}
 	});
 
 	//FOUNDSET SAMPLE GALERY FUNCTIONS//
@@ -24,7 +36,7 @@ defineSupportCode(({ Given, Then, When, Before, After }) => {
 		menuItems.each(function (menuItem) {
 			clickElement(menuItem.element(by.cssContainingText('a', tabName))).then(function () {
 				wrapUp(callback, "Click event");
-			})
+			});
 		}).catch(function (error) {
 			console.log(error.message);
 			tierdown(true);
@@ -46,6 +58,7 @@ defineSupportCode(({ Given, Then, When, Before, After }) => {
 		var monthFrom = new Date().getMonth() + 1;
 		var yearTo = year;
 		var differenceInMonths;
+		var x = 0;
 
 		if (yearFrom > yearTo) { //calendar year is in the future
 			differenceInMonths = (yearFrom - yearTo) * 12;//selected calendar date to is in the past
@@ -56,7 +69,7 @@ defineSupportCode(({ Given, Then, When, Before, After }) => {
 			else if (monthFrom > monthTo) {
 				differenceInMonths += (monthFrom - monthTo);
 			}
-			for (var x = 0; x < differenceInMonths; x++) {
+			for (x = 0; x < differenceInMonths; x++) {
 				clickElement(element.all(by.css('.prev')).first());
 			}
 		} else if (yearFrom < yearTo) { //calendar year is in the past
@@ -70,7 +83,7 @@ defineSupportCode(({ Given, Then, When, Before, After }) => {
 			}
 			console.log('Clicks after month: ' + differenceInMonths);
 
-			for (var x = 0; x < differenceInMonths; x++) {
+			for (x = 0; x < differenceInMonths; x++) {
 				clickElement(element.all(by.css('.next')).first());
 			}
 		} else { //calendar data and current year are the same
@@ -78,7 +91,7 @@ defineSupportCode(({ Given, Then, When, Before, After }) => {
 				differenceInMonths = (monthTo - monthFrom);
 				console.log('Clicks after month: ' + differenceInMonths);
 
-				for (var x = 0; x < differenceInMonths; x++) {
+				for (x = 0; x < differenceInMonths; x++) {
 					clickElement(element.all(by.css('.next')).first());
 				}
 			}
@@ -86,7 +99,7 @@ defineSupportCode(({ Given, Then, When, Before, After }) => {
 				differenceInMonths = (monthFrom - monthTo);
 				console.log('Clicks after month: ' + differenceInMonths);
 
-				for (var x = 0; x < differenceInMonths; x++) {
+				for (x = 0; x < differenceInMonths; x++) {
 					clickElement(element.all(by.css('.prev')).first());
 				}
 			}
@@ -105,7 +118,7 @@ defineSupportCode(({ Given, Then, When, Before, After }) => {
 		}).catch(function (error) {
 			console.log('error.message');
 			tierdown(true);
-		})
+		});
 	});
 
 	When('servoy select2tokenizer component with name {elementName} is clicked', { timeout: 60 * 1000 }, function (elementName, callback) {
@@ -262,14 +275,14 @@ defineSupportCode(({ Given, Then, When, Before, After }) => {
 				console.log(error.message);
 				tierdown(true);
 			});
-		})
+		});
 	});
 
 	When(/^"([^"]*)" with name "([^"]*)" is clicked on servoy row "([^"]*)"$/, { timeout: 60 * 1000 }, function (elementType, elementName, rowNumber, callback) {
 		browser.wait(EC.presenceOf(element(by.xpath("//" + elementType + "[@data-svy-name='" + elementName + "']"))).call(), 20000, 'Not visible').then(function () {
 			element.all(by.xpath("//" + elementType + "[@data-svy-name='" + elementName + "']")).each(function (childElement) {
 				clickElement(childElement.all(by.css('.ui-grid-row.ng-scope')).get(rowNumber - 1));
-			})
+			});
 		}).then(function () {
 			wrapUp(callback, "Click event");
 		}).catch(function (error) {
@@ -352,7 +365,7 @@ defineSupportCode(({ Given, Then, When, Before, After }) => {
 		console.log('Flow completed');
 		browser.sleep(5000).then(function () {
 			callback();
-		})
+		});
 	});
 
 	After(function () {
@@ -408,25 +421,23 @@ function sendKeys(elem, input) {
 
 function calcBlockDuration(timeStepCompleted) {
 	if (!!tempBlockDate) {
-		var stepduration = timeStepCompleted - tempBlockDate;
+		var temp = (timeStepCompleted - tempBlockDate);
 		tempBlockDate = timeStepCompleted;
-		return stepduration;
+		return temp;
 	} else {
-		var stepduration = timeStepCompleted - startBlockDate;
 		tempBlockDate = timeStepCompleted;
-		return stepduration;
+		return (timeStepCompleted - startBlockDate);
 	}
 }
 
 function calcStepDuration(timeStepCompleted) {
 	if (!!tempDate) {
-		var stepduration = timeStepCompleted - tempDate;
+		var temp = (timeStepCompleted - tempDate);
 		tempDate = timeStepCompleted;
-		return stepduration;
+		return temp;
 	} else {
-		var stepduration = timeStepCompleted - startDate;
 		tempDate = timeStepCompleted;
-		return stepduration;
+		return (timeStepCompleted - startDate);
 	}
 }
 

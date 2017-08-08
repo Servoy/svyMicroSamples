@@ -1,17 +1,15 @@
 Feature: Testing the Servoy Sample Galery - Hashing   
-    Scenario Outline: Sample Galery - Test Hashing with different algorithm
+    Scenario Outline: Protractor and Cucumber Test
+
 Given I go to "My Application to Test"
-Then I expect the url to be "http://localhost:8080/solutions/sampleGallery/index.html?f=galleryMain"
-Then I expect the class to not be "sablowaitcursor"
-When servoy sidenav component with name "galleryMain.nav" tab "Working with Data" is clicked
-When servoy sidenav component with name "galleryMain.nav" tab "Secure Hashing" is clicked
-When servoy combobox component with name "exampleHash.algrothim" is clicked
-When servoy combobox component with name "exampleHash.algrothim" is clicked
-When servoy combobox component with name "exampleHash.algrothim" the text <hash> is inserted
-When I press "enter"
-When default textarea component with name "exampleHash.plainText" the text "secret code" is inserted
-When servoy button component with name "exampleHash.svy_" is clicked
-# Then I am done
+When servoy sidenav component with name galleryMain.nav tab Working with Data is clicked
+When servoy sidenav component with name galleryMain.nav tab Secure Hashing is clicked
+When servoy combobox component with name exampleHash.algrothim is clicked
+When servoy combobox component with name exampleHash.algrothim is clicked
+When servoy combobox component with name exampleHash.algrothim the text <hash> is inserted
+When I press enter
+When default textarea component with name exampleHash.plainText the text secret code is inserted
+When servoy button component with name exampleHash.svy_ is clicked
 
 @data_table_servoy
 Examples:

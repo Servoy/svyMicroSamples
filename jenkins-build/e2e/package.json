@@ -1,20 +1,20 @@
 {
   "name": "servoy-minox-test",
-  "description": "Servoy Protractor tests on Minox Solution",
+  "description": "Servoy Protractor tests",
   "repository": "N/A",
   "readme": "N/A",
   "private": true,
   "author": "",
   "version": "1.0.0",
   "dependencies": {
-    "cucumber": "*",
-    "expect": "*",
-    "protractor": "*",
-    "restler": "*",
-    "selenium-webdriver": "*",
-    "universal-analytics": "*",
-    "webdriver-manager": "*",
-    "cucumber-html-reporter": "*",
+    "cucumber": "latest",
+    "expect": "latest",
+    "protractor": "latest",
+    "restler": "latest",
+    "selenium-webdriver": "latest",
+    "universal-analytics": "latest",
+    "webdriver-manager": "latest",
+    "cucumber-html-reporter": "latest",
     "find": "^0.2.7",
     "fs-extra": "^3.0.1",
     "js-base64": "^2.1.9",
@@ -25,6 +25,6 @@
   },
   "engine": "node >= 7.5.0",
   "devDependencies": {
-    "protractor-cucumber-framework": "*"
+    "protractor-cucumber-framework": "latest"
   }
 }
