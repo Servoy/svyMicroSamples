@@ -27,6 +27,17 @@
 
     <!-- Fixed workspace path for windows -->
     <propertyregex property="WORKSPACE_FIX" input="${WORKSPACE}" regexp="\\" replace="/" global="true" />
+    <if>
+        <os family="unix" />
+        <then>
+            <property name="OS.COMMAND.EXECUTER" value="bash" />
+            <property name="OS.COMMAND.CALL" value="-c" />
+        </then>
+        <else>
+            <property name="OS.COMMAND.EXECUTER" value="cmd" />
+            <property name="OS.COMMAND.CALL" value="/C"/>
+        </else>
+    </if>
 
     <import file="shared_utils.xml" />
     <import file="servoy_utils.xml" />

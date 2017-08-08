@@ -26,6 +26,7 @@
                  <jvmarg value="${SERVOY.EXPORTER.MEMORY.MAXPERM}" />
                  <jvmarg value="-Dosgi.configuration.cascaded=false" />
                  <jvmarg value="-Dservoy.application_server.dir=${SERVOY.INSTALL.APPSERVER.DIR}" />
+                 <jvmarg value="-Djava.awt.headless=true" />
 
                  <arg value="-application" />
                  <arg value="com.servoy.eclipse.exporter.solution.application" />
@@ -85,7 +86,8 @@
                 <jvmarg value="${SERVOY.EXPORTER.MEMORY.MAXPERM}" />
                 <jvmarg value="-Dosgi.configuration.cascaded=false" />
                 <jvmarg value="-Dservoy.application_server.dir=${SERVOY.INSTALL.APPSERVER.DIR}" />
-                <!--<jvmarg value="-Djava.awt.headless=true" />-->
+                <jvmarg value="-Djava.awt.headless=true" />
+                
                 <arg value="-application" />
                 <arg value="com.servoy.eclipse.exporter.war.application" />
 

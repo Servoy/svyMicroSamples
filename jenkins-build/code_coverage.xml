@@ -27,26 +27,15 @@
     <!-- Step 2: instrument all code from workspace into the temp instrumented workspace-->
     <target name="code_coverage_instrument_workspace">
         <echo level="verbose" message="instrumenting ${SERVOY.SOLUTION_UNDER_TESTING} into ${CODE.COVERAGE.INSTRUMENTED.WORKSPACE.TEMP}"/>
-        <exec executable="istanbul.cmd" dir="${TOOLS-DIR}" osfamily="windows" failonerror="true">
-            <arg value="instrument"/>
+        <exec executable="istanbul" dir="${TOOLS-DIR}" failonerror="true">
+            <arg line="instrument" />
             <arg value="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE}"/>
-            <arg value="--output"/>
+            <arg line="--output"/>
             <arg value="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE.TEMP}"/>
-            <arg value="--preserve-comments"/>
-            <arg value="--no-compact"/>
-            <arg value="--save-baseline"/>
-            <arg value="--baseline-file"/>
-            <arg value="${CODE.COVERAGE.REPORT.DIR}/coverage-baseline.json"/>
-        </exec>
-        <exec executable="istanbul" dir="${TOOLS-DIR}" osfamily="unix" failonerror="true">
-            <arg value="instrument"/>
-            <arg value="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE}"/>
-            <arg value="--output"/>
-            <arg value="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE.TEMP}"/>
-            <arg value="--preserve-comments"/>
-            <arg value="--no-compact"/>
-            <arg value="--save-baseline"/>
-            <arg value="--baseline-file"/>
+            <arg line="--preserve-comments"/>
+            <arg line="--no-compact"/>
+            <arg line="--save-baseline"/>
+            <arg line="--baseline-file"/>
             <arg value="${CODE.COVERAGE.REPORT.DIR}/coverage-baseline.json"/>
         </exec>
     </target>
@@ -80,25 +69,15 @@
             <isfalse value="${TEST.FAILED}" />
             <then>
                 <foreach list="${CODE.COVERAGE.REPORT-FORMATS}" param="format">
-                    <sequential>
-                        <echo level="info" message="Generating @{format} report"/>
-                        <exec executable="istanbul.cmd" dir="${TOOLS-DIR}" osfamily="windows" failonerror="true">
-                            <arg value="report" />
-                            <arg value="--root" />
-                            <arg value="${CODE.COVERAGE.REPORT.DIR}" />
-                            <arg value="--dir" />
-                            <arg value="${WORKSPACE}" />
-                            <arg value="@{format}" />
-                        </exec>
-                        <exec executable="istanbul" dir="${TOOLS-DIR}" osfamily="unix" failonerror="true">
-                            <arg value="report" />
-                            <arg value="--root" />
-                            <arg value="${CODE.COVERAGE.REPORT.DIR}" />
-                            <arg value="--dir" />
-                            <arg value="${WORKSPACE}" />
-                            <arg value="@{format}" />
-                        </exec>
-                    </sequential>
+                    <echo level="info" message="Generating @{format} report"/>
+                    <exec executable="istanbul" dir="${TOOLS-DIR}"  failonerror="true">
+                        <arg value="report" />
+                        <arg value="--root" />
+                        <arg value="${CODE.COVERAGE.REPORT.DIR}" />
+                        <arg value="--dir" />
+                        <arg value="${WORKSPACE}" />
+                        <arg value="@{format}" />
+                    </exec>
                 </foreach>
             </then>
         </if>
@@ -109,12 +88,8 @@
         <if>
             <istrue value="${INSTALL_SOFTWARE_FROM_SCRIPT}"/>
             <then>
-                <exec executable="cmd" osfamily="windows" failonerror="true">
-                    <arg line="/c npm install --prefix ${TOOLS-DIR} istanbul" />
-                </exec>
-                <exec executable="bash" osfamily="unix" failonerror="true">
-                    <arg line="-c" />
-                    <arg value="npm install --prefix ${TOOLS-DIR} istanbul"/>
+                <exec executable="${OS.COMMAND.EXECUTER}" dir="${TOOLS-DIR}"  failonerror="true">
+                    <arg value="${OS.COMMAND.CALL} npm install --prefix ${TOOLS-DIR} istanbul" />
                 </exec>
             </then>
             <else>
@@ -122,12 +97,8 @@
             </else>
         </if>
         <echo level="info" message="Install UUID in lib dir, needed because global ref is not workingL" />
-        <exec executable="bash" osfamily="unix" failonerror="true">
-            <arg line="-c" />
-            <arg value="npm install --prefix ${LIB-DIR} uuid"/>
-        </exec>
-        <exec executable="cmd" osfamily="windows" failonerror="true">
-            <arg line="/c npm install --prefix ${LIB-DIR} uuid" />
+        <exec executable="${OS.COMMAND.EXECUTER}" dir="${TOOLS-DIR}"  failonerror="true">
+            <arg value="${OS.COMMAND.CALL}npm install --prefix ${LIB-DIR} uuid"/>
         </exec>
     </target>
 
