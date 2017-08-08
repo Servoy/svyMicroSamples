@@ -1,7 +1,4 @@
-<?xml version="1.0"?>
-
-<!-- Works with Ant 1.7.0 and higher -->
-<project basedir=".">
+<project>
     <macrodef name="export-solution-as-dot-servoy">
          <attribute name="solutionNames"/>
          <attribute name="workspace" default="${WORKSPACE}"/>
@@ -87,7 +84,7 @@
                 <jvmarg value="-Dosgi.configuration.cascaded=false" />
                 <jvmarg value="-Dservoy.application_server.dir=${SERVOY.INSTALL.APPSERVER.DIR}" />
                 <jvmarg value="-Djava.awt.headless=true" />
-                
+
                 <arg value="-application" />
                 <arg value="com.servoy.eclipse.exporter.war.application" />
 
@@ -156,18 +153,18 @@
                 <jvmarg value="${SERVOY.TEST.MEMORY.XMS}" />
                 <jvmarg value="${SERVOY.TEST.MEMORY.XMX}" />
                 <jvmarg value="${SERVOY.TEST.MEMORY.MAXPERM}" />
-                <jvmarg value="-Dtest.log.location=${LOG.DIR}/test.log" />
+                <jvmarg value="-Dtest.log.location=${WORKSPACE}/${LOG.DIR}/test.log" />
                 <classpath refid="classpath.run_test" />
 
-                <sysproperty key="servoy.test.target-exports" value="${OUTPUT.DIR.TEST.EXPORTS}" />
+                <sysproperty key="servoy.test.target-exports" value="${WORKSPACE}/${OUTPUT.DIR.TEST.EXPORTS}" />
                 <sysproperty key="servoy.test.property-file" value="${SERVOY.PROPERTIES.FILE}" />
                 <sysproperty key="servoy.test.solution-load.timeout" value="${SERVOY.SOLUTION-LOAD.TIMEOUT}" />
-                <!--<sysproperty key="servoy.test.target-file-ext" value=".servoy" /> -->
+                <sysproperty key="servoy.test.target-file-ext" value=".servoy" />
 
                 <formatter type="xml" extension=".xm1"/>
                 <formatter type="xml" />
 
-                <test name="com.servoy.automation.jsunit.smartclient.ServoyJSUnitTestRunner" todir="${SERVOY.TEST.JUNIT.REPORT.DIR}" />
+                <test name="com.servoy.automation.jsunit.smartclient.ServoyJSUnitTestRunner" todir="${WORKSPACE}/${SERVOY.TEST.JUNIT.REPORT.DIR}" />
             </junit>
 
             <script language="javascript"><![CDATA[
@@ -187,7 +184,7 @@
             ]]></script>
 
             <move-log-to-logDir logFileToCopy="${SERVOY.INSTALL.APPSERVER.DIR}/servoy_log.txt" newName="junit$servoy_log.txt"/>
-            <move-log-to-logDir logFileToCopy="${WORKSPACE}/.metadata/.log" newName="junit$workspace_log.log"/>
+            <move-log-to-logDir logFileToCopy=".metadata/.log" newName="junit$workspace_log.log"/>
             <antcall target="create_test_report"/>
            </sequential>
     </macrodef>

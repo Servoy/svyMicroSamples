@@ -1,32 +1,28 @@
-<?xml version="1.0"?>
-
-<!-- Works with Ant 1.7.0 and higher -->
-<!-- These are useful combined with command line/ant test runners for mobile/smart client solutions exports; -->
-<!-- see Servoy Wiki - Building A Software Factory for how to use test runners with ant on these exports -->
-<!--<project name="Ant Solution Exporter" default="copy_fonts_dir" basedir=".">-->
-<project name="Ant Solution Exporter" default="ALL" basedir=".">
+<project name="Ant Solution Exporter" default="ALL" basedir="..">
 
     <property environment="env"/>
     <property name="WORKSPACE" value="${env.WORKSPACE}"/>
-    
-    <!-- Init set result properties -->
     <property name="TEST.FAILED" value="false" />
     <property name="E2E.FAILED" value="false" />
     <property name="EXPORT.FAILED" value="false" />
-    <property file="build.properties"/>
+    <property file="jenkins-build/build.properties"/>
 
-    <tstamp>
-        <format property="TODAY_TIMEFORMAT" pattern="yyyyMMdd-HHmm"  locale="nl,NL" />
-    </tstamp>
+    <import file="shared_utils.xml" />
+    <import file="servoy_utils.xml" />
+    <import file="code_coverage.xml" />
+    <import file="code_analyis.xml" />
+    <import file="tomcat_utils.xml" />
+    <import file="e2e.xml" />
 
-    <taskdef resource="net/sf/antcontrib/antcontrib.properties" >
+    <taskdef resource="net/sf/antcontrib/antlib.xml" >
         <classpath>
-            <pathelement location="${ANT_CONTRIB_JAR}"/>
+            <pathelement location="${WORKSPACE}/${ANT_CONTRIB_JAR}"/>
         </classpath>
     </taskdef>
 
     <!-- Fixed workspace path for windows -->
     <propertyregex property="WORKSPACE_FIX" input="${WORKSPACE}" regexp="\\" replace="/" global="true" />
+    
     <if>
         <os family="unix" />
         <then>
@@ -38,13 +34,6 @@
             <property name="OS.COMMAND.CALL" value="/C"/>
         </else>
     </if>
-
-    <import file="shared_utils.xml" />
-    <import file="servoy_utils.xml" />
-    <import file="code_coverage.xml" />
-    <import file="code_analyis.xml" />
-    <import file="tomcat_utils.xml" />
-    <import file="e2e.xml" />
 
     <target name="ALL" depends="1-SetupEnvironment, 2-SetupCodecoverage, 3-RunJSUnitTest, 4-RunE2ETests, 5-ExportDeployWarFile, 6-GenerateReports, 7-StoreData" />
 
@@ -76,7 +65,7 @@
             }
         ]]></script>
 
-        <exec executable="node" outputproperty="unmergedChanged" failonerror="true" append="true">
+        <exec executable="node" dir="${WORKSPACE}" outputproperty="unmergedChanged" failonerror="true" append="true">
                 <arg value="${LIB-DIR}/pendingSourceMerges.js" />
                 <arg value="${WORKSPACE_FIX}" />
         </exec>

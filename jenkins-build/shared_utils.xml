@@ -1,7 +1,4 @@
-<?xml version="1.0"?>
-
-<!-- Works with Ant 1.7.0 and higher -->
-<project basedir=".">
+<project>
     <macrodef name="make-clean-dir">
         <attribute name="dir"/>
         <sequential>

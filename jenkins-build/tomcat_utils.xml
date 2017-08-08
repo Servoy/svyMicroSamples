@@ -1,8 +1,4 @@
-<?xml version="1.0"?>
-
-<!-- Works with Ant 1.7.0 and higher -->
-<project basedir=".">
-
+<project>
     <macrodef name="deploy-war-on-tomcat-server">
         <attribute name="applicationName" default="${TOMCAT.APPLICATION.NAME}" />
         <attribute name="warFile" default="${WAR-FILE}" />
@@ -11,12 +7,12 @@
             <if>
                 <os family="unix" />
                 <then>
-                    <exec executable="curl" output="${LOG.DIR}/war_deploy.log">
-                        <arg line="--upload-file @{warFile} http://${TOMCAT.USERNAME}:${TOMCAT.PASSWORD}@${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/deploy?path=/@{applicationName}"/>
+                    <exec executable="curl" dir="${WORKSPACE}" output="${LOG.DIR}/war_deploy.log">
+                        <arg line="--upload-file ${WORKSPACE}/@{warFile} http://${TOMCAT.USERNAME}:${TOMCAT.PASSWORD}@${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/deploy?path=/@{applicationName}"/>
                     </exec>
                 </then>
                 <else>
-                    <get quiet="true" src="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/deploy?path=/@{applicationName}&amp;war=@{warFile}" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" dest="${LOG.DIR}/war_deploy.log"/>
+                    <get quiet="true" src="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/deploy?path=/@{applicationName}&amp;war=${WORKSPACE}/@{warFile}" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" dest="${LOG.DIR}/war_deploy.log"/>
                 </else>
             </if>
 
@@ -36,7 +32,7 @@
             <if>
                 <os family="unix" />
                 <then>
-                    <exec executable="curl" output="${LOG.DIR}/war_undeploy.log">
+                    <exec executable="curl" dir="${WORKSPACE}" output="${LOG.DIR}/war_undeploy.log">
                         <arg line="http://${TOMCAT.USERNAME}:${TOMCAT.PASSWORD}@${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/undeploy?path=/@{applicationName} || true"/>
                     </exec>
                 </then>

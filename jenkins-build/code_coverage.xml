@@ -1,7 +1,4 @@
-<?xml version="1.0"?>
-
-<!-- Works with Ant 1.7.0 and higher -->
-<project basedir=".">
+<project>
     <!-- Step 1: clean the instrumented workspace -->
     <target name="code_coverage_reporting_preparation" depends="install_istanbul">
 
@@ -18,7 +15,7 @@
                 </fileset>
                 <globmapper from="scopes.codeCoverageReporting.js" to="codeCoverageReporting.js"/>
             </copy>
-            <exec executable="node" failonerror="true">
+            <exec executable="node" dir="${WORKSPACE}" failonerror="true">
                 <arg value="${LIB-DIR}/servoyIstanbulInstrumentCleaner.js" />
                 <arg value="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE}" />
             </exec>
@@ -27,8 +24,9 @@
     <!-- Step 2: instrument all code from workspace into the temp instrumented workspace-->
     <target name="code_coverage_instrument_workspace">
         <echo level="verbose" message="instrumenting ${SERVOY.SOLUTION_UNDER_TESTING} into ${CODE.COVERAGE.INSTRUMENTED.WORKSPACE.TEMP}"/>
-        <exec executable="istanbul" dir="${TOOLS-DIR}" failonerror="true">
-            <arg line="instrument" />
+        <exec executable="${OS.COMMAND.EXECUTER}" dir="${WORKSPACE}" failonerror="true">
+            <arg value="${OS.COMMAND.CALL}" />
+            <arg value="istanbul instrument" />
             <arg value="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE}"/>
             <arg line="--output"/>
             <arg value="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE.TEMP}"/>
@@ -43,7 +41,7 @@
     <!-- Step 3: parse all the instrumented code from the temp instrumented workspace and save the modified instrumented file into the instrumented workspace-->
     <target name="code_coverage_fix_instrumented_workspace_for_servoy">
         <echo level="verbose" message="Processing instrumented code from ${CODE.COVERAGE.INSTRUMENTED.WORKSPACE.TEMP} to ${CODE.COVERAGE.INSTRUMENTED.WORKSPACE}, fixing Servoy incompatibilities"/>
-        <exec executable="node" failonerror="true">
+        <exec executable="node" dir="${WORKSPACE}" failonerror="true">
             <arg value="${LIB-DIR}/servoyCodeCoverageInstrumentationFixer.js"/>
             <arg value="--d"/>
             <arg value="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE}"/>
@@ -68,17 +66,19 @@
         <if>
             <isfalse value="${TEST.FAILED}" />
             <then>
-                <foreach list="${CODE.COVERAGE.REPORT-FORMATS}" param="format">
-                    <echo level="info" message="Generating @{format} report"/>
-                    <exec executable="istanbul" dir="${TOOLS-DIR}"  failonerror="true">
-                        <arg value="report" />
-                        <arg value="--root" />
-                        <arg value="${CODE.COVERAGE.REPORT.DIR}" />
-                        <arg value="--dir" />
-                        <arg value="${WORKSPACE}" />
-                        <arg value="@{format}" />
-                    </exec>
-                </foreach>
+                <for list="${CODE.COVERAGE.REPORT-FORMATS}" param="format">
+                    <sequential>
+                        <exec executable="${OS.COMMAND.EXECUTER}" dir="${WORKSPACE}" failonerror="true">
+                            <arg value="${OS.COMMAND.CALL}" />
+                            <arg value="istanbul report" />
+                            <arg value="--root" />
+                            <arg value="${WORKSPACE}/${CODE.COVERAGE.REPORT.DIR}" />
+                            <arg value="--dir" />
+                            <arg value="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE}" />
+                            <arg value="@{format}" />
+                        </exec>
+                    </sequential>
+                </for>
             </then>
         </if>
     </target>
@@ -88,8 +88,9 @@
         <if>
             <istrue value="${INSTALL_SOFTWARE_FROM_SCRIPT}"/>
             <then>
-                <exec executable="${OS.COMMAND.EXECUTER}" dir="${TOOLS-DIR}"  failonerror="true">
-                    <arg value="${OS.COMMAND.CALL} npm install --prefix ${TOOLS-DIR} istanbul" />
+                <exec executable="${OS.COMMAND.EXECUTER}" dir="${WORKSPACE}" failonerror="true">
+                    <arg value="${OS.COMMAND.CALL}" />
+                    <arg value="npm install --prefix ${TOOLS-DIR} istanbul" />
                 </exec>
             </then>
             <else>
@@ -97,7 +98,7 @@
             </else>
         </if>
         <echo level="info" message="Install UUID in lib dir, needed because global ref is not workingL" />
-        <exec executable="${OS.COMMAND.EXECUTER}" dir="${TOOLS-DIR}"  failonerror="true">
+        <exec executable="${OS.COMMAND.EXECUTER}" dir="${WORKSPACE}" failonerror="true">
             <arg value="${OS.COMMAND.CALL}npm install --prefix ${LIB-DIR} uuid"/>
         </exec>
     </target>

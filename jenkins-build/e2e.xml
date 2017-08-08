@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project basedir=".">
+<project>
     <target name="install_dependencies">
         <if>
             <istrue value="${INSTALL_SOFTWARE_FROM_SCRIPT}"/>
             <then>
                 <exec executable="${OS.COMMAND.EXECUTER}" dir="${TOOLS-DIR}"  failonerror="true">
-                    <arg value="${OS.COMMAND.CALL} npm install --production"/>
+                    <arg value="${OS.COMMAND.CALL}" />
+                    <arg value="npm install --production"/>
                 </exec>
             </then>
             <else>
@@ -19,11 +19,9 @@
             <echo level="verbose" message="Testing solution: ${SERVOY.SOLUTION}"/>
 
     <!-- TODO: Add fail handler for PROTRACTOR -->
-    <echo>
-        ${OS.COMMAND.EXECUTER} ${OS.COMMAND.CALL} protractor ${PROTRACTOR.CONF} --seleniumAddress=${PROTRACTOR.SELENIUM.URL} --params.testDomainURL=${PROTRACTOR.TEST.URL}
-    </echo>
-        <exec executable="${OS.COMMAND.EXECUTER}">
-            <arg value="${OS.COMMAND.CALL} protractor" />
+        <exec executable="${OS.COMMAND.EXECUTER}" dir="${WORKSPACE}">
+            <arg value="${OS.COMMAND.CALL}" />
+            <arg value="protractor" />
             <arg value="${PROTRACTOR.CONF}"/>
             <arg value="--seleniumAddress=${PROTRACTOR.SELENIUM.URL}" />
             <arg value="--params.testDomainURL=${PROTRACTOR.TEST.URL}"/>
