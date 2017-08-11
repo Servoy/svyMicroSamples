@@ -37,7 +37,8 @@ exports.config = {
   },
 
   beforeLaunch: () => {
-    console.log('beforeLaunch');    
+    console.log('beforeLaunch');
+    createReportFolder();
     removeJsonReports(); //removes reports from previous tests
     removeScreenshots(); //remove screenshots from previous tests
     startDate = new Date();
@@ -80,4 +81,18 @@ function removeScreenshots() {
   files.map(function (file) {
     fs.unlinkSync(file);
   });
+}
+
+function createReportFolder() {
+  var path = require('path');
+  var proc = require('process');
+  var fs = require('fs');
+  var pathToCreate = proc.cwd() + '/reports/cucumber_reports';
+  pathToCreate.split(path.sep).reduce(function(currentPath, folder){
+    currentPath += folder + path.sep;
+    if(!fs.existsSync(currentPath)) {
+      fs.mkdirSync(currentPath);
+    }
+    return currentPath;
+  },'');
 }
