@@ -35,9 +35,7 @@
         <condition property="CODE.ANALYSIS.SETTINGS.LINTER-OPTION.VALUE" value="${CODE.ANALYSIS.SETTINGS.JSHINT}" else="${CODE.ANALYSIS.SETTINGS.ESLINT}">
             <equals arg1="${CODE.ANALYSIS.LINTER}" arg2="jshint" />
         </condition>
-        <exec executable="${OS.COMMAND.EXECUTER}" dir="${WORKSPACE}" failonerror="true">
-            <arg value="${OS.COMMAND.CALL}" />
-            <arg value="plato"/>
+        <exec executable="plato" dir="${WORKSPACE}" failonerror="true">
             <arg value="--recurse" />
             <arg value="--dir"/>
             <arg value="${CODE.ANALYSIS.REPORT.DIR}"/>
@@ -55,9 +53,8 @@
         <if>
             <istrue value="${INSTALL_SOFTWARE_FROM_SCRIPT}"/>
             <then>
-                <exec executable="${OS.COMMAND.EXECUTER}" dir="${WORKSPACE}"  failonerror="true">
-                    <arg value="${OS.COMMAND.CALL}" />
-                    <arg value="npm install --prefix ${TOOLS-DIR} plato" />
+                <exec executable="npm" dir="${WORKSPACE}"  failonerror="true">
+                    <arg value="install -g plato" />
                 </exec>
             </then>
             <else>

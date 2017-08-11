@@ -24,9 +24,8 @@
     <!-- Step 2: instrument all code from workspace into the temp instrumented workspace-->
     <target name="code_coverage_instrument_workspace">
         <echo level="verbose" message="instrumenting ${SERVOY.SOLUTION_UNDER_TESTING} into ${CODE.COVERAGE.INSTRUMENTED.WORKSPACE.TEMP}"/>
-        <exec executable="${OS.COMMAND.EXECUTER}" dir="${WORKSPACE}" failonerror="true">
-            <arg value="${OS.COMMAND.CALL}" />
-            <arg value="istanbul instrument" />
+        <exec executable="istanbul" dir="${WORKSPACE}" failonerror="true">
+            <arg value="instrument" />
             <arg value="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE}"/>
             <arg line="--output"/>
             <arg value="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE.TEMP}"/>
@@ -68,18 +67,14 @@
             <then>
                 <for list="${CODE.COVERAGE.REPORT-FORMATS}" param="format">
                     <sequential>
-                        <exec executable="${OS.COMMAND.EXECUTER}" dir="${WORKSPACE}" failonerror="true">
-                            <arg value="${OS.COMMAND.CALL}" />
-                            <arg value="istanbul report" />
+                        <exec executable="istanbul" dir="${WORKSPACE}" failonerror="true">
+                            <arg value="report" />
                             <arg value="--root" />
                             <arg value="${WORKSPACE}/${CODE.COVERAGE.REPORT.DIR}" />
                             <arg value="--dir" />
                             <arg value="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE}" />
                             <arg value="@{format}" />
                         </exec>
-                        <echo>
-                        ${OS.COMMAND.EXECUTER} ${OS.COMMAND.CALL} istanbul report --root ${WORKSPACE}/${CODE.COVERAGE.REPORT.DIR} --dir ${CODE.COVERAGE.INSTRUMENTED.WORKSPACE} @{format}
-                        </echo>
                     </sequential>
                 </for>
             </then>
@@ -91,9 +86,8 @@
         <if>
             <istrue value="${INSTALL_SOFTWARE_FROM_SCRIPT}"/>
             <then>
-                <exec executable="${OS.COMMAND.EXECUTER}" dir="${WORKSPACE}" failonerror="true">
-                    <arg value="${OS.COMMAND.CALL}" />
-                    <arg value="npm install --prefix ${TOOLS-DIR} istanbul" />
+                <exec executable="npm" dir="${WORKSPACE}" failonerror="true">
+                    <arg value="install -g istanbul" />
                 </exec>
             </then>
             <else>
@@ -101,8 +95,8 @@
             </else>
         </if>
         <echo level="info" message="Install UUID in lib dir, needed because global ref is not workingL" />
-        <exec executable="${OS.COMMAND.EXECUTER}" dir="${WORKSPACE}" failonerror="true">
-            <arg value="${OS.COMMAND.CALL}npm install --prefix ${LIB-DIR} uuid"/>
+        <exec executable="npm" dir="${WORKSPACE}" failonerror="true">
+            <arg value="install -g uuid"/>
         </exec>
     </target>
 
