@@ -12,7 +12,7 @@
                     </exec>
                 </then>
                 <else>
-                    <get quiet="true" src="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/deploy?path=/@{applicationName}&amp;war=${WORKSPACE}/@{warFile}" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" dest="${LOG.DIR}/war_deploy.log"/>
+                    <get quiet="true" src="http://${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/deploy?path=/@{applicationName}&amp;war=@{warFile}" username="${TOMCAT.USERNAME}" password="${TOMCAT.PASSWORD}" dest="${LOG.DIR}/war_deploy.log"/>
                 </else>
             </if>
 

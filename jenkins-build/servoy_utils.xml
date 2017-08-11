@@ -153,10 +153,10 @@
                 <jvmarg value="${SERVOY.TEST.MEMORY.XMS}" />
                 <jvmarg value="${SERVOY.TEST.MEMORY.XMX}" />
                 <jvmarg value="${SERVOY.TEST.MEMORY.MAXPERM}" />
-                <jvmarg value="-Dtest.log.location=${WORKSPACE}/${LOG.DIR}/test.log" />
+                <jvmarg value="-Dtest.log.location=${LOG.DIR}/test.log" />
                 <classpath refid="classpath.run_test" />
 
-                <sysproperty key="servoy.test.target-exports" value="${WORKSPACE}/${OUTPUT.DIR.TEST.EXPORTS}" />
+                <sysproperty key="servoy.test.target-exports" value="${OUTPUT.DIR.TEST.EXPORTS}" />
                 <sysproperty key="servoy.test.property-file" value="${SERVOY.PROPERTIES.FILE}" />
                 <sysproperty key="servoy.test.solution-load.timeout" value="${SERVOY.SOLUTION-LOAD.TIMEOUT}" />
                 <sysproperty key="servoy.test.target-file-ext" value=".servoy" />
@@ -164,7 +164,7 @@
                 <formatter type="xml" extension=".xm1"/>
                 <formatter type="xml" />
 
-                <test name="com.servoy.automation.jsunit.smartclient.ServoyJSUnitTestRunner" todir="${WORKSPACE}/${SERVOY.TEST.JUNIT.REPORT.DIR}" />
+                <test name="com.servoy.automation.jsunit.smartclient.ServoyJSUnitTestRunner" todir="${SERVOY.TEST.JUNIT.REPORT.DIR}" />
             </junit>
 
             <script language="javascript"><![CDATA[

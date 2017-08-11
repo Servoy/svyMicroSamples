@@ -16,7 +16,7 @@
 
     <taskdef resource="net/sf/antcontrib/antlib.xml" >
         <classpath>
-            <pathelement location="${WORKSPACE}/${ANT_CONTRIB_JAR}"/>
+            <pathelement location="${ANT_CONTRIB_JAR}"/>
         </classpath>
     </taskdef>
 
