@@ -1,6 +1,6 @@
 <project>
     <!-- Step 1: clean the instrumented workspace -->
-    <target name="code_coverage_reporting_preparation" depends="install_istanbul">
+    <target name="code_coverage_reporting_preparation">
 
             <make-clean-dir dir="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE.TEMP}" />
             <make-clean-dir dir="${CODE.COVERAGE.REPORT.DIR}" />
@@ -24,7 +24,7 @@
     <!-- Step 2: instrument all code from workspace into the temp instrumented workspace-->
     <target name="code_coverage_instrument_workspace">
         <echo level="verbose" message="instrumenting ${SERVOY.SOLUTION_UNDER_TESTING} into ${CODE.COVERAGE.INSTRUMENTED.WORKSPACE.TEMP}"/>
-        <exec executable="istanbul" dir="${WORKSPACE}" failonerror="true">
+        <exec executable="istanbul${OS.NODE.EXTENTION}" dir="${WORKSPACE}" failonerror="true">
             <arg value="instrument" />
             <arg value="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE}"/>
             <arg line="--output"/>
@@ -67,7 +67,7 @@
             <then>
                 <for list="${CODE.COVERAGE.REPORT-FORMATS}" param="format">
                     <sequential>
-                        <exec executable="istanbul" dir="${WORKSPACE}" failonerror="true">
+                        <exec executable="istanbul${OS.NODE.EXTENTION}" dir="${WORKSPACE}" failonerror="true">
                             <arg value="report" />
                             <arg value="--root" />
                             <arg value="${WORKSPACE}/${CODE.COVERAGE.REPORT.DIR}" />
@@ -80,24 +80,4 @@
             </then>
         </if>
     </target>
-
-    <!-- Install istanbul -->
-    <target name="install_istanbul">
-        <if>
-            <istrue value="${INSTALL_SOFTWARE_FROM_SCRIPT}"/>
-            <then>
-                <exec executable="npm" dir="${WORKSPACE}" failonerror="true">
-                    <arg value="install -g istanbul" />
-                </exec>
-            </then>
-            <else>
-                <echo level="info" message="Install of software disabled from config, will use manual install of ISTANBUL" />
-            </else>
-        </if>
-        <echo level="info" message="Install UUID in lib dir, needed because global ref is not workingL" />
-        <exec executable="npm" dir="${WORKSPACE}" failonerror="true">
-            <arg value="install -g uuid"/>
-        </exec>
-    </target>
-
 </project>

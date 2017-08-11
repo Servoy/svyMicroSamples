@@ -1,27 +1,10 @@
 <project>
-    <target name="install_dependencies">
-        <if>
-            <istrue value="${INSTALL_SOFTWARE_FROM_SCRIPT}"/>
-            <then>
-                <exec executable="${OS.COMMAND.EXECUTER}" dir="${TOOLS-DIR}"  failonerror="true">
-                    <arg value="${OS.COMMAND.CALL}" />
-                    <arg value="npm install --production"/>
-                </exec>
-            </then>
-            <else>
-                <echo level="info" message="Install of software disabled from config, will use manual install of E2E Dependencies" />
-            </else>
-        </if>
-    </target>
-
-    <target name="run_e2e_tests" depends="install_dependencies">
+    <target name="run_e2e_tests">
             <echo level="verbose" message="Run tests script started"/>
             <echo level="verbose" message="Testing solution: ${SERVOY.SOLUTION}"/>
 
     <!-- TODO: Add fail handler for PROTRACTOR -->
-        <exec executable="${OS.COMMAND.EXECUTER}" dir="${WORKSPACE}">
-            <arg value="${OS.COMMAND.CALL}" />
-            <arg value="protractor" />
+        <exec executable="protractor${OS.NODE.EXTENTION}" dir="${WORKSPACE}">
             <arg value="${PROTRACTOR.CONF}"/>
             <arg value="--seleniumAddress=${PROTRACTOR.SELENIUM.URL}" />
             <arg value="--params.testDomainURL=${PROTRACTOR.TEST.URL}"/>

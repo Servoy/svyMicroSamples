@@ -27,7 +27,7 @@
     </target>
 
     <!-- create a code analysis report using plato-->
-    <target name="execute_plato_for_code_analysis" depends="install_plato">
+    <target name="execute_plato_for_code_analysis">
         <echo level="verbose" message="code analysis of ${CODE.ANALYSIS.INPUT.DIR} into output dir ${CODE.ANALYSIS.REPORT.DIR}"/>
         <condition property="CODE.ANALYSIS.SETTINGS.LINTER-OPTION" value="--jshint" else="--eslint">
             <equals arg1="${CODE.ANALYSIS.LINTER}" arg2="jshint" />
@@ -35,7 +35,7 @@
         <condition property="CODE.ANALYSIS.SETTINGS.LINTER-OPTION.VALUE" value="${CODE.ANALYSIS.SETTINGS.JSHINT}" else="${CODE.ANALYSIS.SETTINGS.ESLINT}">
             <equals arg1="${CODE.ANALYSIS.LINTER}" arg2="jshint" />
         </condition>
-        <exec executable="plato" dir="${WORKSPACE}" failonerror="true">
+        <exec executable="plato${OS.NODE.EXTENTION}" dir="${WORKSPACE}" failonerror="true">
             <arg value="--recurse" />
             <arg value="--dir"/>
             <arg value="${CODE.ANALYSIS.REPORT.DIR}"/>
@@ -47,20 +47,4 @@
             <arg value="${CODE.ANALYSIS.INPUT.DIR}"/>
         </exec>
     </target>
-
-    <!-- Install istanbul -->
-    <target name="install_plato">
-        <if>
-            <istrue value="${INSTALL_SOFTWARE_FROM_SCRIPT}"/>
-            <then>
-                <exec executable="npm" dir="${WORKSPACE}"  failonerror="true">
-                    <arg value="install -g plato" />
-                </exec>
-            </then>
-            <else>
-                <echo level="info" message="Install of software disabled from config, will use manual install of PLATO" />
-            </else>
-        </if>
-    </target>
-
 </project>
