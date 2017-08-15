@@ -22,6 +22,11 @@
 
     <!-- Fixed workspace path for windows -->
     <propertyregex property="WORKSPACE_FIX" input="${WORKSPACE}" regexp="\\" replace="/" global="true" />
+    <condition property="WORKSPACE_FIX" value="${WORKSPACE}">
+        <not>  
+            <isset property="WORKSPACE_FIX"/>
+        </not>
+    </condition>
     
     <if>
         <os family="unix" />
