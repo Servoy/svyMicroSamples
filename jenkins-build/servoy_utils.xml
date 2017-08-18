@@ -149,39 +149,24 @@
 
             <echo level="info" message="*** Running Unit Tests ***"/>
             <!-- Define a timeout so we know the test will finish eventually -->
-            <junit fork="yes" forkmode="once" timeout="${SERVOY.TEST.TIMEOUT}" dir="${SERVOY.INSTALL.APPSERVER.DIR}" haltonfailure="false" haltonerror="false" showoutput="true" errorProperty="TEST.FAILED" failureProperty="TEST.FAILED" printsummary="withOutAndErr">
-                <jvmarg value="${SERVOY.TEST.MEMORY.XMS}" />
+            <junit fork="yes" forkmode="once" timeout="${SERVOY.TEST.TIMEOUT}" dir="${SERVOY.INSTALL.APPSERVER.DIR}" haltonfailure="false" haltonerror="false" showoutput="true" errorProperty="TEST.FAILED" failureProperty="TEST.FAILED" printsummary="on">
+                <jvmarg value="-XX:MaxPermSize=128m" />
+                <!--<jvmarg value="${SERVOY.TEST.MEMORY.XMS}" />
                 <jvmarg value="${SERVOY.TEST.MEMORY.XMX}" />
                 <jvmarg value="${SERVOY.TEST.MEMORY.MAXPERM}" />
-                <!--<jvmarg value="-Dtest.log.location=${LOG.DIR}/test.log" /> -->
+                <jvmarg value="-Dservoy.application_server.dir=${SERVOY.INSTALL.APPSERVER.DIR}" />
+                <jvmarg value="-Dtest.log.location=${LOG.DIR}/test.log" /> -->
+
                 <classpath refid="classpath.run_test" />
 
                 <sysproperty key="servoy.test.target-exports" value="${OUTPUT.DIR.TEST.EXPORTS}" />
                 <sysproperty key="servoy.test.property-file" value="${SERVOY.PROPERTIES.FILE}" />
-                <sysproperty key="servoy.test.solution-load.timeout" value="${SERVOY.SOLUTION-LOAD.TIMEOUT}" />
-                <sysproperty key="servoy.test.target-file-ext" value=".servoy" />
 
-                <formatter type="xml" extension=".xm1"/>
+                <formatter type="brief" usefile="false" />
                 <formatter type="xml" />
 
                 <test name="com.servoy.automation.jsunit.smartclient.ServoyJSUnitTestRunner" todir="${SERVOY.TEST.JUNIT.REPORT.DIR}" />
             </junit>
-
-            <script language="javascript"><![CDATA[
-                var start = parseInt(project.getProperty('servoy.test.start-time'))
-                var delta = Math.round((Date.now() - start)/1000)
-
-                var seconds = delta % 60
-                delta -= seconds
-                var minutePart = delta%3600
-                delta -= minutePart
-
-                var value = delta ? delta/3600 + ' hours ': '' //hours
-                value += (minutePart ? minutePart / 60 : '0') + ' minutes ' //minutes
-                value += seconds + ' seconds' //secondsvalue
-
-                project.log("Solution import and Unit Test execution finished in " + value, project.MSG_INFO)
-            ]]></script>
 
             <move-log-to-logDir logFileToCopy="${SERVOY.INSTALL.APPSERVER.DIR}/servoy_log.txt" newName="junit$servoy_log.txt"/>
             <move-log-to-logDir logFileToCopy="${WORKSPACE}/.metadata/.log" newName="junit$workspace_log.log"/>
