@@ -1,6 +1,6 @@
 var protractor = require('protractor');
 var proc = require('process');
-var { defineSupportCode } = require(proc.cwd() + '/lib/cucumberLoader').load();
+var {defineSupportCode} = require('cucumber');
 var EC = protractor.ExpectedConditions;
 var element = browser.element;
 var expect = require('expect');

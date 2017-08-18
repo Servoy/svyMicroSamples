@@ -2,9 +2,6 @@
 
     <property environment="env"/>
     <property name="WORKSPACE" value="${env.WORKSPACE}"/>
-    <property name="TEST.FAILED" value="false" />
-    <property name="E2E.FAILED" value="false" />
-    <property name="EXPORT.FAILED" value="false" />
     <property file="jenkins-build/build.properties"/>
 
     <import file="shared_utils.xml" />
@@ -123,7 +120,9 @@
     <target name="4-RunE2ETests" depends="get_equinox_jar">
         <if>
             <and>
-                <isfalse value="${TEST.FAILED}" />
+                <not>
+                    <isset property="${TEST.FAILED}" />
+                </not>
                 <istrue value="${E2E.ENABLED}" />
             </and>
             <then>
@@ -142,15 +141,21 @@
     <target name="5-ExportDeployWarFile" depends="get_equinox_jar">
         <if>
             <and>
-                <isfalse value="${TEST.FAILED}" />
-                <isfalse value="${E2E.FAILED}"/>
+                <not>
+                    <isset property="${TEST.FAILED}" />
+                </not>
+                <not>
+                    <isset property="${E2E.FAILED}"/>
+                </not>
             </and>
             <then>
                 <setup-servoy-properties dbName="${DB.NAME}" dbServerUrl="${DB.URL}" dbServerPort="${DB.PORT}" dbServerUsername="${DB.USERNAME}" dbServerPassword="${DB.PASSWORD}"/>
                 <export-solution-as-war solutionNames="${SERVOY.SOLUTION}" workspace="${WORKSPACE}" warFileName="${WAR-FILE.NAME}"/>
                 <if>
                     <and>
-                        <isfalse value="${EXPORT.FAILED}" />
+                        <not>
+                            <isset property="${EXPORT.FAILED}" />
+                        </not>
                         <istrue value="${TOMCAT.WAR_DEPLOY.ENABLED}" />
                     </and>
                     <then>
@@ -165,7 +170,9 @@
         <if>
             <and>
                 <istrue value="${CODE.COVERAGE.ENABLED}" />
-                <isfalse value="${TEST.FAILED}"/>
+                <not>
+                    <isset property="${TEST.FAILED}"/>
+                </not>
             </and>
             <then>
                 <antcall target="generate_code_coverage_reports"/>
@@ -175,7 +182,9 @@
         <if>
             <and>
                 <istrue value="${CODE.ANALYSIS.ENABLED}"/>
-                <isfalse value="${TEST.FAILED}"/>
+                <not>
+                    <isset property="${TEST.FAILED}"/>
+                </not>
             </and>
             <then>
                 <antcall target="generate_code_analysis_reports"/>
