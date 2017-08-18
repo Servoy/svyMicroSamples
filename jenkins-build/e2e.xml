@@ -8,6 +8,7 @@
             <arg value="${PROTRACTOR.CONF}"/>
             <arg value="--seleniumAddress=${PROTRACTOR.SELENIUM.URL}" />
             <arg value="--params.testDomainURL=${PROTRACTOR.TEST.URL}"/>
+            <arg value="--params.reportDirectory=${PROTRACTOR.REPORT.DIR}" />
         </exec>
     </target>
 

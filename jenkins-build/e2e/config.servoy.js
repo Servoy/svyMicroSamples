@@ -7,7 +7,8 @@ exports.config = {
   seleniumAddress: 'http://127.0.0.1:4444/wd/hub',
   framework: 'custom',
   params: {
-    testDomainURL: 'http://localhost:8080/solutions/sampleGallery/index.html?f=galleryMain'
+    testDomainURL: 'http://localhost:8080/solutions/sampleGallery/index.html?f=galleryMain',
+    reportDirectory: proc.cwd() + 'jenkins-build/e2e/reports/cucumber_reports'
   },
 
   // path relative to the current config file
@@ -87,7 +88,7 @@ function createReportFolder() {
   var path = require('path');
   var proc = require('process');
   var fs = require('fs');
-  var pathToCreate = proc.cwd() + '/reports/cucumber_reports';
+  var pathToCreate = params.reportDirectory;
   pathToCreate.split(path.sep).reduce(function(currentPath, folder){
     currentPath += folder + path.sep;
     if(!fs.existsSync(currentPath)) {
