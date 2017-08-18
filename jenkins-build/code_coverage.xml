@@ -14,10 +14,10 @@
                 </fileset>
                 <globmapper from="scopes.codeCoverageReporting.js" to="codeCoverageReporting.js"/>
             </copy>
-            <exec executable="node" failonerror="true">
+            <!--<exec executable="node" failonerror="true">
                 <arg value="${LIB-DIR}/servoyIstanbulInstrumentCleaner.js" />
                 <arg value="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE}" />
-            </exec>
+            </exec>-->
     </target>
 
     <!-- Step 2: instrument all code from workspace into the temp instrumented workspace-->
