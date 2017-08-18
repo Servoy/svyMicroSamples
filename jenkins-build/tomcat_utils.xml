@@ -8,7 +8,7 @@
                 <os family="unix" />
                 <then>
                     <exec executable="curl" dir="${WORKSPACE}" output="${LOG.DIR}/war_deploy.log">
-                        <arg line="--upload-file ${WORKSPACE}/@{warFile} http://${TOMCAT.USERNAME}:${TOMCAT.PASSWORD}@${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/deploy?path=/@{applicationName}"/>
+                        <arg line="--upload-file @{warFile} http://${TOMCAT.USERNAME}:${TOMCAT.PASSWORD}@${TOMCAT.SERVER.ADDRESS}:${TOMCAT.SERVER.PORT}/manager/text/deploy?path=/@{applicationName}"/>
                     </exec>
                 </then>
                 <else>
