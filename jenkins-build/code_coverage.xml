@@ -25,7 +25,7 @@
         <echo level="verbose" message="instrumenting ${SERVOY.SOLUTION_UNDER_TESTING} into ${CODE.COVERAGE.INSTRUMENTED.WORKSPACE.TEMP}"/>
         <exec executable="istanbul${OS.NODE.EXTENTION}" dir="${WORKSPACE}" failonerror="true">
             <arg value="instrument"/>
-            <arg value="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE}"/>
+            <arg value="${WORKSPACE}"/>
             <arg value="--output"/>
             <arg value="${CODE.COVERAGE.INSTRUMENTED.WORKSPACE.TEMP}"/>
             <arg value="--preserve-comments"/>
