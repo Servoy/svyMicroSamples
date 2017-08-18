@@ -153,7 +153,7 @@
                 <jvmarg value="${SERVOY.TEST.MEMORY.XMS}" />
                 <jvmarg value="${SERVOY.TEST.MEMORY.XMX}" />
                 <jvmarg value="${SERVOY.TEST.MEMORY.MAXPERM}" />
-                <jvmarg value="-Dtest.log.location=${LOG.DIR}/test.log" />
+                <!--<jvmarg value="-Dtest.log.location=${LOG.DIR}/test.log" /> -->
                 <classpath refid="classpath.run_test" />
 
                 <sysproperty key="servoy.test.target-exports" value="${OUTPUT.DIR.TEST.EXPORTS}" />
@@ -184,7 +184,7 @@
             ]]></script>
 
             <move-log-to-logDir logFileToCopy="${SERVOY.INSTALL.APPSERVER.DIR}/servoy_log.txt" newName="junit$servoy_log.txt"/>
-            <move-log-to-logDir logFileToCopy=".metadata/.log" newName="junit$workspace_log.log"/>
+            <move-log-to-logDir logFileToCopy="${WORKSPACE}/.metadata/.log" newName="junit$workspace_log.log"/>
             <antcall target="create_test_report"/>
            </sequential>
     </macrodef>
