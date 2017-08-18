@@ -15,8 +15,7 @@ function processArgs(args) {
 }
 
 function isServoySolution(fileArray, dirname) {
-    if(fileArray.indexOf(".buildpath") == -1 && gForceCopyFolders.indexOf(dirname) == -1) {
-        console.log(dirname)
+    if(fileArray.indexOf("META-INF") != -1 && gForceCopyFolders.indexOf(dirname) == -1) {
         return false;
     } else {
         return true;
