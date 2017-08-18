@@ -1,7 +1,7 @@
 var fs = require('fs');
 
 var gDirToClear = '';
-var gForceCopyFolders = ['recources'];
+var gForceCopyFolders = ['resources'];
 
 processArgs(process.argv.slice(2));
 clearInstrumentDirectory(gDirToClear);
@@ -14,8 +14,9 @@ function processArgs(args) {
     }
 }
 
-function isServoySolution(fileArray) {
-    if(fileArray.indexOf(".buildpath") == -1 && gForceCopyFolders.indexOf(fileArray) == -1) {
+function isServoySolution(fileArray, dirname) {
+    if(fileArray.indexOf(".buildpath") == -1 && gForceCopyFolders.indexOf(dirname) == -1) {
+        console.log(dirname)
         return false;
     } else {
         return true;
@@ -58,13 +59,13 @@ function clearInstrumentDirectory(dirToClear) {
                         var subDirName = subFiles[j];
                         name = dirToClear + "/" + dirname + "/"+ subDirName;
                         if(fs.statSync(name).isDirectory()) {
-                            if(!isServoySolution(fs.readdirSync(name))) {
+                            if(!isServoySolution(fs.readdirSync(name), dirname)) {
                                 deleteFolderRecursive(name);
                             } 
                         }
                     }
 
-                } else if(!isServoySolution(subFiles)){
+                } else if(!isServoySolution(subFiles, dirname)){
                     deleteFolderRecursive(name);
                 }
             } 
