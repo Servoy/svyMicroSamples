@@ -156,7 +156,7 @@
                 <jvmarg value="${SERVOY.TEST.MEMORY.MAXPERM}" />
                 <jvmarg value="-Dservoy.application_server.dir=${SERVOY.INSTALL.APPSERVER.DIR}" />
                 <jvmarg value="-Dtest.log.location=${LOG.DIR}/test.log" /> -->
-
+                <jvmarg value="-Djava.awt.headless=true" />
                 <classpath refid="classpath.run_test" />
 
                 <sysproperty key="servoy.test.target-exports" value="${OUTPUT.DIR.TEST.EXPORTS}" />
