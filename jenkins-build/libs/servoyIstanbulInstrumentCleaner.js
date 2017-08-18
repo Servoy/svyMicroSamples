@@ -1,6 +1,7 @@
 var fs = require('fs');
 
 var gDirToClear = '';
+var gForceCopyFolders = ['recources'];
 
 processArgs(process.argv.slice(2));
 clearInstrumentDirectory(gDirToClear);
@@ -14,8 +15,11 @@ function processArgs(args) {
 }
 
 function isServoySolution(fileArray) {
-    if(fileArray.indexOf(".buildpath") == -1) return false;
-    else return true;
+    if(fileArray.indexOf(".buildpath") == -1 && gForceCopyFolders.indexOf(fileArray) == -1) {
+        return false;
+    } else {
+        return true;
+    }
 }
 
 function deleteFolderRecursive(path) {
