@@ -322,7 +322,11 @@ function processJSFile() {
 			
 			//If the last file is processed, 'close' the codeCoverageReporting.js file
 			if (!jsFilesToProcess.length) {
-				ccScopeWriteStream.end('}');
+				if(ccScopeWriteStream.bytesWritten > 0) {
+					ccScopeWriteStream.end('}');
+				} else {
+					ccScopeWriteStream.end();
+				}
 			}
 		
 			// Update file content to previous content but with JSDoc and init code wrapped in an iife
