@@ -5,24 +5,6 @@
 [submodule "svyShowdown"]
 	path = svyShowdown
 	url = https://github.com/Servoy/svyShowdown.git
-[submodule "svySearch"]
-	path = svySearch
-	url = https://github.com/Servoy/svySearch.git
 [submodule "svyBlockUI"]
 	path = svyBlockUI
 	url = https://github.com/Servoy/svyBlockUI.git
-[submodule "svyKeyListener"]
-	path = svyKeyListener
-	url = https://github.com/Servoy/svyKeyListener.git
-[submodule "bootstrapextracomponents"]
-	path = bootstrapextracomponents
-	url = https://github.com/Servoy/bootstrapextracomponents.git
-[submodule "svyChartJS"]
-	path = svyChartJS
-	url = https://github.com/Servoy/svyChartJS.git
-[submodule "example-solutions"]
-	path = example-solutions
-	url = https://github.com/Servoy/example-solutions.git
-[submodule "webnotifications"]
-	path = webnotifications
-	url = https://github.com/Servoy/webnotifications.git
