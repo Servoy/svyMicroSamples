@@ -1,8 +1,10 @@
 Feature: Testing the Servoy Sample Galery - Foundset   
     Scenario Outline: Protractor and Cucumber Test
 
+
+Given I setup the environment
 Given I go to http://demo.servoy.com/sampleGallery/solutions/sampleGallery/index.html?f=galleryMain
-When servoy sidenav component with name galleryMain.nav tab Working with Data is clicked
+When servoy sidenav component with name galleryMain.nav tab <tab> is clicked
 When servoy sidenav component with name galleryMain.nav tab Basic Filtering is clicked
 # When servoy calendar component with name filterOrdersList.startDate is clicked
 # When servoy calendar component is clicked untill I reach month <startMonth> in year <startYear>
@@ -24,8 +26,10 @@ When servoy select2tokenizer component with class name select2-results__options 
 
 
 When servoy table component with name filterOrdersList.svy_lvp_filterOrdersList I scroll to the record with <customer> as text
+When I want to log the time it toke to do the foundset event
 
 @data_table_servoy
 Examples:
 |startMonth      | startYear   | endMonth   | endYear   | customer          | employee            | tab               | nav              |
 |july            | 1997        | september  | 2017      | Romero y tomillo  | Margaret Peacock    | Working with Data |  galleryMain.nav | 
+# |july            | 1997        | september  | 2017      | Romero y tomillo  | Margaret Peacock    | Working with something |  galleryMain.nav | 
