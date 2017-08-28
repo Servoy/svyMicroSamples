@@ -1,7 +1,7 @@
 [submodule "svyUtils"]
 	path = svyUtils
 	url = https://github.com/Servoy/svyUtils.git
-	branch = develop
+	branch = master
 [submodule "svyShowdown"]
 	path = svyShowdown
 	url = https://github.com/Servoy/svyShowdown.git
