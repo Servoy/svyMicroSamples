@@ -25,3 +25,8 @@ Thumbs.db
 # Node JS Modules #
 */node_modules
 node_modules
+
+# Protractor Report #
+jenkins-build/e2e/reports/**
+jenkins-build/e2e/screenshots/**
+
