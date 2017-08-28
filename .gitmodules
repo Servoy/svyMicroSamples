@@ -5,6 +5,8 @@
 [submodule "svyShowdown"]
 	path = svyShowdown
 	url = https://github.com/Servoy/svyShowdown.git
+	branch = master
 [submodule "svyBlockUI"]
 	path = svyBlockUI
 	url = https://github.com/Servoy/svyBlockUI.git
+	branch = master
