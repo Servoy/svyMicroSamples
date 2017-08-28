@@ -11,6 +11,9 @@ var tempBlockDate;
 var hasErrorDuringSuite = false;
 var userAnalytics = require('universal-analytics');
 var analytics = userAnalytics('UA-93980847-1');
+var find = require('find');
+var fs = require('fs-extra');
+
 defineSupportCode(({ Given, Then, When, Before, After }) => {
 	Given('I go to {url}', { timeout: 60 * 1000 }, function (url, callback) {
 		if (browser.params.testDomainURL !== '') {
@@ -28,6 +31,14 @@ defineSupportCode(({ Given, Then, When, Before, After }) => {
 				tierdown(true);
 			});
 		}
+	});
+
+	Given('I setup the environment', { timeout: 30 * 1000 }, function (callback) {
+		createDirIfNotExists(browser.params.htmlDirectory);
+		createDirIfNotExists(browser.params.screenshotDirectory);
+		removeHtmlReports(browser.params.htmlDirectory); //remove html reports from previous tests
+		removeScreenshots(browser.params.screenshotDirectory);
+		wrapUp(callback, 'setupEnvironment');
 	});
 
 	//FOUNDSET SAMPLE GALERY FUNCTIONS//
@@ -146,7 +157,6 @@ defineSupportCode(({ Given, Then, When, Before, After }) => {
 		browser.sleep(2000).then(function () {
 			element.all(by.xpath("//ul[@class='" + elementClass + "']")).each(function (childElement) {
 				childElement.all(by.css('li')).get(recordNumber - 1).getText().then(function (textToCompare) {
-					console.log(textToCompare);
 					validate(textToCompare, text);
 				});
 			}).then(function () {
@@ -234,6 +244,14 @@ defineSupportCode(({ Given, Then, When, Before, After }) => {
 			tierdown(true);
 		});
 	});
+
+	When('I want to log the time it toke to do the {event} event', { timeout: 60 * 1000 }, function (event, callback) {
+		var duration = calcBlockDuration(new Date());
+		console.log('The ' + event + ' event toke ' + duration + ' miliseconds');
+		analytics.event('Scenario 1', "Performance", event, duration).send();
+		callback();
+	});
+
 	//ENDCRYPTOGRAPHY SAMPLE GALERY FUNCTIONS//
 
 	Then(/^the page URL is "([^"]*)"$/, { timeout: 60 * 1000 }, function (URL, callback) {
@@ -488,4 +506,25 @@ function scrollToElement(elementName, recordText, callback) {
 		});
 	});
 }
-// };
+
+//deletes previously used reports and files
+
+function removeHtmlReports(htmlDirectory) {
+	var files = find.fileSync(/\.html/, htmlDirectory);
+	files.map(function (file) {
+		fs.unlinkSync(file);
+	});
+}
+
+function removeScreenshots(screenshotDirectory) {
+	var files = find.fileSync(/\.png/, screenshotDirectory);
+	files.map(function (file) {
+		fs.unlinkSync(file);
+	});
+}
+
+function createDirIfNotExists(dir) {
+	if (!fs.existsSync(dir)) {
+		fs.mkdirSync(dir);
+	}
+}
