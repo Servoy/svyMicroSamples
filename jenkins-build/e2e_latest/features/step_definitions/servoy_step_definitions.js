@@ -16,7 +16,6 @@ var find = require('find');
 var fs = require('fs-extra');
 
 defineSupportCode(({ Given, Then, When, Before, After }) => {
-	// Given('I go to {url}', { timeout: 60 * 1000 }, function (url) {
 	Given('I go to {url}', { timeout: 60 * 1000 }, function (url) {
 		return browser.get(url);
 	});
@@ -29,13 +28,12 @@ defineSupportCode(({ Given, Then, When, Before, After }) => {
 		wrapUp(callback, 'setupEnvironment');
 	});
 
-	//FOUNDSET SAMPLE GALERY FUNCTIONS//
-	When('servoy sidenav component with name {elementName} tab {tabName} is clicked', { timeout: 10 * 1000 }, function (elementName, tabName, callback) {
+	When('servoy sidenav component with name {elementName} tab {tabName} is clicked', { timeout: 60 * 1000 }, function (elementName, tabName, callback) {
 		var menuItems = element.all(by.xpath("//data-servoyextra-sidenav[@data-svy-name='" + elementName + "']"));
 		menuItems.each(function (menuItem) {
 			clickElement(menuItem.element(by.cssContainingText('a', tabName))).then(function () {
 				wrapUp(callback, "Click event");
-			})
+			});
 		}).catch(function (error) {
 			console.log(error.message);
 			tierdown(true);
@@ -103,7 +101,6 @@ defineSupportCode(({ Given, Then, When, Before, After }) => {
 			}
 		}
 		browser.controlFlow().execute(callback);
-		//wrapUp(callback, "Calendar event");
 	});
 
 	When('servoy calendar component day {day} is clicked', { timeout: 15 * 1000 }, function (day, callback) {
@@ -194,8 +191,6 @@ defineSupportCode(({ Given, Then, When, Before, After }) => {
 		findRecord(elementName, recordText, callback);
 	});
 
-	//END FOUNDSET SAMPLE GALERY FUNCTIONS//
-	//CRYPTOGRAPHY SAMPLE GALERY FUNCTIONS//	
 	When('servoy combobox component with name {elementName} is clicked', { timeout: 60 * 1000 }, function (elementName, callback) {
 		clickElement(element(by.xpath("//data-servoydefault-combobox[@data-svy-name='" + elementName + "']"))).then(function () {
 			wrapUp(callback, "Click event");
@@ -239,140 +234,6 @@ defineSupportCode(({ Given, Then, When, Before, After }) => {
 		callback();
 	});
 
-	//ENDCRYPTOGRAPHY SAMPLE GALERY FUNCTIONS//
-
-	Then(/^the page URL is "([^"]*)"$/, { timeout: 60 * 1000 }, function (URL, callback) {
-		browser.wait(function () {
-			return browser.getCurrentUrl().then(function (url) {
-				if (url === URL) {
-					wrapUp(callback, "URL Validation event");
-				}
-			});
-		}).catch(function (error) {
-			console.log(error.message);
-			tierdown(true);
-		});
-	});
-
-	When(/^"([^"]*)" with name "([^"]*)" I insert (.*)$/, { timeout: 60 * 1000 }, function (elementType, elementName, input, callback) {
-		browser.wait(EC.presenceOf(element(by.xpath("//" + elementType + "[starts-with(@data-svy-name, '" + elementName + "')]"))).call(), 20000, 'Not visible').then(function () {
-			var elem_fld = element(by.xpath("//" + elementType + "[starts-with(@data-svy-name, '" + elementName + "')]"));
-			browser.wait(EC.presenceOf(elem_fld)).then(function () {
-				sendKeys(elem_fld, input);
-			});
-		}).then(function () {
-			wrapUp(callback, "Insert value event");
-		}).catch(function (error) {
-			console.log(error.message);
-			tierdown(true);
-		});
-	});
-
-	When(/^"([^"]*)" with name "([^"]*)" with a class "([^"]*)" that is clicked$/, { timeout: 60 * 1000 }, function (elementType, elementName, elementClass, callback) {
-		browser.sleep(1000).then(function () {
-			browser.wait(EC.presenceOf(element(by.xpath("//" + elementType + "[@data-svy-name='" + elementName + "']"))).call(), 20000, 'Not visible').then(function () {
-				element.all(by.xpath("//" + elementType + "[@data-svy-name='" + elementName + "']")).each(function (childElement) {
-					clickElement(childElement.element(by.css('.' + elementClass))).then(function () {
-						wrapUp(callback, "Click event");
-					});
-				});
-			}).catch(function (error) {
-				console.log(error.message);
-				tierdown(true);
-			});
-		})
-	});
-
-	When(/^"([^"]*)" with name "([^"]*)" is clicked on servoy row "([^"]*)"$/, { timeout: 60 * 1000 }, function (elementType, elementName, rowNumber, callback) {
-		browser.wait(EC.presenceOf(element(by.xpath("//" + elementType + "[@data-svy-name='" + elementName + "']"))).call(), 20000, 'Not visible').then(function () {
-			element.all(by.xpath("//" + elementType + "[@data-svy-name='" + elementName + "']")).each(function (childElement) {
-				clickElement(childElement.all(by.css('.ui-grid-row.ng-scope')).get(rowNumber - 1));
-			})
-		}).then(function () {
-			wrapUp(callback, "Click event");
-		}).catch(function (error) {
-			console.log(error.message);
-			tierdown(true);
-		});
-	});
-
-	When(/^I want to log the time it toke to do this "([^"]*)" event$/, { timeout: 60 * 1000 }, function (event, callback) {
-		var duration = calcBlockDuration(new Date());
-		console.log('The ' + event + ' event toke ' + duration + ' miliseconds');
-		analytics.event('Scenario 1', "Performance", event, duration).send();
-		callback();
-	});
-
-	When(/^"([^"]*)" with name "([^"]*)" is clicked with text (.*)$/, { timeout: 10 * 1000 }, function (elementType, elementName, text, callback) {
-		browser.sleep(3000).then(function () {
-			element.all(by.xpath("//" + elementType + "[@data-svy-name='" + elementName + "']")).each(function (childElement) {
-				clickElement(childElement.all(by.cssContainingText('div', text)).last());
-			}).then(function () {
-				wrapUp(callback, "Click event");
-			}).catch(function (error) {
-				console.log(error.message);
-				tierdown(true);
-			});
-		});
-	});
-
-	When(/^"([^"]*)" with name "([^"]*)" is clicked$/, { timeout: 60 * 1000 }, function (elementType, elementName, callback) {
-		clickElement(element(by.xpath("//" + elementType + "[starts-with(@data-svy-name, '" + elementName + "')]"))).then(function () {
-			wrapUp(callback, "Click event");
-		}).catch(function (error) {
-			console.log(error.message);
-			tierdown(true);
-		});
-	});
-
-	When(/^"([^"]*)" with name "([^"]*)" is clicked on row "([^"]*)"$/, { timeout: 60 * 1000 }, function (elementType, elementName, rowNumber, callback) {
-		browser.wait(EC.presenceOf(element(by.xpath("//" + elementType + "[@data-svy-name='" + elementName + "']"))).call(), 20000, 'Not visible').then(function () {
-			element.all(by.xpath("//" + elementType + "[@data-svy-name='" + elementName + "']")).each(function (childElement) {
-				browser.wait(EC.elementToBeClickable(childElement.all(by.css('.ui-grid-row.ng-scope')).get(rowNumber - 1)), 30000, 'Element not clickable').then(function () {
-					clickElement(childElement.all(by.css('.ui-grid-row.ng-scope')).get(rowNumber - 1));
-				});
-			});
-		}).then(function () {
-			wrapUp(callback, "Click event");
-		}).catch(function (error) {
-			console.log(error.message);
-			tierdown(true);
-		});
-	});
-
-	When(/^"([^"]*)" with name "([^"]*)" is clicked which contains the exact text "([^"]*)"$/, { timeout: 60 * 1000 }, function (elementType, elementName, input, callback) {
-		browser.wait(EC.presenceOf(element(by.xpath("//" + elementType + "[@data-svy-name='" + elementName + "']"))).call(), 20000, 'Not visible').then(function () {
-			element.all(by.xpath("//" + elementType + "[@data-svy-name='" + elementName + "']")).each(function (childElement) {
-				clickElement(childElement.element(by.cssContainingText('*', input)));
-			});
-		}).then(function () {
-			wrapUp(callback, "Click event");
-		}).catch(function (error) {
-			console.log(error.message);
-			tierdown(true);
-		});
-	});
-
-	When(/^"([^"]*)" with name "([^"]*)" is clicked which contains text "([^"]*)"$/, { timeout: 60 * 1000 }, function (elementType, elementName, input, callback) {
-		browser.sleep(2000).then(function () {
-			element.all(by.xpath("//" + elementType + "[starts-with(@data-svy-name, '" + elementName + "')]")).each(function (childElement) {
-				clickElement(childElement.all(by.xpath('//div[contains(.,"' + input + '")]')).last()).then(function () {
-					wrapUp(callback, "Click event");
-				});
-			}).catch(function (error) {
-				console.log(error.message);
-				tierdown(true);
-			});
-		});
-	});
-
-	Then(/^I am done$/, { timeout: 30 * 1000 }, function (callback) {
-		console.log('Flow completed');
-		browser.sleep(5000).then(function () {
-			callback();
-		})
-	});
-
 	After(function () {
 		console.log('Completed scenario');
 		if (!hasErrorDuringSuite) {
@@ -404,7 +265,7 @@ function validate(input, inputToCompare) {
 function wrapUp(callback, performanceEvent) {
 	var duration = calcStepDuration(new Date());
 	console.log('Step toke ' + duration + ' miliseconds');
-	//analytics.event('Scenario 1', "Performance", performanceEvent, duration).send();
+	analytics.event('Scenario 1', "Performance", performanceEvent, duration).send();
 	callback();
 }
 
@@ -420,6 +281,9 @@ function sendKeys(elem, input) {
 	return browser.wait(EC.visibilityOf(elem).call(), 30000, 'Element not visible').then(function () {
 		return elem.clear().then(function () {
 			return elem.sendKeys(input);
+			// return elem.sendKeys(input).then(function () {
+			// 	return browser.actions().sendKeys(protractor.Key.ESCAPE).perform();
+			// });
 		});
 	});
 }

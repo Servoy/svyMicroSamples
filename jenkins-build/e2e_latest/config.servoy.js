@@ -1,8 +1,9 @@
 var startDate;
-// protractor --params.jsonDirectory=reports/cucumber_reports/ --params.screenshotDirectory=reports/screenshots/ --params.htmlDirectory=reports/html_reports/ config.servoy.js --disableChecks
 var jsonDirectory = 'reports/cucumber_reports/';
 exports.config = {
-  seleniumAddress: 'http://127.0.0.1:4444/wd/hub',
+  // seleniumAddress: 'http://127.0.0.1:4444/wd/hub',
+  seleniumAddress: 'http://localhost:4723/wd/hub',
+  baseUrl: 'http://10.0.2.2:8000',
   framework: 'custom',
   params: {
     screenshotDirectory: 'reports/screenshots/',
@@ -12,22 +13,22 @@ exports.config = {
   // path relative to the current config file
   frameworkPath: require.resolve('protractor-cucumber-framework'),
 
-  //  capabilities: {
-  //     'browserName': 'firefox'/*,
-  //     'chromeOptions': {
-  //       'args': ['--headless', '--disable-gpu'],
-  //       'mobileEmulation' : {
-  //         'deviceName': 'Apple iPhone 6 Plus'
-  //       }
-  //     }*/
-  //   },
-  multiCapabilities: [{
-    'browserName': 'chrome'
-  }],
+  capabilities: {
+    browserName: 'chrome',
+    platformName: 'Android',
+    platformVersion: '7.0',
+    deviceName: 'Android Emulator',
+    // platformVersion: '7.1.1',
+    // deviceName: 'Nexus_6_API_25'
+  },
+
+  // multiCapabilities: [{
+  //   'browserName': 'chrome'
+  // }],
 
   // Spec patterns are relative to this directory.
   specs: [
-    'features/sample_application/foundset.feature'
+    'features/sample_application/hashing.feature'
   ],
 
   cucumberOpts: {
@@ -50,15 +51,10 @@ exports.config = {
 
   onPrepare: () => {
     console.log('onPrepare');
-    // browser.driver.manage().window().maximize();
-    browser.driver.executeScript(function () {
-      return {
-        width: window.screen.availWidth / 2,
-        height: window.screen.availHeight
-      };
-    }).then(function (result) {
-      browser.driver.manage().window().setSize(result.width, result.height);
-    });
+    var wd = require('wd'),
+      protractor = require('protractor'),
+      wdBridge = require('wd-bridge')(protractor, wd);    
+    wdBridge.initFromProtractor(exports.config);
   },
 
   onComplete: () => {
