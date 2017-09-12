@@ -1,3 +1,4 @@
+@import url('themes/theme-servoy.css');
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i');
 @IMPORT url("sideNav.css");
 @IMPORT url("webElements.css");
@@ -8,7 +9,7 @@ body
 }
 .svy-main-window-container
 {
-	background-color: #2c3e50;
+	/*background-color: #2c3e50;*/
 }
 
 /* rest bg color to white */
@@ -22,7 +23,7 @@ body
 }
 .body_main
 {
-	width: 90%;
+	/* width: 90%; */
     margin-left: auto;
     margin-right: auto;
 	background-color: #fff;

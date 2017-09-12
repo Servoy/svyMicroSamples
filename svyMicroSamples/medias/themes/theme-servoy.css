@@ -1,0 +1,374 @@
+colors {
+	TopBar: #EB8C39;
+	Light Orange: #E9720B;
+	Dark-Blue: #F5B986;
+	Light-Orange: #364453;
+	Dark-Gray: #7C7C7C;
+	Light-Gray : #F8F8F8;
+	Dark: #18222C;
+	Dark-Light: #464E56;
+	Border: #DBDBDB;
+}
+
+/* FIXME how to add a theme to dropdown and other items not in form : Calendar Dialog, Dropdown etc..*/
+
+
+/* General Style */
+:focus {
+	outline: none;
+}
+
+/* Fields */
+.theme-servoy .svy-label,
+.theme-servoy .bts-label {
+	color: #7C7C7C;
+	font-weight: 100;
+	font-size: 12px;
+}
+
+.theme-servoy .svy-field,
+.theme-servoy .svy-textarea, .theme-servoy .bts-textarea,
+.theme-servoy .svy-textfield, .theme-servoy .bts-textbox,
+.theme-servoy .svy-typeahead, .theme-servoy .bts-typeahead,
+.theme-servoy .svy-combobox, .theme-servoy .bts-select,
+.theme-servoy .svy-calendar, .theme-servoy .bts-calendar, .theme-servoy .bts-calendar input {
+	border: 0;
+	border-bottom: 1px solid #DBDBDB;
+	border-radius: 0;
+	box-shadow: none;
+	color: #7C7C7C;
+	font-size: 16px;
+}
+
+.theme-servoy .svy-field:focus,
+.theme-servoy .svy-textarea:focus, .theme-servoy .bts-textarea:focus,
+.theme-servoy .svy-textfield:focus, .theme-servoy .bts-textbox:focus,
+.theme-servoy .svy-typeahead:focus, .theme-servoy .bts-typeahead:focus,
+.theme-servoy .svy-combobox:focus, .theme-servoy .bts-select:focus,
+.theme-servoy .svy-calendar:focus, .theme-servoy .bts-calendar:focus, .theme-servoy .bts-calendar input:focus {
+	border-color: #F5B986
+}
+
+/* Checkbox */
+/*** custom checkboxes ***/
+.theme-servoy .svy-checkgroup label,
+.theme-servoy .svy-radiogroup label,
+.theme-servoy .bts-check label,
+.theme-servoy .bts-radiogroup label {
+	font-weight: normal;
+	margin: 0;
+	padding: 0;
+}
+
+.theme-servoy .svy-checkgroup input[type=checkbox],
+.theme-servoy .svy-radiogroup input[type=radio],
+.theme-servoy .bts-check input[type=checkbox],
+.theme-servoy .bts-radiogroup input[type=checkbox],
+.theme-servoy .bts-radiogroup input[type=radio] { 
+	display:none; /* to hide the checkbox itself */
+} 
+
+.theme-servoy .svy-checkgroup input[type=checkbox] + span:before,
+.theme-servoy .svy-radiogroup input[type=radio] + span:before,
+.theme-servoy .bts-check input[type=checkbox] + span:before,
+.theme-servoy .bts-radiogroup input[type=checkbox] + span:before,
+.theme-servoy .bts-radiogroup input[type=radio] + span:before {
+  	display: inline-block;
+  	font-family: 'Glyphicons Halflings';
+  	letter-spacing: 5px;
+}
+
+.theme-servoy .bts-check input[type=checkbox] + span:before,
+.theme-servoy .svy-checkgroup input[type=checkbox] + span:before,
+.theme-servoy .bts-radiogroup input[type=checkbox] + span:before { 
+	content: "\e157";
+}
+
+.theme-servoy .bts-check input[type=checkbox]:checked + span:before,
+.theme-servoy .svy-checkgroup input[type=checkbox]:checked + span:before,
+.theme-servoy .bts-radiogroup input[type=checkbox]:checked + span:before {
+	content: "\e067";
+}
+
+.theme-servoy .svy-radiogroup input[type=radio] + span:before,
+.theme-servoy .bts-radiogroup input[type=radio] + span:before { 
+	content: "\e157";
+}
+
+.theme-servoy .svy-radiogroup input[type=radio]:checked + span:before,
+.theme-servoy .bts-radiogroup input[type=radio]:checked + span:before {
+	content: "\e165";
+}
+
+/* Calendar Field */
+.theme-servoy .input-group.date .input-group-addon {
+	background-color: inherit;
+	border-radius: 0;
+	border-width: 0;
+	border-bottom: 1px solid #DBDBDB;
+}
+
+.theme-servoy .svy-calendar input,
+.theme-servoy .bts-calendar input,
+.theme-servoy .table .input-group.date .input-group-addon {
+	background-color: #FFF;
+}
+
+/* Calendar Picker */
+.bootstrap-datetimepicker-widget a {
+	color: #F5B986;
+}
+
+.bootstrap-datetimepicker-widget table td.active, 
+.bootstrap-datetimepicker-widget table td.active:hover {
+	background-color: #EB8C39;
+}
+
+.bootstrap-datetimepicker-widget table td.today {
+	color: #EB8C39;
+}
+
+/* Bootstrap Select  */
+.theme-servoy .bts-select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	-webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.theme-servoy .bts-select option {
+	
+}
+
+.theme-servoy .bts-select option:checked,
+.theme-servoy .bts-select option:focus,
+.theme-servoy .bts-select option:hover,
+.theme-servoy .bts-select option:active {
+	background-color: #EB8C39 !important;
+	background: #EB8C39 !important;
+	outline: none;
+}
+
+/* Dropdown field */
+.dropdown-menu > li > a {
+	color: #7C7C7C;
+}
+
+.dropdown-menu > .active > a, 
+.dropdown-menu > .active > a:hover, 
+.dropdown-menu > .active > a:focus {
+	background-color: #EB8C39;
+}
+
+/* TabPanel */
+.theme-servoy .svy-tabpanel,
+.theme-servoy .svy-tabpanel a,
+.theme-servoy .bts-tabpanel,
+.theme-servoy .bts-tabpanel a  {
+	background-color:#F8F8F8;
+	color: #7C7C7C;
+}
+
+.theme-servoy .svy-tabpanel .nav-tabs,
+.theme-servoy .bts-tabpanel .nav-tabs {
+	border: 0;
+}
+
+.theme-servoy .svy-tabpanel li.active,
+.theme-servoy .svy-tabpanel li.active a,
+.theme-servoy .bts-tabpanel li.active,
+.theme-servoy .bts-tabpanel li.active a {
+	background-color: #EB8C39;
+	color: #FFF;
+	border: 0;
+	border-radius: 0;
+}
+
+.theme-servoy .svy-tabpanel .nav-tabs > li > a,
+.theme-servoy .svy-tabpanel .nav-tabs > li.active > a, 
+.theme-servoy .svy-tabpanel .nav-tabs > li.active > a:hover, 
+.theme-servoy .svy-tabpanel .nav-tabs > li.active > a:focus,
+.theme-servoy .bts-tabpanel .nav-tabs > li > a,
+.theme-servoy .bts-tabpanel .nav-tabs > li.active > a, 
+.theme-servoy .bts-tabpanel .nav-tabs > li.active > a:hover, 
+.theme-servoy .bts-tabpanel .nav-tabs > li.active > a:focus {
+	border: 0;
+	border-radius: 0;
+}
+
+/* Font Awesome *
+.theme-servoy data-servoyextra-fontawesome > div {
+	display: inline;
+	float: left;
+	font-size: 18px;
+	margin : 0 15px;
+}
+*/
+
+/* Default Table */
+.theme-servoy .ui-grid {
+	border: 0;
+}
+
+.theme-servoy .ui-grid-header-cell,
+.theme-servoy .table > thead > tr > th {
+	text-transform: uppercase;
+	border: 0;
+	font-weight: 100;
+/*	font-size: 12px; */
+}
+
+.theme-servoy .ui-grid-header,
+.theme-servoy .ui-grid-top-panel,
+.theme-servoy .ui-grid-header-cell,
+.theme-servoy .ui-grid-row:nth-child(even) .ui-grid-cell,
+.theme-servoy .ui-grid-row:nth-child(odd) .ui-grid-cell {
+	background: #FFF;
+	color: #7C7C7C;
+}
+
+.theme-servoy .ui-grid-row-selected div.ui-grid-cell {
+	background-color: #EB8C39 !important;
+}
+
+.theme-servoy .ui-grid-row .ui-grid-cell {
+	border-color: #DBDBDB;
+	border-bottom: 1px solid #DBDBDB;
+}
+
+.theme-servoy .ui-grid-row div.ui-grid-cell > * {
+	border-width: 0;
+	box-shadow: none;
+}
+
+/* Servoy Extra Table */
+.theme-servoy .table-servoyextra-selected {
+	background-color: #EB8C39;
+}
+
+.theme-servoy .table > thead > tr > th, .theme-dark .table > tbody > tr > th, 
+.theme-servoy .table > tfoot > tr > th, .theme-dark .table > thead > tr > td, 
+.theme-servoy .table > tbody > tr > td, .theme-dark .table > tfoot > tr > td {
+	border-color: #DBDBDB;
+}
+
+/* Popup */
+.yuimenu {
+	padding: 0;
+}
+
+.yuimenuitemlabel {
+	color: #7C7C7C;
+}
+
+.yuimenuitemlabel a:hover, .yuimenuitemlabel a:focus {
+	color: #6C6C6C;
+}
+
+.yuimenuitemlabel:hover,
+.yuimenuitemlabel-selected,
+.yuimenuitemlabel-selected:hover {
+	background-color: #EB8C39;
+}
+
+/* Scrollbar Style */
+.theme-servoy ::-webkit-scrollbar {
+	width: 12px;
+	padding: 0 5px;
+}
+
+.theme-servoy ::-webkit-scrollbar-track {
+	border-radius: 0px;
+	background: #FFF;
+	border: 1px solid #DBDBDB;
+}
+
+.theme-servoy ::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background: #DBDBDB;
+}
+.theme-servoy ::-webkit-scrollbar-thumb:window-inactive {
+	background: #F8F8F8;
+}
+
+
+/* Class Templates Top Bar */
+.theme-servoy .header-bar {
+	border-top: 12px solid #EB8C39;
+	background-color: #E9720B;
+	color: white;
+	padding: 30px 0;
+	font-size: 24px;
+	text-transform: uppercase;
+	height: initial !important;
+}
+
+.theme-servoy .header-bar .bts-label,
+.them-servoy .header-bar .svy-label {
+	color: #FFF;
+}
+
+.theme-servoy .header-title {
+    text-align: center;
+    float: left;
+    width: calc(100% - 98px);
+    font-size: 24px;
+}
+
+/* Labels */
+.theme-servoy .label_header_0 {
+	background: #F8F8F8;
+	color: #EB8C39;
+	font-size: 24px;
+	padding-left: 30px;
+	text-transform: uppercase;
+}
+
+.theme-servoy .label_header_1 {
+	color: #F5B986;
+	background: #FFF;
+	border-bottom: 1px solid #F5B986;
+	font-size: 24px;
+	font-weight: 100;
+}
+
+.theme-servoy .label_header_2,
+.theme-servoy .label_header_3 {
+	background: #EB8C39;
+	color: white;
+	font-weight: 100;
+	border-radius: 25px;
+}
+
+.theme-servoy .label_header_0,
+.theme-servoy .label_header_1,
+.theme-servoy .label_header_2,
+.theme-servoy .label_header_3 {
+	display: inline-block;
+	width: 100%;
+}
+
+.theme-servoy .svy-layoutcontainer > * > .label_header_1,
+.theme-servoy .svy-layoutcontainer > * > .label_header_2 {
+	margin: 15px 0;
+}
+
+.theme-servoy .svy-layoutcontainer > * > .label_header_0,
+.theme-servoy .svy-layoutcontainer > * > .label_header_3 {
+	display: inline-block;
+	width: 100%;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.theme-servoy .label_header_3 {
+	text-align: center;
+}
+
+.theme-servoy .label_subheader_0 {
+	position: absolute;
+    top: 25px;
+    left: 160px;
+}
