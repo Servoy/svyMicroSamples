@@ -151,7 +151,17 @@ colors {
 	outline: none;
 }
 
-/* Dropdown field */
+/* Dropdown field & Combobox */
+.theme-servoy .svy-combobox .ui-select-toggle {
+	border: 0;
+}
+
+.svy-combobox input {
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+}
+
 .dropdown-menu > li > a {
 	color: #7C7C7C;
 }
@@ -209,7 +219,7 @@ colors {
 
 /* Default Table */
 .theme-servoy .ui-grid {
-	border: 0;
+	/*border: 0; */
 }
 
 .theme-servoy .ui-grid-header-cell,
@@ -241,6 +251,38 @@ colors {
 .theme-servoy .ui-grid-row div.ui-grid-cell > * {
 	border-width: 0;
 	box-shadow: none;
+}
+
+.theme-servoy .ui-grid-cell .svy-field, 
+.theme-servoy .ui-grid-cell .svy-textarea, 
+.theme-servoy .ui-grid-cell .bts-textarea, 
+.theme-servoy .ui-grid-cell .svy-textfield, 
+.theme-servoy .ui-grid-cell .bts-textbox, 
+.theme-servoy .ui-grid-cell .svy-typeahead, 
+.theme-servoy .ui-grid-cell .bts-typeahead, 
+.theme-servoy .ui-grid-cell .svy-combobox, 
+.theme-servoy .ui-grid-cell .bts-select, 
+.theme-servoy .ui-grid-cell .svy-calendar, 
+.theme-servoy .ui-grid-cell .bts-calendar, 
+.theme-servoy .ui-grid-cell .bts-calendar input {
+	border: 0;
+}
+
+.theme-servoy .ui-grid-row-selected .ui-grid-cell .svy-field, 
+.theme-servoy .ui-grid-row-selected .ui-grid-cell .svy-textarea, 
+.theme-servoy .ui-grid-row-selected .ui-grid-cell .bts-textarea, 
+.theme-servoy .ui-grid-row-selected .ui-grid-cell .svy-textfield, 
+.theme-servoy .ui-grid-row-selected .ui-grid-cell .bts-textbox, 
+.theme-servoy .ui-grid-row-selected .ui-grid-cell .svy-typeahead, 
+.theme-servoy .ui-grid-row-selected .ui-grid-cell .bts-typeahead, 
+.theme-servoy .ui-grid-row-selected .ui-grid-cell .svy-combobox, 
+.theme-servoy .ui-grid-row-selected .ui-grid-cell .bts-select, 
+.theme-servoy .ui-grid-row-selected .ui-grid-cell .svy-calendar, 
+.theme-servoy .ui-grid-row-selected .ui-grid-cell .bts-calendar, 
+.theme-servoy .ui-grid-row-selected .ui-grid-cell .bts-calendar input {
+	outline: #EB8C39;
+	background-color: #EB8C39;
+	color: #FFF;
 }
 
 /* Servoy Extra Table */
