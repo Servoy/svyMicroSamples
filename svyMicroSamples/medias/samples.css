@@ -48,6 +48,10 @@ body
 	background-color: #c2e7c4;
 	font-size: 12pt;
 }
+.theme-servoy .label_header_1 {
+	color: #EB8C39;	
+}
+
 .label_header_2
 {
 	font-weight: bold;
