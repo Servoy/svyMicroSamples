@@ -1,8 +1,8 @@
 colors {
-	TopBar: #EB8C39;
-	Light Orange: #E9720B;
-	Dark-Blue: #F5B986;
-	Light-Orange: #364453;
+	Orange: #EB8C39;
+	Dark-Orange: #E9720B;
+	Light-Orange: #F5B986;
+	Dark-Blue: #364453;
 	Dark-Gray: #7C7C7C;
 	Light-Gray : #F8F8F8;
 	Dark: #18222C;
@@ -18,14 +18,37 @@ colors {
 	outline: none;
 }
 
-/* Fields */
+/* Button */
+.theme-servoy .svy-button,
+.theme-servoy .bts-button {
+	border-radius: 2px;
+}
+
+.theme-servoy .btn:focus, .theme-servoy .btn:active:focus, 
+.theme-servoy .btn.active:focus, .theme-servoy .btn.focus, 
+.theme-servoy .btn:active.focus, .theme-servoy .btn.active.focus {
+	outline-color: #F5B986;
+	border-color: #F5B986;
+}
+
+/* Label */
 .theme-servoy .svy-label,
 .theme-servoy .bts-label {
 	color: #7C7C7C;
 	font-weight: 100;
-	font-size: 12px;
+	/* font-size: 12px; */
 }
 
+/* Fields */
+
+.form-control:focus {
+	outline: 1px;
+	outline-color: #F5B986;
+	border-color: #F5B986;
+	box-shadow: none;
+}
+
+.theme-servoy .form-control,
 .theme-servoy .svy-field,
 .theme-servoy .svy-textarea, .theme-servoy .bts-textarea,
 .theme-servoy .svy-textfield, .theme-servoy .bts-textbox,
@@ -101,11 +124,15 @@ colors {
 }
 
 /* Calendar Field */
+.theme-servoy .bts-calendar input {
+	border: 0;
+}
+
 .theme-servoy .input-group.date .input-group-addon {
 	background-color: inherit;
 	border-radius: 0;
 	border-width: 0;
-	border-bottom: 1px solid #DBDBDB;
+	border-color: #DBDBDB;
 }
 
 .theme-servoy .svy-calendar input,
@@ -126,6 +153,41 @@ colors {
 
 .bootstrap-datetimepicker-widget table td.today {
 	color: #EB8C39;
+}
+
+/* Combobox */
+.theme-servoy .svy-combobox .ui-select-toggle {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.svy-combobox input {
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+.svy-combobox input:focus {
+	-webkit-box-shadow: none;
+    box-shadow: none;
+    border-bottom: 1px solid #F5B986;
+}
+
+.svy-combobox.ui-select-bootstrap .ui-select-choices-row.active>span {
+	background-color: #EB8C39;
+}
+
+
+/* Dropdown field */
+.dropdown-menu > li > a {
+	color: #7C7C7C;
+}
+
+.dropdown-menu > .active > a, 
+.dropdown-menu > .active > a:hover, 
+.dropdown-menu > .active > a:focus {
+	background-color: #EB8C39;
 }
 
 /* Bootstrap Select  */
@@ -149,27 +211,6 @@ colors {
 	background-color: #EB8C39 !important;
 	background: #EB8C39 !important;
 	outline: none;
-}
-
-/* Dropdown field & Combobox */
-.theme-servoy .svy-combobox .ui-select-toggle {
-	border: 0;
-}
-
-.svy-combobox input {
-	border: 0;
-	border-radius: 0;
-	box-shadow: none;
-}
-
-.dropdown-menu > li > a {
-	color: #7C7C7C;
-}
-
-.dropdown-menu > .active > a, 
-.dropdown-menu > .active > a:hover, 
-.dropdown-menu > .active > a:focus {
-	background-color: #EB8C39;
 }
 
 /* TabPanel */
@@ -222,8 +263,7 @@ colors {
 	/*border: 0; */
 }
 
-.theme-servoy .ui-grid-header-cell,
-.theme-servoy .table > thead > tr > th {
+.theme-servoy .ui-grid-header-cell {
 	text-transform: uppercase;
 	border: 0;
 	font-weight: 100;
@@ -260,7 +300,7 @@ colors {
 .theme-servoy .ui-grid-cell .bts-textbox, 
 .theme-servoy .ui-grid-cell .svy-typeahead, 
 .theme-servoy .ui-grid-cell .bts-typeahead, 
-.theme-servoy .ui-grid-cell .svy-combobox, 
+.theme-servoy .ui-grid-cell .svy-combobox, .theme-servoy .ui-grid-cell .svy-combobox .ui-select-toggle, .svy-combobox input,
 .theme-servoy .ui-grid-cell .bts-select, 
 .theme-servoy .ui-grid-cell .svy-calendar, 
 .theme-servoy .ui-grid-cell .bts-calendar, 
@@ -275,7 +315,7 @@ colors {
 .theme-servoy .ui-grid-row-selected .ui-grid-cell .bts-textbox, 
 .theme-servoy .ui-grid-row-selected .ui-grid-cell .svy-typeahead, 
 .theme-servoy .ui-grid-row-selected .ui-grid-cell .bts-typeahead, 
-.theme-servoy .ui-grid-row-selected .ui-grid-cell .svy-combobox, 
+.theme-servoy .ui-grid-row-selected .ui-grid-cell .svy-combobox, .theme-servoy .ui-grid-row-selected .ui-grid-cell .svy-combobox .ui-select-toggle, .ui-grid-row-selected .ui-grid-cell .svy-combobox input,
 .theme-servoy .ui-grid-row-selected .ui-grid-cell .bts-select, 
 .theme-servoy .ui-grid-row-selected .ui-grid-cell .svy-calendar, 
 .theme-servoy .ui-grid-row-selected .ui-grid-cell .bts-calendar, 
@@ -285,16 +325,29 @@ colors {
 	color: #FFF;
 }
 
-/* Servoy Extra Table */
+/* Servoy Bootstrap/Extra Table */
+.theme-servoy .table-bootstrapcomponent-selected,
 .theme-servoy .table-servoyextra-selected {
 	background-color: #EB8C39;
+	color: #FFF;
 }
 
-.theme-servoy .table > thead > tr > th, .theme-dark .table > tbody > tr > th, 
-.theme-servoy .table > tfoot > tr > th, .theme-dark .table > thead > tr > td, 
-.theme-servoy .table > tbody > tr > td, .theme-dark .table > tfoot > tr > td {
+.theme-servoy .svy-table  th,
+.theme-servoy .svy-table  td,
+.theme-servoy .bts-table  th,
+.theme-servoy .bts-table  td {
 	border-color: #DBDBDB;
 }
+
+.theme-servoy .ui-grid-header-cell,
+.theme-servoy .svy-table th,
+.theme-servoy .bts-table th {
+	text-transform: uppercase;
+	border: 0;
+	font-weight: 100;
+/*	font-size: 12px; */
+}
+
 
 /* Popup */
 .yuimenu {
@@ -336,7 +389,9 @@ colors {
 }
 
 
-/* Class Templates Top Bar */
+/************************************************************************************
+ Class Templates Top Bar 
+ *************************************************************************************/
 .theme-servoy .header-bar {
 	border-top: 12px solid #EB8C39;
 	background-color: #E9720B;
