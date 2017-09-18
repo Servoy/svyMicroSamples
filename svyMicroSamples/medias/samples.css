@@ -86,10 +86,11 @@ body
 {
 	font-size: 24px;
 }
-.font-icon.inverted
+.font-icon.inverted, .glyph-font.inverted
 {
 	color: #fff;
 }
+
 .font-icon:HOVER
 {
 	color: #e77509;
