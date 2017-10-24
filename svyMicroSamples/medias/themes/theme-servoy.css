@@ -476,11 +476,15 @@ colors {
 	padding: 30px 0;
 	font-size: 24px;
 	text-transform: uppercase;
-	height: initial !important;
+}
+
+.theme-servoy .header-bar {
+	/* height: initial !important; TODO what is this for, to center the text of a navbar ? */
+	
 }
 
 .theme-servoy .header-bar .bts-label,
-.them-servoy .header-bar .svy-label {
+.theme-servoy .header-bar .svy-label {
 	color: #FFF;
 }
 

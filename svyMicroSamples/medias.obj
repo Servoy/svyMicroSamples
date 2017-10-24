@@ -1,6 +1,13 @@
 [
 {
 encapsulation:0,
+mimeType:"image/png",
+name:"logo.png",
+typeid:37,
+uuid:"CCE7495F-48DA-456A-8BCA-47860E05FCB4"
+},
+{
+encapsulation:0,
 mimeType:"text/css",
 name:"samples.css",
 typeid:37,
