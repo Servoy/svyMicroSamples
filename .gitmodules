@@ -12,5 +12,5 @@
 	branch = master
 [submodule "servoy-extra-components"]
 	path = servoy-extra-components
-	url = https://github.com/Servoy/servoy-extra-components
+	url = https://github.com/Servoy/servoy-extra-components.git
 	branch = master
