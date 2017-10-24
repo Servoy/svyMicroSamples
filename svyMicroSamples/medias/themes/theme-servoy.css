@@ -8,6 +8,11 @@ colors {
 	Dark: #18222C;
 	Dark-Light: #464E56;
 	Border: #DBDBDB;
+	
+	Font-Color: #E9720B;
+	
+	Dark-Bg: #18222C;
+	Dark-Selected: #464E56;
 }
 
 /* FIXME how to add a theme to dropdown and other items not in form : Calendar Dialog, Dropdown etc..*/
@@ -40,8 +45,7 @@ colors {
 }
 
 /* Fields */
-
-.form-control:focus {
+.theme-servoy .form-control:focus {
 	outline: 1px;
 	outline-color: #F5B986;
 	border-color: #F5B986;
@@ -70,6 +74,16 @@ colors {
 .theme-servoy .svy-combobox:focus, .theme-servoy .bts-select:focus,
 .theme-servoy .svy-calendar:focus, .theme-servoy .bts-calendar:focus, .theme-servoy .bts-calendar input:focus {
 	border-color: #F5B986
+}
+
+/* Input Groups */
+.theme-servoy .input-group-btn {
+	border-bottom: 1px solid #DBDBDB;
+}
+
+.theme-servoy .input-group-btn > .btn {
+	border: 0;
+	border-radius: 0;
 }
 
 /* Checkbox */
@@ -258,6 +272,19 @@ colors {
 }
 */
 
+/* Navbar */
+.theme-servoy .navbar {
+	border-radius: 0;
+}
+
+.theme-servoy .navbar .form-control {
+	background-color: inherit;
+}
+
+.theme-servoy .navbar .input-group-btn > .btn {
+	background-color: inherit;
+}
+
 /* Default Table */
 .theme-servoy .ui-grid {
 	/*border: 0; */
@@ -315,7 +342,8 @@ colors {
 .theme-servoy .ui-grid-row-selected .ui-grid-cell .bts-textbox, 
 .theme-servoy .ui-grid-row-selected .ui-grid-cell .svy-typeahead, 
 .theme-servoy .ui-grid-row-selected .ui-grid-cell .bts-typeahead, 
-.theme-servoy .ui-grid-row-selected .ui-grid-cell .svy-combobox, .theme-servoy .ui-grid-row-selected .ui-grid-cell .svy-combobox .ui-select-toggle, .ui-grid-row-selected .ui-grid-cell .svy-combobox input,
+.theme-servoy .ui-grid-row-selected .ui-grid-cell .svy-combobox, 
+.theme-servoy .ui-grid-row-selected .ui-grid-cell .svy-combobox .ui-select-toggle, .ui-grid-row-selected .ui-grid-cell .svy-combobox input,
 .theme-servoy .ui-grid-row-selected .ui-grid-cell .bts-select, 
 .theme-servoy .ui-grid-row-selected .ui-grid-cell .svy-calendar, 
 .theme-servoy .ui-grid-row-selected .ui-grid-cell .bts-calendar, 
@@ -388,6 +416,55 @@ colors {
 	background: #F8F8F8;
 }
 
+/************************************************************************************
+ Style Layout Containers
+ *************************************************************************************/
+
+/* Simple Collapsible */
+.theme-servoy .simple-collapsible {
+	margin-bottom: 15px;
+}
+
+.theme-servoy .simple-collapsible-toggle {
+	color: #EB8C39;
+	border-bottom: 1px solid #EB8C39;
+}
+
+.theme-servoy .simple-collapsible-content > *:first-child {
+	margin-top: 15px;
+}
+
+.theme-servoy .simple-collapsible-content > *:last-child {
+	margin-bottom: 15px;
+}
+
+.theme-servoy .simple-collapsible-content {
+	border-bottom: 1px solid #EB8C39;
+}
+
+.theme-servoy .simple-collapsible-toggle .svy-label,
+.theme-servoy .simple-collapsible-toggle .bts-label {
+	color: #EB8C39;
+	font-size: 18px;
+}
+
+/* Inline Groups */
+.theme-servoy .inline-group > .inline-group-left,
+.theme-servoy .inline-group > .inline-group-right  {
+	line-height: 34px;
+}
+
+/* Style the flex footer if used on a form with theme servoy */
+.theme-servoy > .flexlayout > .flex-footer {
+	background-color: #EB8C39;
+	color: #FFF;
+	height: 80px;
+}
+
+.theme-servoy > .flexlayout > .flex-footer .svy-label,
+.theme-servoy > .flexlayout > .flex-footer .bts-label {
+	color: #FFF;
+}
 
 /************************************************************************************
  Class Templates Top Bar 
@@ -468,4 +545,12 @@ colors {
 	position: absolute;
     top: 25px;
     left: 160px;
+}
+
+.theme-servoy .content-panel {
+	border-radius: 4px;
+	border: 2px solid #EB8C39;
+	padding: 30px 15px;
+	border-bottom-width: 30px;
+	min-width: 640px;
 }
