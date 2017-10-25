@@ -162,11 +162,11 @@ colors {
 
 .bootstrap-datetimepicker-widget table td.active, 
 .bootstrap-datetimepicker-widget table td.active:hover {
-	background-color: #EB8C39;
+	background-color: #E9720B;
 }
 
 .bootstrap-datetimepicker-widget table td.today {
-	color: #EB8C39;
+	color: #E9720B;
 }
 
 /* Combobox */
@@ -189,7 +189,7 @@ colors {
 }
 
 .svy-combobox.ui-select-bootstrap .ui-select-choices-row.active>span {
-	background-color: #EB8C39;
+	background-color: #E9720B;
 }
 
 
@@ -201,7 +201,7 @@ colors {
 .dropdown-menu > .active > a, 
 .dropdown-menu > .active > a:hover, 
 .dropdown-menu > .active > a:focus {
-	background-color: #EB8C39;
+	background-color: #E9720B;
 }
 
 /* Bootstrap Select  */
@@ -222,8 +222,8 @@ colors {
 .theme-servoy .bts-select option:focus,
 .theme-servoy .bts-select option:hover,
 .theme-servoy .bts-select option:active {
-	background-color: #EB8C39 !important;
-	background: #EB8C39 !important;
+	background-color: #E9720B !important;
+	background: #E9720B !important;
 	outline: none;
 }
 
@@ -250,7 +250,7 @@ colors {
 .theme-servoy .svy-tabpanel li.active a,
 .theme-servoy .bts-tabpanel li.active,
 .theme-servoy .bts-tabpanel li.active a {
-	background-color: #EB8C39;
+	background-color: #E9720B;
 	color: #FFF;
 	border: 0;
 	border-radius: 0;
@@ -323,7 +323,7 @@ colors {
 
 /* Selected Row */
 .theme-servoy .ui-grid-row-selected div.ui-grid-cell {
-	background-color: #EB8C39 !important;
+	background-color: #E9720B !important;
 }
 
 .theme-servoy .ui-grid-cell .svy-field, 
@@ -359,15 +359,15 @@ colors {
 .theme-servoy .ui-grid-row-selected .ui-grid-cell .svy-calendar, 
 .theme-servoy .ui-grid-row-selected .ui-grid-cell .bts-calendar, 
 .theme-servoy .ui-grid-row-selected .ui-grid-cell .bts-calendar input {
-	outline: #EB8C39;
-	background-color: #EB8C39;
+	outline: #E9720B;
+	background-color: #E9720B;
 	color: #FFF;
 }
 
 /* Servoy Bootstrap/Extra Table */
 .theme-servoy .table-bootstrapcomponent-selected,
 .theme-servoy .table-servoyextra-selected {
-	background-color: #EB8C39;
+	background-color: #E9720B;
 	color: #FFF;
 }
 
@@ -404,7 +404,7 @@ colors {
 .yuimenuitemlabel:hover,
 .yuimenuitemlabel-selected,
 .yuimenuitemlabel-selected:hover {
-	background-color: #EB8C39;
+	background-color: #E9720B;
 }
 
 /* Scrollbar Style */
@@ -437,8 +437,8 @@ colors {
 }
 
 .theme-servoy .simple-collapsible-toggle {
-	color: #EB8C39;
-	border-bottom: 1px solid #EB8C39;
+	color: #E9720B;
+	border-bottom: 1px solid #E9720B;
 }
 
 .theme-servoy .simple-collapsible-content > *:first-child {
@@ -450,12 +450,12 @@ colors {
 }
 
 .theme-servoy .simple-collapsible-content {
-	border-bottom: 1px solid #EB8C39;
+	border-bottom: 1px solid #E9720B;
 }
 
 .theme-servoy .simple-collapsible-toggle .svy-label,
 .theme-servoy .simple-collapsible-toggle .bts-label {
-	color: #EB8C39;
+	color: #E9720B;
 	font-size: 18px;
 }
 
@@ -467,7 +467,7 @@ colors {
 
 /* Style the flex footer if used on a form with theme servoy */
 .theme-servoy > .flexlayout > .flex-footer {
-	background-color: #EB8C39;
+	background-color: #E9720B;
 	color: #FFF;
 	height: 80px;
 }
@@ -509,7 +509,7 @@ colors {
 /* Labels */
 .theme-servoy .label_header_0 {
 	background: #F8F8F8;
-	color: #EB8C39;
+	color: #E9720B;
 	font-size: 24px;
 	padding-left: 30px;
 	text-transform: uppercase;
@@ -525,7 +525,7 @@ colors {
 
 .theme-servoy .label_header_2,
 .theme-servoy .label_header_3 {
-	background: #EB8C39;
+	background: #E9720B;
 	color: white;
 	font-weight: 100;
 	border-radius: 25px;
@@ -564,7 +564,7 @@ colors {
 
 .theme-servoy .content-panel {
 	border-radius: 4px;
-	border: 2px solid #EB8C39;
+	border: 2px solid #E9720B;
 	padding: 30px 15px;
 	border-bottom-width: 30px;
 	min-width: 640px;
