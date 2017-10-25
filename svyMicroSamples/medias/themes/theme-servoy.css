@@ -227,6 +227,11 @@ colors {
 	outline: none;
 }
 
+/* Select2Tokenizer */
+.svy-select2-autotokenizer-dropdown .select2-results__option.select2-results__option--highlighted {
+	background-color: #E9720B;
+}
+
 /* TabPanel */
 .theme-servoy .svy-tabpanel,
 .theme-servoy .svy-tabpanel a,
@@ -306,10 +311,6 @@ colors {
 	color: #7C7C7C;
 }
 
-.theme-servoy .ui-grid-row-selected div.ui-grid-cell {
-	background-color: #EB8C39 !important;
-}
-
 .theme-servoy .ui-grid-row .ui-grid-cell {
 	border-color: #DBDBDB;
 	border-bottom: 1px solid #DBDBDB;
@@ -318,6 +319,11 @@ colors {
 .theme-servoy .ui-grid-row div.ui-grid-cell > * {
 	border-width: 0;
 	box-shadow: none;
+}
+
+/* Selected Row */
+.theme-servoy .ui-grid-row-selected div.ui-grid-cell {
+	background-color: #EB8C39 !important;
 }
 
 .theme-servoy .ui-grid-cell .svy-field, 
@@ -333,6 +339,11 @@ colors {
 .theme-servoy .ui-grid-cell .bts-calendar, 
 .theme-servoy .ui-grid-cell .bts-calendar input {
 	border: 0;
+}
+
+.theme-servoy .ui-grid-row-selected div.ui-grid-cell .svy-label,
+.theme-servoy .ui-grid-row-selected div.ui-grid-cell .bts-label {
+	color: #FFF;
 }
 
 .theme-servoy .ui-grid-row-selected .ui-grid-cell .svy-field, 
