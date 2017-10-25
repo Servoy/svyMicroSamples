@@ -52,7 +52,7 @@
 			"parameters": [
 				{
 					"name": "message",
-					"type": "String"
+					"type": "string"
 				}
 			]
 		}
