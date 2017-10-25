@@ -1,18 +1,18 @@
 colors {
 	Orange: #EB8C39;
-	Dark-Orange: #E9720B;
 	Light-Orange: #F5B986;
-	Dark-Blue: #364453;
-	Dark-Gray: #7C7C7C;
-	Light-Gray : #F8F8F8;
-	Dark: #18222C;
-	Dark-Light: #464E56;
-	Border: #DBDBDB;
+	Light-Gray : #F8F8F8; /* Deprecated */
 	
-	Font-Color: #E9720B;
+	Dark-Orange: #E9720B;
 	
 	Dark-Bg: #18222C;
 	Dark-Selected: #464E56;
+	Dark-Border: #364453;
+	
+	Light-Gray: #DBDBDB; /* Text label, Border */
+	
+	Label-Font: #777777; /* Label Text */
+	Field-Color: #4A4A4A;
 }
 
 /* FIXME how to add a theme to dropdown and other items not in form : Calendar Dialog, Dropdown etc..*/
@@ -39,7 +39,7 @@ colors {
 /* Label */
 .theme-servoy .svy-label,
 .theme-servoy .bts-label {
-	color: #7C7C7C;
+	color: #777777;
 	font-weight: 100;
 	/* font-size: 12px; */
 }
@@ -63,8 +63,8 @@ colors {
 	border-bottom: 1px solid #DBDBDB;
 	border-radius: 0;
 	box-shadow: none;
-	color: #7C7C7C;
-	font-size: 16px;
+	color: #777777;
+	font-size: 14px;
 }
 
 .theme-servoy .svy-field:focus,
@@ -73,7 +73,15 @@ colors {
 .theme-servoy .svy-typeahead:focus, .theme-servoy .bts-typeahead:focus,
 .theme-servoy .svy-combobox:focus, .theme-servoy .bts-select:focus,
 .theme-servoy .svy-calendar:focus, .theme-servoy .bts-calendar:focus, .theme-servoy .bts-calendar input:focus {
-	border-color: #F5B986
+	border-color: #E9720B;
+}
+
+.theme-servoy .form-control[disabled], 
+.theme-servoy .form-control[readonly], 
+.theme-servoy fieldset[disabled] .form-control {
+	background-color: inherit;
+	opacity: 0.6;
+	border-color: #DBDBDB;
 }
 
 /* Input Groups */
@@ -195,7 +203,7 @@ colors {
 
 /* Dropdown field */
 .dropdown-menu > li > a {
-	color: #7C7C7C;
+	color: #777777;
 }
 
 .dropdown-menu > .active > a, 
@@ -227,7 +235,7 @@ colors {
 	outline: none;
 }
 
-/* Select2Tokenizer */
+/* Select2Tokenizer Servoy Extra */
 .svy-select2-autotokenizer-dropdown .select2-results__option.select2-results__option--highlighted {
 	background-color: #E9720B;
 }
@@ -238,7 +246,7 @@ colors {
 .theme-servoy .bts-tabpanel,
 .theme-servoy .bts-tabpanel a  {
 	background-color:#F8F8F8;
-	color: #7C7C7C;
+	color: #777777;
 }
 
 .theme-servoy .svy-tabpanel .nav-tabs,
@@ -277,7 +285,62 @@ colors {
 }
 */
 
-/* Navbar */
+/* Sidenav Servoy Extra */
+.theme-servoy .svy-sidenav {
+	background-color: #18222C;
+	color: #FFF;
+	border: 0;
+}
+
+.theme-servoy .svy-sidenav-menu,
+.theme-servoy .svy-sidenav-collapse-icon {
+	font-size: 12px;
+	line-height: 36px;
+	color: #FFF;
+}
+
+.theme-servoy .svy-sidenav-item {
+	font-size: 12px;
+}
+
+.theme-servoy .svy-sidenav-dropdown {
+	background-color: #18222C;
+}
+
+.theme-servoy .svy-sidenav-dropdown {
+	font-weight: initial;
+}
+
+.theme-servoy .svy-sidenav-dropdown.sn-level-2 {
+	margin-left: -20px;
+	padding-left: 20px;
+}
+
+.theme-servoy .svy-sidenav-item.sn-level-2 {
+	margin-right: 0;
+}
+
+.theme-servoy .svy-navitem-selected {
+	color: inherit;
+	background-color: #464E56;
+}
+
+.theme-servoy .svy-navitem-selected.sn-level-1 {
+	border-left: 5px solid #E9720B;
+}
+
+
+.theme-servoy .svy-sidenav-dropdown.sn-level-1:not(.svy-navitem-selected) {
+	padding-left: 5px; /* align non selected items with the selected item */
+}
+
+.theme-servoy .svy-sidenav-item:hover,
+.theme-servoy .svy-sidenav-item:hover > .svy-sidenav-collapse-icon,
+.theme-servoy .svy-sidenav-dropdown.sn-level-2:hover {
+	background-color: #464E56;	
+}
+
+/* Navbar Bootstrap Extra */
 .theme-servoy .navbar {
 	border-radius: 0;
 }
@@ -308,7 +371,7 @@ colors {
 .theme-servoy .ui-grid-row:nth-child(even) .ui-grid-cell,
 .theme-servoy .ui-grid-row:nth-child(odd) .ui-grid-cell {
 	background: #FFF;
-	color: #7C7C7C;
+	color: #777777;
 }
 
 .theme-servoy .ui-grid-row .ui-grid-cell {
@@ -339,6 +402,11 @@ colors {
 .theme-servoy .ui-grid-cell .bts-calendar, 
 .theme-servoy .ui-grid-cell .bts-calendar input {
 	border: 0;
+}
+
+.theme-servoy .ui-grid-cell .svy-label,
+.theme-servoy .ui-grid-cell .bts-label {
+	font-size: 14px;
 }
 
 .theme-servoy .ui-grid-row-selected div.ui-grid-cell .svy-label,
@@ -387,6 +455,21 @@ colors {
 /*	font-size: 12px; */
 }
 
+/* AG Grid Table */
+.theme-servoy .ag-table {
+	color: #777777;
+}
+
+.theme-servoy .ag-table .ag-header {
+	color: #777777;
+	text-transform: uppercase;
+	font-weight: 100;
+}
+
+.theme-servoy .ag-table .ag-row-selected {
+	background-color: #E9720B;
+	color: #FFF;
+}
 
 /* Popup */
 .yuimenu {
@@ -394,7 +477,7 @@ colors {
 }
 
 .yuimenuitemlabel {
-	color: #7C7C7C;
+	color: #777777;
 }
 
 .yuimenuitemlabel a:hover, .yuimenuitemlabel a:focus {

@@ -57,7 +57,7 @@
 
 /****************************************************************
  * SELECTORS FOR CHANGE OF STATE, i.e. focus | hover | diabled
- */
+ *
 
 .svy-field:FOCUS, .svy-textarea:FOCUS
 {
@@ -78,14 +78,14 @@
 {
 	color: #ff8000;
 }
-/* Override inherited styles from Servoy/Bootstrap, i.e. disbaled fields */
+/* Override inherited styles from Servoy/Bootstrap, i.e. disbaled fields *
 .form-control[disabled]
 {
 	color: #d66;
 }
 *:FOCUS
  {
- 	/* remove outline on focused elements */
+ 	/* remove outline on focused elements *
  	outline: none;
  }
 
