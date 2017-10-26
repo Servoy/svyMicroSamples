@@ -25,7 +25,8 @@ colors {
 
 /* Button */
 .theme-servoy .svy-button,
-.theme-servoy .bts-button {
+.theme-servoy .bts-button,
+.theme-servoy .btn {
 	border-radius: 2px;
 }
 
@@ -45,6 +46,11 @@ colors {
 }
 
 /* Fields */
+.theme-servoy .form-control {
+	box-shadow: none;
+	border-radius: 2px;
+}
+
 .theme-servoy .form-control:focus {
 	outline: 1px;
 	outline-color: #F5B986;
@@ -52,27 +58,39 @@ colors {
 	box-shadow: none;
 }
 
-.theme-servoy .form-control,
 .theme-servoy .svy-field,
 .theme-servoy .svy-textarea, .theme-servoy .bts-textarea,
 .theme-servoy .svy-textfield, .theme-servoy .bts-textbox,
 .theme-servoy .svy-typeahead, .theme-servoy .bts-typeahead,
-.theme-servoy .svy-combobox, .theme-servoy .bts-select,
-.theme-servoy .svy-calendar, .theme-servoy .bts-calendar, .theme-servoy .bts-calendar input {
+.theme-servoy .svy-combobox, .theme-servoy .svy-combobox ~ .input-group-addon,
+.theme-servoy .bts-select, .theme-servoy .bts-select ~ .input-group-addon,
+.theme-servoy .svy-calendar, .theme-servoy .svy-calendar ~ .input-group-addon,
+.theme-servoy .bts-calendar input, .theme-servoy .bts-calendar input ~ .input-group-addon {
 	border: 0;
 	border-bottom: 1px solid #DBDBDB;
 	border-radius: 0;
 	box-shadow: none;
 	color: #777777;
 	font-size: 14px;
+	-webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	   -moz-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	    -ms-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	     -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  	        transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+.theme-servoy .input-group.date .input-group-addon {
+	background-color: inherit;
 }
 
 .theme-servoy .svy-field:focus,
 .theme-servoy .svy-textarea:focus, .theme-servoy .bts-textarea:focus,
 .theme-servoy .svy-textfield:focus, .theme-servoy .bts-textbox:focus,
 .theme-servoy .svy-typeahead:focus, .theme-servoy .bts-typeahead:focus,
-.theme-servoy .svy-combobox:focus, .theme-servoy .bts-select:focus,
-.theme-servoy .svy-calendar:focus, .theme-servoy .bts-calendar:focus, .theme-servoy .bts-calendar input:focus {
+.theme-servoy .svy-combobox:focus, .theme-servoy .svy-combobox:focus ~ .input-group-addon,
+.theme-servoy .bts-select:focus, .theme-servoy .bts-select:focus ~ .input-group-addon,
+.theme-servoy .svy-calendar:focus, .theme-servoy .svy-calendar:focus ~ .input-group-addon,
+.theme-servoy .bts-calendar input:focus, .theme-servoy .bts-calendar input:focus ~ .input-group-addon  {
 	border-color: #E9720B;
 }
 
@@ -84,18 +102,9 @@ colors {
 	border-color: #DBDBDB;
 }
 
-/* Input Groups */
-.theme-servoy .input-group-btn {
-	border-bottom: 1px solid #DBDBDB;
-}
-
-.theme-servoy .input-group-btn > .btn {
-	border: 0;
-	border-radius: 0;
-}
-
 /* Checkbox */
 /*** custom checkboxes ***/
+.theme-servoy .svy-check label,
 .theme-servoy .svy-checkgroup label,
 .theme-servoy .svy-radiogroup label,
 .theme-servoy .bts-check label,
@@ -105,6 +114,8 @@ colors {
 	padding: 0;
 }
 
+.theme-servoy .svy-check input[type=checkbox],
+.theme-servoy .svy-check input[type=radio],
 .theme-servoy .svy-checkgroup input[type=checkbox],
 .theme-servoy .svy-radiogroup input[type=radio],
 .theme-servoy .bts-check input[type=checkbox],
@@ -113,6 +124,8 @@ colors {
 	display:none; /* to hide the checkbox itself */
 } 
 
+.theme-servoy .svy-check input[type=checkbox] + span:before,
+.theme-servoy .svy-check input[type=radio] + span:before,
 .theme-servoy .svy-checkgroup input[type=checkbox] + span:before,
 .theme-servoy .svy-radiogroup input[type=radio] + span:before,
 .theme-servoy .bts-check input[type=checkbox] + span:before,
@@ -123,12 +136,33 @@ colors {
   	letter-spacing: 5px;
 }
 
+.theme-servoy input[type="radio"][disabled] + span, 
+.theme-servoy input[type="checkbox"][disabled] + span, 
+.theme-servoy input[type="radio"].disabled + span, 
+.theme-servoy input[type="checkbox"].disabled + span, 
+.theme-servoy fieldset[disabled] input[type="radio"] + span, 
+.theme-servoy fieldset[disabled] input[type="checkbox"] + span {
+    cursor: not-allowed;
+}
+
+.theme-servoy input[type="radio"][disabled] + span:before, 
+.theme-servoy input[type="checkbox"][disabled] + span:before, 
+.theme-servoy input[type="radio"].disabled + span:before, 
+.theme-servoy input[type="checkbox"].disabled + span:before, 
+.theme-servoy fieldset[disabled] input[type="radio"] + span:before, 
+.theme-servoy fieldset[disabled] input[type="checkbox"] + span:before {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.theme-servoy .svy-check input[type=checkbox] + span:before,
 .theme-servoy .bts-check input[type=checkbox] + span:before,
 .theme-servoy .svy-checkgroup input[type=checkbox] + span:before,
 .theme-servoy .bts-radiogroup input[type=checkbox] + span:before { 
 	content: "\e157";
 }
 
+.theme-servoy .svy-check input[type=checkbox]:checked + span:before,
 .theme-servoy .bts-check input[type=checkbox]:checked + span:before,
 .theme-servoy .svy-checkgroup input[type=checkbox]:checked + span:before,
 .theme-servoy .bts-radiogroup input[type=checkbox]:checked + span:before {
@@ -145,43 +179,78 @@ colors {
 	content: "\e165";
 }
 
-/* Calendar Field */
+/* Calendar Field *
 .theme-servoy .bts-calendar input {
 	border: 0;
 }
 
-.theme-servoy .input-group.date .input-group-addon {
+/* Input Groups *
+.theme-servoy .input-group .input-group-addon {
 	background-color: inherit;
 	border-radius: 0;
 	border-width: 0;
 	border-color: #DBDBDB;
+	border-bottom-width: 1px;
+	-webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	   -moz-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	    -ms-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	     -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  	        transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+.theme-servoy .svy-field:focus ~ .input-group-addon,
+.theme-servoy .svy-textarea:focus ~ .input-group-addon, .theme-servoy .bts-textarea:focus ~ .input-group-addon,
+.theme-servoy .svy-textfield:focus ~ .input-group-addon, .theme-servoy .bts-textbox:focus ~ .input-group-addon,
+.theme-servoy .svy-typeahead:focus ~ .input-group-addon, .theme-servoy .bts-typeahead:focus ~ .input-group-addon,
+.theme-servoy .svy-combobox:focus ~ .input-group-addon, .theme-servoy .bts-select:focus ~ .input-group-addon,
+.theme-servoy .svy-calendar:focus ~ .input-group-addon, .theme-servoy .bts-calendar:focus ~ .input-group-addon, 
+.theme-servoy .bts-calendar input:focus ~ .input-group-addon  {
+	border-color: #E9720B;
+}
+
+.theme-servoy .svy-field:focus ~ .input-group-addon,
+.theme-servoy .svy-textarea:focus ~ .input-group-addon, .theme-servoy .bts-textarea:focus ~ .input-group-addon,
+.theme-servoy .svy-textfield:focus ~ .input-group-addon, .theme-servoy .bts-textbox:focus ~ .input-group-addon,
+.theme-servoy .svy-typeahead:focus ~ .input-group-addon, .theme-servoy .bts-typeahead:focus ~ .input-group-addon,
+.theme-servoy .svy-combobox:focus ~ .input-group-addon, .theme-servoy .bts-select:focus ~ .input-group-addon,
+.theme-servoy .svy-calendar:focus ~ .input-group-addon, .theme-servoy .bts-calendar:focus ~ .input-group-addon, 
+.theme-servoy .bts-calendar input:focus ~ .input-group-addon  {
+	border-color: #E9720B;
 }
 
 .theme-servoy .svy-calendar input,
 .theme-servoy .bts-calendar input,
-.theme-servoy .table .input-group.date .input-group-addon {
+.theme-servoy .table .input-group .input-group-addon {
 	background-color: #FFF;
 }
+*/
 
 /* Calendar Picker */
 .bootstrap-datetimepicker-widget a {
 	color: #F5B986;
 }
 
+.bootstrap-datetimepicker-widget table td.today {
+	color: #E9720B;
+}
+
 .bootstrap-datetimepicker-widget table td.active, 
 .bootstrap-datetimepicker-widget table td.active:hover {
 	background-color: #E9720B;
-}
-
-.bootstrap-datetimepicker-widget table td.today {
-	color: #E9720B;
+	color: #FFF;
 }
 
 /* Combobox */
 .theme-servoy .svy-combobox .ui-select-toggle {
     border: 0;
+    border-bottom: 1px solid #DBDBDB;
     border-radius: 0;
     box-shadow: none;
+}
+
+.theme-servoy .svy-combobox .ui-select-toggle:hover {
+    background-color: inherit;
+    border-color: #E9720B;
 }
 
 .svy-combobox input {
@@ -242,9 +311,9 @@ colors {
 
 /* TabPanel */
 .theme-servoy .svy-tabpanel,
-.theme-servoy .svy-tabpanel a,
+.theme-servoy .svy-tabpanel > .nav-tabs > li > a,
 .theme-servoy .bts-tabpanel,
-.theme-servoy .bts-tabpanel a  {
+.theme-servoy .bts-tabpanel > .nav-tabs > li > a {
 	background-color:#F8F8F8;
 	color: #777777;
 }
@@ -254,10 +323,10 @@ colors {
 	border: 0;
 }
 
-.theme-servoy .svy-tabpanel li.active,
-.theme-servoy .svy-tabpanel li.active a,
-.theme-servoy .bts-tabpanel li.active,
-.theme-servoy .bts-tabpanel li.active a {
+.theme-servoy .svy-tabpanel > .nav > li.active,
+.theme-servoy .svy-tabpanel > .nav > li.active a,
+.theme-servoy .bts-tabpanel > .nav > li.active,
+.theme-servoy .bts-tabpanel > .nav > li.active a {
 	background-color: #E9720B;
 	color: #FFF;
 	border: 0;
@@ -329,7 +398,6 @@ colors {
 	border-left: 5px solid #E9720B;
 }
 
-
 .theme-servoy .svy-sidenav-dropdown.sn-level-1:not(.svy-navitem-selected) {
 	padding-left: 5px; /* align non selected items with the selected item */
 }
@@ -345,12 +413,27 @@ colors {
 	border-radius: 0;
 }
 
-.theme-servoy .navbar .form-control {
-	background-color: inherit;
+/* Input Group Bootstrap Extra */
+.theme-servoy .bts-extra-navbar .form-control,
+.theme-servoy .bts-extra-input-group .form-control {
+	border: 1px solid #DBDBDB;
 }
 
-.theme-servoy .navbar .input-group-btn > .btn {
-	background-color: inherit;
+.theme-servoy .bts-extra-navbar .form-control:focus,
+.theme-servoy .bts-extra-input-group .form-control:focus {
+    outline: 1px;
+    outline-color: #F5B986;
+    border-color: #F5B986;
+}
+
+.theme-servoy .bts-extra-input-group .form-control:first-child {
+   border-top-left-radius: 2px;
+   border-bottom-left-radius: 2px;
+}
+
+.theme-servoy .bts-extra-input-group .form-control:last-child {
+   border-top-right-radius: 2px;
+   border-bottom-right-radius: 2px;
 }
 
 /* Default Table */
@@ -396,11 +479,12 @@ colors {
 .theme-servoy .ui-grid-cell .bts-textbox, 
 .theme-servoy .ui-grid-cell .svy-typeahead, 
 .theme-servoy .ui-grid-cell .bts-typeahead, 
-.theme-servoy .ui-grid-cell .svy-combobox, .theme-servoy .ui-grid-cell .svy-combobox .ui-select-toggle, .svy-combobox input,
+.theme-servoy .ui-grid-cell .svy-combobox, .theme-servoy .ui-grid-cell .svy-combobox .ui-select-toggle, .theme-servoy .ui-grid-cell .svy-combobox input,
 .theme-servoy .ui-grid-cell .bts-select, 
 .theme-servoy .ui-grid-cell .svy-calendar, 
-.theme-servoy .ui-grid-cell .bts-calendar, 
-.theme-servoy .ui-grid-cell .bts-calendar input {
+.theme-servoy .ui-grid-cell .svy-calendar ~ .input-group-addon, 
+.theme-servoy .ui-grid-cell .bts-calendar input, 
+.theme-servoy .ui-grid-cell .bts-calendar input ~ .input-group-addon{
 	border: 0;
 }
 
@@ -474,6 +558,8 @@ colors {
 /* Popup */
 .yuimenu {
 	padding: 0;
+	background: #FFF;
+    border-radius: 2px;
 }
 
 .yuimenuitemlabel {
@@ -481,7 +567,7 @@ colors {
 }
 
 .yuimenuitemlabel a:hover, .yuimenuitemlabel a:focus {
-	color: #6C6C6C;
+	color: #777777;
 }
 
 .yuimenuitemlabel:hover,
@@ -490,9 +576,39 @@ colors {
 	background-color: #E9720B;
 }
 
+.yuimenubaritemlabel:focus,
+.yuimenubaritemlabel:hover,
+.yuimenuitemlabel:hover,
+.yuimenuitemlabel:focus {
+	outline: none;
+	text-decoration: initial;
+	color: inherit;
+}
+
+.yuimenubaritemlabel-selected, 
+.yuimenubaritemlabel-selected:hover, 
+.yuimenubaritemlabel-selected:focus, 
+.yuimenubaritemlabel-selected:visited, 
+.yuimenuitemlabel-selected, 
+.yuimenuitemlabel-selected:hover,
+.yuimenuitemlabel-selected:focus,  
+.yuimenuitemlabel-selected:visited {
+	background-color: #E9720B;
+    color: #FFF;
+    text-decoration: inherit;
+}
+
+.yuimenubaritemlabel-disabled:focus,
+.yuimenubaritemlabel-disabled:hover,
+.yuimenuitemlabel-disabled:hover,
+.yuimenuitemlabel-disabled:focus {
+	color: #DBDBDB;
+}
+
 /* Scrollbar Style */
 .theme-servoy ::-webkit-scrollbar {
 	width: 12px;
+	height: 12px;
 	padding: 0 5px;
 }
 
