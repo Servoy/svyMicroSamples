@@ -49,7 +49,15 @@ items:[
 json:{
 enabled:true,
 imageStyleClass:"glyphicon glyphicon-log-out icon-dropdown",
+location:{
+x:1,
+y:1
+},
 onActionMethodID:"E6C90459-DF39-4661-B57C-DEC67E897320",
+size:{
+height:100,
+width:100
+},
 styleClass:"btn btn-default pull-right",
 tabSeq:-2,
 text:"Shutdown"
@@ -76,8 +84,17 @@ uuid:"2E71F630-452A-43B2-8963-C9BF7D664942"
 {
 json:{
 imageStyleClass:"glyphicon glyphicon-chevron-down icon-dropdown",
+location:{
+x:2,
+y:2
+},
 onActionMethodID:"E3FB7267-4A8A-44BA-8C9F-AC056D4D860A",
+size:{
+height:100,
+width:100
+},
 styleClass:"btn btn-default pull-right",
+tabSeq:-2,
 text:"Form"
 },
 location:"2,2",
@@ -90,8 +107,17 @@ uuid:"6497AB9D-6F71-460D-BB42-72B3C48E4719"
 {
 json:{
 imageStyleClass:"glyphicon glyphicon-chevron-down icon-dropdown",
+location:{
+x:3,
+y:3
+},
 onActionMethodID:"21FF8813-776B-43EE-95E2-59FA3BB75E8E",
+size:{
+height:100,
+width:100
+},
 styleClass:"btn btn-default pull-right",
+tabSeq:-2,
 text:"Element"
 },
 location:"3,3",
@@ -149,13 +175,16 @@ uuid:"400E6377-EFFF-48D0-B425-3376881AC0D6"
 json:{
 dataProviderID:"varNumber",
 enabled:true,
+location:{
+x:2,
+y:2
+},
 placeholderText:"Custom",
 styleClass:"form-control form-header",
 tabSeq:-2
 },
 location:"2,2",
 name:"varNumber",
-styleClass:"form-control form-header",
 typeName:"bootstrapcomponents-textbox",
 typeid:47,
 uuid:"DAC26C7D-2A30-4D14-9AE1-BD03626B0DA3"
@@ -177,12 +206,15 @@ items:[
 {
 json:{
 dataProviderID:"varBoolean",
+location:{
+x:2,
+y:2
+},
 styleClass:"form-control form-header",
 tabSeq:-2
 },
 location:"2,2",
 name:"varBoolean",
-styleClass:"form-control form-header",
 typeName:"bootstrapcomponents-textbox",
 typeid:47,
 uuid:"05FACC27-C203-4C72-B67E-937ACE68B2EC"
@@ -215,18 +247,27 @@ items:[
 json:{
 dataProviderID:"varString",
 editable:true,
-styleClass:"form-control form-header"
+location:{
+x:5,
+y:5
+},
+size:{
+height:100,
+width:100
+},
+styleClass:"form-control form-header",
+tabSeq:-2
 },
 location:"5,5",
 name:"varString",
 size:"100,100",
-styleClass:"form-control form-header",
 typeName:"bootstrapcomponents-textbox",
 typeid:47,
 uuid:"66EA526B-77D1-44A5-916D-AB22FDA1CBDD"
 },
 {
 json:{
+tabSeq:-2,
 text:"String"
 },
 location:"4,4",
@@ -267,6 +308,10 @@ items:[
 {
 json:{
 imageStyleClass:"glyphicon glyphicon-remove",
+location:{
+x:1,
+y:1
+},
 onActionMethodID:"7A243C9A-5DF7-46AA-98C7-E4EBD71BE036",
 styleClass:"btn btn-default pull-right btn-icon",
 tabSeq:-2,

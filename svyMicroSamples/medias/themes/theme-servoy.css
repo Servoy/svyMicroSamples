@@ -45,6 +45,13 @@ colors {
 	/* font-size: 12px; */
 }
 
+.theme-servoy .btn-success,
+.theme-servoy .btn-info,
+.theme-servoy .btn-warning,
+.theme-servoy .btn-danger {
+	color: #FFF;
+}
+
 /* Fields */
 .theme-servoy .form-control {
 	box-shadow: none;
