@@ -56,7 +56,7 @@ function getIconStyleClass(){
  * @properties={typeid:24,uuid:"C8EC085D-B075-42F6-B580-A3FFA4B928DB"}
  */
 function getMoreInfo(){
-	return null;
+	return "<i>We are sorry, no info is available</i>";
 }
 
 /**
