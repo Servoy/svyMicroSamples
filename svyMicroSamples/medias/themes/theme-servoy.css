@@ -775,3 +775,53 @@ colors {
 	border-bottom-width: 30px;
 	min-width: 640px;
 }
+
+.label-info
+{
+	background-color: #5bc0de;
+	color: #fff;
+	border-radius: 4px;
+	text-align: center;
+	box-shadow: 4px 4px 5px #888888;
+	font-weight: bold;
+}
+.label-warn
+{
+	background-color: #FF8000;
+	color: #FFF;
+	border-radius: 4px;
+	text-align: center;
+	box-shadow: 4px 4px 5px #888888;
+	font-weight: bold;
+}
+.label-error
+{
+	background-color: #800000;
+	color: #fff;
+	border-radius: 4px;
+	text-align: center;
+	box-shadow: 4px 4px 5px #888888;
+	font-weight: bold;
+}
+
+.label-info:HOVER {
+	background-color: #5a96e1;
+}
+
+.message-submit {
+  position: absolute;
+  z-index: 1;
+  top: 9px;
+  right: 10px;
+  color: #fff;
+  border: none;
+  background: #248A52;
+  font-size: 10px;
+  text-transform: uppercase;
+  line-height: 1;
+  padding: 6px 10px;
+  border-radius: 10px;
+  outline: none !important;
+  -webkit-transition: background .2s ease;
+  transition: background .2s ease;
+}
