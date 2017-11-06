@@ -51,6 +51,14 @@ colors {
 .theme-servoy .btn-danger {
 	color: #FFF;
 }
+.theme-servoy .label-success,
+.theme-servoy .label-info, 
+.theme-servoy .label-warning,
+.theme-servoy .label-danger {
+	color: #FFF;
+	text-align: center;
+	border-radius: 2px;
+}
 
 /* Fields */
 .theme-servoy .form-control {
@@ -387,6 +395,28 @@ colors {
 	font-weight: initial;
 }
 
+/* Override padding to obtain hover effect */
+.theme-servoy .svy-sidenav-menu ul {
+    padding-left: 0px;
+}
+
+.theme-servoy .svy-sidenav-item {
+	padding-left: 20px;
+}
+
+.theme-servoy .svy-sidenav-item.sn-level-2 {
+	padding-left: 40px;
+}
+
+.theme-servoy .svy-sidenav-item.sn-level-3 {
+	padding-left: 60px;
+}
+
+.theme-servoy .svy-sidenav-item.sn-level-4 {
+	padding-left: 80px;
+}
+
+/*
 .theme-servoy .svy-sidenav-dropdown.sn-level-2 {
 	margin-left: -20px;
 	padding-left: 20px;
@@ -395,6 +425,16 @@ colors {
 .theme-servoy .svy-sidenav-item.sn-level-2 {
 	margin-right: 0;
 }
+
+.theme-servoy .svy-sidenav-dropdown.sn-level-3 {
+	margin-left: -40px;
+	padding-left: 40px;
+}
+
+.theme-servoy .svy-sidenav-dropdown.sn-level-4 {
+	margin-left: -60px;
+	padding-left: 60px;
+}*/
 
 .theme-servoy .svy-navitem-selected {
 	color: inherit;
@@ -411,7 +451,9 @@ colors {
 
 .theme-servoy .svy-sidenav-item:hover,
 .theme-servoy .svy-sidenav-item:hover > .svy-sidenav-collapse-icon,
-.theme-servoy .svy-sidenav-dropdown.sn-level-2:hover {
+.theme-servoy .svy-sidenav-dropdown.sn-level-2:hover,
+.theme-servoy .svy-sidenav-dropdown.sn-level-3:hover,
+.theme-servoy .svy-sidenav-dropdown.sn-level-4:hover {
 	background-color: #464E56;	
 }
 
@@ -774,54 +816,4 @@ colors {
 	padding: 30px 15px;
 	border-bottom-width: 30px;
 	min-width: 640px;
-}
-
-.label-info
-{
-	background-color: #5bc0de;
-	color: #fff;
-	border-radius: 4px;
-	text-align: center;
-	box-shadow: 4px 4px 5px #888888;
-	font-weight: bold;
-}
-.label-warn
-{
-	background-color: #FF8000;
-	color: #FFF;
-	border-radius: 4px;
-	text-align: center;
-	box-shadow: 4px 4px 5px #888888;
-	font-weight: bold;
-}
-.label-error
-{
-	background-color: #800000;
-	color: #fff;
-	border-radius: 4px;
-	text-align: center;
-	box-shadow: 4px 4px 5px #888888;
-	font-weight: bold;
-}
-
-.label-info:HOVER {
-	background-color: #5a96e1;
-}
-
-.message-submit {
-  position: absolute;
-  z-index: 1;
-  top: 9px;
-  right: 10px;
-  color: #fff;
-  border: none;
-  background: #248A52;
-  font-size: 10px;
-  text-transform: uppercase;
-  line-height: 1;
-  padding: 6px 10px;
-  border-radius: 10px;
-  outline: none !important;
-  -webkit-transition: background .2s ease;
-  transition: background .2s ease;
 }
