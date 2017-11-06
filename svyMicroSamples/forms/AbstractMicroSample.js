@@ -47,7 +47,10 @@ function getParent(){
  * @properties={typeid:24,uuid:"03913234-F650-4704-B138-4C8EA9BE27C2"}
  */
 function getIconStyleClass(){
-	return null;
+	var parenForm = getParent()
+	if (parenForm) {
+		return parenForm.getIconStyleClass();
+	}
 }
 
 /**
@@ -92,7 +95,7 @@ function getDownloadURL(){
  * @properties={typeid:24,uuid:"73D6C3E0-FCAC-4F36-8B8E-C9A10D1B6780"}
  */
 function getSort(){
-	return '0';
+	return '999';
 }
 
 /**

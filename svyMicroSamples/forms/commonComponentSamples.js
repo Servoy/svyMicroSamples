@@ -31,7 +31,7 @@ function getDescription() {
 * @properties={typeid:24,uuid:"3D97AB6A-5E0A-4F6C-AAF2-A52671A350BD"}
 */
 function getIconStyleClass() {
-	return 'fa fa-file-code-o';
+	return 'fa fa-font';
 }
 
 /**
