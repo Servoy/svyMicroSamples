@@ -68,7 +68,7 @@ function getMoreInfo(){
  * @properties={typeid:24,uuid:"68A0A486-8045-482D-809E-267A3BF5930F"}
  */
 function getSampleCode(){
-	return [];
+	return ['/* No sample code available */'];
 }
 
 /**
