@@ -18,6 +18,12 @@ colors {
 /* FIXME how to add a theme to dropdown and other items not in form : Calendar Dialog, Dropdown etc..*/
 
 
+/* 12 Grid margin reset */
+div:not(.container):not(.container-fluid):not([class^="col-xs-"]):not([class^="col-sm-"]):not([class^="col-md-"]):not([class^="col-lg-"]) > .row {
+	margin-right: 0;
+	margin-left: 0;
+}
+
 /* General Style */
 :focus {
 	outline: none;
