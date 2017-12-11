@@ -42,7 +42,7 @@ function getDescription() {
 * @properties={typeid:24,uuid:"0EDAFEE4-10A4-41C7-A26B-A0E58E2E3C5D"}
 */
 function getIconStyleClass() {
-	return "fa fa-pencil";
+	return 'fa fa-pencil';
 }
 
 /**

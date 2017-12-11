@@ -51,6 +51,7 @@ function getIconStyleClass(){
 	if (parenForm) {
 		return parenForm.getIconStyleClass();
 	}
+	return null;
 }
 
 /**
@@ -59,7 +60,7 @@ function getIconStyleClass(){
  * @properties={typeid:24,uuid:"C8EC085D-B075-42F6-B580-A3FFA4B928DB"}
  */
 function getMoreInfo(){
-	return "<i>We are sorry, no info is available</i>";
+	return '<i>Additional information is not available</i>';
 }
 
 /**
@@ -68,7 +69,7 @@ function getMoreInfo(){
  * @properties={typeid:24,uuid:"68A0A486-8045-482D-809E-267A3BF5930F"}
  */
 function getSampleCode(){
-	return ['/* No sample code available */'];
+	return ['/* No code required */'];
 }
 
 /**

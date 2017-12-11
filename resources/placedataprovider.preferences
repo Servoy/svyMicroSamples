@@ -1,0 +1,9 @@
+{
+"_":{
+"DATETIME":"servoydefault-calendar",
+"INTEGER":"servoydefault-textfield",
+"MEDIA":"servoydefault-imagemedia",
+"NUMBER":"servoydefault-textfield",
+"TEXT":"servoydefault-textfield"
+}
+}
