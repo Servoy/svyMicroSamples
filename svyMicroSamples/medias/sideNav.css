@@ -2,7 +2,6 @@
 	font-size: 12px;
 	line-height: 36px;
 	padding-left: 0px;
-	border-radius: 4px;
 	border-style: solid;
 	border-width: 0px;
 }
@@ -33,9 +32,7 @@
 {
 	font-weight: bold;
 	color: #e77509;
-	background-color: #e6f6fc;
-	
-	border-radius: 6px;
+	background-color: #e6f6fc;	
 	border: 0px solid;
 	
 	transition: background-color .25s, color .25s;

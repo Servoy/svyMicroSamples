@@ -16,10 +16,13 @@ body
     background-color: white;
 }
 
+/*
 .svy-label
 {
 	font-size: 10px;
 }
+*/
+
 .body_main
 {
 	/* width: 90%; */
@@ -94,37 +97,8 @@ body
 {
 	color: #e77509;
 }
-.label-info
-{
-	background-color: #5bc0de;
-	color: #fff;
-	border-radius: 4px;
-	text-align: center;
-	box-shadow: 4px 4px 5px #888888;
-	font-weight: bold;
-}
-.label-warn
-{
-	background-color: #ff8000;
-	color: #fff;
-	border-radius: 4px;
-	text-align: center;
-	box-shadow: 4px 4px 5px #888888;
-	font-weight: bold;
-}
-.label-error
-{
-	background-color: #800000;
-	color: #fff;
-	border-radius: 4px;
-	text-align: center;
-	box-shadow: 4px 4px 5px #888888;
-	font-weight: bold;
-}
-.label-info:HOVER {
-	background-color: #5a96e1;
-}
 
+/* Used in .svy-shat only !!! should be moved */
 .message-submit {
   position: absolute;
   z-index: 1;
@@ -143,14 +117,16 @@ body
   transition: background .2s ease;
 }
 
+/* Can Be deprecated */
 .customLabel{
 	color:#000000;
 }
 
-.margin{
-	
+.margin {
 	margin-top:15px;
 }
+
+/* Used in galleryResponsive */
 .full_width
 {
 	width: 100%;
