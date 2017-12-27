@@ -50,11 +50,12 @@ titleText:"Quantity"
 },
 {
 allowNull:false,
-autoEnterType:3,
+autoEnterType:5,
+compatibleColumnTypes:"[[8,17,17]]",
 creationOrderIndex:2,
-dataType:4,
+dataType:8,
 defaultFormat:"¤#.00|#.00",
-defaultValue:"0",
+lookupValue:"order_details_to_products.unitprice",
 name:"unitprice",
 titleText:"Price"
 }
