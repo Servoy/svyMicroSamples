@@ -3,7 +3,6 @@
 	<name>exampleSharedWebPackages</name>
 	<comment></comment>
 	<projects>
-		<project>resources</project>
 		<project>servoy-extra-components</project>
 	</projects>
 	<buildSpec>
