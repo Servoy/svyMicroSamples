@@ -3,7 +3,7 @@
 	<name>exampleDataModel</name>
 	<comment></comment>
 	<projects>
-		<project>resources</project>
+		<project>resources_example_demo</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
