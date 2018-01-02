@@ -1,0 +1,13 @@
+addEmptyValue:1,
+customProperties:"lazyLoading:false",
+dataProviderID1:"country",
+dataProviderID2:"city",
+dataProviderID3:"address",
+name:"deliveryAddresses",
+relationName:"orders_to_customers",
+returnDataProviders:4,
+separator:" ",
+showDataProviders:7,
+typeid:34,
+uuid:"46F74159-07F7-4334-BED5-7E28A216EDCD",
+valueListType:1
