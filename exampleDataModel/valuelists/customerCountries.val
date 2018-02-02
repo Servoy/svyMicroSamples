@@ -1,0 +1,10 @@
+customProperties:"lazyLoading:false",
+dataProviderID1:"country",
+dataSource:"db:/example_data/customers",
+name:"customerCountries",
+returnDataProviders:1,
+showDataProviders:1,
+sortOptions:"country asc",
+typeid:34,
+uuid:"B91E48BD-0596-473F-A889-A810BC41827E",
+valueListType:1
