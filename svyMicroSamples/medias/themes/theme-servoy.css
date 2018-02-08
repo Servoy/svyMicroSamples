@@ -541,7 +541,7 @@ data-servoyextra-fontawesome > div {
 }
 
 /* Selected Row */
-.ui-grid-row-selected div.ui-grid-cell {
+.ui-grid-row.ui-grid-row-selected div.ui-grid-cell {
 	background-color: #E9720B !important;
 }
 
