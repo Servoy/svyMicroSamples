@@ -14,3 +14,7 @@
 	path = servoy-extra-components
 	url = https://github.com/Servoy/servoy-extra-components.git
 	branch = master
+[submodule "svyThemeRoller"]
+	path = svyThemeRoller
+	url = https://github.com/Servoy/svyThemeRoller.git
+	branch = master
