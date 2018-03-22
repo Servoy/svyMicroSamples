@@ -5,6 +5,8 @@
 	<projects>
 		<project>resources</project>
 		<project>servoy-extra-components</project>
+		<project>bootstrapcomponents</project>
+		<project>12grid</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

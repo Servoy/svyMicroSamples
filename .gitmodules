@@ -18,3 +18,11 @@
 	path = svyThemeRoller
 	url = https://github.com/Servoy/svyThemeRoller.git
 	branch = master
+[submodule "bootstrapcomponents"]
+	path = bootstrapcomponents
+	url = https://github.com/Servoy/bootstrapcomponents.git
+	branch = master
+[submodule "12grid"]
+	path = 12grid
+	url = https://github.com/Servoy/12grid.git
+	branch = master
