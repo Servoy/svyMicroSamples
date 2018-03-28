@@ -46,7 +46,7 @@ var varNumber
  *
  * @properties={typeid:35,uuid:"3AA1DAD9-B048-433C-89AC-1DF125CCCC34",variableType:93}
  */
-var varDate
+var varDate;
 
 /**
  * @type {Date}
