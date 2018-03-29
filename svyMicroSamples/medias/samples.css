@@ -1,7 +1,7 @@
-@import url('themes/theme-servoy.css');
+/* @import url('themes/theme-servoy.css'); */
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i');
 @IMPORT url("webElements.css");
-
+	
 body
 {
 	font-family: 'Roboto', sans-serif;
@@ -16,10 +16,13 @@ body
     background-color: white;
 }
 
+/*
 .svy-label
 {
 	font-size: 10px;
 }
+*/
+
 .body_main
 {
 	/* width: 90%; */
@@ -28,6 +31,7 @@ body
 	background-color: #fff;
 }
 
+/* Banner used in main standalone demos */
 .banner
 {
 	font-size: 28px;
@@ -39,6 +43,7 @@ body
 	border-bottom-width: 2px;
 }
 
+/*
 .label_header_3
 {
 	font-weight: bold;
@@ -70,10 +75,15 @@ body
 	padding-right: 20px;
 	border-radius: 0px;
 }
+*/
+
+/*
 .center
 {
 	text-align: center;
-}
+}*/
+
+/* TODO move the font icon */
 .font-icon
 {
 	font-size: 18px;
@@ -94,6 +104,8 @@ body
 {
 	color: #e77509;
 }
+
+/*
 .label-info
 {
 	background-color: #5bc0de;
@@ -103,6 +115,7 @@ body
 	box-shadow: 4px 4px 5px #888888;
 	font-weight: bold;
 }
+
 .label-warn
 {
 	background-color: #ff8000;
@@ -154,4 +167,99 @@ body
 .full_width
 {
 	width: 100%;
+}*/
+
+.flender-select2 .select2-container {
+	font-size: 1em;
 }
+
+.flender-select2 {
+    width: auto;
+}
+
+.flender-select2 .select2-container--default .select2-selection--multiple {
+    background-color: white;
+    border: 0px solid #d8d8d8;
+    border-radius: 0px;
+    cursor: text;
+}
+
+.flender-select2 .select2-container--default.select2-container--focus .select2-selection--multiple {
+    border: 0px solid #d8d8d8;
+    outline: 0;
+    border-radius: 0px;
+}
+
+.flender-select2 .select2-container .select2-selection--multiple .select2-selection__rendered {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 2px 5px;
+}
+
+.flender-select2 .svy-select2-autotokenizer.select2-sm .svy-select2-autotokenizer-container .select2-selection__choice, .svy-select2-autotokenizer.select2-sm .svy-select2-autotokenizer-container .select2-search--inline .select2-search__field {
+    margin-bottom: 5px;
+}
+
+.flender-select2 .select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #76BB29;
+    border: 0px solid #d8d8d8;
+    border-radius: 30px;
+    cursor: default;
+    margin-right: 10px;
+    margin-top: 5px;
+    padding: 1px 15px 1px 10px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.flender-select2 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    color: #4A4A4A;
+    cursor: pointer;
+    font-weight: normal;
+    margin-right: 5px;
+    font-size: 0px;
+}
+
+.flender-select2 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:before {
+	font-family: "Material Design Icons";
+	content: "\F15A";
+	font-size: 20px;
+	color: #ffffff;
+}
+
+.flender-select2 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover:before {
+	font-family: "Material Design Icons";
+	content: "\F159";
+	font-size: 20px;
+	color: #ffffff;
+}
+
+.flender-select2 .select2-results__option[aria-selected=true] {
+	background-color: #fff;
+	color: inherit;
+}
+
+.flender-select2 .select2-results__option[aria-selected]:before {
+	font-family: "Material Design Icons";
+	font-size: 20px;
+	content: "\F131";
+	margin-right: 5px;
+}
+
+
+.flender-select2 .select2-results__option[aria-selected=true]:before {
+	content: "\F135";
+}
+
+/* TODO */
+/* Bootstrap uses .h1 for font-size
+.h1 {
+	font-size: 16px;
+}
+
+.h1 .small {
+	font-size: 75%;
+}
+*/
