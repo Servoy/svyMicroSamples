@@ -107,5 +107,6 @@ uuid:"FF1670CE-7FD9-4573-AEBD-F9934AC272AB"
 ],
 name:"globalCSS",
 showInMenu:true,
+styleClass:"frm-globalCSS",
 typeid:3,
 uuid:"DB009BA9-76C8-4733-8061-087D29E3F277"

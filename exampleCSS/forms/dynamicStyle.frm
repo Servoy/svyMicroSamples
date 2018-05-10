@@ -174,5 +174,6 @@ uuid:"FDCDF82A-B48F-42AE-9526-CC30F016D25C"
 ],
 name:"dynamicStyle",
 showInMenu:true,
+styleClass:"frm-css-sample",
 typeid:3,
 uuid:"382E3339-4E16-4B32-B567-3DF04761DAAC"

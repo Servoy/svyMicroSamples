@@ -242,6 +242,7 @@ uuid:"F8502BAE-842E-43A8-A7C8-4A5CE3E26BEE"
 ],
 name:"animation",
 showInMenu:true,
+styleClass:"frm-css-sample",
 transparent:false,
 typeid:3,
 uuid:"CBA152EA-7E01-47AF-B009-60FF28EF7594"

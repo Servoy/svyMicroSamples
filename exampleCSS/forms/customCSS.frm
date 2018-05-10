@@ -365,5 +365,6 @@ name:"customCSS",
 navigatorID:"-1",
 showInMenu:true,
 size:"900,550",
+styleClass:"frm-css-sample",
 typeid:3,
 uuid:"F032A1CB-7F42-4322-B45C-22A71128C14B"
