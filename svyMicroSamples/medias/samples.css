@@ -24,6 +24,7 @@ body
 }
 */
 
+/*
 .body_main
 {
 	/* width: 90%; */
@@ -31,8 +32,31 @@ body
     margin-right: auto;
 	background-color: #fff;
 }
+*/
 
-/* Banner used in main standalone demos */
+/* TODO move the font icon */
+.font-icon
+{
+	font-size: 18px;
+	text-align: center;
+	color: #aaa;
+	transition: .25s;
+}
+.font-icon.large
+{
+	font-size: 24px;
+}
+.font-icon.inverted, .glyph-font.inverted
+{
+	color: #fff;
+}
+
+.font-icon:HOVER
+{
+	color: #e77509;
+}
+
+/* Banner used in main standalone demos 
 .banner
 {
 	font-size: 28px;
@@ -44,7 +68,6 @@ body
 	border-bottom-width: 2px;
 }
 
-/*
 .label_header_3
 {
 	font-weight: bold;
@@ -76,37 +99,12 @@ body
 	padding-right: 20px;
 	border-radius: 0px;
 }
-*/
 
-/*
 .center
 {
 	text-align: center;
-}*/
-
-/* TODO move the font icon */
-.font-icon
-{
-	font-size: 18px;
-	text-align: center;
-	color: #aaa;
-	transition: .25s;
-}
-.font-icon.large
-{
-	font-size: 24px;
-}
-.font-icon.inverted, .glyph-font.inverted
-{
-	color: #fff;
 }
 
-.font-icon:HOVER
-{
-	color: #e77509;
-}
-
-/*
 .label-info
 {
 	background-color: #5bc0de;
