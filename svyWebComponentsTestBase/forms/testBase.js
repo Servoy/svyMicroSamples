@@ -340,7 +340,7 @@ function toggleFormEnabled(event) {
  *
  * @properties={typeid:24,uuid:"776DBB83-F711-47F9-8B82-2203191BCCBF"}
  */
-function testElementHasProperty(prop) {
+function elementHasProperty(prop) {
     if (!testElement || !elements[testElement]) { 
     	return false 
 	}

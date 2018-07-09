@@ -331,7 +331,7 @@ function toggleFormEnabled(event) {
  *
  * @properties={typeid:24,uuid:"F656851C-7563-4E69-A2BA-EF1AD376C1BE"}
  */
-function testElementHasProperty(prop) {
+function elementHasProperty(prop) {
     if (!testElement || !elements[testElement]) { 
     	return false 
 	}
@@ -348,7 +348,7 @@ function testElementHasProperty(prop) {
  * @properties={typeid:24,uuid:"B3A2544C-33F7-4E31-AB43-BEB6EE3C88FC"}
  */
 function toggleElementPropertyBoolean(event , prop) {
-    if (testElementHasProperty(prop)) {
+    if (elementHasProperty(prop)) {
     	elements[testElement][prop] = elements[testElement][prop] ? false : true;
     	log("Element " + testElement + ' is now ' + (elements[testElement][prop] ? prop : 'non-' + prop));
     }
@@ -373,8 +373,8 @@ function onClearLog(event) {
  * @properties={typeid:24,uuid:"D91FC963-4C17-4885-8115-F2FFD8A01D41"}
  */
 function updateUI(event) {
-//	if (!testElementHasProperty("enabled")) elements.btnEnabled.visible = false;
-//	if (!testElementHasProperty("readOnly")) elements.btnReadOnly.visible = false;	
+//	if (!elementHasProperty("enabled")) elements.btnEnabled.visible = false;
+//	if (!elementHasProperty("readOnly")) elements.btnReadOnly.visible = false;	
 }
 
 
