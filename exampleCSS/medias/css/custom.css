@@ -4,7 +4,7 @@
 /* ***************
 *  BASIC SELECTORS
 *  ***************/
-.svy-label.my-button
+.frm-css-sample .svy-label.my-button
 {
 	border-radius: 4px; 	/** Here's how to get rounded borders */
 	
@@ -17,24 +17,24 @@
 	border: #ccc 1px solid;
 }
 
-.svy-label.my-button:hover
+.frm-css-sample .svy-label.my-button:hover
 {
 	background-color: #eee;
 	color: #444;
 }
 
-.svy-label.primary
+.frm-css-sample .svy-label.primary
 {
 	color: white;
 	background-color: #0080c0;
 	font-weight: bold;
 }
-.svy-label.green
+.frm-css-sample .svy-label.green
 {
 	color: white;
 	background-color: #008000;
 }
-.svy-label.red
+.frm-css-sample .svy-label.red
 {
 	color: white;
 	background-color: #c60000;
@@ -43,11 +43,11 @@
 /* ***************
 *  BOX SHADOW
 *  ***************/
-.box-shadow
+.frm-css-sample .box-shadow
 {
 	box-shadow: 3px 3px 10px #aaa;
 }
-.box-shadow:HOVER
+.frm-css-sample .box-shadow:HOVER
 {
 	box-shadow: 10px 10px 10px #777; 	/* Darken the shadow on hover */
 }
@@ -56,11 +56,11 @@
 /* ***************
 *  TRANSITION SPEEDS
 *  ***************/
-.transition-medium
+.frm-css-sample .transition-medium
 {
 	transition: 300ms;
 }
-.transition-slow
+.frm-css-sample .transition-slow
 {
 	transition: 1500ms;
 }
@@ -69,28 +69,28 @@
 *  BADGES AND SHAPES
 *  (This is inherited from Bootstrap CSS)
 *  ***************/
-.badge
+.frm-css-sample .badge
 {
 	color: #fff;
 	cursor: pointer;
 	font-size: 16px;
 	background-color: #0080c0;
 }
-.badge:HOVER
+.frm-css-sample .badge:HOVER
 {
 	background-color: #444;
 }
-.badge.warning
+.frm-css-sample .badge.warning
 {
 	background-color: #ff8000;
 }
-.badge.alerts
+.frm-css-sample .badge.alerts
 {
 	background-color: #800000;
 }
 
 /** Make anything a circle */
-.circle
+.frm-css-sample .circle
 {
 	border-radius: 50%;
 	text-align: center;
@@ -99,18 +99,18 @@
 /* ****************************************
 *  Stylize the glyphicons and Font-Awesome
 *  ****************************************/
-.glyph-font
+.frm-css-sample .glyph-font
 {
 	font-size: 20px;
 	cursor: pointer;
 	color: #888;
 	text-align: center;
 }
-.glyph-font:HOVER
+.frm-css-sample .glyph-font:HOVER
 {
 	color: #ff8000;
 }
-.glyph-font.large
+.frm-css-sample .glyph-font.large
 {
 	font-size: 36px;
 }
@@ -119,15 +119,15 @@
 	color: #fff;
 	background-color: #888;
 }
-.glyph-font.inverted:HOVER
+.frm-css-sample .glyph-font.inverted:HOVER
 {
 	background-color: #00b300;
 }
-.glyph-font.toggled
+.frm-css-sample .glyph-font.toggled
 {
 	background-color: #009d00;
 }
-.glyph-font.toggled:HOVER
+.frm-css-sample .glyph-font.toggled:HOVER
 {
 	background-color: #008000;
 }
@@ -155,8 +155,6 @@
     transform: rotate(540deg);
 }
 
-
-
 .notification
 {
 	border-radius: 8px;
@@ -170,12 +168,10 @@
 	text-decoration: underline;
 }
 
-
 .no-border
 {
 	border-style: none;
 }
-
 
 .svy-label.callout {
 

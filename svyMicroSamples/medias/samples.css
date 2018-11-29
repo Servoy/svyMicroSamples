@@ -1,82 +1,12 @@
-@import url('themes/theme-servoy.css');
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i');
-@IMPORT url("webElements.css");
-
+@import url("themes/theme-servoy.css");
+	
 body
 {
 	font-family: 'Roboto', sans-serif;
 }
-.svy-main-window-container
-{
-	/*background-color: #2c3e50;*/
-}
 
-/* rest bg color to white */
-.svy-main-window-container > * > .svy-form {
-    background-color: white;
-}
-
-/*
-.svy-label
-{
-	font-size: 10px;
-}
-*/
-
-.body_main
-{
-	/* width: 90%; */
-    margin-left: auto;
-    margin-right: auto;
-	background-color: #fff;
-}
-
-.banner
-{
-	font-size: 28px;
-	font-style: oblique;	
-}
-.banner-orange
-{
-	border: 0px solid #ff8000;
-	border-bottom-width: 2px;
-}
-
-.label_header_3
-{
-	font-weight: bold;
-	padding-left: 12px;
-	color: #008040;
-	background-color: #c2e7c4;
-	font-size: 12pt;
-}
-.theme-servoy .label_header_1 {
-	color: #EB8C39;	
-}
-
-.label_header_2
-{
-	font-weight: bold;
-	padding-left: 12px;
-	color: #005177;
-	background-color: #eee;
-	font-size: 12pt;
-}
-.label_header_1
-{
-	font-weight: bold;
-	padding-left: 12px;
-	color: #fff;
-	background-color: #006fa4;
-	font-size: 16px;
-	padding-left: 20px;
-	padding-right: 20px;
-	border-radius: 0px;
-}
-.center
-{
-	text-align: center;
-}
+/* TODO move the font icon */
 .font-icon
 {
 	font-size: 18px;
@@ -98,7 +28,7 @@ body
 	color: #e77509;
 }
 
-/* Used in .svy-shat only !!! should be moved */
+/* 
 .message-submit {
   position: absolute;
   z-index: 1;
@@ -117,17 +47,107 @@ body
   transition: background .2s ease;
 }
 
-/* Can Be deprecated */
 .customLabel{
 	color:#000000;
 }
 
-.margin {
+.margin{
+	
 	margin-top:15px;
 }
+*/
 
-/* Used in galleryResponsive */
-.full_width
-{
-	width: 100%;
+.flender-select2 .select2-container {
+	font-size: 1em;
 }
+
+.flender-select2 {
+    width: auto;
+}
+
+.flender-select2 .select2-container--default .select2-selection--multiple {
+    background-color: white;
+    border: 0px solid #d8d8d8;
+    border-radius: 0px;
+    cursor: text;
+}
+
+.flender-select2 .select2-container--default.select2-container--focus .select2-selection--multiple {
+    border: 0px solid #d8d8d8;
+    outline: 0;
+    border-radius: 0px;
+}
+
+.flender-select2 .select2-container .select2-selection--multiple .select2-selection__rendered {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 2px 5px;
+}
+
+.flender-select2 .svy-select2-autotokenizer.select2-sm .svy-select2-autotokenizer-container .select2-selection__choice, .svy-select2-autotokenizer.select2-sm .svy-select2-autotokenizer-container .select2-search--inline .select2-search__field {
+    margin-bottom: 5px;
+}
+
+.flender-select2 .select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #76BB29;
+    border: 0px solid #d8d8d8;
+    border-radius: 30px;
+    cursor: default;
+    margin-right: 10px;
+    margin-top: 5px;
+    padding: 1px 15px 1px 10px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.flender-select2 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    color: #4A4A4A;
+    cursor: pointer;
+    font-weight: normal;
+    margin-right: 5px;
+    font-size: 0px;
+}
+
+.flender-select2 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:before {
+	font-family: "Material Design Icons";
+	content: "\F15A";
+	font-size: 20px;
+	color: #ffffff;
+}
+
+.flender-select2 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover:before {
+	font-family: "Material Design Icons";
+	content: "\F159";
+	font-size: 20px;
+	color: #ffffff;
+}
+
+.flender-select2 .select2-results__option[aria-selected=true] {
+	background-color: #fff;
+	color: inherit;
+}
+
+.flender-select2 .select2-results__option[aria-selected]:before {
+	font-family: "Material Design Icons";
+	font-size: 20px;
+	content: "\F131";
+	margin-right: 5px;
+}
+
+
+.flender-select2 .select2-results__option[aria-selected=true]:before {
+	content: "\F135";
+}
+
+/* TODO */
+/* Bootstrap uses .h1 for font-size
+.h1 {
+	font-size: 16px;
+}
+
+.h1 .small {
+	font-size: 75%;
+}
+*/

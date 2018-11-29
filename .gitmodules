@@ -13,4 +13,16 @@
 [submodule "servoy-extra-components"]
 	path = servoy-extra-components
 	url = https://github.com/Servoy/servoy-extra-components.git
-	branch = timeline
+	branch = master
+[submodule "svyThemeRoller"]
+	path = svyThemeRoller
+	url = https://github.com/Servoy/svyThemeRoller.git
+	branch = master
+[submodule "bootstrapcomponents"]
+	path = bootstrapcomponents
+	url = https://github.com/Servoy/bootstrapcomponents.git
+	branch = master
+[submodule "12grid"]
+	path = 12grid
+	url = https://github.com/Servoy/12grid.git
+	branch = master

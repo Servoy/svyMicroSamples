@@ -1,5 +1,5 @@
 /* Style for the elements that hold the squares */
-.grid {
+.frm-css-sample .grid {
   width: 125px;
   background: #DDD;
   height: 125px;
@@ -8,7 +8,7 @@
 }
 
 /* The squares that will be animated */
-.svy-label.grid-item {
+.frm-css-sample .svy-label.grid-item {
   color: #fff !important;
   cursor: pointer;
   margin: 0 5px 5px 0;
@@ -24,18 +24,18 @@
   transition: width 2s, height 2s, background-color 300ms, transform 2s;
 }
 
-.svy-label.grid-item:HOVER
+.frm-css-sample .svy-label.grid-item:HOVER
 {
 	box-shadow: 6px 6px 8px #888;
 	background: #06c;
 }
 
 /* the class used to animate the sqaures */
-.svy-label.is-moved {
+.frm-css-sample .svy-label.is-moved {
   transform: translateX( 500px ) rotate( 720deg );
   background-color: #ff8000;
 }
-.svy-label.is-moved:HOVER {
+.frm-css-sample .svy-label.is-moved:HOVER {
   background-color: #dd7000;
 }
 
