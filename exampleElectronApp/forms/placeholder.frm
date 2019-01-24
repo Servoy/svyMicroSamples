@@ -3,6 +3,7 @@ layout:{\
 responsive:true\
 }",
 encapsulation:60,
+extendsID:"14E1D5B3-5DA2-40A5-BCF1-FA15EE0D714B",
 items:[
 {
 customProperties:"attributes:{\
@@ -28,7 +29,6 @@ styleClass:"label-success h2",
 text:"Hello Hackathon '19"
 },
 name:"label",
-styleClass:"label-success h2",
 typeName:"bootstrapcomponents-label",
 typeid:47,
 uuid:"B6C4F9EC-6C4C-4F91-AC76-61E9B9646612"
