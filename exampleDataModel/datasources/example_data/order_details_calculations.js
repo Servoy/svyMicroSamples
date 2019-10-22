@@ -22,7 +22,7 @@ function order_total() {
 		var orderRecord = order_details_to_orders.getSelectedRecord();
 		var total = 0;
 		for (var i = 1; i <= orderRecord.orders_to_order_details.getSize(); i++) {
-			var record = orders_to_order_details.getRecord(i);
+			var record = orderRecord.orders_to_order_details.getRecord(i);
 			total += record.subtotal;
 		}
 		return total + orderRecord.freight;
