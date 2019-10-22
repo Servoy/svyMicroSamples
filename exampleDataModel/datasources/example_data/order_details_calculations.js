@@ -12,3 +12,21 @@ function subtotal() {
 		return 0;
 	}
 }
+
+/**
+ * @properties={type:8,typeid:36,uuid:"A432FFB0-C602-4FA7-BC45-016ACFA79051"}
+ */
+function order_total() {
+	
+	if (utils.hasRecords(order_details_to_orders) ) {
+		var orderRecord = order_details_to_orders.getSelectedRecord();
+		var total = 0;
+		for (var i = 1; i <= orderRecord.orders_to_order_details.getSize(); i++) {
+			var record = orders_to_order_details.getRecord(i);
+			total += record.subtotal;
+		}
+		return total + orderRecord.freight;
+	} else {
+		return 0;
+	}
+}
