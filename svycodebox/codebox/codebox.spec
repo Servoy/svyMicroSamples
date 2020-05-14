@@ -1,6 +1,7 @@
 {
 	"name": "svycodebox-codebox",
 	"displayName": "CodeBox",
+	"categoryName": "Visualization",
 	"version": 1,
 	"definition": "svycodebox/codebox/codebox.js",
 	"libraries": [
