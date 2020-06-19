@@ -1,6 +1,8 @@
 addEmptyValue:1,
 customValues:"active|1\r\
 passive|0",
+displayValueType:12,
 name:"activePassive",
+realValueType:8,
 typeid:34,
 uuid:"78F24849-7F4D-4160-BAE0-B7AEB9999DC2"
