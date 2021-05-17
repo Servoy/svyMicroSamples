@@ -2,7 +2,7 @@
 /**
  * IMPORT CUSTOM CSS
  */
-@IMPORT url("custom.css");
+@IMPORT url("custom.css?t=##last-changed-timestamp##"");
 
 /****************************
  * DEFAULT SERVOY SELECTORS
